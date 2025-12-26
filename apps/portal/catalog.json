@@ -34,60 +34,36 @@
                 "disclaimer": "Annual refund for trade fair participation."
             },
             "freight": {
-                "name": "Freight Rebate Scheme",
-                "refund_rate": 0.25,
-                "refund_cap": 0,
+                "name": "Made in Moris Scheme",
+                "refund_rate": 1.00,
+                "refund_cap": 5000,
                 "currency": "Rs",
-                "category": "Export",
-                "disclaimer": "25% refund on ocean freight to Africa/Indian Ocean."
-            },
-            "crigs": {
-                "name": "Collaborative Research (CRIGS)",
-                "refund_rate": 0.50,
-                "refund_cap": 5000000,
-                "currency": "Rs",
-                "category": "Innovation",
-                "disclaimer": "Matching grant up to Rs 5M. Priority: Renewable Energy, ICT."
-            },
-            "agri_equip": {
-                "name": "Agricultural Equipment (FAREI)",
-                "refund_rate": 0.50,
-                "refund_cap": 350000,
-                "currency": "Rs",
-                "category": "Agriculture",
-                "disclaimer": "50% grant for machinery (FAREI)."
-            },
-            "sheltered": {
-                "name": "Sheltered Farming",
-                "refund_rate": 0.50,
-                "refund_cap": 400000,
-                "currency": "Rs",
-                "category": "Agriculture",
-                "disclaimer": "50% grant for greenhouse structures."
+                "category": "Label Support",
+                "disclaimer": "Rs 5000/year to cover labeling costs."
             },
             "dbm_women": {
                 "name": "Women Entrepreneur Loan (DBM)",
                 "refund_rate": 0.00,
-                "refund_cap": 1200000,
+                "refund_cap": 500000,
                 "currency": "Rs",
                 "category": "Loan (0.5%)",
-                "disclaimer": "Loan up to Rs 1.2M at 0.5% p.a. Moratorium 18 months."
+                "disclaimer": "Unsecured loan up to Rs 500k at 0.5% interest. 7 year repayment."
             },
             "elleboost": {
                 "name": "ElleBoost (MauBank)",
                 "refund_rate": 0.00,
-                "refund_cap": 0,
+                "refund_cap": 1000000,
                 "currency": "Rs",
-                "category": "Loan",
-                "disclaimer": "100% financing for equipment. Zero processing fees."
+                "category": "Loan (2.5%)",
+                "disclaimer": "SME loan for women-led businesses. Moratorium available."
             },
-            "sbm_bright": {
-                "name": "Bright-HER Future (SBM)",
-                "refund_rate": 0.00,
-                "refund_cap": 0,
+            "sme_marketing": {
+                "name": "SME Marketing Support",
+                "refund_rate": 0.80,
+                "refund_cap": 200000,
                 "currency": "Rs",
-                "category": "Loan",
-                "disclaimer": "Preferential rates and leasing for women-led businesses."
+                "category": "Refund (80%)",
+                "disclaimer": "Covers digital marketing, websites, and brochures."
             }
         }
     },

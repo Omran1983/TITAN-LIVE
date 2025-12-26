@@ -5,12 +5,16 @@
 <div class="bg-slate-900 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="text-center">
-            <h2 class="text-base font-semibold text-blue-500 tracking-wide uppercase">White Glove Service</h2>
+            <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-500 border border-yellow-800 mb-4">
+                ⚠️ DEMO MODE: MAURITIUS DATASET LOADED
+            </span>
+            <h2 class="text-base font-semibold text-blue-500 tracking-wide uppercase">Project Setup</h2>
             <h2 class="mt-2 text-3xl font-extrabold text-white">
                 Project Auto-Generation
             </h2>
             <p class="mt-2 text-sm text-slate-400">
-                You give us the basics. TITAN builds the rest.<br>
+                You give us the basics. TITAN structures the evidence.<br>
                 <span class="text-blue-400 font-semibold">5 Minutes. Zero Friction.</span>
             </p>
         </div>
@@ -32,7 +36,7 @@
                 </div>
 
                 <div>
-                    <label for="nid" class="block text-sm font-medium text-slate-300">National ID / Passport No.</label>
+                    <label for="nid" class="block text-sm font-medium text-slate-300">ID / Passport No.</label>
                     <div class="mt-1">
                         <input id="nid" name="nid" type="text" required
                             class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
@@ -41,12 +45,11 @@
                 </div>
 
                 <div>
-                    <label for="mobile" class="block text-sm font-medium text-slate-300">Mobile Number
-                        (WhatsApp)</label>
+                    <label for="mobile" class="block text-sm font-medium text-slate-300">Mobile Number</label>
                     <div class="mt-1">
                         <input id="mobile" name="mobile" type="tel" autocomplete="tel" required
                             class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
-                            placeholder="+230 5...">
+                            placeholder="+44 ...">
                     </div>
                 </div>
 
@@ -65,7 +68,7 @@
                         </div>
 
                         <div>
-                            <label for="brn" class="block text-sm font-medium text-slate-300">BRN / Trade License <span
+                            <label for="brn" class="block text-sm font-medium text-slate-300">Registration No.<span
                                     class="text-slate-500 font-normal">(Optional)</span></label>
                             <input id="brn" name="brn" type="text"
                                 class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
@@ -76,15 +79,14 @@
 
                 <!-- 3. The One Question -->
                 <div class="border-t border-slate-700 pt-6">
-                    <label for="desc" class="block text-sm font-medium text-slate-300">What do you do? (One
+                    <label for="desc" class="block text-sm font-medium text-slate-300">What does the business do? (One
                         Sentence)</label>
                     <div class="mt-1">
                         <textarea id="desc" name="desc" rows="3" required
                             class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
-                            placeholder='e.g. "I sell clothes online" or "I run a taxi service" or "I want to start a hydroponic farm"'></textarea>
+                            placeholder='e.g. "I manufacture clothes" or "I provide IT consultancy"'></textarea>
                     </div>
-                    <p class="mt-2 text-xs text-slate-500">TITAN will infer your sector, eligible grants, and market
-                        code from this.</p>
+                    <p class="mt-2 text-xs text-slate-500">TITAN will infer your sector and eligible opportunities.</p>
                 </div>
 
                 <!-- 4. Consent (The Contract) -->
@@ -95,15 +97,15 @@
                     </div>
                     <div class="ml-3 text-sm">
                         <label for="consent" class="font-medium text-blue-300">Authorization</label>
-                        <p class="text-slate-400">I allow TITAN to retrieve, infer, and prepare my project documentation
-                            automatically using public registries and AI.</p>
+                        <p class="text-slate-400">I allow TITAN to structure my project documentation automatically. I
+                            understand this is a preparation tool, not a legal submission.</p>
                     </div>
                 </div>
 
                 <div>
                     <button type="submit"
                         class="w-full flex justify-center py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all hover:scale-[1.02]">
-                        Generate My Project (Auto)
+                        Generate Project Structure
                     </button>
                 </div>
             </form>
@@ -112,7 +114,7 @@
         <!-- Trust Strip -->
         <div class="mt-6 flex justify-center space-x-6 text-xs text-slate-500 grayscale opacity-50">
             <span>🔒 256-bit Encryption</span>
-            <span>🛡️ Data Privacy Act Compliant</span>
+            <span>🛡️ GDPR Aligned</span>
             <span>🤖 AI Powered</span>
         </div>
     </div>
@@ -125,16 +127,16 @@
 
         // 1. Loading State
         btn.disabled = true;
-        btn.innerHTML = `<span class="animate-pulse">🔄 Connecting to Registries...</span>`;
+        btn.innerHTML = `<span class="animate-pulse">🔄 Initializing Project Engine...</span>`;
 
         // 2. Mock Process (The Experience)
-        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">📂 Fetching Shareholder Data...</span>`; }, 1500);
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">📂 Structuring Evidence...</span>`; }, 1500);
         setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">🧠 Inferring Market Code...</span>`; }, 3000);
-        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Grants (TINNS/DBM)...</span>`; }, 4500);
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Opportunities (Demo: TINNS)...</span>`; }, 4500);
 
         // 3. Success (Redirect to 'Mock' Result or Dashboard)
         setTimeout(() => {
-            alert("✅ TITAN has successfully inferred your profile!\n\nDetected:\n- Sector: Retail/Textile\n- Status: Unregistered (Sole Trader)\n- Eligible: SME Grant (Marketing)\n\n(This is a demo of the 'Luxury Intake' flow. In prod, this creates the Project Artifact.)");
+            alert("✅ DEMO COMPLETE: TITAN has inferred your profile.\n\nSimulated Match (Mauritius Data):\n- Sector: Retail/Textile\n- Opportunity: SME Grant (Marketing)\n\n(In the UK Version, this would match Innovate UK or Digital Outcomes.)");
             btn.disabled = false;
             btn.innerText = originalText;
         }, 6000);
