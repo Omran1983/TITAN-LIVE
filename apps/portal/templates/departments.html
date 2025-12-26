@@ -1,132 +1,192 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="bg-slate-50 min-h-screen py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-extrabold text-slate-900">Departments</h1>
-        <p class="mt-2 text-slate-600">Browse all TITAN capabilities available for your business.</p>
-
-        <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-            <!-- 1. Grants & Funding (Expanded Scope) -->
-            <a href="/portal/grants"
-                class="col-span-1 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all group">
-                <div class="w-full h-full p-6">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="p-2 bg-blue-100 rounded-lg text-blue-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                </path>
-                            </svg>
-                        </span>
-                        <div>
-                            <h3 class="text-slate-900 font-bold group-hover:text-blue-600 transition-colors">Grants &
-                                Funding</h3>
-                            <span
-                                class="inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">Live</span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">
-                        Unified access to SME Mauritius schemes. Beyond TINNS:
-                    </p>
-                    <ul class="text-xs text-slate-500 space-y-1">
-                        <li>• <strong>Innovation:</strong> Technology (TINNS)</li>
-                        <li>• <strong>Sustainability:</strong> Green Finance (GSS)</li>
-                        <li>• <strong>Growth:</strong> Business Transformation (BTS)</li>
-                    </ul>
-                </div>
-            </a>
-
-            <!-- 2. Compliance Audit -->
-            <a href="/portal/audit"
-                class="col-span-1 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all group">
-                <div class="w-full h-full p-6">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="p-2 bg-indigo-100 rounded-lg text-indigo-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                                </path>
-                            </svg>
-                        </span>
-                        <div>
-                            <h3 class="text-slate-900 font-bold group-hover:text-blue-600 transition-colors">Compliance
-                                Audit</h3>
-                            <span
-                                class="inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">V3
-                                Live</span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">
-                        AI-powered contract review reflecting 2025 Labor Laws.
-                    </p>
-                    <ul class="text-xs text-slate-500 space-y-1">
-                        <li>• <strong>2025 Rules:</strong> Right to Disconnect, New Wages</li>
-                        <li>• <strong>Risks:</strong> Termination & Probation checks</li>
-                    </ul>
-                </div>
-            </a>
-
-            <!-- 3. International Setups -->
-            <a href="/portal/international"
-                class="col-span-1 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all group">
-                <div class="w-full h-full p-6">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="p-2 bg-purple-100 rounded-lg text-purple-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                </path>
-                            </svg>
-                        </span>
-                        <div>
-                            <h3 class="text-slate-900 font-bold group-hover:text-blue-600 transition-colors">
-                                International HQ</h3>
-                            <span
-                                class="inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">Advisory</span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">
-                        Strategic structuring for Foreign Direct Investment (FDI).
-                    </p>
-                    <ul class="text-xs text-slate-500 space-y-1">
-                        <li>• <strong>Structure:</strong> GBC vs Domestic vs Dual-Hub</li>
-                        <li>• <strong>Licensing:</strong> FSC Criteria & EDB Incentives</li>
-                    </ul>
-                </div>
-            </a>
-
-            <!-- 4. Resources -->
-            <a href="/portal/resources"
-                class="col-span-1 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all group">
-                <div class="w-full h-full p-6">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="p-2 bg-yellow-100 rounded-lg text-yellow-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                                </path>
-                            </svg>
-                        </span>
-                        <div>
-                            <h3 class="text-slate-900 font-bold group-hover:text-blue-600 transition-colors">Resources
-                            </h3>
-                            <span
-                                class="inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">Updated</span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">
-                        Central repository for Acts, Regulations, and Guides.
-                    </p>
-                    <ul class="text-xs text-slate-500 space-y-1">
-                        <li>• <strong>Legal:</strong> WRA 2019, MCCI Laws</li>
-                        <li>• <strong>Sectoral:</strong> Remuneration Orders (30+)</li>
-                    </ul>
-                </div>
-            </a>
-
+<div class="bg-slate-900 min-h-screen">
+    <!-- Header -->
+    <div class="relative py-16 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div class="absolute inset-0 overflow-hidden">
+            <svg class="absolute bottom-0 left-0 w-full h-full opacity-5" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="grid-sm" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M0 20L20 0H10L0 10M20 20V10L10 20" stroke="white" stroke-width="1" fill="none" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-sm)" />
+            </svg>
         </div>
+        <div class="relative max-w-7xl mx-auto text-center">
+            <h2 class="text-base font-semibold text-blue-500 tracking-wide uppercase">Operational Modules</h2>
+            <p class="mt-1 text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Choose Your Outcome
+            </p>
+            <p class="max-w-xl mt-5 mx-auto text-xl text-slate-400">
+                Activate specialized agents to execute complex business tasks autonomously.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modules List (Futuristic Cards) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+
+        <!-- 1. GRANTS ENGINE -->
+        <div
+            class="relative bg-slate-800/50 rounded-2xl border border-slate-700 p-8 flex flex-col md:flex-row items-start md:items-center hover:border-blue-500 transition-all group overflow-hidden">
+            <!-- Glow Effect -->
+            <div
+                class="absolute -left-10 -top-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 group-hover:opacity-20 transition-all">
+            </div>
+
+            <div class="flex-shrink-0 mr-6 z-10">
+                <div
+                    class="h-16 w-16 rounded-xl bg-blue-900/50 flex items-center justify-center border border-blue-500/30 text-blue-400 text-3xl">
+                    💸
+                </div>
+            </div>
+
+            <div class="flex-1 z-10">
+                <div class="flex items-center mb-1">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">Grants &
+                        Funding</h3>
+                    <span
+                        class="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900/30 text-green-400 border border-green-900">
+                        LIVE - 80% REFUNDS
+                    </span>
+                </div>
+                <p class="text-slate-400 text-lg">
+                    Auto-generate compliant TINNS, SME, and DBM Loan proposals using AI. We parse the rules, you get the
+                    cash.
+                </p>
+                <!-- Key Stats -->
+                <div class="mt-4 flex gap-6 text-sm text-slate-500">
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-blue-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                            <path fill-rule="evenodd"
+                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                                clip-rule="evenodd" />
+                        </svg> 5+ Schemes</span>
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
+                        </svg> Success Fee: 5%</span>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-0 md:ml-6 flex-shrink-0 z-10">
+                <a href="/portal/grants"
+                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-900/50">
+                    Launch Engine &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. COMPLIANCE AUDIT -->
+        <div
+            class="relative bg-slate-800/50 rounded-2xl border border-slate-700 p-8 flex flex-col md:flex-row items-start md:items-center hover:border-purple-500 transition-all group overflow-hidden">
+            <!-- Glow Effect -->
+            <div
+                class="absolute -left-10 -top-10 w-40 h-40 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 group-hover:opacity-20 transition-all">
+            </div>
+
+            <div class="flex-shrink-0 mr-6 z-10">
+                <div
+                    class="h-16 w-16 rounded-xl bg-purple-900/50 flex items-center justify-center border border-purple-500/30 text-purple-400 text-3xl">
+                    ⚖️
+                </div>
+            </div>
+
+            <div class="flex-1 z-10">
+                <div class="flex items-center mb-1">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors">Compliance
+                        Audit</h3>
+                    <span
+                        class="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900/30 text-green-400 border border-green-900">
+                        LIVE - INSTANT
+                    </span>
+                </div>
+                <p class="text-slate-400 text-lg">
+                    Employment contracts, PRB 2026 checks, and WRA 2019 validation. We find the liability traps before
+                    you sign.
+                </p>
+                <!-- Key Stats -->
+                <div class="mt-4 flex gap-6 text-sm text-slate-500">
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-purple-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.699-3.181a1 1 0 011.827 1.035L17.475 5.82l2.736.547a1 1 0 01.789 1.652l-2.153 2.153 2.153 2.153a1 1 0 01-.789 1.652l-2.736.547-1.006 1.884a1 1 0 01-1.827 1.035L14 15.677V17a1 1 0 01-2 0v-1.323l-3.954-1.582-1.699 3.181a1 1 0 01-1.827-1.035l1.006-1.884-2.736-.547a1 1 0 01-.789-1.652l2.153-2.153L2.153 7.847a1 1 0 01.789-1.652l2.736-.547 1.006-1.884a1 1 0 011.827-1.035l1.699 3.181L9 3.323V2a1 1 0 011-1z"
+                                clip-rule="evenodd" />
+                        </svg> AI OCR Analysis</span>
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                            <path fill-rule="evenodd"
+                                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                clip-rule="evenodd" />
+                        </svg> Price: $49 / Year</span>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-0 md:ml-6 flex-shrink-0 z-10">
+                <a href="/portal/audit"
+                    class="inline-flex items-center px-6 py-3 border border-slate-600 text-base font-medium rounded-md text-white bg-slate-800 hover:bg-slate-700">
+                    Run Audit &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. HQ SETUP -->
+        <div
+            class="relative bg-slate-800/50 rounded-2xl border border-slate-700 p-8 flex flex-col md:flex-row items-start md:items-center hover:border-orange-500 transition-all group overflow-hidden">
+            <!-- Glow Effect -->
+            <div
+                class="absolute -left-10 -top-10 w-40 h-40 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 group-hover:opacity-20 transition-all">
+            </div>
+
+            <div class="flex-shrink-0 mr-6 z-10">
+                <div
+                    class="h-16 w-16 rounded-xl bg-orange-900/50 flex items-center justify-center border border-orange-500/30 text-orange-400 text-3xl">
+                    🌍
+                </div>
+            </div>
+
+            <div class="flex-1 z-10">
+                <div class="flex items-center mb-1">
+                    <h3 class="text-2xl font-bold text-white group-hover:text-orange-400 transition-colors">Global HQ
+                        Setup</h3>
+                    <span
+                        class="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/30 text-blue-400 border border-blue-900">
+                        ADVISORY
+                    </span>
+                </div>
+                <p class="text-slate-400 text-lg">
+                    Setup your Mauritius GBC. 3% Tax. No Capital Gains. We handle structure, visas, and banking.
+                </p>
+                <!-- Key Stats -->
+                <div class="mt-4 flex gap-6 text-sm text-slate-500">
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-orange-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                        </svg> 100% Foreign Ownership</span>
+                    <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
+                        </svg> Price: Case by Case</span>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-0 md:ml-6 flex-shrink-0 z-10">
+                <a href="/portal/international"
+                    class="inline-flex items-center px-6 py-3 border border-slate-600 text-base font-medium rounded-md text-white bg-slate-800 hover:bg-slate-700">
+                    Structure Plan &rarr;
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}

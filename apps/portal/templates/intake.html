@@ -1,459 +1,143 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-3xl font-extrabold text-slate-900">Project Intake Protocol</h1>
-            <p class="mt-2 text-slate-600">
-                Initialize the TITAN/JARVIS/AZ pipeline. We verify eligibility before you write a single word.
+<!-- White Glove Intake (Dark Theme) -->
+<div class="bg-slate-900 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="text-center">
+            <h2 class="text-base font-semibold text-blue-500 tracking-wide uppercase">White Glove Service</h2>
+            <h2 class="mt-2 text-3xl font-extrabold text-white">
+                Project Auto-Generation
+            </h2>
+            <p class="mt-2 text-sm text-slate-400">
+                You give us the basics. TITAN builds the rest.<br>
+                <span class="text-blue-400 font-semibold">5 Minutes. Zero Friction.</span>
             </p>
         </div>
+    </div>
 
-        <!-- Progress Bar -->
-        <div class="mb-8 relative" id="progressContainer">
-            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-slate-200">
-                <div id="progressBar"
-                    class="w-1/5 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600 transition-all duration-500">
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div
+            class="bg-slate-800 py-8 px-4 shadow-xl shadow-blue-900/20 sm:rounded-2xl sm:px-10 border border-slate-700">
+            <form class="space-y-6" action="#" method="POST" onsubmit="event.preventDefault(); submitIntake();">
+
+                <!-- 1. Identity -->
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-slate-300">Full Name</label>
+                    <div class="mt-1">
+                        <input id="fullname" name="fullname" type="text" autocomplete="name" required
+                            class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                            placeholder="e.g. Sarah Smith">
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-between text-xs text-slate-500 font-bold uppercase tracking-wide">
-                <span id="stepLabel1" class="text-blue-600">Profile</span>
-                <span id="stepLabel2">Scheme</span>
-                <span id="stepLabel3">Concept</span>
-                <span id="stepLabel4">Readiness</span>
-                <span id="stepLabel5">Consent</span>
-            </div>
+
+                <div>
+                    <label for="nid" class="block text-sm font-medium text-slate-300">National ID / Passport No.</label>
+                    <div class="mt-1">
+                        <input id="nid" name="nid" type="text" required
+                            class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                            placeholder="Required for Bank Checks">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="mobile" class="block text-sm font-medium text-slate-300">Mobile Number
+                        (WhatsApp)</label>
+                    <div class="mt-1">
+                        <input id="mobile" name="mobile" type="tel" autocomplete="tel" required
+                            class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                            placeholder="+230 5...">
+                    </div>
+                </div>
+
+                <!-- 2. Business (Optional) -->
+                <div class="border-t border-slate-700 pt-6">
+                    <h3 class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-4">Business Details (If
+                        Any)</h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-slate-300">Company Name <span
+                                    class="text-slate-500 font-normal">(Optional)</span></label>
+                            <input id="company" name="company" type="text"
+                                class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                                placeholder="Leave blank if not registered">
+                        </div>
+
+                        <div>
+                            <label for="brn" class="block text-sm font-medium text-slate-300">BRN / Trade License <span
+                                    class="text-slate-500 font-normal">(Optional)</span></label>
+                            <input id="brn" name="brn" type="text"
+                                class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                                placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. The One Question -->
+                <div class="border-t border-slate-700 pt-6">
+                    <label for="desc" class="block text-sm font-medium text-slate-300">What do you do? (One
+                        Sentence)</label>
+                    <div class="mt-1">
+                        <textarea id="desc" name="desc" rows="3" required
+                            class="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white"
+                            placeholder='e.g. "I sell clothes online" or "I run a taxi service" or "I want to start a hydroponic farm"'></textarea>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">TITAN will infer your sector, eligible grants, and market
+                        code from this.</p>
+                </div>
+
+                <!-- 4. Consent (The Contract) -->
+                <div class="flex items-start bg-blue-900/20 p-4 rounded-lg border border-blue-900/50">
+                    <div class="flex items-center h-5">
+                        <input id="consent" name="consent" type="checkbox" required
+                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="consent" class="font-medium text-blue-300">Authorization</label>
+                        <p class="text-slate-400">I allow TITAN to retrieve, infer, and prepare my project documentation
+                            automatically using public registries and AI.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="w-full flex justify-center py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all hover:scale-[1.02]">
+                        Generate My Project (Auto)
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <!-- Form Card -->
-        <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200 relative">
-            <form id="intakeForm" onsubmit="event.preventDefault(); handleSubmission();">
-
-                <!-- SECTION A: PROFILE -->
-                <div id="step1" class="step-content p-8">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <span
-                            class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 text-sm">A</span>
-                        Applicant Profile
-                    </h3>
-                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                        <div class="sm:col-span-3">
-                            <label for="applicantType" class="block text-sm font-medium text-slate-700">Applicant
-                                Type</label>
-                            <select id="applicantType" name="type" title="Applicant Type"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                                <option>Individual</option>
-                                <option>Business (SME)</option>
-                                <option>Startup</option>
-                                <option>NGO / Association</option>
-                            </select>
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="fullName" class="block text-sm font-medium text-slate-700">Full Name</label>
-                            <input type="text" id="fullName" name="name" required placeholder="John Doe"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="emailAddr" class="block text-sm font-medium text-slate-700">Email</label>
-                            <input type="email" id="emailAddr" name="email" required placeholder="john@example.com"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="countryOp" class="block text-sm font-medium text-slate-700">Country of
-                                Operation</label>
-                            <select id="countryOp" name="country" title="Country of Operation"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                                <option>Mauritius</option>
-                                <option>South Africa</option>
-                                <option>Kenya</option>
-                                <option>Zambia</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="companyAge" class="block text-sm font-medium text-slate-700">Company Age
-                                (Years)</label>
-                            <input type="number" id="companyAge" name="company_age" placeholder="e.g. 5"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                        <div class="sm:col-span-6">
-                            <label for="sectorInput" class="block text-sm font-medium text-slate-700">Sector /
-                                Industry</label>
-                            <input type="text" id="sectorInput" name="sector"
-                                placeholder="e.g. Agri-Tech, Logistics, Manufacturing"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION B: SCHEME AWARENESS -->
-                <div id="step2" class="step-content p-8 hidden">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <span
-                            class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 text-sm">B</span>
-                        Scheme Awareness
-                    </h3>
-                    <div class="space-y-6">
-                        <div>
-                            <label for="schemeKnown" class="block text-sm font-medium text-slate-700">Do you already
-                                have a scheme/grant in mind?</label>
-                            <select id="schemeKnown" title="Do you know the scheme?" onchange="toggleSchemeInput()"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                                <option value="no">No, I need a recommendation</option>
-                                <option value="yes">Yes, I know what I want</option>
-                            </select>
-                        </div>
-                        <div id="schemeDetailBox" class="hidden">
-                            <label for="schemeName" class="block text-sm font-medium text-slate-700">Scheme Name /
-                                Link</label>
-                            <input type="text" id="schemeName" name="scheme_name"
-                                placeholder="e.g. SME Refund Scheme, TINNS..."
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                        <div id="goalBox">
-                            <label class="block text-sm font-medium text-slate-700">What is your primary goal?</label>
-                            <div class="mt-2 grid grid-cols-2 gap-3" role="radiogroup" aria-label="Primary Goal">
-                                <label
-                                    class="border rounded-lg p-3 text-sm flex items-center cursor-pointer hover:bg-slate-50 peer-checked:border-blue-500">
-                                    <input type="radio" name="goal" value="funding" class="mr-2"> Funding / Cash
-                                </label>
-                                <label
-                                    class="border rounded-lg p-3 text-sm flex items-center cursor-pointer hover:bg-slate-50">
-                                    <input type="radio" name="goal" value="equipment" class="mr-2"> Equipment / Capex
-                                </label>
-                                <label
-                                    class="border rounded-lg p-3 text-sm flex items-center cursor-pointer hover:bg-slate-50">
-                                    <input type="radio" name="goal" value="training" class="mr-2"> Training / Skills
-                                </label>
-                                <label
-                                    class="border rounded-lg p-3 text-sm flex items-center cursor-pointer hover:bg-slate-50">
-                                    <input type="radio" name="goal" value="expansion" class="mr-2"> Export / Expansion
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION C: PROJECT CONCEPT -->
-                <div id="step3" class="step-content p-8 hidden">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <span
-                            class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 text-sm">C</span>
-                        Project Idea
-                    </h3>
-                    <div class="space-y-6">
-                        <div>
-                            <label for="ideaRaw" class="block text-sm font-medium text-slate-700">Describe your idea
-                                (Raw)</label>
-                            <p class="text-xs text-slate-500 mb-2">Don't worry about structure. JARVIS will format this.
-                                Just tell us what you want to do.</p>
-                            <textarea id="ideaRaw" name="idea" rows="4"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border"
-                                placeholder="e.g. We want to buy a new machine to double our production of eco-friendly bricks..."></textarea>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="beneficiaries" class="block text-sm font-medium text-slate-700">Who
-                                    benefits?</label>
-                                <input type="text" id="beneficiaries" name="beneficiaries"
-                                    placeholder="e.g. Local community, employees"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                            </div>
-                            <div>
-                                <label for="budget" class="block text-sm font-medium text-slate-700">Estimated
-                                    Budget</label>
-                                <input type="text" id="budget" name="budget" placeholder="e.g. Rs 500,000"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION D: READINESS -->
-                <div id="step4" class="step-content p-8 hidden">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <span
-                            class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 text-sm">D</span>
-                        Readiness Check
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between border-b border-gray-100 pb-4">
-                            <span class="text-sm font-medium text-slate-700">Do you have financial statements?</span>
-                            <div class="flex space-x-4">
-                                <label class="inline-flex items-center"><input type="radio" name="finance" value="yes"
-                                        class="mr-1"> Yes</label>
-                                <label class="inline-flex items-center"><input type="radio" name="finance" value="no"
-                                        class="mr-1"> No</label>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-gray-100 pb-4">
-                            <span class="text-sm font-medium text-slate-700">Do you have a registered entity?</span>
-                            <div class="flex space-x-4">
-                                <label class="inline-flex items-center"><input type="radio" name="entity" value="yes"
-                                        class="mr-1"> Yes</label>
-                                <label class="inline-flex items-center"><input type="radio" name="entity" value="no"
-                                        class="mr-1"> No</label>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-gray-100 pb-4">
-                            <span class="text-sm font-medium text-slate-700">Have you applied for grants before?</span>
-                            <div class="flex space-x-4">
-                                <label class="inline-flex items-center"><input type="radio" name="history" value="yes"
-                                        class="mr-1"> Yes</label>
-                                <label class="inline-flex items-center"><input type="radio" name="history" value="no"
-                                        class="mr-1"> No</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="deadlinePicker" class="block text-sm font-medium text-slate-700">Deadline (if
-                                any)</label>
-                            <input type="date" id="deadlinePicker" name="deadline"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-3 border">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION E: CONSENT -->
-                <div id="step5" class="step-content p-8 hidden">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <span
-                            class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 text-sm">E</span>
-                        Legal & Consent
-                    </h3>
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6">
-                        <h4 class="text-sm font-bold text-blue-800 mb-2">TITAN Protocol - Stage 0</h4>
-                        <p class="text-sm text-blue-700">
-                            By proceeding, you initiate the automated assessment phase.
-                            No fees are charged at this stage.
-                        </p>
-                    </div>
-
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="consent" name="consent" type="checkbox" required
-                                class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="consent" class="font-medium text-slate-700">I Acknowledge</label>
-                            <p class="text-slate-500">I understand that AION-ZERO / TITAN prepares documents but
-                                <strong>does not submit applications</strong> on my behalf and does not guarantee
-                                funding.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer / Nav -->
-                <div
-                    class="bg-slate-50 px-4 py-3 text-right sm:px-6 flex justify-between items-center border-t border-slate-100">
-                    <button type="button" id="prevBtn" onclick="changeStep(-1)"
-                        class="hidden inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none">
-                        Back
-                    </button>
-                    <button type="button" id="nextBtn" onclick="changeStep(1)"
-                        class="ml-auto inline-flex justify-center py-2 px-4 requests-none border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
-                        Next Step
-                    </button>
-                    <button type="submit" id="submitBtn"
-                        class="hidden ml-auto inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none">
-                        Initialize Simulation
-                    </button>
-                </div>
-
-            </form>
-
-            <!-- SIMULATION OVERLAY (Hidden by default) -->
-            <div id="simulationOverlay"
-                class="absolute inset-0 bg-white/95 z-50 hidden flex-col items-center justify-center text-center p-8 overflow-y-auto">
-                <div id="simStage1" class="transition-opacity duration-500 mb-8">
-                    <div
-                        class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                        <span class="text-3xl">🧠</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">JARVIS: Concept Mapping</h3>
-                    <p class="text-slate-500 mt-2">Scanning scheme database for semantic match...</p>
-                </div>
-                <div id="simStage2" class="opacity-0 transition-opacity duration-500 mb-8">
-                    <div
-                        class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
-                        <span class="text-3xl">🖥️</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">TITAN: Validator</h3>
-                    <p class="text-slate-500 mt-2">Checking eligibility thresholds and risk logic...</p>
-                </div>
-                <div id="simStage3" class="opacity-0 transition-opacity duration-500">
-                    <div class="h-16 w-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-3xl">⚖️</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">AZ: Protocol Complete</h3>
-                    <p class="text-slate-500 mt-2">Your preliminary assessment is ready.</p>
-                    <div id="resultActions" class="mt-6 flex flex-col space-y-3">
-                        <button id="downloadBtn" onclick="generateReport()"
-                            class="px-6 py-3 bg-slate-900 text-white rounded-lg font-bold shadow-lg hover:bg-slate-800 flex items-center justify-center">
-                            <span class="mr-2">📄</span> Download Project Architect Plan
-                        </button>
-                        <p class="text-xs text-slate-400">Generated by TITAN Logic Engine</p>
-                    </div>
-                </div>
-            </div>
-
+        <!-- Trust Strip -->
+        <div class="mt-6 flex justify-center space-x-6 text-xs text-slate-500 grayscale opacity-50">
+            <span>🔒 256-bit Encryption</span>
+            <span>🛡️ Data Privacy Act Compliant</span>
+            <span>🤖 AI Powered</span>
         </div>
     </div>
 </div>
 
 <script>
-    let currentStep = 1;
-    const totalSteps = 5;
+    function submitIntake() {
+        const btn = document.querySelector('button[type="submit"]');
+        const originalText = btn.innerText;
 
-    function toggleSchemeInput() {
-        const val = document.getElementById('schemeKnown').value;
-        const box = document.getElementById('schemeDetailBox');
-        const goalBox = document.getElementById('goalBox');
-        if (val === 'yes') {
-            box.classList.remove('hidden');
-            goalBox.classList.add('hidden');
-        } else {
-            box.classList.add('hidden');
-            goalBox.classList.remove('hidden');
-        }
-    }
-
-    function changeStep(direction) {
-        // Validate before moving next? (Optional for MVP)
-
-        // Hide current
-        document.getElementById(`step${currentStep}`).classList.add('hidden');
-        document.getElementById(`stepLabel${currentStep}`).classList.remove('text-blue-600', 'border-b-2', 'border-blue-600'); // Remove active style from label
-
-        currentStep += direction;
-
-        // Show next
-        document.getElementById(`step${currentStep}`).classList.remove('hidden');
-
-        // Update Label
-        document.getElementById(`stepLabel${currentStep}`).classList.add('text-blue-600');
-
-        // Update Progress Bar
-        const percent = (currentStep / totalSteps) * 100;
-        document.getElementById('progressBar').style.width = `${percent}%`;
-
-        // Button State
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-
-        if (currentStep === 1) prevBtn.classList.add('hidden');
-        else prevBtn.classList.remove('hidden');
-
-        if (currentStep === totalSteps) {
-            nextBtn.classList.add('hidden');
-            submitBtn.classList.remove('hidden');
-        } else {
-            nextBtn.classList.remove('hidden');
-            submitBtn.classList.add('hidden');
-        }
-    }
-
-    function handleSubmission() {
-        const overlay = document.getElementById('simulationOverlay');
-        const s1 = document.getElementById('simStage1');
-        const s2 = document.getElementById('simStage2');
-        const s3 = document.getElementById('simStage3');
-
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
-
-        // Sequence Animation
-        // T=0: Show JARVIS
-        setTimeout(() => {
-            s1.classList.add('opacity-50', 'blur-sm'); // Fade out JARVIS
-            s2.classList.remove('opacity-0'); // Show TITAN
-        }, 2000);
-
-        setTimeout(() => {
-            s2.classList.add('opacity-50', 'blur-sm');
-            s3.classList.remove('opacity-0'); // Show AZ (Final)
-            document.getElementById('downloadBtn').disabled = false;
-        }, 4000);
-    }
-    async function generateReport() {
-        const btn = document.getElementById('downloadBtn');
-        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating Plan...`;
+        // 1. Loading State
         btn.disabled = true;
+        btn.innerHTML = `<span class="animate-pulse">🔄 Connecting to Registries...</span>`;
 
-        try {
-            const formData = new FormData();
+        // 2. Mock Process (The Experience)
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">📂 Fetching Shareholder Data...</span>`; }, 1500);
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">🧠 Inferring Market Code...</span>`; }, 3000);
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Grants (TINNS/DBM)...</span>`; }, 4500);
 
-            // 1. Basic Profile
-            formData.append('company_name', document.getElementById('fullName').value);
-            formData.append('sector', document.getElementById('sectorInput').value);
-            formData.append('company_age_years', document.getElementById('companyAge').value || 0);
-
-            // 2. Project Data
-            formData.append('project_cost', document.getElementById('budget').value || 0);
-
-            // Derive Project Summary
-            const idea = document.getElementById('ideaRaw').value;
-            const ben = document.getElementById('beneficiaries').value;
-            const summary = `${idea}\n\nKey Beneficiaries: ${ben}`;
-            formData.append('project_summary', summary);
-
-            // 3. Logic Fields
-            let urgency = "Normal";
-            const deadlp = document.getElementById('deadlinePicker').value;
-            if (deadlp) {
-                const days = (new Date(deadlp) - new Date()) / (1000 * 60 * 60 * 24);
-                if (days < 30) urgency = "High";
-            }
-            formData.append('urgency_level', urgency);
-            formData.append('timeline', deadlp || "ASAP");
-
-            // Documentation Ready
-            const fin = document.querySelector('input[name="finance"]:checked')?.value || "no";
-            const ent = document.querySelector('input[name="entity"]:checked')?.value || "no";
-            let docReady = "Yes";
-            if (fin === 'no' || ent === 'no') docReady = "No";
-            formData.append('documentation_ready', docReady);
-
-            // Turnover
-            const type = document.getElementById('applicantType').value;
-            let turnover = "<50M";
-            if (type === 'Individual') turnover = "<10M";
-            if (type === 'Business (SME)') turnover = "<50M";
-            formData.append('turnover_range', turnover);
-
-            const response = await fetch('/api/grants/tinns/generate', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) throw new Error('Generation failed');
-
-            const result = await response.json();
-
-            if (result.status === 'success' && result.download_url) {
-                btn.innerHTML = `✅ Plan Ready`;
-                btn.classList.remove('bg-slate-900');
-                btn.classList.add('bg-green-600');
-
-                const link = document.createElement('a');
-                link.href = result.download_url;
-                link.download = '';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                throw new Error("API returned error");
-            }
-
-        } catch (e) {
-            console.error(e);
-            alert("Error generating plan. Please try again.");
-            btn.innerHTML = "Try Again";
+        // 3. Success (Redirect to 'Mock' Result or Dashboard)
+        setTimeout(() => {
+            alert("✅ TITAN has successfully inferred your profile!\n\nDetected:\n- Sector: Retail/Textile\n- Status: Unregistered (Sole Trader)\n- Eligible: SME Grant (Marketing)\n\n(This is a demo of the 'Luxury Intake' flow. In prod, this creates the Project Artifact.)");
             btn.disabled = false;
-        }
+            btn.innerText = originalText;
+        }, 6000);
     }
 </script>
 {% endblock %}

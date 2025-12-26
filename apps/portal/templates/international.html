@@ -126,6 +126,111 @@
                         </button>
                     </div>
                     <input type="hidden" id="selectedGoal" value="">
+
+                    <!-- GOAL DETAILS PANELS (Dynamic) -->
+                    <div id="goal-details" class="mt-6">
+                        <!-- 1. Tax Optimization Details -->
+                        <div id="detail-tax"
+                            class="goal-detail hidden bg-green-50 rounded-xl p-4 border border-green-100">
+                            <h4 class="font-bold text-green-900 mb-2">Tax Efficiency (GBC Structure)</h4>
+                            <table class="w-full text-sm text-left">
+                                <tr class="border-b border-green-200">
+                                    <th class="pb-2 text-green-800">Benefit</th>
+                                    <th class="pb-2 text-green-800 text-right">Value</th>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-green-700">Corporate Tax (Foreign Income)</td>
+                                    <td class="py-2 text-right font-bold text-green-900">3%*</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-green-700">Dividends Withholding Tax</td>
+                                    <td class="py-2 text-right font-bold text-green-900">0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-green-700">Capital Gains Tax</td>
+                                    <td class="py-2 text-right font-bold text-green-900">0%</td>
+                                </tr>
+                                <tr class="bg-green-100/50">
+                                    <td class="py-2 pl-2 font-semibold text-green-800">Min. Annual Expenditure</td>
+                                    <td class="py-2 pr-2 text-right font-bold text-green-900">~$12,000</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- 2. Asset Protection Details -->
+                        <div id="detail-ip"
+                            class="goal-detail hidden bg-purple-50 rounded-xl p-4 border border-purple-100">
+                            <h4 class="font-bold text-purple-900 mb-2">IP & Asset Holding (Authorized Company)</h4>
+                            <p class="text-xs text-purple-700 mb-3">Ideal for holding intellectual property or real
+                                estate outside Mauritius.</p>
+                            <table class="w-full text-sm text-left">
+                                <tr class="border-b border-purple-200">
+                                    <th class="pb-2 text-purple-800">Feature</th>
+                                    <th class="pb-2 text-purple-800 text-right">Details</th>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-purple-700">Tax on Foreign Income</td>
+                                    <td class="py-2 text-right font-bold text-purple-900">0% (Exempt)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-purple-700">Confidentiality</td>
+                                    <td class="py-2 text-right font-bold text-purple-900">High</td>
+                                </tr>
+                                <tr class="bg-purple-100/50">
+                                    <td class="py-2 pl-2 font-semibold text-purple-800">Min. Investment</td>
+                                    <td class="py-2 pr-2 text-right font-bold text-purple-900">$0</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- 3. Trade/Regional HQ Details -->
+                        <div id="detail-trade"
+                            class="goal-detail hidden bg-blue-50 rounded-xl p-4 border border-blue-100">
+                            <h4 class="font-bold text-blue-900 mb-2">Regional Trading HQ</h4>
+                            <table class="w-full text-sm text-left">
+                                <tr class="border-b border-blue-200">
+                                    <th class="pb-2 text-blue-800">Market Access</th>
+                                    <th class="pb-2 text-blue-800 text-right">Benefit</th>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-blue-700">Export to Africa (COMESA/SADC)</td>
+                                    <td class="py-2 text-right font-bold text-blue-900">Duty Free</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-blue-700">Export to USA (AGOA)</td>
+                                    <td class="py-2 text-right font-bold text-blue-900">Duty Free (Selected)</td>
+                                </tr>
+                                <tr class="bg-blue-100/50">
+                                    <td class="py-2 pl-2 font-semibold text-blue-800">Freeport Warehousing</td>
+                                    <td class="py-2 pr-2 text-right font-bold text-blue-900">0% Tax on Profit</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- 4. Venture Capital / Investor Visa -->
+                        <div id="detail-invest"
+                            class="goal-detail hidden bg-orange-50 rounded-xl p-4 border border-orange-100">
+                            <h4 class="font-bold text-orange-900 mb-2">Investment & Residency</h4>
+                            <table class="w-full text-sm text-left">
+                                <tr class="border-b border-orange-200">
+                                    <th class="pb-2 text-orange-800">Visa Type</th>
+                                    <th class="pb-2 text-orange-800 text-right">Min Investment</th>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-orange-700">Investor Permit (10 Years)</td>
+                                    <td class="py-2 text-right font-bold text-orange-900">$50,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-orange-700">Professional (Tech Visa)</td>
+                                    <td class="py-2 text-right font-bold text-orange-900">$0 (Salary > Rs 30k)</td>
+                                </tr>
+                                <tr class="bg-orange-100/50">
+                                    <td class="py-2 pl-2 font-semibold text-orange-800">Family Dependents</td>
+                                    <td class="py-2 pr-2 text-right font-bold text-orange-900">Included</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 3. Turnover Slider -->
