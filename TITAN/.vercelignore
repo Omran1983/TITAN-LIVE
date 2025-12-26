@@ -1,0 +1,18 @@
+# --- TITAN VERCEL IGNORE ---
+# Ignore generated content
+io/
+logs/
+__pycache__/
+*.pdf
+*.log
+*.zip
+*.db
+*.sqlite
+
+# Ignore venv if present
+venv/
+.venv/
+
+# Ignore internal tools
+runner/
+tools/
