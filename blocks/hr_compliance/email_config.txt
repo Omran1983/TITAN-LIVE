@@ -1,0 +1,1 @@
+Email Configuration Confirmed: Master=deals@aogrl.com, Alias=compliance@aogrl.com

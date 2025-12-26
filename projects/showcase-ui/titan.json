@@ -1,0 +1,8 @@
+{
+    "name": "showcase-ui",
+    "version": "1.0.0",
+    "description": "Client Facing Portal for TITAN AI Products",
+    "modules": {
+        "web": "index.html"
+    }
+}

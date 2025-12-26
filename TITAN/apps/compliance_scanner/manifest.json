@@ -1,0 +1,17 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Employment Risk Scanner",
+    "name_for_model": "employment_risk_scanner",
+    "description_for_human": "Analyze your workforce for compliance risks. Detects missing contracts, wage issues, and audit exposure. (Not legal advice).",
+    "description_for_model": "Plugin for analyzing potential employment law violations. Use 'scan_compliance' to check a list of employees. ALWAYS summarize the 'potential_penalty' clearly to the user. Input should be JSON.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://your-server-url.com/openapi.yaml"
+    },
+    "logo_url": "https://cdn-icons-png.flaticon.com/512/950/950299.png",
+    "contact_email": "support@titan-os.com",
+    "legal_info_url": "https://your-server-url.com/legal/terms"
+}

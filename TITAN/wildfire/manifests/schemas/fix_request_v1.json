@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "fix_request_v1",
+    "type": "object",
+    "required": [
+        "fix_id",
+        "report_id",
+        "requested_actions",
+        "approval",
+        "signature"
+    ],
+    "properties": {
+        "fix_id": {
+            "type": "string"
+        },
+        "report_id": {
+            "type": "string"
+        },
+        "requested_actions": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "approval": {
+            "type": "object",
+            "required": [
+                "required",
+                "status"
+            ],
+            "properties": {
+                "required": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "pending",
+                        "approved",
+                        "rejected"
+                    ]
+                }
+            }
+        },
+        "signature": {
+            "type": "object"
+        }
+    }
+}

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReachX Ops Console</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #0b1120;
+      color: #e5e7eb;
+    }
+    header {
+      padding: 12px 20px;
+      background: linear-gradient(to right, #0f172a, #1d4ed8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1f2937;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+    }
+    header span {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      height: calc(100vh - 52px);
+    }
+    nav {
+      background: #020617;
+      border-right: 1px solid #1f2937;
+      padding: 10px;
+    }
+    nav h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #9ca3af;
+      margin: 8px 4px;
+    }
+    nav button {
+      width: 100%;
+      text-align: left;
+      padding: 8px 10px;
+      margin-bottom: 4px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    nav button.active {
+      background: #1d4ed8;
+    }
+    nav button:hover {
+      background: #111827;
+    }
+    main {
+      padding: 12px 18px;
+      overflow: auto;
+    }
+    h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+    .row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #020617;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #1f2937;
+      flex: 1 1 260px;
+      min-width: 260px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th, td {
+      border-bottom: 1px solid #111827;
+      padding: 4px 6px;
+      text-align: left;
+    }
+    th {
+      background: #020617;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:hover td {
+      background: #020617;
+    }
+    .toolbar {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+    .toolbar button {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: white;
+    }
+    .toolbar input {
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    label {
+      font-size: 11px;
+      color: #9ca3af;
+      display: block;
+      margin-bottom: 2px;
+    }
+    input, select, textarea {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 4px 6px;
+      font-size: 12px;
+      resize: vertical;
+    }
+    textarea {
+      min-height: 60px;
+    }
+    .btn-secondary {
+      background: #111827 !important;
+      color: #e5e7eb !important;
+      border: 1px solid #374151 !important;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 10px;
+      background: #111827;
+      border: 1px solid #1f2937;
+    }
+    .status-open { color: #fbbf24; }
+    .status-active { color: #22c55e; }
+    .status-unpaid { color: #f97316; }
+    .status-paid { color: #22c55e; }
+    .status-draft { color: #9ca3af; }
+    .status-expired { color: #f97316; }
+    .danger {
+      color: #f97316;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>ReachX Ops Console</h1>
+    <span>JARVIS · Supabase project: abkprecmhitqmmlzxfad</span>
+  </div>
+  <div>
+    <span id="status-text">Disconnected</span>
+  </div>
+</header>
+<div class="layout">
+  <nav>
+    <h2>Core</h2>
+    <button data-view="dashboard" class="active">Dashboard</button>
+    <button data-view="employers">Employers</button>
+    <button data-view="workers">Workers</button>
+    <button data-view="agents">Agents</button>
+    <button data-view="dormitories">Dormitories</button>
+    <button data-view="requests">Requests & Assignments</button>
+    <button data-view="contracts">Contracts</button>
+    <button data-view="finance">Finance</button>
+    <button data-view="communications">Communication Log</button>
+    <h2>Admin</h2>
+    <button data-view="users">Users & Roles</button>
+    <button data-view="audit">Audit Log</button>
+  </nav>
+  <main>
+    <!-- Views will be swapped here -->
+    <section id="view-dashboard">
+      <h3>Dashboard</h3>
+      <div class="row" id="dashboard-kpis">
+        <div class="card">
+          <strong>Employers</strong>
+          <div id="kpi-employers">—</div>
+        </div>
+        <div class="card">
+          <strong>Active requests</strong>
+          <div id="kpi-requests">—</div>
+        </div>
+        <div class="card">
+          <strong>Active assignments</strong>
+          <div id="kpi-assignments">—</div>
+        </div>
+        <div class="card">
+          <strong>Available workers</strong>
+          <div id="kpi-workers">—</div>
+        </div>
+        <div class="card">
+          <strong>Dorm occupancy</strong>
+          <div id="kpi-dorms">—</div>
+        </div>
+        <div class="card">
+          <strong>Unpaid invoices (MUR)</strong>
+          <div id="kpi-unpaid">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-employers" style="display:none;">
+      <div class="toolbar">
+        <h3>Employers</h3>
+        <div>
+          <input id="employer-search" placeholder="Search by name…" />
+          <button id="btn-refresh-employers">Refresh</button>
+          <button id="btn-clear-employer">New employer</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="employer-form">
+            <input type="hidden" id="employer-id" />
+            <div>
+              <label>Name</label>
+              <input id="employer-name" required />
+            </div>
+            <div>
+              <label>Country</label>
+              <input id="employer-country" />
+            </div>
+            <div>
+              <label>Status</label>
+              <select id="employer-status">
+                <option value="active">active</option>
+                <option value="inactive">inactive</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-employer">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Status</th>
+                <th>Open req.</th>
+                <th>Assignments</th>
+                <th>Unpaid (MUR)</th>
+              </tr>
+            </thead>
+            <tbody id="employer-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-workers" style="display:none;">
+      <div class="toolbar">
+        <h3>Workers</h3>
+        <div>
+          <input id="worker-search" placeholder="Search by name…" />
+          <button id="btn-refresh-workers">Refresh</button>
+          <button id="btn-clear-worker">New worker</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="worker-form">
+            <input type="hidden" id="worker-id" />
+            <div>
+              <label>Full name</label>
+              <input id="worker-name" required />
+            </div>
+            <div>
+              <label>Nationality</label>
+              <input id="worker-nationality" />
+            </div>
+            <div>
+              <label>Status</label>
+              <select id="worker-status">
+                <option value="available">available</option>
+                <option value="assigned">assigned</option>
+                <option value="reserve">reserve</option>
+                <option value="inactive">inactive</option>
+              </select>
+            </div>
+            <div>
+              <label>Skill / role</label>
+              <input id="worker-skill" />
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-worker">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Nationality</th>
+                <th>Status</th>
+                <th>Skill</th>
+              </tr>
+            </thead>
+            <tbody id="worker-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-agents" style="display:none;">
+      <div class="toolbar">
+        <h3>Agents</h3>
+        <div>
+          <button id="btn-refresh-agents">Refresh</button>
+          <button id="btn-clear-agent">New agent</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="agent-form">
+            <input type="hidden" id="agent-id" />
+            <div>
+              <label>Full name</label>
+              <input id="agent-name" required />
+            </div>
+            <div>
+              <label>Email</label>
+              <input id="agent-email" type="email" />
+            </div>
+            <div>
+              <label>Phone</label>
+              <input id="agent-phone" />
+            </div>
+            <div>
+              <label>Region</label>
+              <input id="agent-region" />
+            </div>
+            <div>
+              <label>Role</label>
+              <input id="agent-role" placeholder="recruiter / sales / account_manager" />
+            </div>
+            <div>
+              <label>Active</label>
+              <select id="agent-active">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-agent">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Region</th>
+                <th>Active</th>
+              </tr>
+            </thead>
+            <tbody id="agent-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-dormitories" style="display:none;">
+      <div class="toolbar">
+        <h3>Dormitories</h3>
+        <div>
+          <button id="btn-refresh-dorms">Refresh</button>
+          <button id="btn-clear-dorm">New dorm</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="dorm-form">
+            <input type="hidden" id="dorm-id" />
+            <div>
+              <label>Name</label>
+              <input id="dorm-name" required />
+            </div>
+            <div>
+              <label>Location</label>
+              <input id="dorm-location" />
+            </div>
+            <div>
+              <label>Capacity</label>
+              <input id="dorm-capacity" type="number" min="0" />
+            </div>
+            <div>
+              <label>Occupied</label>
+              <input id="dorm-occupied" type="number" min="0" />
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-dorm">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Occupied</th>
+              </tr>
+            </thead>
+            <tbody id="dorm-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-contracts" style="display:none;">
+      <div class="toolbar">
+        <h3>Contracts</h3>
+        <div>
+          <button id="btn-refresh-contracts">Refresh</button>
+          <button id="btn-clear-contract">New contract</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="contract-form">
+            <input type="hidden" id="contract-id" />
+            <div>
+              <label>Employer ID</label>
+              <input id="contract-employer-id" required />
+            </div>
+            <div>
+              <label>Name</label>
+              <input id="contract-name" required />
+            </div>
+            <div>
+              <label>Billing model</label>
+              <input id="contract-billing-model" placeholder="per_head / retainer / project" />
+            </div>
+            <div>
+              <label>Rate currency</label>
+              <input id="contract-currency" value="MUR" />
+            </div>
+            <div>
+              <label>Rate amount</label>
+              <input id="contract-amount" type="number" step="0.01" />
+            </div>
+            <div>
+              <label>Start date</label>
+              <input id="contract-start" type="date" />
+            </div>
+            <div>
+              <label>End date</label>
+              <input id="contract-end" type="date" />
+            </div>
+            <div>
+              <label>Status</label>
+              <select id="contract-status">
+                <option value="active">active</option>
+                <option value="draft">draft</option>
+                <option value="expired">expired</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;">
+              <label>Notes</label>
+              <textarea id="contract-notes"></textarea>
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-contract">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Employer</th>
+                <th>Name</th>
+                <th>Billing</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="contract-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-finance" style="display:none;">
+      <div class="toolbar">
+        <h3>Finance – Invoices & Payments</h3>
+        <div>
+          <button id="btn-refresh-finance">Refresh</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Employer</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Issued</th>
+              </tr>
+            </thead>
+            <tbody id="invoice-table-body"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <form id="payment-form">
+            <input type="hidden" id="payment-invoice-id" />
+            <div>
+              <label>Invoice ID</label>
+              <input id="payment-invoice-id-display" disabled />
+            </div>
+            <div>
+              <label>Amount</label>
+              <input id="payment-amount" type="number" step="0.01" />
+            </div>
+            <div>
+              <label>Currency</label>
+              <input id="payment-currency" value="MUR" />
+            </div>
+            <div>
+              <label>Method</label>
+              <input id="payment-method" placeholder="bank / cash / card" />
+            </div>
+            <div>
+              <label>Reference</label>
+              <input id="payment-ref" />
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Add payment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-communications" style="display:none;">
+      <div class="toolbar">
+        <h3>Communication Log</h3>
+        <div>
+          <button id="btn-refresh-comms">Refresh</button>
+          <button id="btn-clear-comm">New entry</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <form id="comm-form">
+            <input type="hidden" id="comm-id" />
+            <div>
+              <label>Employer ID</label>
+              <input id="comm-employer-id" />
+            </div>
+            <div>
+              <label>Worker ID</label>
+              <input id="comm-worker-id" />
+            </div>
+            <div>
+              <label>Request ID</label>
+              <input id="comm-request-id" />
+            </div>
+            <div>
+              <label>Agent ID</label>
+              <input id="comm-agent-id" />
+            </div>
+            <div>
+              <label>Type</label>
+              <input id="comm-type" placeholder="call / email / whatsapp / meeting / note" />
+            </div>
+            <div>
+              <label>Direction</label>
+              <input id="comm-direction" placeholder="outbound / inbound" />
+            </div>
+            <div style="grid-column:1/-1;">
+              <label>Subject</label>
+              <input id="comm-subject" />
+            </div>
+            <div style="grid-column:1/-1;">
+              <label>Summary</label>
+              <textarea id="comm-summary"></textarea>
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit">Save</button>
+              <button type="button" class="btn-secondary" id="btn-delete-comm">Delete</button>
+            </div>
+          </form>
+        </div>
+        <div class="card" style="flex:2 1 400px; max-height:60vh; overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Type</th>
+                <th>Direction</th>
+                <th>Subject</th>
+              </tr>
+            </thead>
+            <tbody id="comm-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-users" style="display:none;">
+      <h3>Users & Roles (basic view)</h3>
+      <p style="font-size:12px;">This reads from <code>reachx_users</code>. Creation/linking to auth can be manual for now.</p>
+      <div class="card" style="max-height:70vh; overflow:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Employer</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-audit" style="display:none;">
+      <h3>Audit Log</h3>
+      <div class="card" style="max-height:70vh; overflow:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Entity</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="audit-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  // === CONFIG – REPLACE ANON KEY ===
+  const SUPABASE_URL = "https://abkprecmhitqmmlzxfad.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFia3ByZWNtaGl0cW1tbHp4ZmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDc2NTksImV4cCI6MjA3NTUyMzY1OX0.laMBfcRG_liLwsaslI0qZyGJwrpgiryUmzy8k-rls2o"; // <-- replace
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const statusText = document.getElementById("status-text");
+
+  async function testConnection() {
+    try {
+      const { data, error } = await supabase.from("reachx_employers").select("id").limit(1);
+      if (error) throw error;
+      statusText.textContent = "Connected to Supabase";
+    } catch (e) {
+      statusText.textContent = "Connection error: " + e.message;
+      statusText.classList.add("danger");
+    }
+  }
+
+  // === NAV ===
+  const buttons = document.querySelectorAll("nav button[data-view]");
+  const views = document.querySelectorAll("main section");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.view;
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      views.forEach(v => {
+        v.style.display = v.id === "view-" + target ? "block" : "none";
+      });
+      // lazy-load per view
+      if (target === "dashboard") loadDashboard();
+      if (target === "employers") loadEmployers();
+      if (target === "workers") loadWorkers();
+      if (target === "agents") loadAgents();
+      if (target === "dormitories") loadDorms();
+      if (target === "contracts") loadContracts();
+      if (target === "finance") loadFinance();
+      if (target === "communications") loadComms();
+      if (target === "users") loadUsers();
+      if (target === "audit") loadAudit();
+    });
+  });
+
+  // === DASHBOARD ===
+  async function loadDashboard() {
+    try {
+      const [empRes, reqRes, assRes, workerRes, dormRes, invRes] = await Promise.all([
+        supabase.from("reachx_employers").select("id", { count: "exact", head: true }),
+        supabase.from("reachx_requests").select("id", { count: "exact", head: true }).eq("status", "open"),
+        supabase.from("reachx_assignments").select("id", { count: "exact", head: true }).eq("status", "active"),
+        supabase.from("reachx_workers").select("id", { count: "exact", head: true }).eq("status", "available"),
+        supabase.from("reachx_dormitories").select("capacity, occupied"),
+        supabase.from("reachx_employer_invoices_view").select("unpaid_amount")
+      ]);
+
+      document.getElementById("kpi-employers").textContent = empRes.count ?? "0";
+      document.getElementById("kpi-requests").textContent = reqRes.count ?? "0";
+      document.getElementById("kpi-assignments").textContent = assRes.count ?? "0";
+      document.getElementById("kpi-workers").textContent = workerRes.count ?? "0";
+
+      let totalCap = 0, totalOcc = 0;
+      (dormRes.data || []).forEach(d => {
+        totalCap += d.capacity || 0;
+        totalOcc += d.occupied || 0;
+      });
+      const occPct = totalCap ? Math.round((totalOcc / totalCap) * 100) : 0;
+      document.getElementById("kpi-dorms").textContent = totalCap
+        ? `${totalOcc}/${totalCap} (${occPct}%)`
+        : "0 / 0";
+
+      let unpaid = 0;
+      (invRes.data || []).forEach(r => {
+        const val = parseFloat(r.unpaid_amount || "0");
+        if (!isNaN(val)) unpaid += val;
+      });
+      document.getElementById("kpi-unpaid").textContent = unpaid.toLocaleString("en-MU", {
+        style: "currency",
+        currency: "MUR"
+      });
+    } catch (e) {
+      console.error("Dashboard error", e);
+    }
+  }
+
+  // === EMPLOYERS CRUD ===
+  const employerTableBody = document.getElementById("employer-table-body");
+  const employerSearch = document.getElementById("employer-search");
+
+  async function loadEmployers() {
+    try {
+      const search = employerSearch.value?.trim();
+      let query = supabase.from("reachx_employer_invoices_view")
+        .select("employer_id, employer_name, employer_country, status, open_requests, active_assignments, unpaid_amount")
+        .order("employer_name");
+
+      if (search) {
+        query = query.ilike("employer_name", "%" + search + "%");
+      }
+
+      const { data, error } = await query;
+      if (error) throw error;
+
+      employerTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.employer_name}</td>
+          <td>${row.employer_country || ""}</td>
+          <td><span class="pill">${row.status || ""}</span></td>
+          <td>${row.open_requests || 0}</td>
+          <td>${row.active_assignments || 0}</td>
+          <td>${row.unpaid_amount || 0}</td>
+        `;
+        tr.addEventListener("click", () => fillEmployerForm(row));
+        employerTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadEmployers error", e);
+    }
+  }
+
+  function fillEmployerForm(row) {
+    document.getElementById("employer-id").value = row.employer_id;
+    document.getElementById("employer-name").value = row.employer_name || "";
+    document.getElementById("employer-country").value = row.employer_country || "";
+    document.getElementById("employer-status").value = row.status || "active";
+  }
+
+  function clearEmployerForm() {
+    document.getElementById("employer-id").value = "";
+    document.getElementById("employer-name").value = "";
+    document.getElementById("employer-country").value = "";
+    document.getElementById("employer-status").value = "active";
+  }
+
+  document.getElementById("btn-refresh-employers").addEventListener("click", loadEmployers);
+  document.getElementById("btn-clear-employer").addEventListener("click", clearEmployerForm);
+  employerSearch.addEventListener("input", () => {
+    clearTimeout(employerSearch._timer);
+    employerSearch._timer = setTimeout(loadEmployers, 300);
+  });
+
+  document.getElementById("employer-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("employer-id").value || null;
+    const name = document.getElementById("employer-name").value.trim();
+    const country = document.getElementById("employer-country").value.trim();
+    const status = document.getElementById("employer-status").value;
+    if (!name) return;
+
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_employers")
+          .update({ name, country, status })
+          .eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_employers")
+          .insert({ name, country, status })
+          .select("id")
+          .single();
+        if (error) throw error;
+        document.getElementById("employer-id").value = data.id;
+      }
+      await loadEmployers();
+    } catch (e) {
+      console.error("save employer error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-employer").addEventListener("click", async () => {
+    const id = document.getElementById("employer-id").value;
+    if (!id) return;
+    if (!confirm("Delete this employer? This may cascade to related data.")) return;
+    try {
+      const { error } = await supabase.from("reachx_employers").delete().eq("id", id);
+      if (error) throw error;
+      clearEmployerForm();
+      await loadEmployers();
+    } catch (e) {
+      console.error("delete employer error", e);
+    }
+  });
+
+  // === WORKERS CRUD ===
+  const workerTableBody = document.getElementById("worker-table-body");
+  const workerSearch = document.getElementById("worker-search");
+
+  function clearWorkerForm() {
+    document.getElementById("worker-id").value = "";
+    document.getElementById("worker-name").value = "";
+    document.getElementById("worker-nationality").value = "";
+    document.getElementById("worker-status").value = "available";
+    document.getElementById("worker-skill").value = "";
+  }
+
+  function fillWorkerForm(row) {
+    document.getElementById("worker-id").value = row.id;
+    document.getElementById("worker-name").value = row.full_name || "";
+    document.getElementById("worker-nationality").value = row.nationality || "";
+    document.getElementById("worker-status").value = row.status || "available";
+    document.getElementById("worker-skill").value = row.skill || "";
+  }
+
+  async function loadWorkers() {
+    try {
+      const search = workerSearch.value?.trim();
+      let query = supabase.from("reachx_workers").select("id, full_name, nationality, status, skill").order("full_name");
+      if (search) query = query.ilike("full_name", "%" + search + "%");
+      const { data, error } = await query;
+      if (error) throw error;
+      workerTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.full_name}</td>
+          <td>${row.nationality || ""}</td>
+          <td><span class="pill">${row.status || ""}</span></td>
+          <td>${row.skill || ""}</td>
+        `;
+        tr.addEventListener("click", () => fillWorkerForm(row));
+        workerTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadWorkers error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-workers").addEventListener("click", loadWorkers);
+  document.getElementById("btn-clear-worker").addEventListener("click", clearWorkerForm);
+  workerSearch.addEventListener("input", () => {
+    clearTimeout(workerSearch._timer);
+    workerSearch._timer = setTimeout(loadWorkers, 300);
+  });
+
+  document.getElementById("worker-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("worker-id").value || null;
+    const full_name = document.getElementById("worker-name").value.trim();
+    const nationality = document.getElementById("worker-nationality").value.trim();
+    const status = document.getElementById("worker-status").value;
+    const skill = document.getElementById("worker-skill").value.trim();
+    if (!full_name) return;
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_workers")
+          .update({ full_name, nationality, status, skill })
+          .eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_workers")
+          .insert({ full_name, nationality, status, skill })
+          .select("id")
+          .single();
+        if (error) throw error;
+        document.getElementById("worker-id").value = data.id;
+      }
+      await loadWorkers();
+    } catch (e) {
+      console.error("save worker error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-worker").addEventListener("click", async () => {
+    const id = document.getElementById("worker-id").value;
+    if (!id) return;
+    if (!confirm("Delete this worker?")) return;
+    try {
+      const { error } = await supabase.from("reachx_workers").delete().eq("id", id);
+      if (error) throw error;
+      clearWorkerForm();
+      await loadWorkers();
+    } catch (e) {
+      console.error("delete worker error", e);
+    }
+  });
+
+  // === AGENTS CRUD ===
+  const agentTableBody = document.getElementById("agent-table-body");
+
+  function clearAgentForm() {
+    document.getElementById("agent-id").value = "";
+    document.getElementById("agent-name").value = "";
+    document.getElementById("agent-email").value = "";
+    document.getElementById("agent-phone").value = "";
+    document.getElementById("agent-region").value = "";
+    document.getElementById("agent-role").value = "";
+    document.getElementById("agent-active").value = "true";
+  }
+
+  function fillAgentForm(row) {
+    document.getElementById("agent-id").value = row.id;
+    document.getElementById("agent-name").value = row.full_name || "";
+    document.getElementById("agent-email").value = row.email || "";
+    document.getElementById("agent-phone").value = row.phone || "";
+    document.getElementById("agent-region").value = row.region || "";
+    document.getElementById("agent-role").value = row.role || "";
+    document.getElementById("agent-active").value = row.is_active ? "true" : "false";
+  }
+
+  async function loadAgents() {
+    try {
+      const { data, error } = await supabase.from("reachx_agents")
+        .select("id, full_name, role, region, is_active")
+        .order("full_name");
+      if (error) throw error;
+      agentTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.full_name}</td>
+          <td>${row.role || ""}</td>
+          <td>${row.region || ""}</td>
+          <td>${row.is_active ? "yes" : "no"}</td>
+        `;
+        tr.addEventListener("click", () => fillAgentForm(row));
+        agentTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadAgents error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-agents").addEventListener("click", loadAgents);
+  document.getElementById("btn-clear-agent").addEventListener("click", clearAgentForm);
+
+  document.getElementById("agent-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("agent-id").value || null;
+    const full_name = document.getElementById("agent-name").value.trim();
+    const email = document.getElementById("agent-email").value.trim();
+    const phone = document.getElementById("agent-phone").value.trim();
+    const region = document.getElementById("agent-region").value.trim();
+    const role = document.getElementById("agent-role").value.trim();
+    const is_active = document.getElementById("agent-active").value === "true";
+    if (!full_name) return;
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_agents")
+          .update({ full_name, email, phone, region, role, is_active })
+          .eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_agents")
+          .insert({ full_name, email, phone, region, role, is_active })
+          .select("id").single();
+        if (error) throw error;
+        document.getElementById("agent-id").value = data.id;
+      }
+      await loadAgents();
+    } catch (e) {
+      console.error("save agent error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-agent").addEventListener("click", async () => {
+    const id = document.getElementById("agent-id").value;
+    if (!id) return;
+    if (!confirm("Delete this agent?")) return;
+    try {
+      const { error } = await supabase.from("reachx_agents").delete().eq("id", id);
+      if (error) throw error;
+      clearAgentForm();
+      await loadAgents();
+    } catch (e) {
+      console.error("delete agent error", e);
+    }
+  });
+
+  // === DORMITORIES CRUD ===
+  const dormTableBody = document.getElementById("dorm-table-body");
+
+  function clearDormForm() {
+    document.getElementById("dorm-id").value = "";
+    document.getElementById("dorm-name").value = "";
+    document.getElementById("dorm-location").value = "";
+    document.getElementById("dorm-capacity").value = "";
+    document.getElementById("dorm-occupied").value = "";
+  }
+
+  function fillDormForm(row) {
+    document.getElementById("dorm-id").value = row.id;
+    document.getElementById("dorm-name").value = row.name || "";
+    document.getElementById("dorm-location").value = row.location || "";
+    document.getElementById("dorm-capacity").value = row.capacity || 0;
+    document.getElementById("dorm-occupied").value = row.occupied || 0;
+  }
+
+  async function loadDorms() {
+    try {
+      const { data, error } = await supabase.from("reachx_dormitories")
+        .select("id, name, location, capacity, occupied")
+        .order("name");
+      if (error) throw error;
+      dormTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.name}</td>
+          <td>${row.location || ""}</td>
+          <td>${row.capacity || 0}</td>
+          <td>${row.occupied || 0}</td>
+        `;
+        tr.addEventListener("click", () => fillDormForm(row));
+        dormTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadDorms error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-dorms").addEventListener("click", loadDorms);
+  document.getElementById("btn-clear-dorm").addEventListener("click", clearDormForm);
+
+  document.getElementById("dorm-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("dorm-id").value || null;
+    const name = document.getElementById("dorm-name").value.trim();
+    const location = document.getElementById("dorm-location").value.trim();
+    const capacity = parseInt(document.getElementById("dorm-capacity").value || "0", 10);
+    const occupied = parseInt(document.getElementById("dorm-occupied").value || "0", 10);
+    if (!name) return;
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_dormitories")
+          .update({ name, location, capacity, occupied })
+          .eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_dormitories")
+          .insert({ name, location, capacity, occupied })
+          .select("id").single();
+        if (error) throw error;
+        document.getElementById("dorm-id").value = data.id;
+      }
+      await loadDorms();
+    } catch (e) {
+      console.error("save dorm error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-dorm").addEventListener("click", async () => {
+    const id = document.getElementById("dorm-id").value;
+    if (!id) return;
+    if (!confirm("Delete this dorm?")) return;
+    try {
+      const { error } = await supabase.from("reachx_dormitories").delete().eq("id", id);
+      if (error) throw error;
+      clearDormForm();
+      await loadDorms();
+    } catch (e) {
+      console.error("delete dorm error", e);
+    }
+  });
+
+  // === CONTRACTS CRUD ===
+  const contractTableBody = document.getElementById("contract-table-body");
+
+  function clearContractForm() {
+    document.getElementById("contract-id").value = "";
+    document.getElementById("contract-employer-id").value = "";
+    document.getElementById("contract-name").value = "";
+    document.getElementById("contract-billing-model").value = "";
+    document.getElementById("contract-currency").value = "MUR";
+    document.getElementById("contract-amount").value = "";
+    document.getElementById("contract-start").value = "";
+    document.getElementById("contract-end").value = "";
+    document.getElementById("contract-status").value = "active";
+    document.getElementById("contract-notes").value = "";
+  }
+
+  function fillContractForm(row) {
+    document.getElementById("contract-id").value = row.id;
+    document.getElementById("contract-employer-id").value = row.employer_id || "";
+    document.getElementById("contract-name").value = row.name || "";
+    document.getElementById("contract-billing-model").value = row.billing_model || "";
+    document.getElementById("contract-currency").value = row.rate_currency || "";
+    document.getElementById("contract-amount").value = row.rate_amount || "";
+    document.getElementById("contract-start").value = row.start_date || "";
+    document.getElementById("contract-end").value = row.end_date || "";
+    document.getElementById("contract-status").value = row.status || "active";
+    document.getElementById("contract-notes").value = row.notes || "";
+  }
+
+  async function loadContracts() {
+    try {
+      const { data, error } = await supabase.from("reachx_contracts")
+        .select("id, employer_id, name, billing_model, status")
+        .order("id", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      contractTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.id}</td>
+          <td>${row.employer_id || ""}</td>
+          <td>${row.name}</td>
+          <td>${row.billing_model || ""}</td>
+          <td><span class="pill">${row.status || ""}</span></td>
+        `;
+        tr.addEventListener("click", () => fillContractForm(row));
+        contractTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadContracts error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-contracts").addEventListener("click", loadContracts);
+  document.getElementById("btn-clear-contract").addEventListener("click", clearContractForm);
+
+  document.getElementById("contract-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("contract-id").value || null;
+    const employer_id = document.getElementById("contract-employer-id").value.trim();
+    const name = document.getElementById("contract-name").value.trim();
+    const billing_model = document.getElementById("contract-billing-model").value.trim();
+    const rate_currency = document.getElementById("contract-currency").value.trim();
+    const rate_amount = document.getElementById("contract-amount").value ? parseFloat(document.getElementById("contract-amount").value) : null;
+    const start_date = document.getElementById("contract-start").value || null;
+    const end_date = document.getElementById("contract-end").value || null;
+    const status = document.getElementById("contract-status").value;
+    const notes = document.getElementById("contract-notes").value.trim();
+
+    if (!employer_id || !name) return;
+
+    const payload = { employer_id, name, billing_model, rate_currency, rate_amount, start_date, end_date, status, notes };
+
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_contracts").update(payload).eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_contracts").insert(payload).select("id").single();
+        if (error) throw error;
+        document.getElementById("contract-id").value = data.id;
+      }
+      await loadContracts();
+    } catch (e) {
+      console.error("save contract error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-contract").addEventListener("click", async () => {
+    const id = document.getElementById("contract-id").value;
+    if (!id) return;
+    if (!confirm("Delete this contract?")) return;
+    try {
+      const { error } = await supabase.from("reachx_contracts").delete().eq("id", id);
+      if (error) throw error;
+      clearContractForm();
+      await loadContracts();
+    } catch (e) {
+      console.error("delete contract error", e);
+    }
+  });
+
+  // === FINANCE – list invoices + add payment ===
+  const invoiceTableBody = document.getElementById("invoice-table-body");
+
+  async function loadFinance() {
+    try {
+      const { data, error } = await supabase.from("reachx_employer_invoices_view")
+        .select("invoice_id, employer_name, invoice_no, status, amount, unpaid_amount, issued_at")
+        .order("issued_at", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      invoiceTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.invoice_no || row.invoice_id}</td>
+          <td>${row.employer_name}</td>
+          <td><span class="pill ${row.status === "unpaid" ? "status-unpaid" : "status-paid"}">${row.status}</span></td>
+          <td>${row.amount || 0}</td>
+          <td>${row.issued_at ? row.issued_at.substring(0,10) : ""}</td>
+        `;
+        tr.addEventListener("click", () => {
+          document.getElementById("payment-invoice-id").value = row.invoice_id;
+          document.getElementById("payment-invoice-id-display").value = row.invoice_id;
+        });
+        invoiceTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadFinance error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-finance").addEventListener("click", loadFinance);
+
+  document.getElementById("payment-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const invoice_id = document.getElementById("payment-invoice-id").value;
+    if (!invoice_id) return;
+    const amount = document.getElementById("payment-amount").value ? parseFloat(document.getElementById("payment-amount").value) : null;
+    const currency = document.getElementById("payment-currency").value.trim() || "MUR";
+    const method = document.getElementById("payment-method").value.trim();
+    const reference = document.getElementById("payment-ref").value.trim();
+    if (!amount) return;
+    try {
+      const payload = { invoice_id: parseInt(invoice_id, 10), amount, currency, method, reference };
+      const { error } = await supabase.from("reachx_payments").insert(payload);
+      if (error) throw error;
+      document.getElementById("payment-amount").value = "";
+      document.getElementById("payment-method").value = "";
+      document.getElementById("payment-ref").value = "";
+      await loadFinance();
+    } catch (e) {
+      console.error("add payment error", e);
+    }
+  });
+
+  // === COMMUNICATIONS CRUD ===
+  const commTableBody = document.getElementById("comm-table-body");
+
+  function clearCommForm() {
+    document.getElementById("comm-id").value = "";
+    document.getElementById("comm-employer-id").value = "";
+    document.getElementById("comm-worker-id").value = "";
+    document.getElementById("comm-request-id").value = "";
+    document.getElementById("comm-agent-id").value = "";
+    document.getElementById("comm-type").value = "";
+    document.getElementById("comm-direction").value = "";
+    document.getElementById("comm-subject").value = "";
+    document.getElementById("comm-summary").value = "";
+  }
+
+  function fillCommForm(row) {
+    document.getElementById("comm-id").value = row.id;
+    document.getElementById("comm-employer-id").value = row.employer_id || "";
+    document.getElementById("comm-worker-id").value = row.worker_id || "";
+    document.getElementById("comm-request-id").value = row.request_id || "";
+    document.getElementById("comm-agent-id").value = row.agent_id || "";
+    document.getElementById("comm-type").value = row.type || "";
+    document.getElementById("comm-direction").value = row.direction || "";
+    document.getElementById("comm-subject").value = row.subject || "";
+    document.getElementById("comm-summary").value = row.summary || "";
+  }
+
+  async function loadComms() {
+    try {
+      const { data, error } = await supabase.from("reachx_communications")
+        .select("id, type, direction, subject, created_at, employer_id")
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      commTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.created_at ? row.created_at.substring(0,19).replace("T"," ") : ""}</td>
+          <td>${row.type}</td>
+          <td>${row.direction || ""}</td>
+          <td>${row.subject || ""}</td>
+        `;
+        tr.addEventListener("click", () => fillCommForm(row));
+        commTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadComms error", e);
+    }
+  }
+
+  document.getElementById("btn-refresh-comms").addEventListener("click", loadComms);
+  document.getElementById("btn-clear-comm").addEventListener("click", clearCommForm);
+
+  document.getElementById("comm-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("comm-id").value || null;
+    const employer_id = document.getElementById("comm-employer-id").value.trim() || null;
+    const worker_id = document.getElementById("comm-worker-id").value.trim() || null;
+    const request_id = document.getElementById("comm-request-id").value.trim() || null;
+    const agent_id = document.getElementById("comm-agent-id").value.trim() || null;
+    const type = document.getElementById("comm-type").value.trim();
+    const direction = document.getElementById("comm-direction").value.trim();
+    const subject = document.getElementById("comm-subject").value.trim();
+    const summary = document.getElementById("comm-summary").value.trim();
+    if (!type) return;
+    const payload = {
+      employer_id: employer_id || null,
+      worker_id: worker_id || null,
+      request_id: request_id ? parseInt(request_id, 10) : null,
+      agent_id: agent_id || null,
+      type,
+      direction,
+      subject,
+      summary
+    };
+    try {
+      if (id) {
+        const { error } = await supabase.from("reachx_communications").update(payload).eq("id", id);
+        if (error) throw error;
+      } else {
+        const { data, error } = await supabase.from("reachx_communications").insert(payload).select("id").single();
+        if (error) throw error;
+        document.getElementById("comm-id").value = data.id;
+      }
+      await loadComms();
+    } catch (e) {
+      console.error("save comm error", e);
+    }
+  });
+
+  document.getElementById("btn-delete-comm").addEventListener("click", async () => {
+    const id = document.getElementById("comm-id").value;
+    if (!id) return;
+    if (!confirm("Delete this communication entry?")) return;
+    try {
+      const { error } = await supabase.from("reachx_communications").delete().eq("id", id);
+      if (error) throw error;
+      clearCommForm();
+      await loadComms();
+    } catch (e) {
+      console.error("delete comm error", e);
+    }
+  });
+
+  // === USERS (read-only for now) ===
+  const usersTableBody = document.getElementById("users-table-body");
+
+  async function loadUsers() {
+    try {
+      const { data, error } = await supabase.from("reachx_users")
+        .select("full_name, email, role, employer_id, is_active")
+        .order("full_name");
+      if (error) throw error;
+      usersTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.full_name || ""}</td>
+          <td>${row.email || ""}</td>
+          <td>${row.role}</td>
+          <td>${row.employer_id || ""}</td>
+          <td>${row.is_active ? "yes" : "no"}</td>
+        `;
+        usersTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadUsers error", e);
+    }
+  }
+
+  // === AUDIT (read-only) ===
+  const auditTableBody = document.getElementById("audit-table-body");
+
+  async function loadAudit() {
+    try {
+      const { data, error } = await supabase.from("reachx_audit_log")
+        .select("created_at, action, entity_type, entity_id, details")
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      auditTableBody.innerHTML = "";
+      (data || []).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.created_at ? row.created_at.substring(0,19).replace("T"," ") : ""}</td>
+          <td>${row.action}</td>
+          <td>${row.entity_type}:${row.entity_id}</td>
+          <td><code>${row.details ? JSON.stringify(row.details).slice(0,80) + "…" : ""}</code></td>
+          <td></td>
+        `;
+        auditTableBody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("loadAudit error", e);
+    }
+  }
+
+  // Initial load
+  testConnection().then(loadDashboard);
+</script>
+</body>
+</html>

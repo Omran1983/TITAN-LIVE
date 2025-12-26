@@ -1,0 +1,6 @@
+{
+  "task_id": "T-CSV-0001",
+  "intent": "csv_export_count",
+  "goal": "Download a public CSV and report row count to log.",
+  "constraints": { "max_steps": 8, "timeout_s": 60 }
+}

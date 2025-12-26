@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aogrl-ops-pack"
+version = "0.0.1"
+description = "AOGRL operations toolkit"
+requires-python = ">=3.11"
+dependencies = [
+  "tenacity", "loguru>=0.7",
+  "diskcache>=5.6"
+, "httpx>=0.27"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["aogrl_ops_pack*"]
+
+

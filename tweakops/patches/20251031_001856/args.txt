@@ -1,0 +1,3 @@
+intent=Change CTA text to 'Shop Now – 15% OFF' and darken hover
+raw_targets=[]
+parsed_targets=[]

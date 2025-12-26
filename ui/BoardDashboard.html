@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AOGRL Board Strategy Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --bg-soft: #ffffff;
+            --border-soft: #e0e4f0;
+            --text-main: #1e293b;
+            --text-soft: #64748b;
+            --accent-atlas: #38bdf8;
+            --accent-vega: #22c55e;
+            --accent-orion: #818cf8;
+            --accent-nova: #f97316;
+            --accent-helios: #facc15;
+            --accent-luna: #ec4899;
+            --radius-lg: 18px;
+            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #e0f2fe, #f5f7fb 45%, #fdf2ff 100%);
+            color: var(--text-main);
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 32px auto 40px;
+            padding: 0 16px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.04);
+            color: var(--text-soft);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-soft);
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .kpi-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 520px) {
+            .kpi-row {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 10px 12px;
+            border: 1px solid var(--border-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-soft);
+        }
+
+        .kpi-value {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .pill {
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.06);
+            color: var(--text-soft);
+        }
+
+        .grid {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .director-card {
+            background: var(--bg-soft);
+            border-radius: var(--radius-lg);
+            padding: 16px 18px 18px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .director-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .director-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5e7eb, #cbd5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .director-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .director-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .director-role {
+            font-size: 12px;
+            color: var(--text-soft);
+        }
+
+        .eta-chip {
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(248, 250, 252, 0.9);
+            color: #0f172a;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 3px 7px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.04);
+            color: var(--text-soft);
+        }
+
+        .tag.atlas { border: 1px solid rgba(56, 189, 248, 0.6); color: #0369a1; }
+        .tag.vega  { border: 1px solid rgba(34, 197, 94, 0.6);  color: #166534; }
+        .tag.orion { border: 1px solid rgba(129, 140, 248, 0.6);color: #3730a3; }
+        .tag.nova  { border: 1px solid rgba(249, 115, 22, 0.6); color: #9a3412; }
+        .tag.helios{ border: 1px solid rgba(250, 204, 21, 0.8); color: #854d0e; }
+        .tag.luna  { border: 1px solid rgba(236, 72, 153, 0.7); color: #9d174d; }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 700px) {
+            .sections {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .section-block {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 8px 10px;
+            border: 1px dashed #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-soft);
+            margin-bottom: 4px;
+        }
+
+        .section-body {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .section-body strong {
+            font-weight: 600;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            font-size: 11px;
+            color: var(--text-soft);
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <div class="badge-row">
+            <div class="badge">AOGRL VIRTUAL BOARDROOM</div>
+            <div class="badge">Daily Strategic Snapshot</div>
+        </div>
+        <h1>Vision & Strategy Map – Board View</h1>
+        <p class="subtitle">
+            Clear path to your first million: each director shares objectives, strategies, strengths, weaknesses,
+            challenges and concrete next moves.
+        </p>
+
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-label">Primary Objective</div>
+                <div class="kpi-value">Build a self-running AI-powered business ecosystem</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">CEO Role</div>
+                <div class="kpi-value">Vision, approvals & capital allocation – not ops</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Core Engines</div>
+                <div class="kpi-value">EduConnect · OKASINA · ReachX · AION-ZERO</div>
+            </div>
+        </div>
+
+        <div class="pill-row">
+            <div class="pill">Objectives</div>
+            <div class="pill">Strategies</div>
+            <div class="pill">Strengths</div>
+            <div class="pill">Weaknesses</div>
+            <div class="pill">Challenges</div>
+            <div class="pill">Solutions & Next Moves</div>
+            <div class="pill">ETAs</div>
+        </div>
+    </header>
+
+    <main class="grid">
+        <!-- ATLAS -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">A</div>
+                    <div class="director-meta">
+                        <div class="director-name">ATLAS</div>
+                        <div class="director-role">Strategy & Systems Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: Automation health report ≤ 30 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag atlas">Automation Backbone</span>
+                <span class="tag atlas">Jarvis · AION-ZERO</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Turn AOGRL into a self-running automation ecosystem where
+                        agents and scripts handle recurring work.<br><br>
+                        <strong>Strategy:</strong> Standardise all projects (EduConnect, OKASINA, ReachX,
+                        AION-ZERO) into reusable modules: scheduled tasks, workers, PS scripts, Supabase tables,
+                        health checks and daily board reports.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Core agents (CommandAgent, DbDump, BoardAgent) are live and
+                        integrated with Supabase.<br><br>
+                        <strong>Weaknesses:</strong> No single automation health dashboard; failure alerts are not
+                        yet centralised.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Multiple projects, scattered scripts, and no “single pane of glass” make it hard to see if
+                        everything is green, amber or red at a glance.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Build a simple Automation Health view fed from Supabase
+                        (task status, last run, errors).<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Log health status for each agent daily.<br>
+                        2) Add a flag for failures and missed runs.<br>
+                        3) Render a traffic-light view (green/amber/red) in a small dashboard.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VEGA -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">V</div>
+                    <div class="director-meta">
+                        <div class="director-name">VEGA</div>
+                        <div class="director-role">Technology & Automation Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: Revenue wiring & infra baseline ≤ 14 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag vega">Supabase · Workers</span>
+                <span class="tag vega">Docker · PS</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Make infra boring and reliable – deployable by script, not by
+                        hand.<br><br>
+                        <strong>Strategy:</strong> Containerise and template as much as possible; use
+                        PowerShell + Workers + Supabase to enable “pick project, run autopilot” flows.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Strong PS foundation, Supabase integration, worker
+                        deployments already tested.<br><br>
+                        <strong>Weaknesses:</strong> Not all projects follow the same pattern; some still rely on
+                        manual tweaks or one-off config.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Ensuring every new project plugs into the same environment pattern without inventing
+                        special cases or one-off stacks each time.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Create a “Project Template” baseline (env layout, logging,
+                        Supabase wiring, schedule patterns).<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Lock a standard env structure.<br>
+                        2) Create a PS “Create-ProjectFromTemplate” script.<br>
+                        3) Migrate key projects (EduConnect, OKASINA, ReachX) to this baseline.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORION -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">O</div>
+                    <div class="director-meta">
+                        <div class="director-name">ORION</div>
+                        <div class="director-role">AI & Intelligence Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: AI decision loops ≤ 21 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag orion">AION-ZERO</span>
+                <span class="tag orion">AI Agents</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Turn your data into guidance – daily, automated, actionable
+                        advice.<br><br>
+                        <strong>Strategy:</strong> Use AION-ZERO + local models to summarise metrics, spot patterns
+                        and recommend next money moves, not just report numbers.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Agent concepts, local LLMs and Supabase-backed workflows are
+                        in place.<br><br>
+                        <strong>Weaknesses:</strong> Still early in connecting live business data (orders, leads,
+                        recruitment) into AI loops.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Getting reliable, clean signals from each system into one place so AI advice is based on
+                        reality, not guesses or partial data.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Start with a single “Daily CEO Brief” summarising key metrics and
+                        suggested actions.<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Decide which numbers matter daily (cash, orders, leads, worker status).<br>
+                        2) Build queries to pull them reliably.<br>
+                        3) Feed them into an AI summary with clear “Do this next” bullets.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVA -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">N</div>
+                    <div class="director-meta">
+                        <div class="director-name">NOVA</div>
+                        <div class="director-role">EduConnect Product Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: Tiers + demo flow ≤ 45 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag nova">EduConnect</span>
+                <span class="tag nova">Productised Platform</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Sell EduConnect as a plug-and-play platform, not a one-off
+                        workshop service.<br><br>
+                        <strong>Strategy:</strong> Define clear tiers (Starter / Pro / Enterprise), each with
+                        fixed features, and a repeatable rollout process.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Direction is clear, core tech knowledge exists, workshop concept
+                        proven.<br><br>
+                        <strong>Weaknesses:</strong> No finalised pricing, tiers, or automated onboarding flow yet.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Packaging everything in a way that is simple to explain, easy to sell, and easy to deploy
+                        repeatedly with minimal effort.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Treat EduConnect like a SaaS play: define plan matrix, onboarding
+                        checklist, and demo journey.<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Finalise 2–3 tiers with feature sets.<br>
+                        2) Design a “Landing → Demo → Proposal” funnel.<br>
+                        3) Create the first client-ready demo workspace template.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HELIOS -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">H</div>
+                    <div class="director-meta">
+                        <div class="director-name">HELIOS</div>
+                        <div class="director-role">Finance & Risk Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: Weekly brief ≤ 30 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag helios">Cashflow</span>
+                <span class="tag helios">Risk & Runway</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Protect cash while pushing towards the first 1M; avoid blind
+                        risks.<br><br>
+                        <strong>Strategy:</strong> Build a single money “truth source” and automate a weekly Helios
+                        brief with balances, obligations and risk notes.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Strong awareness of constraints, deals and time pressure.<br><br>
+                        <strong>Weaknesses:</strong> No automated view of runway; decisions still based on mental
+                        math and scattered notes.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Balancing urgent short-term cash needs with long-term compounding bets, without burning
+                        out or overextending.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Decide where balances and obligations are tracked, then wire an
+                        automated summary.<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Choose the finance store (sheet / Supabase).<br>
+                        2) Script a weekly summary (income, outgoings, runway).<br>
+                        3) Add simple red flags for “danger” thresholds.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LUNA -->
+        <section class="director-card">
+            <div class="director-header">
+                <div class="director-left">
+                    <div class="avatar">L</div>
+                    <div class="director-meta">
+                        <div class="director-name">LUNA</div>
+                        <div class="director-role">Brand & Marketing Director</div>
+                    </div>
+                </div>
+                <div class="eta-chip">ETA: Asset library ≤ 21 days</div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag luna">Brand Systems</span>
+                <span class="tag luna">AI Marketing</span>
+            </div>
+
+            <div class="sections">
+                <div class="section-block">
+                    <div class="section-title">Objectives & Strategy</div>
+                    <div class="section-body">
+                        <strong>Objective:</strong> Make every AOGRL brand touchpoint feel premium and consistent
+                        without manual creative grind.<br><br>
+                        <strong>Strategy:</strong> Build an asset library and pair it with AI-generated copy +
+                        campaigns triggered by data (new product, new deal, new client).
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Strengths & Weaknesses</div>
+                    <div class="section-body">
+                        <strong>Strengths:</strong> Strong visual taste, multiple live brand concepts and previous
+                        creative work to build from.<br><br>
+                        <strong>Weaknesses:</strong> Assets are scattered; no single “source of brand truth” wired
+                        to performance data.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Challenges</div>
+                    <div class="section-body">
+                        Linking creative output to actual results so we double down on what works and kill what
+                        doesn’t quickly.
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="section-title">Solutions & Next Moves</div>
+                    <div class="section-body">
+                        <strong>Solution:</strong> Centralise assets by brand and tag them by usage and campaign.<br><br>
+                        <strong>Next Moves:</strong>
+                        1) Create a simple asset index (even a table) for AOGRL, OKASINA, ReachX, EduConnect.<br>
+                        2) Start tagging “used in X campaign / page / flyer”.<br>
+                        3) Later, wire results (clicks, leads, sales) to specific creatives.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <p class="footer-note">
+        This dashboard is a static strategic snapshot of your virtual board. Daily live updates are written into
+        Supabase by Jarvis-BoardAgent; a future UI can read from <code>az_director_snapshots</code> and render
+        real-time status.
+    </p>
+</div>
+</body>
+</html>

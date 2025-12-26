@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jarvis Control Center · AION-ZERO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+  :root {
+    --bg: #020617;
+    --bg-alt: #020617;
+    --bg-panel: rgba(15, 23, 42, 0.96);
+    --bg-panel-soft: rgba(15, 23, 42, 0.9);
+    --accent: #22c55e;        /* softer green accent */
+    --accent-strong: #4ade80;
+    --accent-soft: rgba(34, 197, 94, 0.12);
+    --text: #e5e7eb;
+    --text-soft: #9ca3af;
+    --danger: #f97373;
+    --success: #4ade80;
+    --warning: #facc15;
+    --border: rgba(148, 163, 184, 0.25);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Segoe UI", sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(148, 163, 184, 0.15), transparent 60%),
+      radial-gradient(circle at 100% 0%, rgba(34, 197, 94, 0.18), transparent 55%),
+      radial-gradient(circle at 50% 100%, rgba(15, 23, 42, 0.96), #020617 60%);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .frame {
+    width: 100%;
+    max-width: 1500px;
+    margin: 24px;
+    padding: 24px;
+    border-radius: 26px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), #020617);
+    box-shadow:
+      0 40px 120px rgba(15, 23, 42, 0.95);
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  @media (max-width: 1100px) {
+    .frame {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-right: 1px solid rgba(31, 41, 55, 0.9);
+    padding-right: 18px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand-logo-wrap {
+    position: relative;
+    width: 52px;
+    height: 52px;
+  }
+
+  .brand-orbit {
+    position: absolute;
+    inset: -10px;
+    border-radius: 999px;
+    border: 1px dashed rgba(148, 163, 184, 0.4);
+    animation: orbit 14s linear infinite;
+  }
+
+  .brand-logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 30% 20%, #4ade80, #14532d 45%, #020617 80%);
+    box-shadow:
+      0 0 28px rgba(74, 222, 128, 0.85),
+      0 0 50px rgba(21, 128, 61, 0.8);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand-logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 140deg,
+      rgba(74, 222, 128, 0.4),
+      transparent,
+      rgba(15, 23, 42, 0.9),
+      transparent
+    );
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    animation: spin 16s linear infinite;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .brand-text-title {
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .brand-text-sub {
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes orbit {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 16px;
+    background: linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.98),
+      rgba(15, 23, 42, 0.9)
+    );
+    border: 1px solid rgba(55, 65, 81, 0.9);
+  }
+
+  .tab {
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-soft);
+    position: relative;
+    transition: background 0.15s ease, border-color 0.15s ease,
+      color 0.15s ease, transform 0.08s ease;
+  }
+
+  .tab-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tab-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.7);
+  }
+
+  .tab-badge {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    color: var(--text-soft);
+  }
+
+  .tab.active {
+    color: var(--accent-strong);
+    border-color: rgba(34, 197, 94, 0.7);
+    background: linear-gradient(
+      120deg,
+      rgba(34, 197, 94, 0.14),
+      rgba(15, 23, 42, 0.96)
+    );
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .tab.active .tab-indicator {
+    background: var(--accent-strong);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.9);
+  }
+
+  .tab:hover:not(.active)) {
+    background: radial-gradient(
+      circle at left,
+      rgba(148, 163, 184, 0.18),
+      transparent
+    );
+  }
+
+  .side-meta {
+    margin-top: auto;
+    font-size: 11px;
+    color: var(--text-soft);
+    padding-top: 14px;
+    border-top: 1px solid rgba(31, 41, 55, 0.9);
+  }
+
+  .side-meta span {
+    display: block;
+  }
+
+  .side-meta strong {
+    color: var(--accent-strong);
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .top-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 1100px) {
+    .top-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .strip-card {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.98),
+      rgba(15, 23, 42, 0.96)
+    );
+    border-radius: 20px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .strip-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .strip-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-soft);
+  }
+
+  .status-pill {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(15, 23, 42, 0.96);
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--danger);
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.9);
+  }
+
+  .status-dot.ok {
+    background: var(--success);
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.9);
+  }
+
+  .status-dot.warn {
+    background: var(--warning);
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+  }
+
+  .mono {
+    font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+  }
+
+  .strip-metrics {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .metric-pill {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(75, 85, 99, 0.9);
+    background: rgba(15, 23, 42, 0.98);
+  }
+
+  .metric-pill strong {
+    color: var(--accent-strong);
+  }
+
+  .config-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .config-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 220px;
+  }
+
+  .config-label {
+    font-size: 11px;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .config-input {
+    background: var(--bg-panel-soft);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+  }
+
+  .config-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: rgba(34, 197, 94, 0.16);
+    color: var(--accent-strong);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    background: rgba(34, 197, 94, 0.23);
+  }
+
+  .btn-ghost {
+    border-color: var(--border);
+    background: transparent;
+    color: var(--text-soft);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(15, 23, 42, 0.96);
+    color: var(--accent-strong);
+  }
+
+  .text-soft {
+    color: var(--text-soft);
+    font-size: 12px;
+  }
+
+  .danger-text {
+    color: var(--danger);
+  }
+
+  .main-panels {
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.4fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 1100px) {
+    .main-panels {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .panel {
+    background: var(--bg-panel);
+    border-radius: 20px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .panel-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-soft);
+  }
+
+  .panel-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  th,
+  td {
+    padding: 6px 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+  }
+
+  th {
+    font-weight: 500;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  tr:hover td {
+    background: rgba(15, 23, 42, 0.96);
+  }
+
+  .scroll-y {
+    max-height: 320px;
+    overflow-y: auto;
+    margin-top: 4px;
+  }
+
+  .pill-small {
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    color: var(--text-soft);
+    display: inline-block;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .field-input,
+  .field-textarea {
+    background: var(--bg-panel-soft);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 7px 9px;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    width: 100%;
+  }
+
+  .field-input:focus,
+  .field-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
+  }
+
+  .field-textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .code-block {
+    background: #020617;
+    border-radius: 12px;
+    border: 1px solid rgba(31, 41, 55, 0.95);
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    max-height: 220px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .footer {
+    margin-top: 6px;
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-soft);
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <!-- SIDE NAV -->
+    <aside class="side-nav">
+      <div class="brand">
+        <div class="brand-logo-wrap">
+          <div class="brand-orbit"></div>
+          <div class="brand-logo"></div>
+        </div>
+        <div class="brand-text">
+          <div class="brand-text-title">Jarvis Control</div>
+          <div class="brand-text-sub">AION-ZERO · Local Ops Brain</div>
+        </div>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="agents">
+          <span class="tab-label">
+            <span class="tab-indicator"></span>
+            <span>Agents</span>
+          </span>
+          <span class="tab-badge" id="tabBadgeAgents">–</span>
+        </button>
+        <button class="tab" data-tab="queue">
+          <span class="tab-label">
+            <span class="tab-indicator"></span>
+            <span>Queue</span>
+          </span>
+          <span class="tab-badge" id="tabBadgeQueue">–</span>
+        </button>
+        <button class="tab" data-tab="health">
+          <span class="tab-label">
+            <span class="tab-indicator"></span>
+            <span>Health</span>
+          </span>
+          <span class="tab-badge" id="tabBadgeHealth">–</span>
+        </button>
+        <button class="tab" data-tab="knowledge">
+          <span class="tab-label">
+            <span class="tab-indicator"></span>
+            <span>Knowledge</span>
+          </span>
+          <span class="tab-badge" id="tabBadgeKnowledge">–</span>
+        </button>
+        <button class="tab" data-tab="commands">
+          <span class="tab-label">
+            <span class="tab-indicator"></span>
+            <span>Commands</span>
+          </span>
+          <span class="tab-badge" id="tabBadgeCommands">API</span>
+        </button>
+      </nav>
+
+      <div class="side-meta">
+        <span><strong>AION-ZERO</strong> · Local Node</span>
+        <span>Mode: <strong>Ops Console v1</strong></span>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main">
+      <!-- TOP STRIP -->
+      <div class="top-strip">
+        <div class="strip-card">
+          <div class="strip-row">
+            <div>
+              <div class="strip-title">Cluster Status</div>
+              <div class="mono">Project: AION-ZERO</div>
+            </div>
+            <div id="globalStatus" class="status-pill">
+              <span class="status-dot"></span>
+              <span class="mono">Status: unknown</span>
+            </div>
+          </div>
+          <div class="strip-metrics" id="stripMetrics">
+            <div class="metric-pill">
+              Agents: <strong><span id="metricAgents">–</span></strong>
+            </div>
+            <div class="metric-pill">
+              Active Queue:
+              <strong><span id="metricQueue">–</span></strong>
+            </div>
+            <div class="metric-pill">
+              Errors:
+              <strong><span id="metricErrors">–</span></strong>
+            </div>
+            <div class="metric-pill">
+              Last Latency:
+              <strong><span id="metricLatency">–</span> ms</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-row">
+            <div class="strip-title">Connections</div>
+            <button class="btn-ghost btn" id="btnSaveConfig">
+              Save Session
+            </button>
+          </div>
+          <div class="config-bar">
+            <div class="config-group">
+              <span class="config-label">Supabase URL</span>
+              <input
+                id="sbUrl"
+                class="config-input mono"
+                placeholder="https://YOUR-PROJECT.supabase.co"
+              />
+            </div>
+            <div class="config-group">
+              <span class="config-label">Supabase Key</span>
+              <input
+                id="sbKey"
+                class="config-input mono"
+                placeholder="SERVICE or ANON KEY (local only)"
+                type="password"
+              />
+            </div>
+            <div class="config-group">
+              <span class="config-label">Commands API</span>
+              <input
+                id="commandsApi"
+                class="config-input mono"
+                placeholder="http://127.0.0.1:5051"
+              />
+            </div>
+          </div>
+          <div class="text-soft" style="margin-top:4px;">
+            ⚠ Local-only console.
+            <span class="danger-text">Do not expose with service role key.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <section id="tab-agents" class="main-panels">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Agents Grid</div>
+            <div class="panel-actions">
+              <button class="btn-ghost btn" data-refresh="agents">Refresh</button>
+            </div>
+          </div>
+          <div class="scroll-y">
+            <table id="agentsTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Code</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="4" class="text-soft">No data yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Agents Summary</div>
+            <div class="panel-actions">
+              <span id="agentsSummaryBadge" class="badge">–</span>
+            </div>
+          </div>
+          <div id="agentsSummaryBody" class="text-soft">
+            Waiting for data…
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-queue" class="main-panels" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Active / Problem Commands</div>
+            <div class="panel-actions">
+              <button class="btn-ghost btn" data-refresh="queue">Refresh</button>
+            </div>
+          </div>
+          <div class="scroll-y">
+            <table id="queueActiveTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Agent</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="5" class="text-soft">No data yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Recent Completed</div>
+          </div>
+          <div class="scroll-y">
+            <table id="queueRecentTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Agent</th>
+                  <th>Status</th>
+                  <th>Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="4" class="text-soft">No data yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-health" class="main-panels" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Latest Health Snapshot</div>
+            <div class="panel-actions">
+              <button class="btn-ghost btn" data-refresh="health">Refresh</button>
+            </div>
+          </div>
+          <div id="healthLatestBody" class="text-soft">
+            Waiting for data…
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Recent Health Timeline</div>
+          </div>
+          <div class="scroll-y">
+            <table id="healthHistoryTable">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Queue</th>
+                  <th>Errors</th>
+                  <th>Latency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="5" class="text-soft">No history.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-knowledge" class="main-panels" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Knowledge Sources</div>
+            <div class="panel-actions">
+              <button class="btn-ghost btn" data-refresh="knowledge">Refresh</button>
+            </div>
+          </div>
+          <div class="scroll-y">
+            <table id="knowledgeSourcesTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Key</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="3" class="text-soft">No data yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Latest Cards per Source</div>
+          </div>
+          <div id="knowledgeCardsBody" class="scroll-y">
+            <div class="text-soft">No data yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-commands" class="main-panels" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Send Command via CommandsApi</div>
+            <div class="panel-actions">
+              <button class="btn-ghost btn" data-refresh="healthPing">Ping /health</button>
+            </div>
+          </div>
+          <div>
+            <div class="field-group">
+              <label class="field-label">Agent</label>
+              <input id="cmdAgent" class="field-input" value="fileops" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Project</label>
+              <input id="cmdProject" class="field-input" value="AION-ZERO" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Payload (JSON)</label>
+              <textarea
+                id="cmdPayload"
+                class="field-textarea mono"
+              >{
+  "kind": "write_file",
+  "path": "F:\\\\AION-ZERO\\\\test\\\\from_control_center.txt",
+  "content": "Hello from Jarvis Control Center",
+  "encoding": "utf8"
+}</textarea>
+            </div>
+            <button class="btn" id="btnSendCommand">Send Command</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Last Response</div>
+          </div>
+          <div id="commandsResponse" class="code-block">
+            No requests yet.
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        Jarvis · AION-ZERO · Control Center v1 — views + CommandsApi wired to local node
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // === TAB SWITCHING ===
+    const tabs = document.querySelectorAll(".tab");
+    const tabViews = {
+      agents: document.getElementById("tab-agents"),
+      queue: document.getElementById("tab-queue"),
+      health: document.getElementById("tab-health"),
+      knowledge: document.getElementById("tab-knowledge"),
+      commands: document.getElementById("tab-commands"),
+    };
+
+    function setActiveTab(name) {
+      tabs.forEach((t) => {
+        t.classList.toggle("active", t.dataset.tab === name);
+      });
+      Object.entries(tabViews).forEach(([key, el]) => {
+        el.style.display = key === name ? "grid" : "none";
+      });
+    }
+
+    tabs.forEach((t) => {
+      t.addEventListener("click", () => setActiveTab(t.dataset.tab));
+    });
+
+    // === CONFIG STORAGE ===
+    const sbUrlInput = document.getElementById("sbUrl");
+    const sbKeyInput = document.getElementById("sbKey");
+    const commandsApiInput = document.getElementById("commandsApi");
+    const btnSaveConfig = document.getElementById("btnSaveConfig");
+    const globalStatus = document.getElementById("globalStatus");
+    const STORAGE_KEY = "jarvis_cc_config";
+
+    function loadConfig() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const cfg = JSON.parse(raw);
+        if (cfg.sbUrl) sbUrlInput.value = cfg.sbUrl;
+        if (cfg.sbKey) sbKeyInput.value = cfg.sbKey;
+        if (cfg.commandsApi) commandsApiInput.value = cfg.commandsApi;
+      } catch (e) {
+        console.warn("Failed to load config", e);
+      }
+    }
+
+    function saveConfig() {
+      const cfg = {
+        sbUrl: sbUrlInput.value.trim(),
+        sbKey: sbKeyInput.value.trim(),
+        commandsApi: commandsApiInput.value.trim(),
+      };
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+    }
+
+    btnSaveConfig.addEventListener("click", () => {
+      saveConfig();
+      alert("Config saved for this browser.");
+    });
+
+    loadConfig();
+
+    function getSupabaseHeaders() {
+      const key = sbKeyInput.value.trim();
+      if (!key) {
+        throw new Error("Supabase key not set. Fill config bar.");
+      }
+      return {
+        apikey: key,
+        Authorization: "Bearer " + key,
+        Accept: "application/json",
+      };
+    }
+
+    async function fetchSupabase(path, params = "") {
+      const base = sbUrlInput.value.trim().replace(/\/+$/, "");
+      if (!base) {
+        throw new Error("Supabase URL not set. Fill config bar.");
+      }
+      const url = base + "/rest/v1/" + path + (params ? "?" + params : "");
+      const headers = getSupabaseHeaders();
+      const res = await fetch(url, { headers });
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error("Supabase error " + res.status + ": " + txt);
+      }
+      return await res.json();
+    }
+
+    function setGlobalStatus(status, text) {
+      const dot = globalStatus.querySelector(".status-dot");
+      const label = globalStatus.querySelector(".mono");
+      dot.classList.remove("ok", "warn");
+      if (status === "ok") {
+        dot.classList.add("ok");
+      } else if (status === "warn") {
+        dot.classList.add("warn");
+      }
+      label.textContent = "Status: " + text;
+    }
+
+    // Metrics / counts
+    const metricAgents = document.getElementById("metricAgents");
+    const metricQueue = document.getElementById("metricQueue");
+    const metricErrors = document.getElementById("metricErrors");
+    const metricLatency = document.getElementById("metricLatency");
+
+    const tabBadgeAgents = document.getElementById("tabBadgeAgents");
+    const tabBadgeQueue = document.getElementById("tabBadgeQueue");
+    const tabBadgeHealth = document.getElementById("tabBadgeHealth");
+    const tabBadgeKnowledge = document.getElementById("tabBadgeKnowledge");
+    const tabBadgeCommands = document.getElementById("tabBadgeCommands");
+
+    // === AGENTS ===
+    async function refreshAgents() {
+      const tbody = document.querySelector("#agentsTable tbody");
+      const summaryBody = document.getElementById("agentsSummaryBody");
+      const summaryBadge = document.getElementById("agentsSummaryBadge");
+      try {
+        const rows = await fetchSupabase("az_cc_agents");
+        tbody.innerHTML = "";
+        if (!rows.length) {
+          tbody.innerHTML =
+            '<tr><td colspan="4" class="text-soft">No agents found.</td></tr>';
+          summaryBody.textContent = "No agents.";
+          summaryBadge.textContent = "0 agents";
+          metricAgents.textContent = "0";
+          tabBadgeAgents.textContent = "0";
+        } else {
+          const counts = {};
+          rows.forEach((r) => {
+            counts[r.status] = (counts[r.status] || 0) + 1;
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${r.id}</td>
+              <td class="mono">${r.code}</td>
+              <td>${r.status}</td>
+              <td>${new Date(r.created_at).toLocaleString()}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+          const summaryLines = Object.entries(counts)
+            .map(([s, c]) => `${s}: ${c}`)
+            .join(" · ");
+          summaryBody.textContent = summaryLines || "No agents.";
+          summaryBadge.textContent = rows.length + " agents";
+          metricAgents.textContent = rows.length.toString();
+          tabBadgeAgents.textContent = rows.length.toString();
+        }
+      } catch (e) {
+        console.error(e);
+        tbody.innerHTML =
+          '<tr><td colspan="4" class="danger-text">Error loading agents.</td></tr>';
+        summaryBody.textContent = e.message;
+        summaryBadge.textContent = "Error";
+        tabBadgeAgents.textContent = "Err";
+      }
+    }
+
+    // === QUEUE ===
+    async function refreshQueue() {
+      const activeBody = document.querySelector("#queueActiveTable tbody");
+      const recentBody = document.querySelector("#queueRecentTable tbody");
+      try {
+        const [active, recent] = await Promise.all([
+          fetchSupabase("az_cc_commands_active"),
+          fetchSupabase("az_cc_commands_recent"),
+        ]);
+
+        activeBody.innerHTML = "";
+        if (!active.length) {
+          activeBody.innerHTML =
+            '<tr><td colspan="5" class="text-soft">No active or problem commands.</td></tr>';
+          metricQueue.textContent = "0";
+          tabBadgeQueue.textContent = "0";
+        } else {
+          metricQueue.textContent = active.length.toString();
+          tabBadgeQueue.textContent = active.length.toString();
+          active.forEach((r) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${r.id}</td>
+              <td class="mono">${r.agent}</td>
+              <td>${r.status}</td>
+              <td>${r.priority ?? ""}</td>
+              <td>${new Date(r.created_at).toLocaleString()}</td>
+            `;
+            activeBody.appendChild(tr);
+          });
+        }
+
+        recentBody.innerHTML = "";
+        if (!recent.length) {
+          recentBody.innerHTML =
+            '<tr><td colspan="4" class="text-soft">No recent completed commands.</td></tr>';
+        } else {
+          recent.forEach((r) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${r.id}</td>
+              <td class="mono">${r.agent}</td>
+              <td>${r.status}</td>
+              <td>${new Date(r.updated_at).toLocaleString()}</td>
+            `;
+            recentBody.appendChild(tr);
+          });
+        }
+      } catch (e) {
+        console.error(e);
+        activeBody.innerHTML =
+          '<tr><td colspan="5" class="danger-text">Error loading queue.</td></tr>';
+        recentBody.innerHTML =
+          '<tr><td colspan="4" class="danger-text">Error loading queue.</td></tr>';
+        tabBadgeQueue.textContent = "Err";
+      }
+    }
+
+    // === HEALTH ===
+    async function refreshHealth() {
+      const latestBody = document.getElementById("healthLatestBody");
+      const historyBody = document.querySelector("#healthHistoryTable tbody");
+      try {
+        const [latestArr, history] = await Promise.all([
+          fetchSupabase("az_cc_health_latest"),
+          fetchSupabase("az_cc_health_history"),
+        ]);
+
+        if (!latestArr.length) {
+          latestBody.textContent = "No health snapshots for AION-ZERO.";
+          setGlobalStatus("warn", "No health data");
+          tabBadgeHealth.textContent = "–";
+        } else {
+          const h = latestArr[0];
+          const statusType = h.status === "ok" ? "ok" : "err";
+          setGlobalStatus(
+            statusType,
+            `${h.status} · queue=${h.queue} · errors=${h.errors} · ${new Date(
+              h.created_at
+            ).toLocaleTimeString()}`
+          );
+          metricErrors.textContent = String(h.errors ?? "0");
+          metricLatency.textContent = String(h.latency ?? "0");
+          tabBadgeHealth.textContent = h.status.toUpperCase();
+
+          latestBody.innerHTML = `
+            <div class="pill-small" style="margin-bottom:6px;">
+              Snapshot at <span class="mono">${new Date(
+                h.created_at
+              ).toLocaleString()}</span>
+            </div>
+            <div style="margin-top:4px;">
+              <div>Project: <span class="mono">${h.project}</span></div>
+              <div>Queue: <span class="mono">${h.queue}</span></div>
+              <div>Errors: <span class="mono">${h.errors}</span></div>
+              <div>Latency: <span class="mono">${h.latency} ms</span></div>
+            </div>
+          `;
+        }
+
+        historyBody.innerHTML = "";
+        if (!history.length) {
+          historyBody.innerHTML =
+            '<tr><td colspan="5" class="text-soft">No history.</td></tr>';
+        } else {
+          history.forEach((h) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${new Date(h.created_at).toLocaleTimeString()}</td>
+              <td>${h.status}</td>
+              <td>${h.queue}</td>
+              <td>${h.errors}</td>
+              <td>${h.latency}</td>
+            `;
+            historyBody.appendChild(tr);
+          });
+        }
+      } catch (e) {
+        console.error(e);
+        latestBody.textContent = "Error loading health: " + e.message;
+        historyBody.innerHTML =
+          '<tr><td colspan="5" class="danger-text">Error loading health.</td></tr>';
+        setGlobalStatus("err", "Health load error");
+        tabBadgeHealth.textContent = "Err";
+      }
+    }
+
+    // === KNOWLEDGE ===
+    async function refreshKnowledge() {
+      const srcBody = document.querySelector("#knowledgeSourcesTable tbody");
+      const cardsBody = document.getElementById("knowledgeCardsBody");
+      try {
+        const [sources, cards] = await Promise.all([
+          fetchSupabase("az_cc_knowledge_sources"),
+          fetchSupabase("az_cc_knowledge_latest_cards"),
+        ]);
+
+        srcBody.innerHTML = "";
+        if (!sources.length) {
+          srcBody.innerHTML =
+            '<tr><td colspan="3" class="text-soft">No knowledge sources.</td></tr>';
+          tabBadgeKnowledge.textContent = "0";
+        } else {
+          tabBadgeKnowledge.textContent = String(sources.length);
+          sources.forEach((s) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${s.id}</td>
+              <td class="mono">${s.source_key}</td>
+              <td>${new Date(s.created_at).toLocaleString()}</td>
+            `;
+            srcBody.appendChild(tr);
+          });
+        }
+
+        cardsBody.innerHTML = "";
+        if (!cards.length) {
+          cardsBody.innerHTML =
+            '<div class="text-soft">No cards for this project.</div>';
+        } else {
+          cards.forEach((c) => {
+            const card = document.createElement("div");
+            card.style.borderBottom = "1px solid rgba(31,41,55,0.9)";
+            card.style.padding = "6px 0";
+            card.innerHTML = `
+              <div class="mono pill-small">Source #${c.source_id}</div>
+              <div style="margin-top:4px; font-size:12px; font-weight:500;">
+                ${c.title || "(no title)"}
+              </div>
+              <div class="text-soft" style="margin-top:4px; font-size:11px;">
+                ${
+                  c.summary
+                    ? c.summary.slice(0, 280) +
+                      (c.summary.length > 280 ? "…" : "")
+                    : "(no summary)"
+                }
+              </div>
+              <div class="text-soft" style="margin-top:4px; font-size:10px;">
+                ${new Date(c.created_at).toLocaleString()}
+              </div>
+            `;
+            cardsBody.appendChild(card);
+          });
+        }
+      } catch (e) {
+        console.error(e);
+        srcBody.innerHTML =
+          '<tr><td colspan="3" class="danger-text">Error loading sources.</td></tr>';
+        cardsBody.innerHTML =
+          '<div class="danger-text">Error loading cards: ' +
+          e.message +
+          "</div>";
+        tabBadgeKnowledge.textContent = "Err";
+      }
+    }
+
+    // === COMMANDS API ===
+    async function pingCommandsHealth() {
+      const out = document.getElementById("commandsResponse");
+      try {
+        const base = commandsApiInput.value.trim() || "http://127.0.0.1:5051";
+        const url = base.replace(/\/+$/, "") + "/health";
+        const res = await fetch(url);
+        const data = await res.json();
+        out.textContent =
+          "GET " +
+          url +
+          "\n\n" +
+          JSON.stringify(data, null, 2);
+        tabBadgeCommands.textContent = "OK";
+      } catch (e) {
+        out.textContent = "Error pinging /health: " + e.message;
+        tabBadgeCommands.textContent = "Err";
+      }
+    }
+
+    async function sendCommand() {
+      const agent = document.getElementById("cmdAgent").value.trim();
+      const project = document.getElementById("cmdProject").value.trim();
+      const payloadRaw = document.getElementById("cmdPayload").value.trim();
+      const out = document.getElementById("commandsResponse");
+
+      if (!agent) {
+        alert("Agent is required.");
+        return;
+      }
+      if (!project) {
+        alert("Project is required.");
+        return;
+      }
+
+      let payload;
+      try {
+        payload = JSON.parse(payloadRaw);
+      } catch (e) {
+        alert("Payload is not valid JSON: " + e.message);
+        return;
+      }
+
+      try {
+        const base = commandsApiInput.value.trim() || "http://127.0.0.1:5051";
+        const url = base.replace(/\/+$/, "") + "/commands";
+        const body = {
+          agent,
+          project,
+          priority: 100,
+          payload,
+        };
+        out.textContent =
+          "POST " +
+          url +
+          "\n\nBody:\n" +
+          JSON.stringify(body, null, 2) +
+          "\n\nAwaiting response…";
+
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        out.textContent =
+          "POST " +
+          url +
+          "\n\nResponse:\n" +
+          JSON.stringify(data, null, 2);
+        tabBadgeCommands.textContent = "OK";
+      } catch (e) {
+        out.textContent = "Error sending command: " + e.message;
+        tabBadgeCommands.textContent = "Err";
+      }
+    }
+
+    document
+      .querySelector("[data-refresh='agents']")
+      .addEventListener("click", refreshAgents);
+    document
+      .querySelector("[data-refresh='queue']")
+      .addEventListener("click", refreshQueue);
+    document
+      .querySelector("[data-refresh='health']")
+      .addEventListener("click", refreshHealth);
+    document
+      .querySelector("[data-refresh='knowledge']")
+      .addEventListener("click", refreshKnowledge);
+    document
+      .querySelector("[data-refresh='healthPing']")
+      .addEventListener("click", pingCommandsHealth);
+    document
+      .getElementById("btnSendCommand")
+      .addEventListener("click", sendCommand);
+
+    // Initial auto-refresh
+    (function initialRefresh() {
+      try {
+        refreshAgents();
+        refreshQueue();
+        refreshHealth();
+        refreshKnowledge();
+      } catch (e) {
+        console.warn("Initial refresh failed", e);
+      }
+    })();
+  </script>
+</body>
+</html>

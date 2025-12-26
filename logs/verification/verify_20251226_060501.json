@@ -1,0 +1,180 @@
+{
+  "tool": "verify_system",
+  "timestamp_utc": "2025-12-26T06:05:01.976484+00:00",
+  "project_root": "F:\\AION-ZERO",
+  "strict": true,
+  "blocks": [
+    "env_compliance",
+    "hr_compliance",
+    "labour_obligations"
+  ],
+  "results": [
+    {
+      "block": "env_compliance",
+      "guardrail": {
+        "name": "guardrail:env_compliance",
+        "ok": true,
+        "exit_code": 0,
+        "stdout": "\ud83d\udee1\ufe0f TITAN GUARDRAIL \u2014 target: F:\\AION-ZERO\\blocks\\env_compliance\n   scanned files: 3\n   strict: True\n\n\u2705 GUARDRAIL PASSED.\n   fails: 0 | errors: 0 | warns: 0\n\n",
+        "stderr": "",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\core\\quality\\titan_guardrail.py",
+            "--target",
+            "F:\\AION-ZERO\\blocks\\env_compliance",
+            "--json",
+            "F:\\AION-ZERO\\logs\\guardrail\\env_compliance.json",
+            "--strict",
+            "--require-tools"
+          ],
+          "cwd": "F:\\AION-ZERO"
+        }
+      },
+      "run": {
+        "name": "run:env_compliance",
+        "ok": false,
+        "exit_code": 1,
+        "stdout": "\u2705 Autonomy Check Passed: 'TITAN-ENV Validation Run' (L1_ADVISOR) <= System (L2_HUMAN_CONFIRM)\n\ud83d\udd39 TITAN-ENV: Starting Compliance Check...\n",
+        "stderr": "Traceback (most recent call last):\n  File \"F:\\AION-ZERO\\blocks\\env_compliance\\validator.py\", line 166, in <module>\n    main()\n    ~~~~^^\n  File \"F:\\AION-ZERO\\blocks\\env_compliance\\validator.py\", line 159, in main\n    generate_compliance_report(report, pdf_path, block_name=\"TITAN-ENV Compliance\", version=\"0.1.0\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\AION-ZERO\\core\\reporting\\pdf_reporter.py\", line 174, in generate_compliance_report\n    reporter.generate(json_data, output_path)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\AION-ZERO\\core\\reporting\\pdf_reporter.py\", line 40, in generate\n    pdf.cell(0, 10, f\"TITAN COMPLIANCE REPORT: {self.block_name.upper()}\", new_x=\"LMARGIN\", new_y=\"NEXT\", align=\"C\")\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ICL  ZAMBIA\\AppData\\Roaming\\Python\\Python313\\site-packages\\fpdf\\fpdf.py\", line 150, in wrapper\n    return fn(self, *args, **kwargs)\nTypeError: FPDF.cell() got an unexpected keyword argument 'new_x'\n",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\blocks\\env_compliance\\validator.py",
+            "--input",
+            "F:\\AION-ZERO\\blocks\\env_compliance\\sample\\env_sample.csv"
+          ],
+          "cwd": "F:\\AION-ZERO\\blocks\\env_compliance"
+        }
+      },
+      "report_path": "F:\\AION-ZERO\\blocks\\env_compliance\\reports\\env_report_20251226_060505.json",
+      "schema_problems": [],
+      "pass": false
+    },
+    {
+      "block": "hr_compliance",
+      "guardrail": {
+        "name": "guardrail:hr_compliance",
+        "ok": false,
+        "exit_code": 1,
+        "stdout": "\ud83d\udee1\ufe0f TITAN GUARDRAIL \u2014 target: F:\\AION-ZERO\\blocks\\hr_compliance\n   scanned files: 16\n   strict: True\n\n\u26d4 GUARDRAIL FAILED.\n   fails: 5 | errors: 0 | warns: 4\n\n[FAIL] RUFF_FAIL :: F:\\AION-ZERO\\blocks\\hr_compliance\n  - Ruff lint failed.\n  - meta: {'cmd': ['ruff', 'check', 'F:\\\\AION-ZERO\\\\blocks\\\\hr_compliance']}\n\n[WARN] TIMEZONE_NAIVE_DATETIME :: F:\\AION-ZERO\\blocks\\hr_compliance\\admin_dashboard.py\n  - Found datetime.now() usage. Prefer timezone-aware (UTC default).\n\n[WARN] TIMEZONE_NAIVE_DATETIME :: F:\\AION-ZERO\\blocks\\hr_compliance\\pdf_generator.py\n  - Found datetime.now() usage. Prefer timezone-aware (UTC default).\n\n[WARN] TIMEZONE_NAIVE_DATETIME :: F:\\AION-ZERO\\blocks\\hr_compliance\\titan_admin.py\n  - Found datetime.now() usage. Prefer timezone-aware (UTC default).\n\n[WARN] MONEY_FLOAT_RISK :: F:\\AION-ZERO\\blocks\\hr_compliance\\validate_employees.py\n  - Found float(...) usage. Prefer Decimal for currency.\n\n[FAIL] STRICT_WARN_AS_FAIL :: F:\\AION-ZERO\\blocks\\hr_compliance\\admin_dashboard.py\n  - Strict mode: warning treated as fail -> TIMEZONE_NAIVE_DATETIME\n\n[FAIL] STRICT_WARN_AS_FAIL :: F:\\AION-ZERO\\blocks\\hr_compliance\\pdf_generator.py\n  - Strict mode: warning treated as fail -> TIMEZONE_NAIVE_DATETIME\n\n[FAIL] STRICT_WARN_AS_FAIL :: F:\\AION-ZERO\\blocks\\hr_compliance\\titan_admin.py\n  - Strict mode: warning treated as fail -> TIMEZONE_NAIVE_DATETIME\n\n[FAIL] STRICT_WARN_AS_FAIL :: F:\\AION-ZERO\\blocks\\hr_compliance\\validate_employees.py\n  - Strict mode: warning treated as fail -> MONEY_FLOAT_RISK\n\n",
+        "stderr": "Exception in thread Thread-1 (_readerthread):\nTraceback (most recent call last):\n  File \"C:\\Python313\\Lib\\threading.py\", line 1041, in _bootstrap_inner\n    self.run()\n    ~~~~~~~~^^\n  File \"C:\\Python313\\Lib\\threading.py\", line 992, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\subprocess.py\", line 1612, in _readerthread\n    buffer.append(fh.read())\n                  ~~~~~~~^^\n  File \"C:\\Python313\\Lib\\encodings\\cp1252.py\", line 23, in decode\n    return codecs.charmap_decode(input,self.errors,decoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 4509: character maps to <undefined>\n",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\core\\quality\\titan_guardrail.py",
+            "--target",
+            "F:\\AION-ZERO\\blocks\\hr_compliance",
+            "--json",
+            "F:\\AION-ZERO\\logs\\guardrail\\hr_compliance.json",
+            "--strict",
+            "--require-tools"
+          ],
+          "cwd": "F:\\AION-ZERO"
+        }
+      },
+      "run": {
+        "name": "run:hr_compliance",
+        "ok": true,
+        "exit_code": 0,
+        "stdout": "\u2705 Autonomy Check Passed: 'TITAN-HR Validation Run' (L1_ADVISOR) <= System (L2_HUMAN_CONFIRM)\n\ud83d\udd39 TITAN-HR: Starting Validation Sequence...\n\ud83d\udd39 Loaded Rules: 1.0.0 (5 rules)\n\ud83d\udd39 Loaded Employees: 3\n\ud83d\udd39 Generating PDF Report: F:\\AION-ZERO\\blocks\\hr_compliance\\reports\\compliance_report_20251226_060507.pdf\n\u26a0\ufe0f PDF Generation Failed: FPDF.cell() got an unexpected keyword argument 'new_x'\n\n\u2705 Validation Complete.\n   Failures Detected: 0\n   Report Saved (JSON): F:\\AION-ZERO\\blocks\\hr_compliance\\reports\\compliance_report_20251226_060507.json\n",
+        "stderr": "",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\blocks\\hr_compliance\\validator.py",
+            "--input",
+            "F:\\AION-ZERO\\blocks\\hr_compliance\\sample\\employees_sample.csv"
+          ],
+          "cwd": "F:\\AION-ZERO\\blocks\\hr_compliance"
+        }
+      },
+      "report_path": "F:\\AION-ZERO\\blocks\\hr_compliance\\reports\\compliance_report_20251226_060507.json",
+      "schema_problems": [],
+      "pass": false
+    },
+    {
+      "block": "labour_obligations",
+      "guardrail": {
+        "name": "guardrail:labour_obligations",
+        "ok": true,
+        "exit_code": 0,
+        "stdout": "\ud83d\udee1\ufe0f TITAN GUARDRAIL \u2014 target: F:\\AION-ZERO\\blocks\\labour_obligations\n   scanned files: 3\n   strict: True\n\n\u2705 GUARDRAIL PASSED.\n   fails: 0 | errors: 0 | warns: 0\n\n",
+        "stderr": "",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\core\\quality\\titan_guardrail.py",
+            "--target",
+            "F:\\AION-ZERO\\blocks\\labour_obligations",
+            "--json",
+            "F:\\AION-ZERO\\logs\\guardrail\\labour_obligations.json",
+            "--strict",
+            "--require-tools"
+          ],
+          "cwd": "F:\\AION-ZERO"
+        }
+      },
+      "run": {
+        "name": "run:labour_obligations",
+        "ok": true,
+        "exit_code": 0,
+        "stdout": "\u2705 Autonomy Check Passed: 'TITAN-LABOUR Validation Run' (L1_ADVISOR) <= System (L2_HUMAN_CONFIRM)\n\ud83d\udd39 TITAN-LABOUR: Starting Filing Check...\n\ud83d\udd39 Generating PDF Report: F:\\AION-ZERO\\blocks\\labour_obligations\\reports\\labour_report_20251226_060509.pdf\n\u26a0\ufe0f PDF Generation Failed: FPDF.cell() got an unexpected keyword argument 'new_x'\n\n\u2705 Validation Complete. Failures: 0\n",
+        "stderr": "",
+        "meta": {
+          "cmd": [
+            "C:\\Python313\\python.EXE",
+            "F:\\AION-ZERO\\blocks\\labour_obligations\\validator.py",
+            "--input",
+            "F:\\AION-ZERO\\blocks\\labour_obligations\\sample\\labour_sample.csv"
+          ],
+          "cwd": "F:\\AION-ZERO\\blocks\\labour_obligations"
+        }
+      },
+      "report_path": "F:\\AION-ZERO\\blocks\\labour_obligations\\reports\\labour_report_20251226_060509.json",
+      "schema_problems": [],
+      "pass": true
+    }
+  ],
+  "team": {
+    "name": "team:pipeline",
+    "ok": false,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "",
+    "meta": {
+      "order": [
+        "hr_compliance",
+        "labour_obligations",
+        "env_compliance"
+      ],
+      "steps": [
+        {
+          "block": "hr_compliance",
+          "guardrail_ok": false,
+          "run_ok": true,
+          "run_exit": 0,
+          "report": "F:\\AION-ZERO\\blocks\\hr_compliance\\reports\\compliance_report_20251226_060511.json",
+          "schema_problems": []
+        },
+        {
+          "block": "labour_obligations",
+          "guardrail_ok": true,
+          "run_ok": true,
+          "run_exit": 0,
+          "report": "F:\\AION-ZERO\\blocks\\labour_obligations\\reports\\labour_report_20251226_060512.json",
+          "schema_problems": []
+        },
+        {
+          "block": "env_compliance",
+          "guardrail_ok": true,
+          "run_ok": false,
+          "run_exit": 1,
+          "report": "F:\\AION-ZERO\\blocks\\env_compliance\\reports\\env_report_20251226_060514.json",
+          "schema_problems": []
+        }
+      ]
+    }
+  },
+  "pass": false
+}

@@ -1,0 +1,8 @@
+# Block Manifest — ENV Compliance
+block = "env_compliance"
+block_version = "0.1.0"
+schema_version = "1.0"
+
+entrypoint = "validator.py"
+sample_input = "sample/env_sample.csv"
+report_dir = "reports"

@@ -1,0 +1,102 @@
+{
+  "owner": {
+    "name": "Omran",
+    "brand": "AOGRL",
+    "email": "deals@aogrl.com",
+    "whatsapp": "https://wa.me/23057887132",
+    "phones": [
+      "+230 5788 7132",
+      "+230 5494 8236"
+    ]
+  },
+  "services": [
+    {
+      "name": "WhatsApp Commerce Launch Pack",
+      "price": "$990",
+      "points": [
+        "WABA setup (or Meta Embedded signup)",
+        "Catalog & order flow (browse \u2192 cart \u2192 order)",
+        "Payment handoff (link, QR, or gateway you use)",
+        "Auto\u2011messages: order status, follow\u2011ups",
+        "Owner training + playbook PDF"
+      ]
+    },
+    {
+      "name": "EduConnect School Ops",
+      "price": "$1,990",
+      "points": [
+        "Attendance ACKs + late/absent notices",
+        "Homework & announcements broadcast",
+        "Fee reminders & payment handoff",
+        "EN/FR/Creole templates & roles",
+        "Analytics dashboard + handover"
+      ]
+    },
+    {
+      "name": "JARVIS Ops Automation",
+      "price": "$1,250",
+      "points": [
+        "n8n/ActivePieces flows for routine tasks",
+        "Daily intel + health monitor digests",
+        "Self\u2011healing checks & alerts",
+        "Supabase/Vercel wiring as needed",
+        "Runbook & rollback plan"
+      ]
+    },
+    {
+      "name": "E\u2011commerce Fast Launch (OKASINA style)",
+      "price": "$1,600",
+      "points": [
+        "Fast storefront (Vercel) + product DB",
+        "Image handling + basic filters & search",
+        "Order form + customer notifications",
+        "Admin basics (add/edit products)",
+        "Deploy + SEO meta + analytics"
+      ]
+    },
+    {
+      "name": "AI Agent Starter",
+      "price": "$1,400",
+      "points": [
+        "Local LLM (Ollama) or cloud model hookup",
+        "One useful agent (research/coding/ops)",
+        "Tool permissions and guardrails",
+        "CLI + docs to extend safely",
+        "Onboarding session recorded"
+      ]
+    },
+    {
+      "name": "Social Growth Engine",
+      "price": "$890",
+      "points": [
+        "FB/IG/TikTok integration & cross\u2011posting",
+        "Inbox unification & quick replies",
+        "Content calendar + 30 assets (templated)",
+        "Autopilot DM flows for promos",
+        "Metrics sheet + weekly cadence"
+      ]
+    }
+  ],
+  "trading": {
+    "affiliates": [
+      {
+        "name": "KuCoin",
+        "cta": "Trade on KuCoin",
+        "url": "https://www.kucoin.com/r/af/r82Y3XZ",
+        "perk": "Referral code: r82Y3XZ (fee perks)"
+      },
+      {
+        "name": "Binance",
+        "cta": "Join via Binance CPA",
+        "url": "https://www.binance.com/activity/referral-entry/CPA?ref=CPA_00G3ONT9KP",
+        "perk": "Referral code: CPA_00G3ONT9KP"
+      },
+      {
+        "name": "Goli Nutrition",
+        "cta": "Shop Goli (Use Code)",
+        "url": "https://go.goli.com/affili8583",
+        "perk": "Use code: affili8583 for discount"
+      }
+    ]
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "block": "TITAN-HR",
+  "block_version": "1.0.0",
+  "timestamp": "2025-12-21T07:48:41.525848+00:00",
+  "total_employees": 5,
+  "failures": 5,
+  "details": [
+    {
+      "employee_id": "EMP001",
+      "name": null,
+      "designation": null,
+      "hire_date": null,
+      "contract_type": "Permanent",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "0",
+            "floor_required": "16500",
+            "gap": "16500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "satisfactory",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        },
+        {
+          "rule_id": "WRA-2019-SEC24",
+          "rule_name": "Annual Leave Utilization",
+          "verdict": "WARNING",
+          "evidence": "Employee has taken very few leave days (Risk of burnout/accumulation)."
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP002",
+      "name": null,
+      "designation": null,
+      "hire_date": null,
+      "contract_type": "Permanent",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "0",
+            "floor_required": "16500",
+            "gap": "16500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "pass",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        },
+        {
+          "rule_id": "WRA-2019-SEC24",
+          "rule_name": "Annual Leave Utilization",
+          "verdict": "WARNING",
+          "evidence": "Employee has taken very few leave days (Risk of burnout/accumulation)."
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP003",
+      "name": null,
+      "designation": null,
+      "hire_date": null,
+      "contract_type": "Permanent",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "0",
+            "floor_required": "16500",
+            "gap": "16500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "FAIL",
+          "evidence": {
+            "performance_status": "hold",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        },
+        {
+          "rule_id": "WRA-2019-SEC24",
+          "rule_name": "Annual Leave Utilization",
+          "verdict": "WARNING",
+          "evidence": "Employee has taken very few leave days (Risk of burnout/accumulation)."
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP004",
+      "name": null,
+      "designation": null,
+      "hire_date": null,
+      "contract_type": "Permanent",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "0",
+            "floor_required": "16500",
+            "gap": "16500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": "No increment proposed, policy constraint not triggered."
+        },
+        {
+          "rule_id": "WRA-2019-SEC24",
+          "rule_name": "Annual Leave Utilization",
+          "verdict": "WARNING",
+          "evidence": "Employee has taken very few leave days (Risk of burnout/accumulation)."
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP005",
+      "name": null,
+      "designation": null,
+      "hire_date": null,
+      "contract_type": "Permanent",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "0",
+            "floor_required": "16500",
+            "gap": "16500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "pass",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        },
+        {
+          "rule_id": "WRA-2019-SEC24",
+          "rule_name": "Annual Leave Utilization",
+          "verdict": "WARNING",
+          "evidence": "Employee has taken very few leave days (Risk of burnout/accumulation)."
+        }
+      ]
+    }
+  ]
+}

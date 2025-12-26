@@ -1,0 +1,6 @@
+@@ -20,7 +20,8 @@ def authenticate_user(username, password):
+     user = User.query.filter_by(username=username).first()
+     if user and check_password_hash(user.password_hash, password):
+         return True
++    print('Authentication failed for user:', username)
+     return False

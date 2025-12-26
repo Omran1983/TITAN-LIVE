@@ -1,0 +1,34 @@
+account:
+  base_quote: USDT
+  symbols:
+  - BTCUSDT
+  - ETHUSDT
+  - XRPUSDT
+  - BNBUSDT
+  - SOLUSDT
+  - DOGEUSDT
+  - ADAUSDT
+  - LINKUSDT
+  - AVAXUSDT
+  - TONUSDT
+risk:
+  tier_default: Balanced
+  tiers:
+    Conservative:
+      per_trade_risk_pct: 0.2
+      daily_loss_limit_pct: 1.5
+      weekly_loss_limit_pct: 3.5
+      max_drawdown_pct: 4.0
+      max_position_pct_per_symbol: 12.0
+    Balanced:
+      per_trade_risk_pct: 0.5
+      daily_loss_limit_pct: 2.0
+      weekly_loss_limit_pct: 5.0
+      max_drawdown_pct: 7.0
+      max_position_pct_per_symbol: 15.0
+    Aggro:
+      per_trade_risk_pct: 0.5
+      daily_loss_limit_pct: 3.0
+      weekly_loss_limit_pct: 7.0
+      max_drawdown_pct: 7.0
+      max_position_pct_per_symbol: 20.0

@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: Global Employment Compliance Scanner
+  description: An AI-powered tool that analyzes employee data for compliance with international labor principles and estimates financial risk exposure.
+  version: 'v1'
+servers:
+  - url: https://your-server-url.com
+paths:
+  /scan:
+    post:
+      operationId: scan_compliance
+      summary: Analyze Employee Compliance Risks
+      description: Accepts a list of employee records and returns a detailed risk assessment, including potential fines and audit recommendations.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jurisdiction:
+                  type: string
+                  description: The legal scope for the check (e.g., 'Generic', 'UK', 'Remote').
+                  default: "Generic (ILO Principles)"
+                employees:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - id
+                      - hours_per_week
+                      - has_written_contract
+                    properties:
+                      id:
+                        type: string
+                        description: Anonymized Employee ID (e.g., 'EMP-001'). Do not send real names.
+                      annual_salary:
+                        type: number
+                      currency:
+                        type: string
+                        default: "USD"
+                      hours_per_week:
+                        type: number
+                      has_written_contract:
+                        type: boolean
+                        description: Whether the employee has a signed employment agreement.
+                      role:
+                        type: string
+      responses:
+        "200":
+          description: Successful Risk Assessment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  overall_risk:
+                    type: string
+                    description: CRITICAL, ELEVATED, or SAFE.
+                  risk_score:
+                    type: integer
+                    description: 0-100 Score (100 is highest risk).
+                  summary:
+                    type: string
+                  audit_recommendation:
+                    type: string
+                  risks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        severity:
+                          type: string
+                        rule_violated:
+                          type: string
+                        description:
+                          type: string
+                        potential_penalty:
+                          type: string
+                        affected_employees:
+                          type: array
+                          items:
+                            type: string
+  /legal/terms:
+    get:
+      operationId: get_terms
+      summary: Get Legal Disclaimer
+      responses:
+        "200":
+          description: Standard Disclaimer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  disclaimer:
+                    type: string

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>ReachX – Employer Detail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --card-bg: #ffffff;
+            --accent: #2563eb;
+            --accent-soft: rgba(37, 99, 235, 0.08);
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #e0ebff 0, #f4f6fb 40%, #f9fafb 100%);
+            color: var(--text-main);
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 16px 40px;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .title-block h1 {
+            margin: 0 0 4px;
+            font-size: 1.7rem;
+        }
+
+        .title-block p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text-main);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .btn-ghost:hover {
+            background: #ffffff;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.09);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+
+        .section-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0 0 10px;
+        }
+
+        .pill {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        .status-active {
+            background: #ecfdf3;
+            color: #166534;
+        }
+
+        .status-inactive {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+        }
+
+        .status-dot-active {
+            background: #16a34a;
+        }
+
+        .status-dot-inactive {
+            background: #dc2626;
+        }
+
+        .metrics-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .metric {
+            flex: 1 1 120px;
+            min-width: 120px;
+            background: #f3f4ff;
+            border-radius: 12px;
+            padding: 8px 10px;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+
+        .metric-note {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .table {
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            background: #ffffff;
+            margin-top: 10px;
+        }
+
+        .table-header,
+        .table-row {
+            display: grid;
+            grid-template-columns: 1.7fr 0.8fr 0.8fr 0.8fr;
+            gap: 8px;
+            padding: 8px 10px;
+            font-size: 0.8rem;
+            align-items: center;
+        }
+
+        .table-header {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: #f9fafb;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-row:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .table-cell-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            padding: 14px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .side-section {
+            margin-bottom: 14px;
+        }
+
+        .side-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .side-main {
+            font-size: 0.95rem;
+        }
+
+        .side-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        code {
+            font-size: 0.75rem;
+            background: #eef2ff;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <div class="title-block">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Connected to Supabase · Employer detail
+            </div>
+            <h1 id="employer-name">Employer</h1>
+            <p id="employer-subtitle">Loading employer…</p>
+        </div>
+        <div class="actions">
+            <button class="btn-ghost" id="btn-back">
+                ← Back to employers
+            </button>
+            <button class="btn-primary" id="btn-refresh">
+                ⟳ Refresh
+            </button>
+        </div>
+    </header>
+
+    <div class="layout">
+        <main>
+            <div class="card" style="margin-bottom: 16px;">
+                <div class="section-title">Overview</div>
+                <div class="section-sub">
+                    Live roll-up for this employer from
+                    <code>reachx_employer_invoices_view</code>.
+                </div>
+
+                <div class="metrics-row" id="overview-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Status</div>
+                        <div class="metric-value" id="metric-status">—</div>
+                        <div class="metric-note" id="metric-country">—</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Open requests</div>
+                        <div class="metric-value" id="metric-open-requests">0</div>
+                        <div class="metric-note">From <code>reachx_requests</code></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Active assignments</div>
+                        <div class="metric-value" id="metric-active-assignments">0</div>
+                        <div class="metric-note">From <code>reachx_assignments</code></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Unpaid (MUR)</div>
+                        <div class="metric-value" id="metric-unpaid-amount">0</div>
+                        <div class="metric-note">From <code>reachx_employer_invoices</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title">Requests</div>
+                <div class="section-sub">Latest open and historical role requests for this employer.</div>
+
+                <div class="table" id="requests-table">
+                    <div class="table-header">
+                        <div>Role / Title</div>
+                        <div>Quantity</div>
+                        <div>Status</div>
+                        <div>Created</div>
+                    </div>
+                    <div id="requests-body">
+                        <div class="empty-state">Loading requests…</div>
+                    </div>
+                </div>
+
+                <div style="height: 14px;"></div>
+
+                <div class="section-title">Assignments</div>
+                <div class="section-sub">Workers currently or previously placed with this employer.</div>
+
+                <div class="table" id="assignments-table">
+                    <div class="table-header">
+                        <div>Assignment</div>
+                        <div>Status</div>
+                        <div>Start</div>
+                        <div>End</div>
+                    </div>
+                    <div id="assignments-body">
+                        <div class="empty-state">Loading assignments…</div>
+                    </div>
+                </div>
+
+                <div style="height: 14px;"></div>
+
+                <div class="section-title">Invoices</div>
+                <div class="section-sub">Basic billing snapshot tied to this employer.</div>
+
+                <div class="table" id="invoices-table">
+                    <div class="table-header">
+                        <div>Invoice</div>
+                        <div>Status</div>
+                        <div>Amount</div>
+                        <div>Issued</div>
+                    </div>
+                    <div id="invoices-body">
+                        <div class="empty-state">Loading invoices…</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="card">
+            <div class="side-section">
+                <div class="side-label">Employer ID</div>
+                <div class="side-main" id="side-employer-id">—</div>
+                <div class="side-sub">Primary key in <code>reachx_employers</code>.</div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-label">Workspace</div>
+                <div class="side-main">JARVIS → ReachX</div>
+                <div class="side-sub">
+                    Data from project <code>abkprecmhitqmmlzxfad</code>.
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-label">View</div>
+                <div class="side-sub">
+                    Top metrics come from <code>reachx_employer_invoices_view</code>,
+                    detail rows from:
+                    <ul>
+                        <li><code>reachx_requests</code></li>
+                        <li><code>reachx_assignments</code></li>
+                        <li><code>reachx_employer_invoices</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-label">URL pattern</div>
+                <div class="side-sub">
+                    Open with:
+                    <br />
+                    <code>reachx-employer-detail.html?id=EMPLOYER_ID</code>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // Config – same as employers dashboard
+    const SUPABASE_URL = "https://abkprecmhitqmmlzxfad.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFia3ByZWNtaGl0cW1tbHp4ZmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDc2NTksImV4cCI6MjA3NTUyMzY1OX0.laMBfcRG_liLwsaslI0qZyGJwrpgiryUmzy8k-rls2o"; // replace with anon public key
+
+    const params = new URLSearchParams(window.location.search);
+    const employerId = params.get("id");
+
+    const employerNameEl = document.getElementById("employer-name");
+    const employerSubtitleEl = document.getElementById("employer-subtitle");
+    const metricStatusEl = document.getElementById("metric-status");
+    const metricCountryEl = document.getElementById("metric-country");
+    const metricOpenReqEl = document.getElementById("metric-open-requests");
+    const metricActiveAssignEl = document.getElementById("metric-active-assignments");
+    const metricUnpaidEl = document.getElementById("metric-unpaid-amount");
+    const sideEmployerIdEl = document.getElementById("side-employer-id");
+
+    const requestsBody = document.getElementById("requests-body");
+    const assignmentsBody = document.getElementById("assignments-body");
+    const invoicesBody = document.getElementById("invoices-body");
+
+    const btnRefresh = document.getElementById("btn-refresh");
+    const btnBack = document.getElementById("btn-back");
+
+    if (!employerId) {
+        employerNameEl.textContent = "Employer not specified";
+        employerSubtitleEl.textContent = "Add ?id=EMPLOYER_ID to the URL.";
+    }
+
+    function fmtDate(value) {
+        if (!value) return "—";
+        const d = new Date(value);
+        return d.toLocaleDateString("en-MU", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        });
+    }
+
+    function fmtAmount(value) {
+        const num = Number(value || 0);
+        if (Number.isNaN(num)) return "0";
+        return num.toLocaleString("en-MU", { maximumFractionDigits: 0 });
+    }
+
+    async function fetchJson(pathWithQuery) {
+        const url = `${SUPABASE_URL}/rest/v1/${pathWithQuery}`;
+        const res = await fetch(url, {
+            headers: {
+                "apikey": SUPABASE_ANON_KEY,
+                "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        });
+        if (!res.ok) {
+            const text = await res.text();
+            console.error("Supabase error", pathWithQuery, res.status, text);
+            throw new Error(`Supabase error ${res.status}`);
+        }
+        return res.json();
+    }
+
+    async function loadOverview() {
+        if (!employerId) return;
+
+        try {
+            const overviewData = await fetchJson(
+                `reachx_employer_invoices_view?employer_id=eq.${encodeURIComponent(employerId)}&select=*`
+            );
+
+            const row = Array.isArray(overviewData) && overviewData.length
+                ? overviewData[0]
+                : null;
+
+            if (!row) {
+                employerNameEl.textContent = "Unknown employer";
+                employerSubtitleEl.textContent = "No row in reachx_employer_invoices_view.";
+                return;
+            }
+
+            const status = (row.employer_status || row.status || "unknown").toLowerCase();
+            const country = row.country || "—";
+
+            employerNameEl.textContent = row.employer_name || row.name || "Employer";
+            employerSubtitleEl.textContent = `${country} · status: ${status}`;
+            sideEmployerIdEl.textContent = row.employer_id || row.id || employerId;
+
+            const statusClass = status === "active" ? "status-active" : "status-inactive";
+            const dotClass = status === "active" ? "status-dot-active" : "status-dot-inactive";
+
+            metricStatusEl.innerHTML = `
+                <span class="status-pill ${statusClass}">
+                    <span class="status-dot ${dotClass}"></span>
+                    ${status}
+                </span>
+            `;
+            metricCountryEl.textContent = country;
+
+            metricOpenReqEl.textContent = (row.open_requests || 0).toString();
+            metricActiveAssignEl.textContent = (row.active_assignments || 0).toString();
+            metricUnpaidEl.textContent = fmtAmount(row.unpaid_amount || 0);
+        } catch (err) {
+            console.error("loadOverview error", err);
+            employerSubtitleEl.textContent = "Error loading overview – see console.";
+        }
+    }
+
+    async function loadRequests() {
+        if (!employerId) return;
+        requestsBody.innerHTML = '<div class="empty-state">Loading requests…</div>';
+
+        try {
+            const data = await fetchJson(
+                `reachx_requests?employer_id=eq.${encodeURIComponent(employerId)}&select=*&order=created_at.desc`
+            );
+
+            requestsBody.innerHTML = "";
+
+            if (!Array.isArray(data) || !data.length) {
+                requestsBody.innerHTML = '<div class="empty-state">No requests for this employer yet.</div>';
+                return;
+            }
+
+            data.forEach(req => {
+                const row = document.createElement("div");
+                row.className = "table-row";
+
+                const colTitle = document.createElement("div");
+                colTitle.innerHTML = `
+                    <div>${req.title || "Untitled request"}</div>
+                    <div class="table-cell-sub">
+                        ${req.role || "—"} · ${req.location || ""} ${req.country ? "· " + req.country : ""}
+                    </div>
+                `;
+
+                const colQty = document.createElement("div");
+                colQty.textContent = req.quantity || 0;
+
+                const status = (req.status || "unknown").toLowerCase();
+                const colStatus = document.createElement("div");
+                colStatus.innerHTML = `
+                    <span class="tag">${status}</span>
+                `;
+
+                const colCreated = document.createElement("div");
+                colCreated.textContent = fmtDate(req.created_at);
+
+                row.appendChild(colTitle);
+                row.appendChild(colQty);
+                row.appendChild(colStatus);
+                row.appendChild(colCreated);
+
+                requestsBody.appendChild(row);
+            });
+        } catch (err) {
+            console.error("loadRequests error", err);
+            requestsBody.innerHTML = '<div class="empty-state">Error loading requests.</div>';
+        }
+    }
+
+    async function loadAssignments() {
+        if (!employerId) return;
+        assignmentsBody.innerHTML = '<div class="empty-state">Loading assignments…</div>';
+
+        try {
+            const data = await fetchJson(
+                `reachx_assignments?employer_id=eq.${encodeURIComponent(employerId)}&select=*&order=start_date.desc`
+            );
+
+            assignmentsBody.innerHTML = "";
+
+            if (!Array.isArray(data) || !data.length) {
+                assignmentsBody.innerHTML = '<div class="empty-state">No assignments recorded for this employer yet.</div>';
+                return;
+            }
+
+            data.forEach(ass => {
+                const row = document.createElement("div");
+                row.className = "table-row";
+
+                const colTitle = document.createElement("div");
+                colTitle.innerHTML = `
+                    <div>${ass.id}</div>
+                    <div class="table-cell-sub">
+                        Request: ${ass.request_id || "—"}
+                    </div>
+                `;
+
+                const status = (ass.status || "unknown").toLowerCase();
+                const colStatus = document.createElement("div");
+                colStatus.innerHTML = `<span class="tag">${status}</span>`;
+
+                const colStart = document.createElement("div");
+                colStart.textContent = fmtDate(ass.start_date);
+
+                const colEnd = document.createElement("div");
+                colEnd.textContent = fmtDate(ass.end_date);
+
+                row.appendChild(colTitle);
+                row.appendChild(colStatus);
+                row.appendChild(colStart);
+                row.appendChild(colEnd);
+
+                assignmentsBody.appendChild(row);
+            });
+        } catch (err) {
+            console.error("loadAssignments error", err);
+            assignmentsBody.innerHTML = '<div class="empty-state">Error loading assignments.</div>';
+        }
+    }
+
+    async function loadInvoices() {
+        if (!employerId) return;
+        invoicesBody.innerHTML = '<div class="empty-state">Loading invoices…</div>';
+
+        try {
+            const data = await fetchJson(
+                `reachx_employer_invoices?employer_id=eq.${encodeURIComponent(employerId)}&select=*&order=issued_at.desc`
+            );
+
+            invoicesBody.innerHTML = "";
+
+            if (!Array.isArray(data) || !data.length) {
+                invoicesBody.innerHTML = '<div class="empty-state">No invoices created for this employer yet.</div>';
+                return;
+            }
+
+            data.forEach(inv => {
+                const row = document.createElement("div");
+                row.className = "table-row";
+
+                const colInv = document.createElement("div");
+                colInv.innerHTML = `
+                    <div>${inv.invoice_no || "Invoice"}</div>
+                    <div class="table-cell-sub">
+                        Assignment: ${inv.assignment_id || "—"}
+                    </div>
+                `;
+
+                const status = (inv.status || "unknown").toLowerCase();
+                const colStatus = document.createElement("div");
+                colStatus.innerHTML = `<span class="tag">${status}</span>`;
+
+                const colAmount = document.createElement("div");
+                colAmount.textContent = fmtAmount(inv.amount || 0);
+
+                const colIssued = document.createElement("div");
+                colIssued.textContent = fmtDate(inv.issued_at);
+
+                row.appendChild(colInv);
+                row.appendChild(colStatus);
+                row.appendChild(colAmount);
+                row.appendChild(colIssued);
+
+                invoicesBody.appendChild(row);
+            });
+        } catch (err) {
+            console.error("loadInvoices error", err);
+            invoicesBody.innerHTML = '<div class="empty-state">Error loading invoices.</div>';
+        }
+    }
+
+    async function reloadAll() {
+        await loadOverview();
+        await Promise.all([
+            loadRequests(),
+            loadAssignments(),
+            loadInvoices()
+        ]);
+    }
+
+    btnRefresh.addEventListener("click", () => {
+        reloadAll();
+    });
+
+    btnBack.addEventListener("click", () => {
+        window.location.href = "reachx-employers-dashboard.html";
+    });
+
+    // Initial
+    reloadAll();
+</script>
+</body>
+</html>

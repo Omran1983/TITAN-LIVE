@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReachX – Employer Console</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./reachx-employer-view.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="./reachx-employer-view.js"></script>
+</head>
+<body>
+<div class="rx-app">
+    <!-- HEADER -->
+    <header class="rx-header">
+        <div class="rx-header-left">
+            <div class="rx-logo">ReachX</div>
+            <div class="rx-header-title">
+                Employer Console – Mauritius
+            </div>
+            <div class="rx-header-badges">
+                <span class="rx-badge" id="rx-employer-count">Employers: –</span>
+                <span class="rx-badge" id="rx-dorm-count">Dormitories: –</span>
+                <span class="rx-badge" id="rx-worker-count">Available workers: –</span>
+            </div>
+        </div>
+        <div class="rx-header-right">
+            <label class="rx-field">
+                <span class="rx-field-label">Currency</span>
+                <select id="rx-currency-select" class="rx-select">
+                    <option value="MUR" selected>MUR (Rs)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="AED">AED (AED)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="INR">INR (₹)</option>
+                </select>
+            </label>
+            <button id="rx-export-btn" class="rx-button rx-button-secondary">
+                Export Snapshot
+            </button>
+            <button id="rx-create-assignment-btn" class="rx-button">
+                Create Assignment
+            </button>
+        </div>
+    </header>
+
+    <main class="rx-layout">
+        <!-- LEFT: FILTERS -->
+        <section class="rx-column rx-column-left">
+            <h2 class="rx-section-title">Filters</h2>
+
+            <div class="rx-panel">
+                <h3 class="rx-panel-title">Employer / Client</h3>
+                <label class="rx-field">
+                    <span class="rx-field-label">Client (Mauritius)</span>
+                    <select id="rx-filter-employer" class="rx-select">
+                        <option value="">All clients</option>
+                    </select>
+                </label>
+
+                <label class="rx-field">
+                    <span class="rx-field-label">Recruiter type</span>
+                    <div class="rx-chip-row">
+                        <label class="rx-chip">
+                            <input type="checkbox" value="agency" class="rx-filter-recruiter-type"> Agency
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="direct" class="rx-filter-recruiter-type"> Direct Employer
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="subcontractor" class="rx-filter-recruiter-type"> Sub-contractor
+                        </label>
+                    </div>
+                </label>
+
+                <label class="rx-field">
+                    <span class="rx-field-label">Location (Mauritius)</span>
+                    <select id="rx-filter-location" class="rx-select">
+                        <option value="">All locations</option>
+                        <option value="Port Louis">Port Louis</option>
+                        <option value="Grand Baie">Grand Baie</option>
+                        <option value="Flic-en-Flac">Flic-en-Flac</option>
+                        <option value="Ebène">Ebène</option>
+                        <option value="Quatre Bornes">Quatre Bornes</option>
+                        <option value="Curepipe">Curepipe</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+
+                <label class="rx-field">
+                    <span class="rx-field-label">Sector</span>
+                    <div class="rx-chip-row">
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Hospitality" class="rx-filter-sector"> Hotels / Hospitality
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Construction" class="rx-filter-sector"> Construction
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Manufacturing" class="rx-filter-sector"> Manufacturing
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Retail" class="rx-filter-sector"> Retail
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Logistics" class="rx-filter-sector"> Logistics
+                        </label>
+                    </div>
+                </label>
+
+                <div class="rx-field">
+                    <span class="rx-field-label">Demand Status</span>
+                    <div class="rx-chip-column">
+                        <label class="rx-chip">
+                            <input type="checkbox" value="active" class="rx-filter-demand-status" checked> Active demand
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="monitoring" class="rx-filter-demand-status"> Monitoring only
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="closed" class="rx-filter-demand-status"> Closed
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="cancelled" class="rx-filter-demand-status"> Cancelled
+                        </label>
+                    </div>
+                </div>
+
+                <label class="rx-field">
+                    <span class="rx-field-label">Headcount needed</span>
+                    <div class="rx-slider-row">
+                        <span class="rx-slider-label" id="rx-headcount-label">1 – 500+</span>
+                        <input id="rx-headcount-min" type="range" min="1" max="500" value="1">
+                        <input id="rx-headcount-max" type="range" min="1" max="500" value="500">
+                    </div>
+                </label>
+            </div>
+
+            <div class="rx-panel">
+                <h3 class="rx-panel-title">Candidate Origins & Status</h3>
+
+                <label class="rx-field">
+                    <span class="rx-field-label">Worker Origins</span>
+                    <div class="rx-chip-row">
+                        <label class="rx-chip">
+                            <input type="checkbox" value="India" class="rx-filter-origin" checked> 🇮🇳 India
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Nepal" class="rx-filter-origin" checked> 🇳🇵 Nepal
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Sri Lanka" class="rx-filter-origin" checked> 🇱🇰 Sri Lanka
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Bangladesh" class="rx-filter-origin" checked> 🇧🇩 Bangladesh
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Kenya" class="rx-filter-origin"> 🇰🇪 Kenya
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Ethiopia" class="rx-filter-origin"> 🇪🇹 Ethiopia
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="Mozambique" class="rx-filter-origin"> 🇲🇿 Mozambique
+                        </label>
+                    </div>
+                </label>
+
+                <div class="rx-field">
+                    <span class="rx-field-label">Candidate Status</span>
+                    <div class="rx-chip-column">
+                        <label class="rx-chip">
+                            <input type="checkbox" value="confirmed" class="rx-filter-cand-status" checked> Confirmed
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="medical" class="rx-filter-cand-status"> In Process – Medical
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="passport" class="rx-filter-cand-status"> In Process – Passport
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="visa" class="rx-filter-cand-status"> In Process – Visa
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="permit" class="rx-filter-cand-status"> In Process – Work Permit
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="closed" class="rx-filter-cand-status"> Closed / Completed
+                        </label>
+                        <label class="rx-chip">
+                            <input type="checkbox" value="cancelled" class="rx-filter-cand-status"> Cancelled
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MIDDLE: EMPLOYER & DORMITORY LIST -->
+        <section class="rx-column rx-column-middle">
+            <h2 class="rx-section-title">Employers & Dormitories (Mauritius)</h2>
+            <div id="rx-employer-list" class="rx-employer-list">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- RIGHT: EMPLOYER PROFILE + MATCHES + COMMS + COMMERCIAL + SHORTLIST -->
+        <section class="rx-column rx-column-right">
+            <div id="rx-empty-state" class="rx-empty-state">
+                <h2>Select an employer to view details</h2>
+                <p>Use the filters on the left to narrow down employers in Mauritius, then click one to see matching candidates, communication history, and commercial details.</p>
+            </div>
+
+            <div id="rx-employer-panel" class="rx-employer-panel rx-hidden">
+                <div class="rx-employer-header">
+                    <div>
+                        <h2 id="rx-employer-name" class="rx-employer-name"></h2>
+                        <div class="rx-employer-meta">
+                            <span id="rx-employer-location" class="rx-tag"></span>
+                            <span id="rx-employer-sector" class="rx-tag"></span>
+                            <span id="rx-employer-demand-summary" class="rx-tag rx-tag-hot"></span>
+                        </div>
+                    </div>
+                    <div class="rx-employer-contact">
+                        <div id="rx-employer-contact-name" class="rx-contact-name"></div>
+                        <div id="rx-employer-contact-phone" class="rx-contact-line"></div>
+                        <div id="rx-employer-contact-email" class="rx-contact-line"></div>
+                    </div>
+                </div>
+
+                <div class="rx-tabs">
+                    <button class="rx-tab rx-tab-active" data-tab="matches">Matches</button>
+                    <button class="rx-tab" data-tab="comms">Communication</button>
+                    <button class="rx-tab" data-tab="commercial">Commercial</button>
+                    <button class="rx-tab" data-tab="shortlist">Shortlist</button>
+                </div>
+
+                <div class="rx-tab-content" id="rx-tab-matches">
+                    <div class="rx-subheader">
+                        <div>
+                            <h3>Auto-matched candidates</h3>
+                            <p>Candidates from India, Nepal, Sri Lanka, Bangladesh and selected African countries.</p>
+                        </div>
+                        <div class="rx-subheader-right">
+                            <span id="rx-match-count" class="rx-badge">Matches: –</span>
+                        </div>
+                    </div>
+                    <div id="rx-candidate-list" class="rx-candidate-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="rx-tab-content rx-hidden" id="rx-tab-comms">
+                    <div class="rx-subheader">
+                        <div>
+                            <h3>Communication History</h3>
+                            <p>Track mode, staff, discussion notes, and follow-up dates.</p>
+                        </div>
+                        <div class="rx-subheader-right">
+                            <button id="rx-add-comm-btn" class="rx-button rx-button-secondary">Add Entry</button>
+                        </div>
+                    </div>
+                    <table class="rx-table" id="rx-comms-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mode</th>
+                            <th>Staff</th>
+                            <th>Summary</th>
+                            <th>Next Follow-Up</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="rx-tab-content rx-hidden" id="rx-tab-commercial">
+                    <div class="rx-subheader">
+                        <div>
+                            <h3>Commercial Snapshot</h3>
+                            <p>Headcount, total project value, potential earnings, and expected close date.</p>
+                        </div>
+                    </div>
+                    <table class="rx-table" id="rx-commercial-table">
+                        <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Headcount</th>
+                            <th>Price/Worker</th>
+                            <th>Total Value</th>
+                            <th>Expected Close</th>
+                            <th>Margin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                    <div class="rx-commercial-summary">
+                        <div id="rx-commercial-total"></div>
+                    </div>
+                </div>
+
+                <div class="rx-tab-content rx-hidden" id="rx-tab-shortlist">
+                    <div class="rx-subheader">
+                        <div>
+                            <h3>Shortlist</h3>
+                            <p>Selected candidates for this employer. Ready for proposal.</p>
+                        </div>
+                        <div class="rx-subheader-right">
+                            <button id="rx-export-proposal-btn" class="rx-button">Generate Proposal Snapshot</button>
+                        </div>
+                    </div>
+                    <table class="rx-table" id="rx-shortlist-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Origin</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Salary</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

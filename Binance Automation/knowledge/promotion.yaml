@@ -1,0 +1,8 @@
+﻿promotion_rules:
+  sandbox_trades_min: 5
+  probation_days_min: 7
+  min_win_rate: 0.45
+  min_profit_factor: 1.2
+  max_avg_slippage_bps: 10
+  auto_demote_after_consec_losses: 3
+  blacklist_decay_hours: 72

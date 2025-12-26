@@ -1,0 +1,38 @@
+{
+    "version": "2.1",
+    "default_deny": true,
+    "tools": {
+        "http.get": {
+            "enabled": true,
+            "timeout_seconds": 30,
+            "allow_domains": [
+                "*"
+            ],
+            "deny_private_ips": true
+        },
+        "file.read": {
+            "enabled": true,
+            "roots": [
+                "TITAN/io",
+                "TITAN/policies"
+            ]
+        },
+        "file.write": {
+            "enabled": true,
+            "roots": [
+                "TITAN/io/work",
+                "TITAN/io/artifacts",
+                "TITAN/io/outbox"
+            ]
+        },
+        "python.run": {
+            "enabled": true,
+            "sandbox_root": "TITAN/io/work",
+            "timeout_seconds": 300,
+            "network": "deny"
+        },
+        "browser.open": {
+            "enabled": true
+        }
+    }
+}

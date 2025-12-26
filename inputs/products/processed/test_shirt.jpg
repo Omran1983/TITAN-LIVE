@@ -1,0 +1,1 @@
+fake image content but needs to be valid base64 or ignored by mock? No, Analyze-Local reads it as base64. Wait, sending 'fake text' as image to Gemini might fail. I should probably use a real image or simple base64 text.

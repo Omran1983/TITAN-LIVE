@@ -1,0 +1,40 @@
+from __future__ import annotations
+import httpx
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from .settings import get_settings
+
+class RetryPolicy:
+    def __init__(self):
+        cfg = get_settings().http
+        self.stop = stop_after_attempt(cfg.retries)
+        self.wait = wait_exponential(multiplier=1, min=cfg.backoff_min, max=cfg.backoff_max)
+
+def _client() -> httpx.Client:
+    cfg = get_settings().http
+    return httpx.Client(
+        timeout=cfg.timeout_sec,
+        limits=httpx.Limits(max_keepalive_connections=cfg.max_connections, max_connections=cfg.max_connections),
+        http2=True,
+    )
+
+class HttpClient:
+    def __init__(self):
+        self.client = _client()
+        self._pol = RetryPolicy()
+
+    def _retry(self):
+        return retry(
+            stop=self._pol.stop,
+            wait=self._pol.wait,
+            retry=retry_if_exception_type((httpx.ReadTimeout, httpx.ConnectError, httpx.RemoteProtocolError))
+        )
+@retry(stop=stop_after_attempt(5), wait=wait_exponential(min=0.5, max=8), reraise=True)
+    def get(self, url: str, **kwargs) -> httpx.Response:
+        return self.client.get(url, **kwargs)
+@retry(stop=stop_after_attempt(5), wait=wait_exponential(min=0.5, max=8), reraise=True)
+    def post(self, url: str, **kwargs) -> httpx.Response:
+        return self.client.post(url, **kwargs)
+
+    def close(self):
+        self.client.close()
+

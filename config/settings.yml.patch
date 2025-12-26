@@ -1,0 +1,2 @@
+- max_connections: 100
++ max_connections: 200

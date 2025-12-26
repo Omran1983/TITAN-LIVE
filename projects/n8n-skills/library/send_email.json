@@ -1,0 +1,16 @@
+{
+    "skill_id": "com.titan.action.email.send",
+    "name": "Send Email",
+    "description": "Sends a transactional email via SMTP/API",
+    "inputs": {
+        "to": "string (email)",
+        "subject": "string",
+        "body_markdown": "string",
+        "attachments": "array<path>"
+    },
+    "outputs": {
+        "message_id": "string",
+        "status": "sent|failed"
+    },
+    "handler": "titan.integrations.email.send"
+}

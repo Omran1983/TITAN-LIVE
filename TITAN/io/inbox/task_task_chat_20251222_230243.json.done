@@ -1,0 +1,19 @@
+{
+  "version": "2.0",
+  "task_id": "task_chat_20251222_230243",
+  "goal": "hi Titan open Google Maps please",
+  "plan": [
+    {
+      "step_id": "step_1",
+      "tool": "http.get",
+      "action": {
+        "url": "https://www.google.com/maps"
+      }
+    }
+  ],
+  "request": {
+    "goal": "hi Titan open Google Maps please",
+    "context": {}
+  },
+  "limits": {}
+}

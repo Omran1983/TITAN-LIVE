@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReachX Ops Cockpit – Visual Flyer V4</title>
+  <style>
+    @page { size: A4; margin: 6mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    .page {
+      min-height: calc(297mm - 12mm);
+      padding: 18px 22px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 5% 0%, #22c55e40, transparent 60%),
+        radial-gradient(circle at 95% 15%, #f9731640, transparent 60%),
+        radial-gradient(circle at 50% 100%, #0ea5e940, transparent 55%),
+        #020617;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 20%, #22c55e, #0ea5e9 45%, #38bdf8 80%);
+      color: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 24px;
+      box-shadow:
+        0 0 0 2px #020617,
+        0 0 0 5px rgba(34,197,94,0.75),
+        0 14px 40px rgba(15,23,42,0.9);
+    }
+    .brand-main {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      font-size: 10px;
+      color: #9ca3af;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .badge {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 10px;
+      background: linear-gradient(135deg, #020617ee, #02061788);
+      box-shadow: 0 10px 28px rgba(15,23,42,0.9);
+    }
+
+    /* HERO */
+    .hero-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.1;
+      font-weight: 900;
+      margin: 0 0 4px;
+    }
+    .hero-title span {
+      color: #22c55e;
+      text-shadow: 0 0 18px rgba(34,197,94,0.7);
+    }
+    .hero-sub {
+      font-size: 12px;
+      color: #d1d5db;
+      max-width: 440px;
+      margin: 0;
+    }
+    .hero-chips {
+      margin-top: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 9px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+    }
+
+    /* MAIN GRID */
+    .main {
+      margin-top: 10px;
+      flex: 1;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      row-gap: 12px;
+    }
+
+    /* BIG FLOW DIAGRAM */
+    .flow-title {
+      font-size: 11px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .big-flow {
+      position: relative;
+      padding: 10px 14px 14px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.88));
+      border: 1px solid rgba(51,65,85,0.95);
+      box-shadow: 0 18px 50px rgba(15,23,42,0.95);
+      overflow: hidden;
+    }
+
+    .flow-line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 53%;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #0ea5e9, #f97316);
+      opacity: 0.65;
+      filter: blur(0.5px);
+    }
+
+    .flow-circles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+    }
+
+    .node {
+      position: relative;
+      text-align: center;
+    }
+    .node-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: #020617;
+      box-shadow:
+        0 0 0 3px #020617,
+        0 0 0 7px rgba(15,23,42,0.95),
+        0 16px 40px rgba(0,0,0,0.9);
+    }
+    .node-circle.left {
+      background: radial-gradient(circle at 20% 20%, #e5e7eb, #22c55e);
+    }
+    .node-circle.center {
+      background: conic-gradient(from 220deg, #22c55e, #0ea5e9, #22c55e);
+    }
+    .node-circle.right {
+      background: radial-gradient(circle at 20% 20%, #f97316, #22c55e);
+    }
+    .node-label {
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .node-sub {
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    .flow-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      font-size: 18px;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 90px;
+    }
+
+    /* MINI OPS ROW */
+    .mini-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mini-card {
+      border-radius: 16px;
+      padding: 10px 10px;
+      background: rgba(15,23,42,0.96);
+      border: 1px dashed rgba(75,85,99,0.98);
+      font-size: 9px;
+    }
+    .mini-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #cbd5f5;
+      margin-bottom: 5px;
+    }
+    .mini-step {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+    .mini-step span {
+      width: 14px; height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+    .mini-text { color: #9ca3af; }
+
+    /* METRICS STRIP */
+    .metrics {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .metric-card {
+      border-radius: 18px;
+      padding: 8px 9px;
+      background:
+        linear-gradient(135deg, rgba(15,23,42,0.97), rgba(15,23,42,0.9));
+      border: 1px solid rgba(55,65,81,0.95);
+      text-align: center;
+    }
+    .metric-main {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: #22c55e;
+      text-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+    .metric-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
+    }
+    .metric-sub {
+      font-size: 9px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    /* BOTTOM */
+    .bottom {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1.7fr 1.3fr;
+      gap: 18px;
+      align-items: flex-end;
+    }
+    .who {
+      font-size: 9px;
+      color: #9ca3af;
+      max-width: 420px;
+    }
+    .who strong { color: #e5e7eb; }
+
+    .cta {
+      border-radius: 20px;
+      padding: 11px 12px;
+      background:
+        radial-gradient(circle at 0% 0%, #22c55e33, transparent 60%),
+        radial-gradient(circle at 100% 0%, #f9731633, transparent 60%),
+        #020617;
+      border: 1px solid rgba(34,197,94,0.9);
+      font-size: 10px;
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.9),
+        0 18px 48px rgba(0,0,0,0.85);
+    }
+    .cta-tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+    .cta-main {
+      font-size: 14px;
+      font-weight: 700;
+      color: #bbf7d0;
+      margin-bottom: 4px;
+    }
+    .cta-line { margin-top: 1px; }
+    .cta-contact {
+      margin-top: 4px;
+      font-size: 9px;
+      color: #e5e7eb;
+    }
+    .qr {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px dashed rgba(148,163,184,0.95);
+      padding: 5px;
+      text-align: center;
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .page { border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- TOP SECTION -->
+    <div>
+      <div class="header">
+        <div class="brand">
+          <div class="logo">RX</div>
+          <div>
+            <div class="brand-main">REACHX OPS COCKPIT</div>
+            <div class="brand-sub">WORKERS • EMPLOYERS • DORMITORIES</div>
+          </div>
+        </div>
+        <div class="badge">14-DAY PILOT • REMOTE SETUP</div>
+      </div>
+
+      <div>
+        <div class="hero-tag">For recruitment & manpower agencies</div>
+        <h1 class="hero-title">
+          From spreadsheet chaos<br />
+          to a <span>live cockpit</span>.
+        </h1>
+        <p class="hero-sub">
+          One visual board for workers, employers & dormitories – powered by the Excel sheets you already use.
+        </p>
+        <div class="hero-chips">
+          <div class="chip">No new system to learn</div>
+          <div class="chip">Cloud cockpit only</div>
+          <div class="chip">Monitored, not blind</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN VISUAL FLOW -->
+    <div class="main">
+      <div>
+        <div class="flow-title">The whole operation in one picture</div>
+        <div class="big-flow">
+          <div class="flow-line"></div>
+
+          <div class="flow-circles">
+            <div class="node">
+              <div class="node-circle left">📊</div>
+              <div class="node-label">Your Sheets</div>
+              <div class="node-sub">Excel / CSV exports with workers, employers, dorms.</div>
+            </div>
+
+            <div class="node">
+              <div class="node-circle center">RX</div>
+              <div class="node-label">Data Sync + Monitoring</div>
+              <div class="node-sub">Autopilot jobs, heartbeats & logs – watched for you.</div>
+            </div>
+
+            <div class="node">
+              <div class="node-circle right">📈</div>
+              <div class="node-label">ReachX Cockpit</div>
+              <div class="node-sub">One live, browser-based ops view for your team.</div>
+            </div>
+          </div>
+
+          <div class="flow-arrows">
+            <div>▶</div>
+            <div>▶</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MINI OPS CARDS -->
+      <div class="mini-row">
+        <div class="mini-card">
+          <div class="mini-title">Onboarding flow</div>
+          <div class="mini-step">
+            <span>1</span>
+            <div class="mini-text">Client copies data into our templates.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span>
+            <div class="mini-text">We map/load into Supabase (ReachX).</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span>
+            <div class="mini-text">We publish their cockpit URL.</div>
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-title">Daily ops loop</div>
+          <div class="mini-step">
+            <span>1</span>
+            <div class="mini-text">Team updates the master Excel.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span>
+            <div class="mini-text">Autopilot sync runs & logs status.</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span>
+            <div class="mini-text">Cockpit shows fresh counts & filters.</div>
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-title">Safety layer</div>
+          <div class="mini-step">
+            <span>1</span>
+            <div class="mini-text">DB heartbeat checks employers / workers / dorms.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span>
+            <div class="mini-text">UI ping confirms cockpit is online.</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span>
+            <div class="mini-text">Status script gives a one-line health snapshot.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- METRICS STRIP -->
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-main">1</div>
+          <div class="metric-label">Ops cockpit</div>
+          <div class="metric-sub">Workers • employers • dorms, one screen.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-main">14</div>
+          <div class="metric-label">Days to pilot</div>
+          <div class="metric-sub">Live with your existing sheets, not new software.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-main">0</div>
+          <div class="metric-label">New system training</div>
+          <div class="metric-sub">We plug into Excel; your team keeps their habits.</div>
+        </div>
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div class="bottom">
+        <div class="who">
+          <strong>Who this is for:</strong><br />
+          Agencies placing workers across multiple employers, cities or dormitories who want a clear cockpit view of
+          operations without forcing a big software change on their team.
+        </div>
+        <div class="cta">
+          <div class="cta-tag">Next step</div>
+          <div class="cta-main">Book a ReachX 14-Day Pilot slot.</div>
+          <div class="cta-line">• 30-minute call to see your current process.</div>
+          <div class="cta-line">• We confirm fit, data templates & start date.</div>
+          <div class="cta-contact">
+            <strong>Contact:</strong> [Your Name] · WhatsApp [+230 XXX XXX XX] · Email [you@example.com]
+          </div>
+          <div class="qr">
+            Place QR / short link here → booking page, WhatsApp or demo video.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

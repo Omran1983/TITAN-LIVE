@@ -1,0 +1,3096 @@
+[
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\governance\\CoreVsPeripheral.toml",
+    "Extension": ".toml",
+    "Length": 319,
+    "LastWrite": "2025-10-30T23:27:56.6212173+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\ops\\ci\\workflow.yml",
+    "Extension": ".yml",
+    "Length": 844,
+    "LastWrite": "2025-10-30T23:27:56.6710671+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\ops\\slo.toml",
+    "Extension": ".toml",
+    "Length": 86,
+    "LastWrite": "2025-10-30T23:27:56.6638077+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\profiles\\exchanges\\binance.toml",
+    "Extension": ".toml",
+    "Length": 198,
+    "LastWrite": "2025-10-30T23:27:56.7786135+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\quant\\config.toml",
+    "Extension": ".toml",
+    "Length": 140,
+    "LastWrite": "2025-10-30T23:27:56.7498689+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\tweakops\\Build-Report.ps1",
+    "Extension": ".ps1",
+    "Length": 340,
+    "LastWrite": "2025-10-30T23:27:56.698969+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\tweakops\\Start-AutoPatch.ps1",
+    "Extension": ".ps1",
+    "Length": 1348,
+    "LastWrite": "2025-10-30T23:27:56.6954616+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\tweakops\\Submit-Tweak.ps1",
+    "Extension": ".ps1",
+    "Length": 538,
+    "LastWrite": "2025-10-30T23:27:56.68685+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-guardrails\\tweakops\\tweakops.policy.toml",
+    "Extension": ".toml",
+    "Length": 345,
+    "LastWrite": "2025-10-30T23:27:56.6837699+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-tweakops-plus\\tweakops\\Start-AutoPatch-Plus.ps1",
+    "Extension": ".ps1",
+    "Length": 1507,
+    "LastWrite": "2025-10-30T23:40:08.36264+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\aion-zero-tweakops-plus\\tweakops\\Update-Report.ps1",
+    "Extension": ".ps1",
+    "Length": 1017,
+    "LastWrite": "2025-10-30T23:40:08.3479514+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-ARTICLE-0001.json",
+    "Extension": ".json",
+    "Length": 195,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-ARTICLE-PING-0001.json",
+    "Extension": ".json",
+    "Length": 121,
+    "LastWrite": "2025-10-27T14:15:01.1160245+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-ARTICLE-PING-0002.json",
+    "Extension": ".json",
+    "Length": 121,
+    "LastWrite": "2025-10-27T14:23:31.5668263+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-CHECKOUT-0001.json",
+    "Extension": ".json",
+    "Length": 242,
+    "LastWrite": "2025-10-27T10:42:21.5722435+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-CHECKOUT-AZ-INIT-20251027-104540.json",
+    "Extension": ".json",
+    "Length": 142,
+    "LastWrite": "2025-10-27T14:45:40.5971137+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-CHECKOUT-AZ-INIT-20251027-105041.json",
+    "Extension": ".json",
+    "Length": 142,
+    "LastWrite": "2025-10-27T14:50:41.2641444+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-CHECKOUT-AZ-INIT-20251027-105403.json",
+    "Extension": ".json",
+    "Length": 146,
+    "LastWrite": "2025-10-27T14:54:03.5724138+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-CSV-0001.json",
+    "Extension": ".json",
+    "Length": 181,
+    "LastWrite": "2025-10-27T10:42:21.5709813+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-FORM-0001.json",
+    "Extension": ".json",
+    "Length": 222,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-0001.json",
+    "Extension": ".json",
+    "Length": 102,
+    "LastWrite": "2025-10-27T14:09:20.4098053+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-143955-048.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T14:39:55.3212284+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-144004-315.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T14:40:04.5933237+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-144505-145.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T14:45:05.2988624+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-145005-029.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T14:50:05.2496762+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-145505-650.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T14:55:05.8087469+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-150005-084.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:00:05.2291021+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-150506-037.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:05:06.2930924+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-151005-582.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:10:05.7716793+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-151505-033.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:15:05.174815+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-152005-933.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:20:06.1071625+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-152506-030.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:25:06.1919727+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-153005-063.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:30:05.2234856+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-153505-012.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:35:05.0976154+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-154005-049.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:40:05.1565935+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-154505-006.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:45:05.0902656+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-155005-025.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:50:05.1212236+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-155505-025.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T15:55:05.1158298+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-160005-030.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:00:05.1503323+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-160505-085.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:05:05.2098847+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-161005-390.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:10:05.5574572+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-161505-083.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:15:05.1958037+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-162005-847.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:20:06.0171536+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-162505-084.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:25:05.1981945+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-163005-123.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:30:05.2553194+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-163505-829.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:35:05.9910259+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-164005-912.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:40:06.0711132+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-164505-173.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:45:05.3941787+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-165005-250.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:50:05.430844+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-165505-292.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T16:55:05.5013989+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-170005-430.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:00:05.569584+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-170505-285.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:05:05.4828751+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-171005-183.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:10:05.3318601+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-171505-218.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:15:05.3455525+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-172005-164.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:20:05.3144398+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-172505-189.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:25:05.322079+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-173005-188.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:30:05.3032059+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-173505-194.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:35:05.3054795+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-174005-218.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:40:05.3298724+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-174505-250.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:45:05.3750657+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-175005-178.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:50:05.3147524+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-175505-182.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T17:55:05.3001026+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-180005-196.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:00:05.2823923+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-180505-206.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:05:05.2897732+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-181005-250.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:10:05.4102909+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-181505-194.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:15:05.317653+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-182005-251.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:20:05.3782266+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-182505-267.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:25:05.3868618+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-183005-506.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:30:05.6366631+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-183505-250.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:35:05.3721848+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-184005-274.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:40:05.3656612+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-184505-296.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:45:05.4291405+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-185005-327.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:50:05.5768465+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-185506-238.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T18:55:06.6433311+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-190005-340.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:00:05.4826028+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-190505-690.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:05:05.8940584+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-191005-279.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:10:05.4075687+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-191505-337.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:15:05.4671782+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-192005-366.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:20:05.5247042+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-192505-439.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:25:05.6432625+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-193005-395.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:30:05.5099146+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-193505-370.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:35:05.4639064+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-194005-414.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:40:05.5950324+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-194506-643.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:45:06.9224979+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-195005-499.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:50:05.6338782+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-195506-728.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T19:55:06.9565411+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-200007-593.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:00:10.153041+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-200505-425.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:05:05.5819969+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-201005-390.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:10:05.5232369+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-201506-514.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:15:06.7042863+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-202006-730.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:20:06.9575752+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-202504-429.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:25:04.6170484+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-203004-403.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:30:04.5210374+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-203504-411.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:35:04.6024773+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-204005-036.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:40:05.1929242+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-204504-400.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:45:04.5194114+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-205005-052.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:50:05.2352035+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-205505-050.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T20:55:05.2088561+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-210005-168.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:00:05.3845826+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-210504-577.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:05:04.8337002+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-211005-858.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:10:07.1042552+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-211505-885.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:15:06.0930736+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-212006-210.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:20:06.4668073+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-212505-936.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:25:06.1754308+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-213006-090.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:30:06.2941645+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-213506-042.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:35:06.2798781+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-214005-399.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:40:05.8918779+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-214504-477.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:45:04.587251+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-215004-578.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:50:04.6879465+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-215504-493.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T21:55:04.6128847+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-220004-491.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:00:04.5828835+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-220504-469.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:05:04.566179+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-221004-659.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:10:04.7699639+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-221504-645.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:15:04.7754955+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-222005-096.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:20:05.2828576+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-222504-671.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:25:04.8412388+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-223005-310.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:30:05.4702092+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-223504-514.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:35:04.6279749+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-224004-685.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:40:04.8507921+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-224504-957.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:45:05.1892961+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-225005-231.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:50:05.3977147+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-225504-752.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T22:55:04.9658071+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-230004-597.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:00:04.7508457+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-230504-840.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:05:05.0144901+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-231004-912.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:10:05.1203377+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-231505-632.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:15:05.8847824+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-232004-598.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:20:04.7332111+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-232504-567.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:25:04.6823174+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-233004-597.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:30:04.7772287+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-233504-654.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:35:04.8275332+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-234004-631.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:40:04.7589323+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-234504-658.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:45:04.8540417+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-235004-674.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:50:04.8077544+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251027-235504-617.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-27T23:55:04.7087766+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-000004-807.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:00:04.9014671+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-000504-699.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:05:04.797434+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-001004-646.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:10:04.7503711+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-001504-751.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:15:04.8445455+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-002004-903.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:20:05.0009673+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-002504-713.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:25:04.8307662+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-003004-725.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:30:04.8514185+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-003504-727.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:35:04.8580854+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-004004-721.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:40:04.851761+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-004507-425.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:45:11.0478899+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-005004-861.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:50:04.9779217+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-005504-982.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T00:55:05.1495754+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-010005-539.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:00:05.6817698+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-010504-875.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:05:05.0156517+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-011004-914.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:10:05.0753722+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-011504-783.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:15:05.0924611+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-012005-701.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:20:06.1441993+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-012504-808.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:25:04.9678562+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-013005-777.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:30:05.9516694+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-013505-303.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:35:05.4485588+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-014004-750.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:40:04.9228101+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-014504-783.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:45:04.9538755+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-015004-765.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:50:04.9471925+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-015505-051.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T01:55:05.2401219+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-020005-565.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:00:05.724536+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-020505-886.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:05:06.0768139+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-021005-040.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:10:05.2398561+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-021504-796.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:15:04.9228998+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-022005-808.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:20:05.9823532+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-022504-796.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:25:04.9549911+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-023004-818.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:30:05.0222419+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-023504-804.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:35:04.9212662+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-024004-813.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:40:04.9525465+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-024505-620.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:45:05.7939405+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-025005-532.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:50:05.7282627+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-025504-862.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T02:55:05.0030152+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-030004-846.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:00:04.9998153+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-030505-875.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:05:06.0740955+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-031005-020.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:10:05.2176621+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-031506-197.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:15:06.6171806+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-032005-710.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:20:05.8771479+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-032504-844.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:25:05.0097152+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-033005-842.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:30:06.0378459+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-033505-692.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:35:05.8757517+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-034005-047.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:40:05.231152+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-034504-844.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:45:04.9788368+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-035005-881.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:50:06.209297+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-035504-889.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T03:55:05.0181362+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-040006-840.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:00:07.2865789+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-040506-100.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:05:06.4726816+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-041005-137.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:10:05.3676674+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-041505-870.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:15:06.0700364+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-042005-130.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:20:05.3115854+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-042505-081.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:25:05.257468+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-043005-946.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:30:06.1508912+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-043505-067.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:35:05.2099442+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-044005-134.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:40:05.3122584+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-044505-781.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:45:06.0205009+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-045006-111.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:50:06.3049653+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-045505-151.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T04:55:05.3512077+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-050006-502.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:00:07.0773166+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-050504-976.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:05:05.2341197+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-051005-200.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:10:05.4153801+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-051505-884.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:15:06.1459377+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-052005-997.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:20:06.2683509+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-052505-215.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:25:05.4191664+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-053006-642.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:30:07.1461688+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-053506-124.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:35:06.348118+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-054005-316.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:40:05.5291689+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-054506-118.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:45:06.351665+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-055005-871.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:50:06.0515263+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-055505-844.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T05:55:06.0188848+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-060005-984.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:00:06.2178602+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-060506-433.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:05:06.7109091+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-061005-274.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:10:05.4954216+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-061505-928.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:15:06.0957935+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-062005-893.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:20:06.0492779+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-062505-331.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:25:05.5266787+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-063005-973.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:30:06.1545982+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-063505-951.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:35:06.1431406+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-064007-000.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:40:07.4635294+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-064505-929.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:45:06.1144395+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-065017-765.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:50:20.090737+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-065505-462.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T06:55:05.8807496+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-070005-178.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:00:05.3098987+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-070506-158.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:05:06.3972698+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-071005-471.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:10:06.0015705+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-071506-959.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:15:07.5516159+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-072008-273.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:20:08.7664083+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-072505-188.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:25:05.3491677+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-073005-242.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:30:05.4755815+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-073506-187.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:35:06.4364713+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-074015-792.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:40:16.0562987+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-074506-257.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:45:06.485861+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-075006-213.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:50:06.4275816+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-075505-772.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T07:55:06.2379301+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-080006-408.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:00:06.6492403+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-080506-465.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:05:06.734214+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-081005-454.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:10:05.7015017+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-081506-345.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:15:06.5458283+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-082006-236.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:20:06.4240609+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-082507-955.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:25:08.4258428+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-083005-710.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:30:06.0349226+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-083506-614.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:35:06.8567956+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-084005-266.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:40:05.398494+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-084507-511.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:45:08.5913448+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-085006-257.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:50:06.5270771+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-085505-580.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T08:55:05.7690389+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-090006-462.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:00:06.6842141+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-090506-312.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:05:06.5563789+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-091005-982.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:10:06.1674405+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-091506-194.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:15:06.3655256+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-092006-204.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:20:06.9572308+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-092505-817.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:25:06.074833+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-093005-294.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:30:05.4529618+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-093507-872.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:35:08.5143548+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-094006-417.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:40:06.6467091+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-094513-587.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:45:14.2266627+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-095006-355.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:50:06.5941525+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-095505-785.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T09:55:05.9875415+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-110505-219.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:05:05.4218741+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-111005-162.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:10:05.5070711+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-111506-727.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:15:06.9573995+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-112006-039.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:20:06.1744905+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-112505-641.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:25:05.8669515+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-113505-748.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:35:05.942813+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-114005-348.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:40:05.5311042+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-114505-173.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:45:05.3313175+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-115006-072.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:50:06.2425902+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-115505-435.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T11:55:05.7063633+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-120006-225.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:00:06.4658125+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-120506-220.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:05:06.5194513+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-121005-239.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:10:05.4076905+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-121505-213.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:15:05.4710444+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-122006-228.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:20:06.4095174+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-122505-482.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:25:05.6845934+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-123006-064.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:30:06.2874689+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-123506-798.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:35:07.0565538+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-124005-468.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:40:05.680494+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-124506-034.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:45:06.2281715+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-125006-345.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:50:06.576125+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-125505-479.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T12:55:05.6668956+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-130006-298.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:00:06.5340645+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-130506-307.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:05:06.4707386+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-131006-421.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:10:11.1882131+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-131506-486.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:15:06.6943237+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-132006-885.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:20:07.1632252+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-132505-568.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:25:05.8682299+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-133007-991.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:30:08.2184772+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-133506-806.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:35:07.0122319+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-134005-485.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:40:05.6989923+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-134506-192.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:45:06.3418205+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-135006-458.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:50:06.6747218+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-135506-002.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T13:55:07.5492594+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-140006-667.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:00:06.9564622+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-140506-453.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:05:06.6283569+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-141005-743.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:10:07.1540682+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-141506-524.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:15:06.7572684+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-142006-390.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:20:06.5452899+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-142505-633.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:25:05.8569629+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-143016-389.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:30:17.2945335+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251028-143505-689.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-28T14:35:05.8617661+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251030-094828-366.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-10-30T09:48:33.3820336+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-20251101-231749-149.json",
+    "Extension": ".json",
+    "Length": 88,
+    "LastWrite": "2025-11-01T23:17:49.5686241+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-AZ-20251027-104540.json",
+    "Extension": ".json",
+    "Length": 153,
+    "LastWrite": "2025-10-27T14:45:40.5991122+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-AZ-20251027-105041.json",
+    "Extension": ".json",
+    "Length": 153,
+    "LastWrite": "2025-10-27T14:50:41.2662554+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-AZ-20251027-105403.json",
+    "Extension": ".json",
+    "Length": 153,
+    "LastWrite": "2025-10-27T14:54:03.5754104+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-AZ-20251027-110324-933.json",
+    "Extension": ".json",
+    "Length": 157,
+    "LastWrite": "2025-10-27T15:03:24.9366133+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-HEALTHCHECK-AZ-20251027-110342-391.json",
+    "Extension": ".json",
+    "Length": 157,
+    "LastWrite": "2025-10-27T15:03:42.3916904+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\bridge\\planned\\T-LEADFIND-0001.json",
+    "Extension": ".json",
+    "Length": 246,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\build\\Build-AZ.ps1",
+    "Extension": ".ps1",
+    "Length": 450,
+    "LastWrite": "2025-10-27T20:04:56.5041509+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\config\\base.toml",
+    "Extension": ".toml",
+    "Length": 341,
+    "LastWrite": "2025-10-30T08:55:52.6744789+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\config\\env.local.toml",
+    "Extension": ".toml",
+    "Length": 52,
+    "LastWrite": "2025-10-30T08:55:52.6821169+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\configs\\preflight.json",
+    "Extension": ".json",
+    "Length": 1429,
+    "LastWrite": "2025-10-27T11:01:19.5830301+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\governance\\CoreVsPeripheral.toml",
+    "Extension": ".toml",
+    "Length": 286,
+    "LastWrite": "2025-10-30T23:21:20.9218782+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\logs\\harvis_killswitch.json",
+    "Extension": ".json",
+    "Length": 74,
+    "LastWrite": "2025-11-15T18:56:05.8889481+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\logs\\project-index-snapshot-20251115-102848.json",
+    "Extension": ".json",
+    "Length": 97388,
+    "LastWrite": "2025-11-15T10:28:48.012335+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\logs\\project-index-summary.json",
+    "Extension": ".json",
+    "Length": 204,
+    "LastWrite": "2025-11-15T10:29:59.5599817+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\logs\\project-index.json",
+    "Extension": ".json",
+    "Length": 97616,
+    "LastWrite": "2025-11-15T10:29:59.544259+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\ops\\Run-Guardrails.ps1",
+    "Extension": ".ps1",
+    "Length": 2826,
+    "LastWrite": "2025-10-30T23:21:24.0330857+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\ops\\slo.toml",
+    "Extension": ".toml",
+    "Length": 117,
+    "LastWrite": "2025-10-30T23:21:20.9245128+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\out\\20251030_232159\\metrics.json",
+    "Extension": ".json",
+    "Length": 66,
+    "LastWrite": "2025-10-30T23:22:31.7061416+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\out\\20251030_232159\\sbom-lite.json",
+    "Extension": ".json",
+    "Length": 1172826,
+    "LastWrite": "2025-10-30T23:22:28.369837+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\profiles\\exchanges\\binance.toml",
+    "Extension": ".toml",
+    "Length": 168,
+    "LastWrite": "2025-10-30T23:21:20.9255119+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\az-backup.ps1",
+    "Extension": ".ps1",
+    "Length": 545,
+    "LastWrite": "2025-10-30T15:49:13.3629297+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\az-logrotate.ps1",
+    "Extension": ".ps1",
+    "Length": 205,
+    "LastWrite": "2025-10-30T15:46:24.8054126+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\az-watchdog.ps1",
+    "Extension": ".ps1",
+    "Length": 710,
+    "LastWrite": "2025-10-30T15:49:13.3629297+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\launcher.ps1",
+    "Extension": ".ps1",
+    "Length": 847,
+    "LastWrite": "2025-10-30T09:39:06.0615259+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\setup.ps1",
+    "Extension": ".ps1",
+    "Length": 1084,
+    "LastWrite": "2025-10-30T09:31:51.516112+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\smoke.ps1",
+    "Extension": ".ps1",
+    "Length": 757,
+    "LastWrite": "2025-10-30T08:55:52.7786998+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\bin\\start-dashboard.ps1",
+    "Extension": ".ps1",
+    "Length": 1405,
+    "LastWrite": "2025-11-01T11:58:20.6118902+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Lib\\site-packages\\aogrl_ops_pack-0.0.1.dist-info\\direct_url.json",
+    "Extension": ".json",
+    "Length": 66,
+    "LastWrite": "2025-10-30T14:06:37.5989052+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Lib\\site-packages\\markdown_it\\port.yaml",
+    "Extension": ".yaml",
+    "Length": 2447,
+    "LastWrite": "2025-10-30T09:32:28.1984073+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Lib\\site-packages\\setuptools\\config\\distutils.schema.json",
+    "Extension": ".json",
+    "Length": 972,
+    "LastWrite": "2025-10-30T09:12:09.8340609+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Lib\\site-packages\\setuptools\\config\\setuptools.schema.json",
+    "Extension": ".json",
+    "Length": 16071,
+    "LastWrite": "2025-10-30T09:12:09.8365716+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Lib\\site-packages\\urllib3\\contrib\\emscripten\\emscripten_fetch_worker.js",
+    "Extension": ".js",
+    "Length": 3655,
+    "LastWrite": "2025-10-30T20:06:42.4424174+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\venv\\Scripts\\Activate.ps1",
+    "Extension": ".ps1",
+    "Length": 27969,
+    "LastWrite": "2025-04-08T15:46:20+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\py\\pyproject.toml",
+    "Extension": ".toml",
+    "Length": 379,
+    "LastWrite": "2025-10-30T13:57:14.618569+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-Build-OKASINA.ps1",
+    "Extension": ".ps1",
+    "Length": 8299,
+    "LastWrite": "2025-11-15T20:55:27.6201515+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-Build-ProjectIndex.ps1",
+    "Extension": ".ps1",
+    "Length": 1931,
+    "LastWrite": "2025-11-15T04:58:44.4808442+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-CommandPoller-Wrapper.ps1",
+    "Extension": ".ps1",
+    "Length": 551,
+    "LastWrite": "2025-11-13T23:47:21.4624214+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-CommandPoller.ps1",
+    "Extension": ".ps1",
+    "Length": 3819,
+    "LastWrite": "2025-11-14T12:30:16.8034873+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-Guard.ps1",
+    "Extension": ".ps1",
+    "Length": 2982,
+    "LastWrite": "2025-11-13T19:58:23.3321959+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-MarkTask.ps1",
+    "Extension": ".ps1",
+    "Length": 706,
+    "LastWrite": "2025-11-14T15:12:36.2639224+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-Night-Build.ps1",
+    "Extension": ".ps1",
+    "Length": 3014,
+    "LastWrite": "2025-11-15T20:55:27.6201515+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-QuickStatus.ps1",
+    "Extension": ".ps1",
+    "Length": 1267,
+    "LastWrite": "2025-11-13T23:53:55.9314692+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-SeedTasks.ps1",
+    "Extension": ".ps1",
+    "Length": 6625,
+    "LastWrite": "2025-11-14T17:14:43.5081847+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-ShowProgress.ps1",
+    "Extension": ".ps1",
+    "Length": 2002,
+    "LastWrite": "2025-11-15T20:55:27.6201515+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-TaskRunner.ps1",
+    "Extension": ".ps1",
+    "Length": 2725,
+    "LastWrite": "2025-11-14T17:32:50.8451364+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\AZ-TasksQuickView.ps1",
+    "Extension": ".ps1",
+    "Length": 2043,
+    "LastWrite": "2025-11-14T17:19:11.2156681+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Enqueue-AZCommand.ps1",
+    "Extension": ".ps1",
+    "Length": 1031,
+    "LastWrite": "2025-11-13T20:12:47.4240155+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Enqueue-Healthcheck.ps1",
+    "Extension": ".ps1",
+    "Length": 399,
+    "LastWrite": "2025-10-27T14:39:53.2319152+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Get-EduconnectDashboard.ps1",
+    "Extension": ".ps1",
+    "Length": 3092,
+    "LastWrite": "2025-11-15T02:47:57.4390096+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Init-EduconnectSmtpConfig.ps1",
+    "Extension": ".ps1",
+    "Length": 843,
+    "LastWrite": "2025-11-15T02:54:08.6959049+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Invoke-AZHealth-Wrapper.ps1",
+    "Extension": ".ps1",
+    "Length": 877,
+    "LastWrite": "2025-11-13T19:50:57.1358072+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Invoke-AZHealth.ps1",
+    "Extension": ".ps1",
+    "Length": 833,
+    "LastWrite": "2025-10-27T10:57:30.0624558+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Invoke-CFApi.ps1",
+    "Extension": ".ps1",
+    "Length": 1868,
+    "LastWrite": "2025-11-13T19:21:10.0388293+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Invoke-EduConnectHealth.ps1",
+    "Extension": ".ps1",
+    "Length": 2734,
+    "LastWrite": "2025-11-14T15:12:30.6210895+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Invoke-Supabase.ps1",
+    "Extension": ".ps1",
+    "Length": 1626,
+    "LastWrite": "2025-11-13T19:21:10.0378151+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Jarvis-DailyReset.ps1",
+    "Extension": ".ps1",
+    "Length": 1451,
+    "LastWrite": "2025-10-27T14:39:53.2329105+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Jarvis-Tick.ps1",
+    "Extension": ".ps1",
+    "Length": 4425,
+    "LastWrite": "2025-11-14T18:12:27.7241737+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Jarvis-Watcher-Wrapper.ps1",
+    "Extension": ".ps1",
+    "Length": 711,
+    "LastWrite": "2025-11-13T18:56:58.1110552+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Jarvis-Watcher.ps1",
+    "Extension": ".ps1",
+    "Length": 2036,
+    "LastWrite": "2025-10-27T14:32:32.7463646+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\List-CF-Workers.ps1",
+    "Extension": ".ps1",
+    "Length": 314,
+    "LastWrite": "2025-11-13T19:21:10.0398245+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\List-CF-Zones.ps1",
+    "Extension": ".ps1",
+    "Length": 192,
+    "LastWrite": "2025-11-13T19:21:10.0388293+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Load-Cloudflare.ps1",
+    "Extension": ".ps1",
+    "Length": 779,
+    "LastWrite": "2025-11-13T19:17:29.1035181+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Load-Supabase.ps1",
+    "Extension": ".ps1",
+    "Length": 3409,
+    "LastWrite": "2025-11-13T23:35:15.4695558+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Panic-Stop.ps1",
+    "Extension": ".ps1",
+    "Length": 219,
+    "LastWrite": "2025-10-27T10:42:21.5755216+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Ping-Infra.ps1",
+    "Extension": ".ps1",
+    "Length": 387,
+    "LastWrite": "2025-11-13T19:19:18.413628+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Plan-Tasks.ps1",
+    "Extension": ".ps1",
+    "Length": 2371,
+    "LastWrite": "2025-10-27T11:08:54.5274802+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Poll-AZCommands.ps1",
+    "Extension": ".ps1",
+    "Length": 3955,
+    "LastWrite": "2025-11-13T20:12:47.4240155+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Proxy-Watcher.ps1",
+    "Extension": ".ps1",
+    "Length": 2465,
+    "LastWrite": "2025-11-13T19:58:23.3311937+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Scan-Secrets.ps1",
+    "Extension": ".ps1",
+    "Length": 728,
+    "LastWrite": "2025-11-13T19:19:18.413628+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Send-AOGRLMail.ps1",
+    "Extension": ".ps1",
+    "Length": 974,
+    "LastWrite": "2025-11-15T04:49:51.0645765+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Send-EduconnectQueuedEmails.ps1",
+    "Extension": ".ps1",
+    "Length": 2933,
+    "LastWrite": "2025-11-15T03:09:23.9577283+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Show-AgentSummary.ps1",
+    "Extension": ".ps1",
+    "Length": 571,
+    "LastWrite": "2025-11-13T19:42:54.291777+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Show-LastPlan.ps1",
+    "Extension": ".ps1",
+    "Length": 291,
+    "LastWrite": "2025-10-27T11:08:59.7287753+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Show-Status.ps1",
+    "Extension": ".ps1",
+    "Length": 456,
+    "LastWrite": "2025-11-13T19:42:54.291777+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Show-Trace.ps1",
+    "Extension": ".ps1",
+    "Length": 70,
+    "LastWrite": "2025-10-27T11:21:25.8102384+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Start-AZ-Wrapper.ps1",
+    "Extension": ".ps1",
+    "Length": 683,
+    "LastWrite": "2025-11-13T19:40:34.5754549+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Start-AZ.ps1",
+    "Extension": ".ps1",
+    "Length": 841,
+    "LastWrite": "2025-10-27T10:57:33.7742218+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-AZCommands.ps1",
+    "Extension": ".ps1",
+    "Length": 473,
+    "LastWrite": "2025-11-13T20:36:39.8942301+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-Cloudflare.ps1",
+    "Extension": ".ps1",
+    "Length": 299,
+    "LastWrite": "2025-11-13T19:17:29.1035181+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-EduconnectPipeline.ps1",
+    "Extension": ".ps1",
+    "Length": 3113,
+    "LastWrite": "2025-11-15T02:31:19.7749248+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-EduEnroll.ps1",
+    "Extension": ".ps1",
+    "Length": 1450,
+    "LastWrite": "2025-11-15T00:33:27.0096709+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-Infra.ps1",
+    "Extension": ".ps1",
+    "Length": 543,
+    "LastWrite": "2025-11-13T19:19:18.4126355+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-Supabase.ps1",
+    "Extension": ".ps1",
+    "Length": 478,
+    "LastWrite": "2025-11-13T19:17:29.1015146+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Test-WorkerEnroll.ps1",
+    "Extension": ".ps1",
+    "Length": 947,
+    "LastWrite": "2025-11-15T00:36:15.790579+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Verify-AZLock.ps1",
+    "Extension": ".ps1",
+    "Length": 1387,
+    "LastWrite": "2025-11-13T20:04:37.4098153+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Watch-Queue.ps1",
+    "Extension": ".ps1",
+    "Length": 108,
+    "LastWrite": "2025-10-27T11:21:25.8140671+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Write-AZLock.ps1",
+    "Extension": ".ps1",
+    "Length": 1572,
+    "LastWrite": "2025-11-13T20:04:37.4088016+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\scripts\\Write-ProxyEvent.ps1",
+    "Extension": ".ps1",
+    "Length": 841,
+    "LastWrite": "2025-11-13T18:42:28.4856869+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\secrets\\educonnect-smtp.json",
+    "Extension": ".json",
+    "Length": 180,
+    "LastWrite": "2025-11-15T03:51:30.1572177+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\src\\components\\Hero.jsx",
+    "Extension": ".jsx",
+    "Length": 111,
+    "LastWrite": "2025-10-31T01:11:59.3547142+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\state\\az.lock.json",
+    "Extension": ".json",
+    "Length": 2435,
+    "LastWrite": "2025-11-13T20:04:37.4694828+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\in\\T-ARTICLE-0001.json",
+    "Extension": ".json",
+    "Length": 195,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\in\\T-CHECKOUT-0001.json",
+    "Extension": ".json",
+    "Length": 242,
+    "LastWrite": "2025-10-27T10:42:21.5722435+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\in\\T-CSV-0001.json",
+    "Extension": ".json",
+    "Length": 181,
+    "LastWrite": "2025-10-27T10:42:21.5709813+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\in\\T-FORM-0001.json",
+    "Extension": ".json",
+    "Length": 222,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\in\\T-LEADFIND-0001.json",
+    "Extension": ".json",
+    "Length": 246,
+    "LastWrite": "2025-10-27T10:42:21.5653043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\out\\T-ARTICLE-0001.status.json",
+    "Extension": ".json",
+    "Length": 101,
+    "LastWrite": "2025-10-27T11:26:14.9880478+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\out\\T-FORM-0001.status.json",
+    "Extension": ".json",
+    "Length": 98,
+    "LastWrite": "2025-10-27T11:27:49.1160118+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\EduConnect-Autoheal.ps1",
+    "Extension": ".ps1",
+    "Length": 3149,
+    "LastWrite": "2025-11-02T10:32:39.0903853+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\EduConnect-Watch.ps1",
+    "Extension": ".ps1",
+    "Length": 786,
+    "LastWrite": "2025-11-02T10:44:10.936915+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\Harvis-Guard-Check.ps1",
+    "Extension": ".ps1",
+    "Length": 489,
+    "LastWrite": "2025-11-01T08:14:58.0153156+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\Harvis-Loop.ps1",
+    "Extension": ".ps1",
+    "Length": 6698,
+    "LastWrite": "2025-11-01T08:12:49.2403689+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\Jarvis-SpaceGuard.ps1",
+    "Extension": ".ps1",
+    "Length": 6189,
+    "LastWrite": "2025-11-02T02:32:24.5124043+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\Run-Harvis.ps1",
+    "Extension": ".ps1",
+    "Length": 1396,
+    "LastWrite": "2025-11-01T00:00:07.947227+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tasks\\Sleep-Kit.ps1",
+    "Extension": ".ps1",
+    "Length": 4039,
+    "LastWrite": "2025-11-01T08:12:49.4134454+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tmp\\package-lock.json",
+    "Extension": ".json",
+    "Length": 2239,
+    "LastWrite": "2025-10-27T11:01:35.5919993+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tmp\\package.json",
+    "Extension": ".json",
+    "Length": 279,
+    "LastWrite": "2025-10-27T11:01:35.5877048+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\Jarvis-AutoStart.ps1",
+    "Extension": ".ps1",
+    "Length": 627,
+    "LastWrite": "2025-10-27T19:54:13.8330108+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\Jarvis-Monitor.ps1",
+    "Extension": ".ps1",
+    "Length": 10213,
+    "LastWrite": "2025-10-27T16:08:37.8841096+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\New-QueueItem.ps1",
+    "Extension": ".ps1",
+    "Length": 1013,
+    "LastWrite": "2025-10-27T15:34:50.1065184+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\Run-AZ-Once.ps1",
+    "Extension": ".ps1",
+    "Length": 1147,
+    "LastWrite": "2025-10-27T21:23:49.2626671+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\Start-WorkerTail.ps1",
+    "Extension": ".ps1",
+    "Length": 442,
+    "LastWrite": "2025-10-28T00:40:18.8576828+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tools\\Start-WranglerTail.ps1",
+    "Extension": ".ps1",
+    "Length": 1629,
+    "LastWrite": "2025-10-28T11:05:06.7015436+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Build-Report.ps1",
+    "Extension": ".ps1",
+    "Length": 340,
+    "LastWrite": "2025-10-30T23:27:56.698969+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Run-Daemon.ps1",
+    "Extension": ".ps1",
+    "Length": 286,
+    "LastWrite": "2025-10-31T00:57:10.4894865+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Smoke-Test.ps1",
+    "Extension": ".ps1",
+    "Length": 827,
+    "LastWrite": "2025-10-31T00:56:49.845342+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Start-AutoPatch-Plus.ps1",
+    "Extension": ".ps1",
+    "Length": 2084,
+    "LastWrite": "2025-10-31T01:11:48.6912949+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Start-AutoPatch.ps1",
+    "Extension": ".ps1",
+    "Length": 1348,
+    "LastWrite": "2025-10-30T23:27:56.6954616+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Submit-Tweak.ps1",
+    "Extension": ".ps1",
+    "Length": 790,
+    "LastWrite": "2025-10-31T00:33:55.4694884+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\tweakops.policy.toml",
+    "Extension": ".toml",
+    "Length": 363,
+    "LastWrite": "2025-10-30T23:21:20.9255119+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\tweakops\\Update-Report.ps1",
+    "Extension": ".ps1",
+    "Length": 1017,
+    "LastWrite": "2025-10-30T23:40:08.3479514+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\AZ-MANIFEST-20251027_145352.json",
+    "Extension": ".json",
+    "Length": 1599,
+    "LastWrite": "2025-10-27T14:53:52.5928791+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\AZ-MANIFEST-20251027_145638.json",
+    "Extension": ".json",
+    "Length": 1181,
+    "LastWrite": "2025-10-27T14:56:38.2873148+04:00"
+  },
+  {
+    "Project": "AION-ZERO",
+    "FullName": "F:\\AION-ZERO\\wrangler.toml",
+    "Extension": ".toml",
+    "Length": 197,
+    "LastWrite": "2025-10-28T19:26:28.401575+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\agents\\Scout\\Run-Scrape.ps1",
+    "Extension": ".ps1",
+    "Length": 591,
+    "LastWrite": "2025-11-04T05:37:05.5596587+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\node_modules\\.cache\\wrangler\\wrangler-account.json",
+    "Extension": ".json",
+    "Length": 83,
+    "LastWrite": "2025-11-15T03:01:06.0515439+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\node_modules\\.mf\\cf.json",
+    "Extension": ".json",
+    "Length": 1778,
+    "LastWrite": "2025-11-02T23:24:16.8902263+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\ops\\rollback.ps1",
+    "Extension": ".ps1",
+    "Length": 1212,
+    "LastWrite": "2025-11-03T00:08:01.127227+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\src\\index.js",
+    "Extension": ".js",
+    "Length": 5108,
+    "LastWrite": "2025-11-15T03:01:00.1749208+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\wrangler.toml",
+    "Extension": ".toml",
+    "Length": 187,
+    "LastWrite": "2025-11-03T15:48:44.9705874+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\ops\\KillSwitch-Watcher.ps1",
+    "Extension": ".ps1",
+    "Length": 470,
+    "LastWrite": "2025-11-04T05:37:05.5607348+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\ops\\Register-Tasks.ps1",
+    "Extension": ".ps1",
+    "Length": 2007,
+    "LastWrite": "2025-11-04T06:09:08.4121183+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\ops\\Run-Overnight.ps1",
+    "Extension": ".ps1",
+    "Length": 3215,
+    "LastWrite": "2025-11-03T04:02:07.0870676+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\out\\hq-lite-snapshot\\index.good.js",
+    "Extension": ".js",
+    "Length": 4179,
+    "LastWrite": "2025-11-03T00:47:28.4906692+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\out\\hq-lite-snapshot\\wrangler.good.toml",
+    "Extension": ".toml",
+    "Length": 396,
+    "LastWrite": "2025-11-03T00:15:27.4028134+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\scripts\\Build-CorePlatformSchema.ps1",
+    "Extension": ".ps1",
+    "Length": 381,
+    "LastWrite": "2025-11-04T05:37:05.5477946+04:00"
+  },
+  {
+    "Project": "EduConnect",
+    "FullName": "F:\\EduConnect\\tasks\\whatever.ps1",
+    "Extension": ".ps1",
+    "Length": 67,
+    "LastWrite": "2025-11-04T05:37:05.5508593+04:00"
+  },
+  {
+    "Project": "EduConnect Cloud",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\node_modules\\.cache\\wrangler\\wrangler-account.json",
+    "Extension": ".json",
+    "Length": 83,
+    "LastWrite": "2025-11-15T03:01:06.0515439+04:00"
+  },
+  {
+    "Project": "EduConnect Cloud",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\node_modules\\.mf\\cf.json",
+    "Extension": ".json",
+    "Length": 1778,
+    "LastWrite": "2025-11-02T23:24:16.8902263+04:00"
+  },
+  {
+    "Project": "EduConnect Cloud",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\ops\\rollback.ps1",
+    "Extension": ".ps1",
+    "Length": 1212,
+    "LastWrite": "2025-11-03T00:08:01.127227+04:00"
+  },
+  {
+    "Project": "EduConnect Cloud",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\src\\index.js",
+    "Extension": ".js",
+    "Length": 5108,
+    "LastWrite": "2025-11-15T03:01:00.1749208+04:00"
+  },
+  {
+    "Project": "EduConnect Cloud",
+    "FullName": "F:\\EduConnect\\cloud\\hq-lite-worker\\wrangler.toml",
+    "Extension": ".toml",
+    "Length": 187,
+    "LastWrite": "2025-11-03T15:48:44.9705874+04:00"
+  },
+  {
+    "Project": "OKASINA",
+    "FullName": "C:\\Users\\ICL  ZAMBIA\\Desktop\\okasina-fashion-store-vite\\src\\components\\AdminOrdersPage.jsx",
+    "Extension": ".jsx",
+    "Length": 821,
+    "LastWrite": "2025-11-15T20:55:27.6878073+04:00"
+  },
+  {
+    "Project": "OKASINA",
+    "FullName": "C:\\Users\\ICL  ZAMBIA\\Desktop\\okasina-fashion-store-vite\\src\\components\\OrdersDashboard.jsx",
+    "Extension": ".jsx",
+    "Length": 5955,
+    "LastWrite": "2025-11-15T20:55:27.6853005+04:00"
+  }
+]

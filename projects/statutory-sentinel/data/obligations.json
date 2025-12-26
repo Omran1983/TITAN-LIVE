@@ -1,0 +1,34 @@
+[
+    {
+        "id": "MRA_VAT",
+        "name": "VAT Return",
+        "authority": "MRA",
+        "frequency": "Monthly",
+        "deadline_day": 20,
+        "penalty_desc": "5% penalty + 1% interest per month"
+    },
+    {
+        "id": "MRA_CSG",
+        "name": "CSG/PAYE Return",
+        "authority": "MRA",
+        "frequency": "Monthly",
+        "deadline_day": 20,
+        "penalty_desc": "2% penalty on late payment"
+    },
+    {
+        "id": "ROC_AR",
+        "name": "Annual Return",
+        "authority": "Registrar of Companies",
+        "frequency": "Annual",
+        "deadline_rel": "6 months after YE",
+        "penalty_desc": "Rs 15,000 max penalty"
+    },
+    {
+        "id": "PRGF_CONTRIB",
+        "name": "PRGF Contribution",
+        "authority": "MRA",
+        "frequency": "Monthly",
+        "deadline_day": 20,
+        "penalty_desc": "Interest on unpaid balance"
+    }
+]

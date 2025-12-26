@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white">
+    <!-- Hero Section -->
+    <!-- Hero: Scheme Marketplace -->
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 mb-12 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-slate-900 opacity-90"></div>
+        </div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-3xl font-bold text-white tracking-wide uppercase">Funding Marketplace</h1>
+            <p class="mt-4 text-xl text-blue-200">
+                Choose your funding track. TITAN architects the perfect proposal for each.
+            </p>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Scheme 1: TINNS -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all cursor-pointer ring-2 ring-blue-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-blue-400 font-bold">Innovation</span>
+                        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">80% Refund</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white text-left">TINNS Scheme</h3>
+                    <p class="text-xs text-slate-300 text-left mt-1">For Software, Hardware, and Cloud projects.</p>
+                </div>
+
+                <!-- Scheme 2: Green -->
+                <div
+                    class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/20 transition-all cursor-pointer opacity-70 hover:opacity-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-green-400 font-bold">Green Impact</span>
+                        <span class="bg-green-600 text-white text-xs px-2 py-1 rounded">100% Grant</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white text-left">GSS / Solar</h3>
+                    <p class="text-xs text-slate-300 text-left mt-1">For Renewable Energy and Efficiency.</p>
+                </div>
+
+                <!-- Scheme 3: Export -->
+                <div
+                    class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/20 transition-all cursor-pointer opacity-70 hover:opacity-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-orange-400 font-bold">Global Growth</span>
+                        <span class="bg-orange-600 text-white text-xs px-2 py-1 rounded">50% Refund</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white text-left">Export (MAP)</h3>
+                    <p class="text-xs text-slate-300 text-left mt-1">For Marketing and Fairs abroad.</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-500 mt-6 italic">Currently active: TINNS (Technology & Innovation)</p>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+
+        <!-- Interactive Calculator & Form -->
+        <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+            <div
+                class="absolute top-0 right-0 -mt-3 -mr-3 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                FAST PATH
+            </div>
+            <h3 class="text-lg font-medium text-slate-900 mb-4">Grant Eligibility Check</h3>
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-medium text-slate-700">Company Name</label>
+                        <input type="text" id="companyName" placeholder="e.g. Acme Trading Ltd" required
+                            class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Project Type</label>
+                        <select id="projectType" aria-label="Project Type"
+                            class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <option value="Hardware">Hardware / Equipment</option>
+                            <option value="Software">Software / Cloud</option>
+                            <option value="Website">Website / E-commerce</option>
+                            <option value="Consultancy">Consultancy</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Planned Cost ({{
+                            catalog.config.schemes.tinns.currency }})</label>
+                        <input type="number" id="costInput" placeholder="e.g. 50000" min="0" required
+                            class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
+                </div>
+
+                <!-- V2: Eligibility Probes (Killer Questions) -->
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 space-y-4">
+                    <h4 class="text-xs font-bold text-blue-800 uppercase tracking-wide">Eligibility Check (Required)
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Incorporation Year</label>
+                            <input type="number" id="incYear" placeholder="YYYY" min="1900" max="2026"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Annual Turnover (Rs)</label>
+                            <select id="turnoverRange" title="Annual Turnover Range"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                                <option value="<2M">Micro (< Rs 2M)</option>
+                                <option value="2M-10M">Small (Rs 2M - 10M)</option>
+                                <option value="10M-50M">Medium (Rs 10M - 50M)</option>
+                                <option value=">50M">Large (> Rs 50M)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Staff Count</label>
+                            <input type="number" id="staffCount" placeholder="e.g. 5" min="0"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Primary Sector</label>
+                            <select id="sector" title="Primary Business Sector"
+                                class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                                <option value="ICT">ICT / Digital</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Retail">Retail / Wholesale</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expanded Fields for Real Proposal -->
+                <div class="pt-2">
+                    <label class="block text-sm font-medium text-slate-700">Project Summary (1-2 sentences)</label>
+                    <textarea id="projectSummary" rows="2"
+                        placeholder="e.g. We need to buy 5 laptops and new inventory software..."
+                        class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Timeline</label>
+                        <select id="timeline" aria-label="Project Timeline"
+                            class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <option>Immediate (1-4 wks)</option>
+                            <option>Mid-term (1-3 mos)</option>
+                            <option>Planning (>3 mos)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Contact Email</label>
+                        <input type="email" id="contactEmail" placeholder="you@company.mu" required
+                            class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-200">
+                    <p class="text-sm text-slate-500">Estimated Refund ({{ (catalog.config.schemes.tinns.refund_rate *
+                        100)|int }}%)</p>
+                    <p class="text-3xl font-bold text-green-600" id="refundAmount">Rs 0</p>
+                    <p class="text-xs text-slate-400 mt-1">*Capped at {{ catalog.config.schemes.tinns.currency }} {{
+                        "{:,}".format(catalog.config.schemes.tinns.refund_cap) }} per scheme.</p>
+                </div>
+
+                <button id="generateBtn" onclick="generateProposal()" disabled
+                    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all mt-4 flex justify-center items-center">
+                    <span>Generate Proposal PDF</span>
+                </button>
+
+                <div id="resultContainer" class="hidden mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <p class="text-green-800 font-medium mb-2">Proposal Generated!</p>
+                    <a id="downloadLink" href="#" target="_blank"
+                        class="text-blue-600 hover:text-blue-800 font-semibold underline flex items-center">
+                        👁️ View Proposal (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Value Proposition -->
+        <!-- Pricing Sidebar -->
+        <div class="py-4">
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 sticky top-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-4">Grant Service Pricing</h3>
+
+                <!-- Tier 1 -->
+                <div class="mb-6 pb-6 border-b border-slate-100">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-semibold text-slate-700">The Explorer</span>
+                        <span class="text-xl font-bold text-green-600">Free</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Eligibility & Scheme Match</p>
+                    <a href="/portal/intake"
+                        class="text-xs font-bold text-blue-600 hover:text-blue-800 mt-2 block">Check Eligibility
+                        &rarr;</a>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="mb-6 pb-6 border-b border-slate-100 bg-blue-50 -mx-6 px-6 py-4 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-bold text-blue-700">The Operator</span>
+                        <span class="text-xl font-bold text-blue-900">Rs 15,000</span>
+                    </div>
+                    <p class="text-xs text-blue-600 mt-1">Full Submission Pack (PDF)</p>
+                    <ul class="mt-3 space-y-2">
+                        <li class="flex items-center text-xs text-blue-800">
+                            <svg class="h-4 w-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Narrative & Strategy
+                        </li>
+                        <li class="flex items-center text-xs text-blue-800">
+                            <svg class="h-4 w-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Budget & Timeline
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-semibold text-slate-700">The Partner</span>
+                        <span class="text-xl font-bold text-slate-900">Rs 25k+</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Managed Service Retainer</p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Config Data for JS -->
+<div id="grantConfig" data-refund-rate="{{ catalog.config.schemes.tinns.refund_rate }}"
+    data-refund-cap="{{ catalog.config.schemes.tinns.refund_cap }}" class="hidden"></div>
+
+<script>
+    // Configuration from Server (Data Attributes)
+    const configEl = document.getElementById('grantConfig');
+    const REFUND_RATE = parseFloat(configEl.dataset.refundRate);
+    const REFUND_CAP = parseFloat(configEl.dataset.refundCap);
+
+    const costInput = document.getElementById('costInput');
+    const refundDisplay = document.getElementById('refundAmount');
+    const generateBtn = document.getElementById('generateBtn');
+    const resultContainer = document.getElementById('resultContainer');
+    const downloadLink = document.getElementById('downloadLink');
+
+    // Inputs
+    const companyInput = document.getElementById('companyName');
+    const summaryInput = document.getElementById('projectSummary');
+    const emailInput = document.getElementById('contactEmail');
+
+    // Validation & Calculation Logic
+    function updateState() {
+        const cost = parseFloat(costInput.value) || 0;
+        const refund = Math.min(cost * REFUND_RATE, REFUND_CAP);
+        refundDisplay.textContent = `Rs ${refund.toLocaleString()}`;
+
+        // Validation: Cost > 0 AND Company Name present
+        if (cost > 0 && companyInput.value.trim().length > 0) {
+            generateBtn.disabled = false;
+        } else {
+            generateBtn.disabled = true;
+        }
+    }
+
+    costInput.addEventListener('input', updateState);
+    companyInput.addEventListener('input', updateState);
+
+    async function generateProposal() {
+        const cost = parseFloat(costInput.value) || 0;
+        if (cost <= 0) return;
+
+        // UI Loading State
+        const originalText = generateBtn.innerHTML;
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating...';
+
+        try {
+            const formData = new FormData();
+            formData.append('project_cost', cost);
+            formData.append('company_name', companyInput.value);
+
+            // V2 Eligibility Data
+            formData.append('inc_year', document.getElementById('incYear').value);
+            formData.append('turnover_range', document.getElementById('turnoverRange').value);
+            formData.append('staff_count', document.getElementById('staffCount').value);
+            formData.append('sector', document.getElementById('sector').value);
+
+            // Extra fields
+            formData.append('project_type', document.getElementById('projectType').value);
+            formData.append('project_summary', summaryInput.value);
+            formData.append('timeline', document.getElementById('timeline').value);
+            formData.append('contact_email', emailInput.value);
+
+            const response = await fetch('/api/grants/tinns/generate', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                resultContainer.classList.remove('hidden');
+                downloadLink.href = result.download_url;
+                generateBtn.innerHTML = '✨ Proposal Generated';
+            } else {
+                alert('Error: ' + result.message);
+                generateBtn.innerHTML = originalText;
+                generateBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Failed to connect to TITAN Engine.');
+            generateBtn.innerHTML = originalText;
+            generateBtn.disabled = false;
+        }
+    }
+</script>
+{% endblock %}

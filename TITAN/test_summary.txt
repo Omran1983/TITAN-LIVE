@@ -1,0 +1,7 @@
+AGREEMENT FOR CONSULTING SERVICES
+
+1. SERVICES. Consultant agrees to provide python coding services to Client.
+2. PAYMENT. Client agrees to pay Rs 50,000 upon completion.
+3. TERMINATION. Either party may terminate with 24 hours notice.
+4. CONFIDENTIALITY. Consultant shall keep all proprietary data confidential forever.
+5. GOVERNING LAW. This agreement is governed by the laws of Mauritius.

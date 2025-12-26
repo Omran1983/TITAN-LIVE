@@ -1,0 +1,147 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "TitanResult",
+    "type": "object",
+    "required": [
+        "version",
+        "task_id",
+        "status",
+        "started_at",
+        "finished_at",
+        "summary",
+        "artifacts",
+        "audit"
+    ],
+    "properties": {
+        "version": {
+            "type": "string",
+            "enum": [
+                "1.0"
+            ]
+        },
+        "task_id": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "success",
+                "partial",
+                "failed",
+                "blocked"
+            ]
+        },
+        "started_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "finished_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "summary": {
+            "type": "object",
+            "required": [
+                "what_happened",
+                "key_outputs",
+                "next_actions"
+            ],
+            "properties": {
+                "what_happened": {
+                    "type": "string"
+                },
+                "key_outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "next_actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "artifacts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "path",
+                    "label"
+                ],
+                "properties": {
+                    "path": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "mime": {
+                        "type": "string"
+                    },
+                    "bytes": {
+                        "type": "integer",
+                        "minimum": 0
+                    }
+                }
+            }
+        },
+        "audit": {
+            "type": "object",
+            "required": [
+                "tool_calls",
+                "warnings",
+                "policy_violations"
+            ],
+            "properties": {
+                "tool_calls": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "tool",
+                            "ok",
+                            "started_at",
+                            "finished_at"
+                        ],
+                        "properties": {
+                            "tool": {
+                                "type": "string"
+                            },
+                            "ok": {
+                                "type": "boolean"
+                            },
+                            "started_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "finished_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "error": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "policy_violations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

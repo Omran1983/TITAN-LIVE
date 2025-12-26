@@ -1,0 +1,11 @@
+TASK T-ARTICLE-0001 | GOAL: Open a public article and save 5 bullet insights to notes.
+MODEL: qwen2.5:7b | STEPS<= 8
+---
+ACTION BROWSER.GOTO | ARG https://examplearticle.com | THEN loaded article page
+ACTION BROWSER.READ | ARG article content | THEN identified 5 key insights
+ACTION FILE.WRITE | ARG insight1.txt | THEN saved first insight
+ACTION FILE.WRITE | ARG insight2.txt | THEN saved second insight
+ACTION FILE.WRITE | ARG insight3.txt | THEN saved third insight
+ACTION FILE.WRITE | ARG insight4.txt | THEN saved fourth insight
+ACTION FILE.WRITE | ARG insight5.txt | THEN saved fifth insight
+STOP Task completed.

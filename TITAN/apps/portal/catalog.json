@@ -1,0 +1,121 @@
+{
+    "config": {
+        "schemes": {
+            "tinns": {
+                "name": "Technology & Innovation Scheme (TINNS)",
+                "refund_rate": 0.80,
+                "refund_cap": 150000,
+                "currency": "Rs",
+                "category": "SME / Tech",
+                "disclaimer": "80% refund up to Rs 150k. Subject to SME Mauritius approval."
+            },
+            "startup": {
+                "name": "Start-Up Support (Women/Young)",
+                "refund_rate": 1.00,
+                "refund_cap": 50000,
+                "currency": "Rs",
+                "category": "SME / Startup",
+                "disclaimer": "100% grant for equipment. Founders < 29y or Women."
+            },
+            "mim": {
+                "name": "Made in Moris Label",
+                "refund_rate": 1.00,
+                "refund_cap": 50000,
+                "currency": "Rs",
+                "category": "SME / Branding",
+                "disclaimer": "One-off grant for certification."
+            },
+            "export_fair": {
+                "name": "Intl Fairs Refund Scheme",
+                "refund_rate": 1.00,
+                "refund_cap": 200000,
+                "currency": "Rs",
+                "category": "Export",
+                "disclaimer": "Annual refund for trade fair participation."
+            },
+            "freight": {
+                "name": "Freight Rebate Scheme",
+                "refund_rate": 0.25,
+                "refund_cap": 0,
+                "currency": "Rs",
+                "category": "Export",
+                "disclaimer": "25% refund on ocean freight to Africa/Indian Ocean."
+            },
+            "crigs": {
+                "name": "Collaborative Research (CRIGS)",
+                "refund_rate": 0.50,
+                "refund_cap": 5000000,
+                "currency": "Rs",
+                "category": "Innovation",
+                "disclaimer": "Matching grant up to Rs 5M. Priority: Renewable Energy, ICT."
+            },
+            "agri_equip": {
+                "name": "Agricultural Equipment (FAREI)",
+                "refund_rate": 0.50,
+                "refund_cap": 350000,
+                "currency": "Rs",
+                "category": "Agriculture",
+                "disclaimer": "50% grant for machinery (FAREI)."
+            },
+            "sheltered": {
+                "name": "Sheltered Farming",
+                "refund_rate": 0.50,
+                "refund_cap": 400000,
+                "currency": "Rs",
+                "category": "Agriculture",
+                "disclaimer": "50% grant for greenhouse structures."
+            }
+        }
+    },
+    "products": [
+        {
+            "id": "resources",
+            "name": "Documentation & Laws",
+            "status": "LIVE",
+            "path": "/portal/resources",
+            "icon": "📚"
+        },
+        {
+            "id": "tinns",
+            "name": "Tech & Innovation Grant (TINNS)",
+            "status": "LIVE",
+            "path": "/portal/grants",
+            "icon": "💻"
+        },
+        {
+            "id": "audit",
+            "name": "Contract Compliance Audit",
+            "status": "LIVE",
+            "path": "/portal/audit",
+            "icon": "⚖️"
+        },
+        {
+            "id": "export",
+            "name": "Export Fairs & Freight Rebate",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🚢"
+        },
+        {
+            "id": "agri",
+            "name": "Agriculture Grants (FAREI)",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🚜"
+        },
+        {
+            "id": "mim",
+            "name": "Made in Moris Certification",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🇲🇺"
+        },
+        {
+            "id": "startup",
+            "name": "Start-Up Grant (Youth/Women)",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🚀"
+        }
+    ]
+}

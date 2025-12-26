@@ -1,0 +1,61 @@
+version: 1
+agent_id: AGENT_CONTEXT_ASSEMBLER
+name: Context Assembler
+owner: TITAN
+runtime:
+  mode: sandbox
+  language: python
+  entrypoint: wildfire/modules/context_assembler/main.py
+  concurrency: 4
+  timeout_ms: 120000
+
+interfaces:
+  consumes:
+    - topic: az.commands
+      schema: az_command_v1
+  produces:
+    - topic: az.context_packets
+      schema: context_packet_v1
+
+permissions:
+  read_scopes:
+    - supabase:public.az_* # read-only
+    - fs:wildfire/**
+    - fs:apps/**/logs/**
+  write_scopes:
+    - fs:wildfire/**
+    - supabase:public.az_context_packets
+  network:
+    outbound_allowlist:
+      - "localhost"
+      - "127.0.0.1"
+
+context_policy:
+  tiers:
+    L0: { max_tokens: 1500, sources: ["current_command", "recent_errors"] }
+    L1: { max_tokens: 2500, sources: ["project_memory", "recent_decisions"] }
+    L2: { max_tokens: 2500, sources: ["historical_decisions", "playbooks"] }
+    L3:
+      {
+        max_tokens: 2000,
+        sources: ["parked_archive"],
+        gated_by: "approval_required",
+      }
+  progressive_disclosure: true
+  redaction:
+    secrets: "env_only"
+    pii: "mask"
+
+observability:
+  heartbeat_sec: 20
+  logs:
+    level: info
+  metrics:
+    - token_count
+    - assemble_latency_ms
+    - cache_hit_rate
+
+promotion:
+  status: sandbox
+  depends_on:
+    - PROMOTION_POLICY_V1

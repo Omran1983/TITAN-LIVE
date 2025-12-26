@@ -1,0 +1,4 @@
+employee_id,name,base_salary,performance_status,increment_proposed
+E001,Asha,25000,satisfactory,true
+E002,Bilal,18000,poor,false
+E003,Chen,22000,pass,false

@@ -1,0 +1,69 @@
+{
+  "mode": "OPEN_ACCESS",
+  "caps": {
+    "max_steps": 8,
+    "timeout_s": 60
+  },
+  "models": {
+    "primary": "qwen2.5:7b",
+    "fallback": "llama3.1:8b",
+    "runtime": "ollama"
+  },
+  "tools": {
+    "browser": "playwright",
+    "ocr": "tesseract",
+    "uia_fallback": true
+  },
+  "bridges": {
+    "dispatch": "file_queue",
+    "supabase": {
+      "enabled": false,
+      "writes": false
+    }
+  },
+  "memory": {
+    "stm_window": 8,
+    "ltm": "sqlite",
+    "vector_store": "disabled"
+  },
+  "governance": {
+    "borderline_rules": "max_leniency",
+    "hard_blocks": [
+      "system_delete",
+      "os_write_outside_workspace",
+      "credential_exfiltration"
+    ],
+    "prompt_injection_checks": true,
+    "risk_score_escalate": 0.8
+  },
+  "telemetry": {
+    "jsonl": true,
+    "screenshots": "per_step",
+    "har_trace": true,
+    "health_checks": true
+  },
+  "persona": {
+    "tone": "analytical_confident_witty",
+    "probing_under_uncertainty": true
+  },
+  "safety": {
+    "panic_hotkey": "CTRL+BREAK",
+    "auto_rollback_on": {
+      "critical_failures": 2
+    }
+  },
+  "kpis": {
+    "min_success_rate": 0.8,
+    "max_median_steps": 8,
+    "max_median_latency_s": 60
+  },
+  "flows": {
+    "acceptance": [
+      "lead_find",
+      "form_fill_dryrun",
+      "article_to_bullets",
+      "csv_export_count",
+      "checkout_staging_dryrun"
+    ]
+  }
+}

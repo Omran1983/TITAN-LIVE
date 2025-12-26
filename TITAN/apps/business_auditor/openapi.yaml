@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Agreement Risk Verdict (SMEs)
+  description: An Audit-Grade scanner that applies universal risk patterns to business agreements. Max text length 200k chars.
+  version: "v3.2.0"
+servers:
+  - url: https://your-server-url.com
+paths:
+  /scan:
+    post:
+      operationId: scan_agreement
+      summary: Scan Agreement for Risk
+      description: Upload agreement text to receive a Traffic Light Verdict, Risk Score, and PDF Report.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - doc_type
+                - text_content
+              properties:
+                doc_type:
+                  type: string
+                  description: Type of the agreement/document.
+                  enum:
+                    - contractor_agreement
+                    - employment_contract
+                    - service_agreement
+                    - nda
+                    - terms_conditions
+                    - other
+                text_content:
+                  type: string
+                  description: Extracted text content of the agreement (paste text).
+                jurisdiction:
+                  type: string
+                  description: Optional context.
+                  default: "Global (Risk Pattern Audit)"
+      responses:
+        "200":
+          description: Audit Score & Verdict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    type: string
+                  verdict_title:
+                    type: string
+                    description: The main verdict (e.g. DO NOT SIGN).
+                  verdict_color:
+                    type: string
+                    description: RED, AMBER, or GREEN.
+                  risk_score:
+                    type: integer
+                  auditor_summary:
+                    type: string
+                  tone_mode:
+                    type: string
+                    description: AUDITOR or CONSULTANT.
+                  pdf_download_url:
+                    type: string
+                  flags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        severity:
+                          type: string
+                          enum: [CRITICAL, HIGH, MEDIUM, LOW]
+                        category:
+                          type: string
+                        issue:
+                          type: string
+                        audit_note:
+                          type: string
+                        bad_clause_snippet:
+                          type: string
+        "400":
+          description: Bad Request / Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Payload Too Large
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            hint:
+              type: string

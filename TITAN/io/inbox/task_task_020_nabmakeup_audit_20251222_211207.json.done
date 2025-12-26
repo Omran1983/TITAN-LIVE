@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "task_id": "task_020_nabmakeup_audit",
+  "request": {
+    "type": "website_review",
+    "target": {
+      "url": "https://nabmakeup.com/"
+    },
+    "checks": [
+      "seo_basics",
+      "performance_basics",
+      "security_headers"
+    ],
+    "notes": "Verify HTTP connectivity and content retrieval."
+  },
+  "limits": {
+    "max_runtime_seconds": 180,
+    "max_pages": 1,
+    "max_bytes_per_page": 800000,
+    "max_total_bytes": 4000000,
+    "respect_robots_txt": true,
+    "rate_limit_ms": 600
+  },
+  "output": {
+    "format": "report_v1",
+    "save_artifacts": true
+  }
+}

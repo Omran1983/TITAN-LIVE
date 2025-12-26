@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "request_id": "verify-1766619071",
+  "ts": "2025-12-25T03:31:11.442359+04:00",
+  "agent": "VerificationHarness",
+  "severity": "info",
+  "human_summary": "All core modules verified successfully.",
+  "findings": [
+    {
+      "module": "site_health",
+      "ok": true,
+      "checks": [
+        {
+          "ok": true,
+          "path": "F:\\AION-ZERO\\TITAN\\apps\\inspector\\inspector.py"
+        },
+        {
+          "ok": true,
+          "path": "F:\\AION-ZERO\\TITAN\\apps\\doctor\\doctor.py"
+        }
+      ]
+    },
+    {
+      "module": "grants_eligibility",
+      "ok": true,
+      "checks": [
+        {
+          "ok": true,
+          "path": "F:\\AION-ZERO\\TITAN\\apps\\grant_writer\\tinns_generator.py"
+        }
+      ]
+    },
+    {
+      "module": "voyager_engine",
+      "ok": true,
+      "checks": [
+        {
+          "ok": true,
+          "path": "F:\\AION-ZERO\\TITAN\\apps\\voyager\\voyager.py"
+        }
+      ]
+    },
+    {
+      "module": "utils",
+      "ok": true,
+      "checks": [
+        {
+          "ok": true,
+          "path": "F:\\AION-ZERO\\TITAN\\apps\\utils\\summarize_cli.py"
+        }
+      ]
+    }
+  ],
+  "metrics": {}
+}

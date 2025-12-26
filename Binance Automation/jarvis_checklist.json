@@ -1,0 +1,655 @@
+﻿{
+    "name":  "JARVIS Trading — Go-Live Checklist",
+    "created_at":  "2025-09-23T21:01:42",
+    "updated_at":  "2025-09-23T22:02:23",
+    "version":  "1.0.0",
+    "tasks":  [
+                  {
+                      "id":  "NEED-001",
+                      "title":  "Mainnet API Key \u0026 Secret (Trade-only, NO withdrawals)",
+                      "detail":  "Provide BINANCE_API_KEY \u0026 BINANCE_API_SECRET with Trade perms only; share last 4 chars for verification.",
+                      "owner":  "OMRAN",
+                      "status":  "DONE",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  1,
+                      "notes":  [
+                                    "[2025-09-23T21:02:08] Keys shared; last4=____; trade-only; no withdrawals.",
+                                    "[2025-09-23T21:02:14] Keys shared; last4=____; trade-only; no withdrawals.",
+                                    "[2025-09-23T22:02:23] Keys shared; last4=____; trade-only; withdrawals=NO."
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T22:02:23"
+                  },
+                  {
+                      "id":  "NEED-002",
+                      "title":  "IP Whitelist(s) for API Keys",
+                      "detail":  "Confirm fixed IP(s) for the trading machine to whitelist on Binance.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  1,
+                      "notes":  [
+                                    "[2025-09-23T21:02:08] Whitelist IP(s): __.__.__.__ / __.__.__.__",
+                                    "[2025-09-23T21:02:14] Whitelist IP(s): __.__.__.__ / __.__.__.__",
+                                    "[2025-09-23T22:02:23] Whitelist IPs: __.__.__.__"
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T22:02:23"
+                  },
+                  {
+                      "id":  "NEED-003",
+                      "title":  "Sub-Account Structure",
+                      "detail":  "Confirm: Core (read-only API) vs Trading (trade-only). Provide sub-account emails/IDs if used.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  1,
+                      "notes":  [
+                                    "[2025-09-23T21:02:08] Sub-accounts confirmed: Core(read-only) / Trading(trade-only)",
+                                    "[2025-09-23T21:02:14] Sub-accounts confirmed: Core(read-only) / Trading(trade-only)"
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:02:14"
+                  },
+                  {
+                      "id":  "NEED-004",
+                      "title":  "Do-Not-Trade List (Core sleeve)",
+                      "detail":  "Confirm symbols never to trade (default: BTCUSDT,SOLUSDT,XRPUSDT,ETHUSDT).",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  2,
+                      "notes":  [
+                                    "[2025-09-23T21:02:08] DoNotTrade list confirmed.",
+                                    "[2025-09-23T21:02:14] DoNotTrade list confirmed."
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:02:14"
+                  },
+                  {
+                      "id":  "NEED-005",
+                      "title":  "MEME Universe (Core candidates)",
+                      "detail":  "Approve initial MEME set (DOGE, SHIB, PEPE, WIF, FLOKI, BONK, BRETT, POPCAT, MEW, PONKE, SATS, PEOPLE).",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "NEED-006",
+                      "title":  "Risk Appetite Dials",
+                      "detail":  "Confirm: DailyLossHaltPct=3, Per-trade loss cap=0.6% notional, Max concurrent=8, Heat cap=4.5.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "NEED-007",
+                      "title":  "DCA Core Sleeve Settings",
+                      "detail":  "Weekly schedule/time, per-cycle USDT, targets: BTC 30%, SOL 10%, XRP 10% (NeverSell).",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  2,
+                      "notes":  [
+                                    "[2025-09-23T21:02:08] DCA schedule + per-cycle USDT confirmed.",
+                                    "[2025-09-23T21:02:14] DCA schedule + per-cycle USDT confirmed."
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:02:14"
+                  },
+                  {
+                      "id":  "NEED-008",
+                      "title":  "Telegram/Signal Channel",
+                      "detail":  "Provide a Telegram chat ID/bot token (or preferred alert channel) for live alerts \u0026 approvals.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "NEED-009",
+                      "title":  "Reporting Preferences",
+                      "detail":  "Confirm CSV path(s), timezone (+04:00), and whether daily rollups email is required.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  3,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "NEED-010",
+                      "title":  "Explorer Budget Confirmation",
+                      "detail":  "Confirm 20% Explorer budget with  ticket sizing \u0026 auto-promotion rules.",
+                      "owner":  "OMRAN",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  true,
+                      "section":  "NEEDS_FROM_OMRAN",
+                      "priority":  3,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "ENV-001",
+                      "title":  "Validate API Credentials",
+                      "detail":  "Hit /api/v3/time and /sapi/v1/account/status; ensure no -2015/-2008 errors.",
+                      "owner":  "JARVIS",
+                      "status":  "DONE",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "KEYS_ENV",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T22:02:23"
+                  },
+                  {
+                      "id":  "ENV-002",
+                      "title":  "Clock Skew \u0026 recvWindow",
+                      "detail":  "NTP sync; enforce recvWindow=2000ms; alert if skew\u003e300ms.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "KEYS_ENV",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "ENV-003",
+                      "title":  "Permissions Sanity",
+                      "detail":  "Trade-only keys; NO withdrawals; confirm IP whitelist active.",
+                      "owner":  "JARVIS",
+                      "status":  "DONE",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "KEYS_ENV",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T22:02:23"
+                  },
+                  {
+                      "id":  "RISK-001",
+                      "title":  "Daily Loss Halt (-3%)",
+                      "detail":  "Auto-disable new entries when day PnL ≤ -3%; exits only.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "RISK_POLICY",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "RISK-002",
+                      "title":  "Per-Trade Loss Cap (≤0.6%)",
+                      "detail":  "ATR-based SL + notional cap; verify position calculators.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "RISK_POLICY",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "RISK-003",
+                      "title":  "Portfolio Heat Governor",
+                      "detail":  "Σ(notional × ATR%) ≤ 4.5; throttle new tickets when near cap.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "RISK_POLICY",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "RISK-004",
+                      "title":  "Max Concurrent Positions = 8",
+                      "detail":  "Hard gate to avoid crowding.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "RISK_POLICY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "RISK-005",
+                      "title":  "Core vs Alpha Firewall",
+                      "detail":  "Respect Do-Not-Trade list; segregate Core sub-account.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "RISK_POLICY",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "SIG-001",
+                      "title":  "Momentum Breakout Playbook",
+                      "detail":  "EMA20\u003eEMA50 rising + Donchian(20) breakout + RSI(50–70) + ROC\u003e0.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "STRATEGY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "SIG-002",
+                      "title":  "Regime Filter",
+                      "detail":  "ADX/ATR bands; RiskOff 0.5 in chop; restore in trend.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "STRATEGY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "SIG-003",
+                      "title":  "Explorer Promotion/Demotion",
+                      "detail":  "Sandbox trades≥5; PF≥1.2; win≥45%; slip≤10bps; auto-demote on 3 losses.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "STRATEGY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "EXE-001",
+                      "title":  "Maker-First Smart Router",
+                      "detail":  "LIMIT_MAKER → mid-peg ±Xbps → IOC slices with slippage cap.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "EXECUTION",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "EXE-002",
+                      "title":  "Spread/Depth Gates",
+                      "detail":  "On signal \u0026 on fill: spread≤12bps; depth≥ (Explorer .5k).",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "EXECUTION",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "EXE-003",
+                      "title":  "Order Age SLO",
+                      "detail":  "Cancel/reprice if NEW\u003e60s; idempotent clientOrderId.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "EXECUTION",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "EXE-004",
+                      "title":  "Filters Sentinel",
+                      "detail":  "Hourly exchangeInfo refresh; on -1013 re-quantize \u0026 retry once.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "EXECUTION",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "TEL-001",
+                      "title":  "Dashboard KPIs",
+                      "detail":  "Maker%, Slip bps, Fees %, ATR regime, Heat, PnL split (Core vs Alpha).",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "TELEMETRY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "TEL-002",
+                      "title":  "Alerts Wiring",
+                      "detail":  "PnL halt, 429 bursts, skew\u003e300ms, order stall\u003e60s, disk\u003c10GB.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "TELEMETRY",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "TEL-003",
+                      "title":  "Tax-Ready Ledger",
+                      "detail":  "Daily CSV: fills/fees/PnL in UTC \u0026 +04:00.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "TELEMETRY",
+                      "priority":  3,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "GOV-001",
+                      "title":  "Change Ledger",
+                      "detail":  "Record who/what/when for risk dials; 2-man rule for critical changes.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "GOVERNANCE",
+                      "priority":  2,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "GOV-002",
+                      "title":  "PanicStop Drill",
+                      "detail":  "One command cancel-all + market-exit-all; verify under 10s (sim).",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "GOVERNANCE",
+                      "priority":  1,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "OPS-001",
+                      "title":  "Journal \u0026 Logs Path",
+                      "detail":  "Create ./journal with rotation; verify write perms.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "OPERATIONS",
+                      "priority":  3,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  },
+                  {
+                      "id":  "OPS-002",
+                      "title":  "Backups \u0026 Restore Test",
+                      "detail":  "Weekly auto-restore test; report result.",
+                      "owner":  "JARVIS",
+                      "status":  "OPEN",
+                      "due":  "",
+                      "needs_input":  false,
+                      "section":  "OPERATIONS",
+                      "priority":  3,
+                      "notes":  [
+
+                                ],
+                      "created_at":  "2025-09-23T21:01:42",
+                      "updated_at":  "2025-09-23T21:01:42"
+                  }
+              ],
+    "meta":  {
+                 "owner":  "Omran (AOGRL)",
+                 "environment":  "Binance Spot (Mainnet)",
+                 "interval_default":  "15m",
+                 "symbols_core":  [
+                                      "DOGEUSDT",
+                                      "SHIBUSDT",
+                                      "PEPEUSDT",
+                                      "WIFUSDT",
+                                      "FLOKIUSDT",
+                                      "BONKUSDT",
+                                      "BRETTUSDT",
+                                      "POPCATUSDT",
+                                      "MEWUSDT",
+                                      "PONKEUSDT",
+                                      "SATSUSDT",
+                                      "PEOPLEUSDT"
+                                  ],
+                 "symbols_do_not":  [
+                                        "BTCUSDT",
+                                        "SOLUSDT",
+                                        "XRPUSDT",
+                                        "ETHUSDT"
+                                    ],
+                 "min_book_depth_usd":  10000,
+                 "max_spread_bps":  12,
+                 "daily_loss_halt_pct":  3,
+                 "cooldown_sec":  600,
+                 "portfolio_heat_cap":  4.5
+             },
+    "history":  [
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "note",
+                        "id":  "NEED-001",
+                        "note":  "Keys shared; last4=____; trade-only; no withdrawals."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "note",
+                        "id":  "NEED-002",
+                        "note":  "Whitelist IP(s): __.__.__.__ / __.__.__.__"
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "note",
+                        "id":  "NEED-003",
+                        "note":  "Sub-accounts confirmed: Core(read-only) / Trading(trade-only)"
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "note",
+                        "id":  "NEED-004",
+                        "note":  "DoNotTrade list confirmed."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "note",
+                        "id":  "NEED-007",
+                        "note":  "DCA schedule + per-cycle USDT confirmed."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:08",
+                        "action":  "status",
+                        "id":  "NEED-001",
+                        "status":  "DONE"
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "note",
+                        "id":  "NEED-001",
+                        "note":  "Keys shared; last4=____; trade-only; no withdrawals."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "note",
+                        "id":  "NEED-002",
+                        "note":  "Whitelist IP(s): __.__.__.__ / __.__.__.__"
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "note",
+                        "id":  "NEED-003",
+                        "note":  "Sub-accounts confirmed: Core(read-only) / Trading(trade-only)"
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "note",
+                        "id":  "NEED-004",
+                        "note":  "DoNotTrade list confirmed."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "note",
+                        "id":  "NEED-007",
+                        "note":  "DCA schedule + per-cycle USDT confirmed."
+                    },
+                    {
+                        "ts":  "2025-09-23T21:02:14",
+                        "action":  "status",
+                        "id":  "NEED-001",
+                        "status":  "DONE"
+                    },
+                    {
+                        "ts":  "2025-09-23T22:02:23",
+                        "action":  "status",
+                        "id":  "ENV-001",
+                        "status":  "DONE"
+                    },
+                    {
+                        "ts":  "2025-09-23T22:02:23",
+                        "action":  "status",
+                        "id":  "ENV-003",
+                        "status":  "DONE"
+                    },
+                    {
+                        "ts":  "2025-09-23T22:02:23",
+                        "action":  "note",
+                        "id":  "NEED-001",
+                        "note":  "Keys shared; last4=____; trade-only; withdrawals=NO."
+                    },
+                    {
+                        "ts":  "2025-09-23T22:02:23",
+                        "action":  "note",
+                        "id":  "NEED-002",
+                        "note":  "Whitelist IPs: __.__.__.__"
+                    }
+                ]
+}

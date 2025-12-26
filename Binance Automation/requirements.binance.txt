@@ -1,0 +1,6 @@
+﻿binance-connector>=3.13.0
+websocket-client>=1.8.0
+python-dotenv>=1.0.1
+requests>=2.32.3
+pandas>=2.2.2
+numpy>=1.26.4

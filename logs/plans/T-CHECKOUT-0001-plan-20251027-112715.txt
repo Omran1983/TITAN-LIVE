@@ -1,0 +1,12 @@
+TASK T-CHECKOUT-0001 | GOAL: Open staging checkout, fill all fields with dummy data, stop before payment.
+MODEL: qwen2.5:7b | STEPS<= 8
+---
+ACTION BROWSER.GOTO | ARG https://staging.example.com/checkout | THEN Staging checkout page loaded
+ACTION BROWSER.TYPE | ARG #firstNameInput | THEN Dummy first name entered
+ACTION BROWSER.TYPE | ARG #lastNameInput | THEN Dummy last name entered
+ACTION BROWSER.TYPE | ARG #emailInput | THEN Dummy email entered
+ACTION BROWSER.TYPE | ARG #phoneInput | THEN Dummy phone number entered
+ACTION BROWSER.TYPE | ARG #addressInput | THEN Dummy address entered
+ACTION BROWSER.TYPE | ARG #cityInput | THEN Dummy city entered
+ACTION BROWSER.TYPE | ARG #zipInput | THEN Dummy zip code entered
+STOP All steps completed within timeout.

@@ -1,0 +1,132 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Decision Atom (TITAN Brain Memory)",
+    "description": "A structured record of a strategic decision, its context, options, and outcome.",
+    "type": "object",
+    "required": [
+        "id",
+        "ts",
+        "context",
+        "decision"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "ts": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "domain": {
+            "type": "string",
+            "enum": [
+                "strategy",
+                "pricing",
+                "compliance",
+                "ops",
+                "tech"
+            ]
+        },
+        "context": {
+            "type": "object",
+            "required": [
+                "situation",
+                "constraints"
+            ],
+            "properties": {
+                "situation": {
+                    "type": "string"
+                },
+                "constraints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "signals": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "options": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "description"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "pros": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "cons": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "risk_score": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 10
+                    }
+                }
+            }
+        },
+        "decision": {
+            "type": "object",
+            "required": [
+                "selected_option_id",
+                "rationale",
+                "hypothesis"
+            ],
+            "properties": {
+                "selected_option_id": {
+                    "type": "string"
+                },
+                "rationale": {
+                    "type": "string"
+                },
+                "hypothesis": {
+                    "type": "string",
+                    "description": "Why we think this will work"
+                },
+                "expected_result": {
+                    "type": "string"
+                }
+            }
+        },
+        "outcome": {
+            "type": "object",
+            "properties": {
+                "actual_result": {
+                    "type": "string"
+                },
+                "delta": {
+                    "type": "string"
+                },
+                "was_hypothesis_correct": {
+                    "type": "boolean"
+                },
+                "learned_atom": {
+                    "type": "string",
+                    "description": "Extracted rule/principle for future"
+                }
+            }
+        }
+    }
+}

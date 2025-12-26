@@ -1,0 +1,3 @@
+Client_Name,Client_Email,Client_Phone,Invoice_Date,Due_Date,Description,Quantity,Unit_Price,Currency,Tax_Rate
+"Acme Corp","accounts@acme.mu","+23057654321","2025-01-01","2025-01-31","Consulting Services",1,15000,"MUR",0.15
+"Beta Ltd","billing@beta.mu","+23051234567","2025-01-05","2025-02-05","Maintenance Fee",1,2500,"MUR",0.15

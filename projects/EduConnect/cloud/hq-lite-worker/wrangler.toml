@@ -1,0 +1,8 @@
+name = "educonnect-hq-lite"
+main = "src/index.js"
+compatibility_date = "2025-11-03"
+[vars]
+SUPABASE_URL = "https://drnqpbyptyyuacmrvdrr.supabase.co"
+[triggers]
+crons = ["*/1 * * * *"]
+

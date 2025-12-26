@@ -1,0 +1,434 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase">Knowledge Base</h2>
+            <p class="mt-1 text-4xl font-extrabold text-slate-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                Resources & Documentation
+            </p>
+            <p class="max-w-xl mt-5 mx-auto text-xl text-slate-500">
+                Centralized repository for Mauritian Business Laws, Grant Guidelines, and Compliance Standards.
+            </p>
+        </div>
+
+        <!-- 2025 Legal Alerts (Live Intelligence) -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-12 rounded-r-lg shadow-sm">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-bold text-yellow-800 uppercase tracking-wide">
+                        ⚠️ Critical Updates (Effective Jan 1, 2025)
+                    </h3>
+                    <div class="mt-2 text-sm text-yellow-700 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong>National Minimum Wage:</strong> Rs 17,110 per month (Guaranteed).</li>
+                            <li><strong>Additional Remuneration:</strong> Rs 610/mo for salaries &le; Rs 50,000.</li>
+                            <li><strong>Wage Relativity:</strong> 2024 Amendment empowers adjustments for gap closing.
+                            </li>
+                        </ul>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong>Right to Disconnect:</strong> Prohibits contact during "unsocial hours"
+                                (10pm-6am).</li>
+                            <li><strong>Vacation Leave:</strong> 30 days for employees with 5+ years service.</li>
+                            <li><strong>Paternity Leave:</strong> Increased to 4 consecutive weeks.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Legal Acts -->
+            <div class="bg-slate-50 rounded-lg p-6 border border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <span class="mr-2">⚖️</span> Employment & Labor Laws
+                </h3>
+                <ul class="space-y-3">
+                    <li
+                        class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-slate-100">
+                        <div class="flex items-center">
+                            <span class="text-red-500 mr-3">📕</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Workers' Rights Act 2019</p>
+                                <p class="text-xs text-slate-500">Consolidated Version (2024)</p>
+                            </div>
+                        </div>
+                        <a href="https://labour.govmu.org/Documents/Legislation/Workers%20Rights%20Act%202019/Workers%20Rights%20Act%202019.pdf"
+                            target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-800 text-sm font-medium">View PDF
+                            &rarr;</a>
+                    </li>
+                    <li
+                        class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-slate-100">
+                        <div class="flex items-center">
+                            <span class="text-red-500 mr-3">📘</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Employment Relations Act 2008</p>
+                                <p class="text-xs text-slate-500">Key regulations for employment contracts</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View PDF &rarr;</a>
+                    </li>
+                    <li
+                        class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-slate-100">
+                        <div class="flex items-center">
+                            <span class="text-slate-500 mr-3">🛡️</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Data Protection Act 2017</p>
+                                <p class="text-xs text-slate-500">GDPR-aligned privacy rules</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View PDF &rarr;</a>
+                    </li>
+                    <li
+                        class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-slate-100">
+                        <div class="flex items-center">
+                            <span class="text-purple-500 mr-3">🏛️</span>
+                            <div>
+                                <p class="font-medium text-slate-900">MCCI Labour Law Guide</p>
+                                <p class="text-xs text-slate-500">Chamber of Commerce Overview</p>
+                            </div>
+                        </div>
+                        <a href="https://www.mcci.org/en/inside-mauritius/legislations-labour-laws" target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-800 text-sm font-medium">Visit Portal &rarr;</a>
+                    </li>
+                    <li
+                        class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-slate-100">
+                        <div class="flex items-center">
+                            <span class="text-red-500 mr-3">⚖️</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Employment Relations (Amendment) 2019</p>
+                                <p class="text-xs text-slate-500">ERT Official PDF</p>
+                            </div>
+                        </div>
+                        <a href="https://ert.govmu.org/Documents/Legislation%20ERT/THE%20EMPLOYMENT%20RELATIONS%20%28AMENDMENT%29%20ACT%20%202019.pdf"
+                            target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download
+                            &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sectoral Remuneration Regulations -->
+            <div class="bg-indigo-50 rounded-lg p-6 border border-indigo-100">
+                <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center">
+                    <span class="mr-2">💼</span> Remuneration Orders (2019)
+                </h3>
+                <p class="text-sm text-indigo-700 mb-4">
+                    Specific regulations governing wages and conditions for distinct sectors.
+                </p>
+                <div class="space-y-2 h-96 overflow-y-auto pr-2 custom-scrollbar">
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">ICT & Related Services</span>
+                        <span class="text-xs text-slate-500">The Information and Communication Technologies...
+                            Regulations 2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Catering & Tourism</span>
+                        <span class="text-xs text-slate-500">The Catering and Tourism Industries (Remuneration)
+                            Regulations 2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Construction & Blockmaking</span>
+                        <span class="text-xs text-slate-500">The Blockmaking, Construction, Stone Crushing...
+                            Regulations 2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Distributive Trades (Retail)</span>
+                        <span class="text-xs text-slate-500">The Distributive Trades (Remuneration) Regulations
+                            2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Factory Employees</span>
+                        <span class="text-xs text-slate-500">The Factory Employees (Remuneration) Regulations
+                            2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Domestic Workers</span>
+                        <span class="text-xs text-slate-500">The Domestic Workers (Remuneration) Regulations 2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Private Security</span>
+                        <span class="text-xs text-slate-500">The Private Security Services Employees (Remuneration)
+                            Regulations 2019</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded shadow-sm text-sm">
+                        <span class="font-bold text-slate-800 block">Transport (Buses & Haulage)</span>
+                        <span class="text-xs text-slate-500">The Public Transport / Road Haulage Industry Regulations
+                            2019</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Grant Guidelines -->
+            <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+                <h3 class="text-lg font-bold text-blue-900 mb-4 flex items-center">
+                    <span class="mr-2">💰</span> SME Scheme Guidelines
+                </h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-blue-100">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-3">📄</span>
+                            <div>
+                                <p class="font-medium text-slate-900">TINNS Guideline</p>
+                                <p class="text-xs text-slate-500">Tech & Innovation Scheme (SME Mauritius)</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download &rarr;</a>
+                    </li>
+                    <li class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-blue-100">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-3">🌿</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Greening Support Scheme (GSS)</p>
+                                <p class="text-xs text-slate-500">Eco-transition funding rules</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download &rarr;</a>
+                    </li>
+                    <li class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-blue-100">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-3">📈</span>
+                            <div>
+                                <p class="font-medium text-slate-900">Business Transformation (BTS)</p>
+                                <p class="text-xs text-slate-500">Strategic consultancy support</p>
+                            </div>
+                        </div>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download &rarr;</a>
+                    </li>
+                </ul>
+                <!-- Funding Directory 2025 -->
+                <div class="md:col-span-2 mt-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
+                        <span class="mr-2">💎</span> 2025 Funding Directory (Reference)
+                    </h3>
+                    <div class="bg-white shadow overflow-hidden border-b border-gray-200 sm:rounded-lg overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Scheme Name</th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Category</th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Benefit</th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                {% for key, scheme in catalog.config.schemes.items() %}
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{
+                                        scheme.name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            {{ scheme.category|default('General') }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {% if scheme.refund_rate == 1.0 %}
+                                        <span class="text-green-600 font-bold">100% Grant</span>
+                                        {% elif scheme.refund_rate > 0 %}
+                                        {{ (scheme.refund_rate * 100)|int }}% Refund
+                                        {% else %}
+                                        Variable
+                                        {% endif %}
+                                        {% if scheme.refund_cap > 0 %}
+                                        (up to Rs {{ "{:,}".format(scheme.refund_cap) }})
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-500 text-xs italic">{{ scheme.disclaimer }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Templates -->
+            <div class="mt-12">
+                <h3 class="text-lg font-bold text-slate-900 mb-4">Standard Templates (TITAN Certified)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="bg-white p-4 rounded border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <p class="font-bold text-slate-800">Employment Contract (Permanent)</p>
+                        <p class="text-xs text-slate-500 mt-1">Compliant with WRA 2019</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <p class="font-bold text-slate-800">Safety Policy Statement</p>
+                        <p class="text-xs text-slate-500 mt-1">OSHA Requirement</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <p class="font-bold text-slate-800">Data Privacy Policy</p>
+                        <p class="text-xs text-slate-500 mt-1">DPA 2017 Requirement</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment & Business Intelligence -->
+            <div class="mt-12 mb-12">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <span class="mr-2">🌍</span> Investment & Business Intelligence
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <a href="https://edbmauritius.org/why-invest-in-mauritius" target="_blank" rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-blue-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Why Invest in Mauritius?</h4>
+                        <p class="text-xs text-slate-500 mt-2">Official EDB guide on fiscal incentives and stability.
+                        </p>
+                    </a>
+
+                    <a href="https://www.henleyglobal.com/residence-investment/mauritius" target="_blank"
+                        rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-purple-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Residence via Investment</h4>
+                        <p class="text-xs text-slate-500 mt-2">Henley & Partners guide on obtaining residency.</p>
+                    </a>
+
+                    <a href="https://businessmauritius.org/" target="_blank" rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-slate-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Business Mauritius</h4>
+                        <p class="text-xs text-slate-500 mt-2">The coordinating body for the Mauritian private sector.
+                        </p>
+                    </a>
+
+                    <a href="https://govmu.org/EN/infoservices/business/Pages/investopp.aspx" target="_blank"
+                        rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-red-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">GovMU Investment Ops</h4>
+                        <p class="text-xs text-slate-500 mt-2">Government portal for business opportunities.</p>
+                    </a>
+
+                    <a href="https://www.lloydsbanktrade.com/en/market-potential/mauritius/investment" target="_blank"
+                        rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-green-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Lloyds Bank Trade</h4>
+                        <p class="text-xs text-slate-500 mt-2">Market potential analysis and investment data.</p>
+                    </a>
+
+                    <a href="https://www.hcimauritius.gov.in/pages?id=9avme&subid=Pe9xd&nextid=1aMAa" target="_blank"
+                        rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-orange-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">HCI Mauritius</h4>
+                        <p class="text-xs text-slate-500 mt-2">Doing Business in Mauritius (India High Commission).</p>
+                    </a>
+
+                    <a href="https://www.fscmauritius.org/media/105875/a_criteria.pdf" target="_blank"
+                        rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-indigo-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">FSC Licensing Criteria</h4>
+                        <p class="text-xs text-slate-500 mt-2">Official Financial Services Commission Guidelines.</p>
+                    </a>
+
+                    <a href="https://companies.govmu.org/" target="_blank" rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-teal-600 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Registrar of Companies</h4>
+                        <p class="text-xs text-slate-500 mt-2">Official CBRD Portal for Business Registration.</p>
+                    </a>
+
+                    <a href="https://www.bom.mu/" target="_blank" rel="noopener noreferrer"
+                        class="block bg-white p-6 rounded-lg border border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-md transition-all">
+                        <div class="text-gray-800 mb-2">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Bank of Mauritius</h4>
+                        <p class="text-xs text-slate-500 mt-2">Central Bank Exchange Rates & Regulations.</p>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,35 @@
+version: 1
+agent_id: AGENT_BITNET_ROUTER
+name: BitNet Router
+runtime:
+  mode: sandbox
+  language: python
+  entrypoint: wildfire/modules/bitnet_router/main.py
+  concurrency: 4
+  timeout_ms: 5000
+
+interfaces:
+  consumes:
+    - topic: az.route_requests
+      schema: route_request_v1
+  produces:
+    - topic: az.route_decisions
+      schema: route_decision_v1
+
+scope:
+  allowed_roles:
+    - "classifier"
+    - "router"
+    - "tagger"
+
+constraints:
+  may_not:
+    - "generate_final_outputs"
+    - "execute_commands"
+    - "touch_db_writes"
+
+observability:
+  heartbeat_sec: 30
+  metrics:
+    - route_accuracy_proxy
+    - route_latency_ms

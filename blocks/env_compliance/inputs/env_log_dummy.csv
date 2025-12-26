@@ -1,0 +1,5 @@
+id,category,amount,unit,status,description,type
+LOG-001,plastics_single_use,45,kg,,Monthly Kitchen Supply,
+LOG-002,plastics_single_use,55,kg,,Warehouse Wrapping (Excess),
+PERMIT-001,license,,,expired,EIA Certificate 2024,eia_license
+LOG-003,paper,120,kg,,Office Usage,

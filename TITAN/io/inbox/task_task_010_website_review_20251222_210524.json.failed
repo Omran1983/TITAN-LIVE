@@ -1,0 +1,41 @@
+﻿{
+    "version": "1.0",
+    "task_id": "task_010_website_review",
+    "created_at": "2025-12-22T21:05:00Z",
+    "tenant": {
+        "org": "AOGRL",
+        "project": "TITAN",
+        "env": "local"
+    },
+    "request": {
+        "goal": "Review a website and produce a structured audit (UX, speed, SEO basics, conversion, trust, compliance). No scraping behind logins, no PII collection.",
+        "inputs": [
+            {
+                "kind": "url",
+                "ref": "https://nabmakeup.com/",
+                "label": "target_url"
+            },
+            {
+                "kind": "text",
+                "ref": "conversion, offer clarity, mobile UX, trust signals, speed, SEO basics",
+                "label": "focus_areas"
+            }
+        ],
+        "deliverables": [
+            "Write a report JSON + a short human-readable summary text artifact."
+        ]
+    },
+    "limits": {
+        "max_seconds": 300,
+        "max_tool_calls": 50,
+        "max_output_mb": 10
+    },
+    "policy": {
+        "allowlist_version": "1.0",
+        "approval_mode": "auto",
+        "data_handling": "local_only"
+    },
+    "callbacks": {
+        "mode": "file"
+    }
+}

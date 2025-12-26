@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employers - ReachX</title>
+    <!-- Include Tailwind CSS via CDN for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.4.1/dist/umd/supabase.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white p-4 flex space-x-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="employers.html" class="font-bold underline">Employers</a>
+        <a href="dormitories.html" class="hover:underline">Dormitories</a>
+        <a href="dashboard.html" class="hover:underline">Dashboard</a>
+    </nav>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Employers</h1>
+        <!-- Search box for filtering employers -->
+        <input id="search-input" type="text" placeholder="Search by name or country..." class="border p-2 mb-4 w-full md:w-1/2 rounded">
+        <!-- Loading and error messages -->
+        <div id="loading" class="mb-4 text-blue-600">Loading employers...</div>
+        <div id="error" class="mt-4 text-red-600 hidden"></div>
+        <!-- Table to display employer data -->
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table id="employers-table" class="min-w-full">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="py-2 px-4 text-left">Name</th>
+                        <th class="py-2 px-4 text-left">Country</th>
+                        <th class="py-2 px-4 text-left">Contact Person</th>
+                        <th class="py-2 px-4 text-left">Phone</th>
+                        <th class="py-2 px-4 text-left">WhatsApp</th>
+                        <th class="py-2 px-4 text-left">Active Workers</th>
+                    </tr>
+                </thead>
+                <tbody id="employers-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    // Replace these placeholders with your actual Supabase credentials
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+    const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+    // Initialize Supabase client
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Fetch all employers from Supabase
+    async function fetchEmployers() {
+        const { data, error } = await supabaseClient
+            .from('employers')
+            .select('*');
+        if (error) {
+            throw error;
+        }
+        return data || [];
+    }
+
+    // Render employers into the table body
+    function renderEmployers(employers) {
+        const tbody = document.getElementById('employers-body');
+        tbody.innerHTML = '';
+        employers.forEach(emp => {
+            const row = document.createElement('tr');
+            row.classList.add('border-b');
+            row.innerHTML = `
+                <td class="py-2 px-4">${emp.name || emp.employer_name || ''}</td>
+                <td class="py-2 px-4">${emp.country || emp.location || ''}</td>
+                <td class="py-2 px-4">${emp.contact_person || emp.contact_person_name || ''}</td>
+                <td class="py-2 px-4">${emp.phone || emp.phone_number || ''}</td>
+                <td class="py-2 px-4">${emp.whatsapp || emp.whatsapp_number || ''}</td>
+                <td class="py-2 px-4">${emp.active_workers_count || emp.worker_count || 0}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Filter employers based on search term
+    function filterEmployers(employers, searchTerm) {
+        if (!searchTerm) return employers;
+        const term = searchTerm.toLowerCase();
+        return employers.filter(emp =>
+            (emp.name || emp.employer_name || '').toLowerCase().includes(term) ||
+            (emp.country || emp.location || '').toLowerCase().includes(term)
+        );
+    }
+
+    document.getElementById('search-input').addEventListener('input', (event) => {
+        const searchTerm = event.target.value;
+        renderEmployers(filterEmployers(window.allEmployers, searchTerm));
+    });
+
+    async function initPage() {
+        try {
+            const employers = await fetchEmployers();
+            window.allEmployers = employers;
+            document.getElementById('loading').style.display = 'none';
+            renderEmployers(employers);
+        } catch (error) {
+            document.getElementById('loading').style.display = 'none';
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = `Error fetching employers: ${error.message}`;
+            errorDiv.classList.remove('hidden');
+        }
+    }
+
+    // Initialize the page on load
+    initPage();
+    </script>
+</body>
+</html>

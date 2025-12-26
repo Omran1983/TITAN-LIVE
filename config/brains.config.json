@@ -1,0 +1,35 @@
+﻿{
+  "default_brain": "llama3-fast",
+  "brains": [
+    {
+      "id": "llama3-fast",
+      "label": "LLaMA 3 â€“ Fast General",
+      "model": "llama3",
+      "endpoint": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.4,
+      "max_tokens": 2048,
+      "roles": ["routing", "summaries", "docs", "ui-copy"],
+      "risk_levels": ["low", "medium"]
+    },
+    {
+      "id": "deepseek-reasoner",
+      "label": "DeepSeek â€“ Deep Reasoning",
+      "model": "deepseek-r1",
+      "endpoint": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.3,
+      "max_tokens": 4096,
+      "roles": ["architecture", "multi-step-plans", "root-cause-analysis"],
+      "risk_levels": ["medium", "high", "critical"]
+    },
+    {
+      "id": "qwen-coder",
+      "label": "Qwen â€“ Code Specialist",
+      "model": "qwen2.5-coder",
+      "endpoint": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.2,
+      "max_tokens": 4096,
+      "roles": ["code-edits", "refactor", "tests", "migrations"],
+      "risk_levels": ["high", "critical"]
+    }
+  ]
+}

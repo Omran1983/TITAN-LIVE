@@ -1,0 +1,39 @@
+# --- TITAN SECURITY ---
+.env
+*.env
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/
+.next/
+*.log
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.bak
+*.tmp
+*.dll
+*.exe
+*.iso
+*.bin
+
+# --- EXCLUSION ZONES (HEAVY) ---
+Jarvis/
+universe/
+backups/
+archive/
+output/
+tmp/
+temp/
+_hidden/
+
+# --- PYTHON ---
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# --- SPECIFIC LARGE FILES ---
+Jarvis_*.zip

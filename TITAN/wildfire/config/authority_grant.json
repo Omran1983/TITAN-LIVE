@@ -1,0 +1,12 @@
+{
+    "granted_by": "Omran",
+    "timestamp": "2025-12-25T10:41:00+04:00",
+    "max_authority": "L3",
+    "economic_limits": {
+        "max_monthly_spend": 500,
+        "max_campaign_budget": 150,
+        "pricing_floor": 29
+    },
+    "kill_switch": true,
+    "status": "ACTIVE"
+}

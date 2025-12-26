@@ -1,0 +1,4 @@
+﻿binance-connector>=3.10,<4.0
+pydantic>=2.0
+pydantic-settings>=2.2
+numpy

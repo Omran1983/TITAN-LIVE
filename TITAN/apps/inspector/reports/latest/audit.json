@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "request_id": "9d4f509c-e1f1-4aba-ae63-6b2d8c15808d",
+  "ts": "2025-12-25T16:55:43.083885+04:00",
+  "agent": "Inspector",
+  "severity": "info",
+  "human_summary": "All checks passed. No broken links, console errors, or network failures detected.",
+  "findings": {
+    "broken_links": [],
+    "console_errors": [],
+    "network_failures": [],
+    "journeys": [
+      {
+        "name": "Grants Flow",
+        "status": "PASS"
+      }
+    ]
+  },
+  "metrics": {
+    "pages_visited": 0,
+    "broken_links_count": 0,
+    "console_errors_count": 0,
+    "network_failures_count": 0,
+    "journeys_count": 1
+  },
+  "next_steps": [
+    "Keep monitoring"
+  ],
+  "status": "PASS",
+  "timestamp": "2025-12-25T16:55:43.083924+04:00",
+  "journeys": [
+    {
+      "name": "Grants Flow",
+      "status": "PASS"
+    }
+  ],
+  "console_errors": [],
+  "broken_links": [],
+  "network_failures": [],
+  "console_warnings": [
+    "cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation",
+    "Generate response content-type not PDF: application/json"
+  ]
+}

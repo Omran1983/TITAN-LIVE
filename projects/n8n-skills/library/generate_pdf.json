@@ -1,0 +1,15 @@
+{
+    "skill_id": "com.titan.action.pdf.generate",
+    "name": "Generate PDF",
+    "description": "Converts Markdown/HTML to PDF using Titan Renderer",
+    "inputs": {
+        "source_markdown": "string",
+        "template_id": "string",
+        "output_name": "string"
+    },
+    "outputs": {
+        "file_path": "string (absolute path)",
+        "size_bytes": "integer"
+    },
+    "handler": "titan.apps.utils.pdf_renderer"
+}

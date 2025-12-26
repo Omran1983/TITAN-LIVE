@@ -1,0 +1,245 @@
+[
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 2.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 3.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 10, 'volume_multiplier': 4.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 2.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 3.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 20, 'volume_multiplier': 4.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 2.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 2.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 3.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 3.0, 'price_move_multiplier': 3.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.0}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 4.0, 'price_move_multiplier': 2.5}"
+    },
+    {
+        "total_trades":0,
+        "total_pnl":0,
+        "win_rate":0,
+        "profit_factor":0,
+        "avg_win":0,
+        "avg_loss":0,
+        "parameters":"{'lookback_period': 30, 'volume_multiplier': 4.0, 'price_move_multiplier': 3.0}"
+    }
+]

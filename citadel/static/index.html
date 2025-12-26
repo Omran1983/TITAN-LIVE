@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>TITAN OS – Autonomous Business Operating System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CDN for now (dev mode) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* The Glass Citadel Theme */
+        :root {
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-highlight: rgba(56, 189, 248, 0.1);
+            --text-primary: #e2e8f0;
+            /* Slate 200 */
+            --text-secondary: #94a3b8;
+            /* Slate 400 */
+        }
+
+        body {
+            background-color: #020617;
+            /* Slate 950+ */
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.1), transparent 40%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(30, 41, 59, 0.6);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        .terminal-text {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(71, 85, 105, 0.5);
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.8);
+        }
+    </style>
+</head>
+
+<body class="h-full text-[var(--text-primary)] antialiased selection:bg-sky-500/30">
+    <div class="min-h-screen flex flex-col">
+        <!-- Top Bar -->
+        <header class="sticky top-0 z-50 glass-panel border-b-0">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-8 w-8 rounded-lg bg-gradient-to-br from-sky-500 to-violet-600 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                        <span class="font-bold text-white text-lg">T</span>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold tracking-wide text-[var(--text-primary)]">
+                            TITAN<span class="font-light text-[var(--text-secondary)]">OS</span>
+                        </h1>
+                        <p class="text-[0.65rem] uppercase tracking-widest text-sky-400/80 font-medium">
+                            STATUS: OPERATIONAL
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex items-center gap-6 text-xs font-medium">
+                        <div class="flex flex-col items-end">
+                            <span
+                                class="text-[var(--text-secondary)] uppercase tracking-wider text-[0.6rem]">Environment</span>
+                            <span class="text-[var(--text-primary)]">PRODUCTION</span>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="text-[var(--text-secondary)] uppercase tracking-wider text-[0.6rem]">System
+                                Status</span>
+                            <span class="inline-flex items-center gap-1.5 text-emerald-400">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                ONLINE
+                            </span>
+                        </div>
+                    </div>
+                    <button id="btn-upload"
+                        class="text-xs font-semibold px-4 py-2 rounded border border-sky-500/30 text-sky-400 bg-sky-500/10 hover:bg-sky-500/20 transition-all">
+                        CONNECT DATA
+                    </button>
+                    <button aria-label="Kill Switch"
+                        class="text-xs font-semibold px-4 py-2 rounded border border-rose-500/30 text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 hover:border-rose-500/60 transition-all shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                        KILL SWITCH
+                    </button>
+                </div>
+            </div>
+
+            <!-- Nav Tabs -->
+            <nav class="border-t border-white/5 bg-black/20">
+                <div class="max-w-7xl mx-auto px-4 flex gap-6 overflow-x-auto py-0 text-sm font-medium">
+                    <button data-tab="overview"
+                        class="tab-btn py-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Overview</button>
+                    <button data-tab="systems" aria-label="Systems Backend"
+                        class="tab-btn py-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Systems
+                        (Backend)</button>
+                    <button data-tab="today"
+                        class="tab-btn py-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Today's
+                        KPIs</button>
+                    <button data-tab="finance"
+                        class="tab-btn py-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Finance
+                        Engine</button>
+                    <button data-tab="ops"
+                        class="tab-btn py-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Operations</button>
+                    <button data-tab="forge" onclick="initForge()"
+                        class="tab-btn py-3 border-b-2 border-transparent text-amber-500/80 hover:text-amber-400 transition-colors font-mono tracking-wider flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        FORGE
+                    </button>
+                    <button data-tab="ledger"
+                        class="tab-btn py-3 border-b-2 border-transparent text-rose-500/80 hover:text-rose-400 transition-colors font-mono tracking-wider flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        LEDGER
+                    </button>
+                    <button data-tab="sms"
+                        class="tab-btn py-3 border-b-2 border-transparent text-emerald-500/80 hover:text-emerald-400 transition-colors font-mono tracking-wider flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                            </path>
+                        </svg>
+                        SMS
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="max-w-6xl mx-auto px-4 py-6 pb-32 space-y-8">
+
+                <!-- PAGE: OVERVIEW -->
+                <section id="page-overview" class="space-y-6">
+                    <!-- Hero / Story -->
+                    <div class="glass-panel relative overflow-hidden rounded-2xl p-1">
+                        <div class="absolute inset-y-0 right-0 opacity-40 pointer-events-none">
+                            <div
+                                class="w-96 h-full bg-[radial-gradient(circle_at_top,_#0ea5e9_0,_transparent_40%),_radial-gradient(circle_at_bottom,_#8b5cf6_0,_transparent_40%)] blur-3xl">
+                            </div>
+                        </div>
+                        <div class="relative p-6 sm:p-8 grid gap-8 lg:grid-cols-[2fr_1.2fr]">
+                            <div class="space-y-4">
+                                <div
+                                    class="inline-flex items-center gap-2 rounded-full bg-sky-500/10 px-3 py-1 text-[0.6rem] font-medium tracking-widest text-sky-400 border border-sky-500/20 uppercase">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                                    CONTROL PLANE ACTIVE
+                                </div>
+
+                                <h2 class="text-3xl font-light tracking-tight text-[var(--text-primary)]">
+                                    <span class="font-semibold text-sky-500">TITAN OS</span>
+                                </h2>
+
+                                <div
+                                    class="space-y-4 text-sm text-[var(--text-secondary)] leading-relaxed font-light max-w-prose border-l-2 border-slate-800 pl-4">
+                                    <p>Automating the empire.</p>
+                                    <p>Separating intelligence from execution.</p>
+                                    <p>TITAN OS monitors capital, governs agents, and enforces safety.</p>
+                                    <p class="text-slate-200 font-medium">Not a chatbot. A command center.</p>
+                                    <p>You authenticate. You approve. We execute.</p>
+                                    <p>Welcome to the Control Plane.</p>
+                                </div>
+                            </div>
+
+                            <!-- The Infinity Grid (6 Stones) -->
+                            <div class="space-y-3">
+                                <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">Primary
+                                    Subsystems</h3>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <!-- 1. MIND (NOESIS) -->
+                                    <div
+                                        class="glass-card rounded-lg p-3 border-l-2 border-amber-400/50 bg-amber-400/5">
+                                        <div class="flex justify-between items-start">
+                                            <span class="text-[0.6rem] font-bold text-amber-200 uppercase">Noesis</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_5px_orange]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Strategic Intelligence.</p>
+                                    </div>
+
+                                    <!-- 2. POWER (HEARTH) -->
+                                    <div
+                                        class="glass-card rounded-lg p-3 border-l-2 border-violet-500/50 bg-violet-500/5">
+                                        <div class="flex justify-between items-start">
+                                            <span
+                                                class="text-[0.6rem] font-bold text-violet-300 uppercase">Hearth</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-violet-500 shadow-[0_0_5px_violet]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Execution Authority.</p>
+                                    </div>
+
+                                    <!-- 3. REALITY (STATE) -->
+                                    <div class="glass-card rounded-lg p-3 border-l-2 border-rose-500/50 bg-rose-500/5">
+                                        <div class="flex justify-between items-start">
+                                            <span class="text-[0.6rem] font-bold text-rose-300 uppercase">State</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-rose-500 shadow-[0_0_5px_crimson]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Immutable Ledger.</p>
+                                    </div>
+
+                                    <!-- 6. SPACE (MESH) -->
+                                    <div class="glass-card rounded-lg p-3 border-l-2 border-sky-500/50 bg-sky-500/5">
+                                        <div class="flex justify-between items-start">
+                                            <span class="text-[0.6rem] font-bold text-sky-300 uppercase">Mesh</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-sky-500 shadow-[0_0_5px_cyan]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Global Presence.</p>
+                                    </div>
+
+                                    <!-- 4. TIME (CHRONOS) -->
+                                    <div
+                                        class="glass-card rounded-lg p-3 border-l-2 border-emerald-500/50 bg-emerald-500/5">
+                                        <div class="flex justify-between items-start">
+                                            <span
+                                                class="text-[0.6rem] font-bold text-emerald-300 uppercase">Chronos</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_lime]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Event Replay.</p>
+                                    </div>
+
+                                    <!-- 5. SOUL (GOVERNANCE) -->
+                                    <div
+                                        class="glass-card rounded-lg p-3 border-l-2 border-orange-500/50 bg-orange-500/5">
+                                        <div class="flex justify-between items-start">
+                                            <span
+                                                class="text-[0.6rem] font-bold text-orange-300 uppercase">Policy</span>
+                                            <div class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_5px_orange]">
+                                            </div>
+                                        </div>
+                                        <p class="text-[0.6rem] text-slate-400 mt-1">Kill Switches.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Integration Map -->
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <div class="glass-panel rounded-xl p-6 relative">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                                    Active Integrations
+                                </h3>
+                                <button id="btn-add-resource" aria-label="Add Resource"
+                                    class="text-[0.65rem] uppercase tracking-wider font-semibold text-sky-400 hover:text-white border border-sky-500/30 hover:border-sky-400 px-2 py-1 rounded transition-colors">
+                                    + Add New
+                                </button>
+                            </div>
+
+                            <div id="integrations-list" class="space-y-3">
+                                <!-- Dynamic Content Loaded Here -->
+                                <div class="text-xs text-slate-500 italic p-2 text-center">Loading connections...</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-xl p-6">
+                            <h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4">
+                                <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                                Integration Pipeline
+                            </h3>
+                            <!-- EduConnect -->
+                            <div class="glass-card rounded-lg p-3 border-l-2 border-l-slate-700 opacity-75">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-slate-300">EduConnect</span>
+                                    <span
+                                        class="text-[0.6rem] px-2 py-0.5 rounded bg-slate-700/50 text-slate-400 border border-slate-700">PLANNED</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Workshops & Training Platform</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RESOURCE MODAL -->
+                <div id="resource-modal"
+                    class="fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+                    <div class="glass-panel rounded-2xl w-full max-w-md p-6 space-y-4 relative animate-scale-in">
+                        <button id="close-resource" class="absolute top-4 right-4 text-slate-400 hover:text-white"
+                            aria-label="Close">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+
+                        <h3 class="text-xl font-light text-white">Add External Resource</h3>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Resource Name</label>
+                                <input type="text" id="res-name"
+                                    class="w-full bg-slate-900/50 border border-slate-700 rounded p-2 text-sm text-white focus:border-sky-500 outline-none"
+                                    placeholder="e.g. Stripe Dashboard">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Type</label>
+                                <select id="res-type" aria-label="Resource Type"
+                                    class="w-full bg-slate-900/50 border border-slate-700 rounded p-2 text-sm text-white focus:border-sky-500 outline-none">
+                                    <option value="link">Website Link</option>
+                                    <option value="api">API Endpoint</option>
+                                    <option value="database">Database Connection</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">URL / Endpoint</label>
+                                <input type="text" id="res-url"
+                                    class="w-full bg-slate-900/50 border border-slate-700 rounded p-2 text-sm text-white focus:border-sky-500 outline-none"
+                                    placeholder="https://...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Description</label>
+                                <input type="text" id="res-desc"
+                                    class="w-full bg-slate-900/50 border border-slate-700 rounded p-2 text-sm text-white focus:border-sky-500 outline-none"
+                                    placeholder="Optional context">
+                            </div>
+
+                            <button id="btn-save-resource"
+                                class="w-full py-2 bg-sky-600 hover:bg-sky-500 text-white rounded font-medium shadow-lg transition-all mt-2">
+                                Save Connection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE: TODAY -->
+                <section id="page-today" class="space-y-6 hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h2 class="text-xl font-light text-white">Today at a Glance</h2>
+                            <p class="text-xs text-slate-400">Real-time pulse across all active entities.</p>
+                        </div>
+                    </div>
+
+                    <!-- KPI Row -->
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <div class="glass-card rounded-xl p-4">
+                            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">OKASINA Sales</p>
+                            <p id="kpi-okasina-revenue" class="mt-2 text-2xl font-bold text-white tracking-tight">MUR 0
+                            </p>
+                            <p id="kpi-okasina-sub"
+                                class="text-[0.65rem] text-emerald-400 mt-1 flex items-center gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Live Stream Active
+                            </p>
+                        </div>
+                        <div class="glass-card rounded-xl p-4">
+                            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Deliveries</p>
+                            <p class="mt-2 text-2xl font-bold text-white tracking-tight">0</p>
+                            <p class="text-[0.65rem] text-sky-400 mt-1">AOGRL Native</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-4">
+                            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Net Flow</p>
+                            <p id="kpi-finance-net" class="mt-2 text-2xl font-bold text-white tracking-tight">MUR 0</p>
+                            <p class="text-[0.65rem] text-slate-500 mt-1">Calculated Live</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 border-rose-500/20 bg-rose-500/5">
+                            <p class="text-xs font-medium text-rose-400 uppercase tracking-wider">Incidents</p>
+                            <p class="mt-2 text-2xl font-bold text-rose-200 tracking-tight">0</p>
+                            <p class="text-[0.65rem] text-rose-400 mt-1">System Health</p>
+                        </div>
+                    </div>
+
+                    <!-- Panels -->
+                    <div class="grid gap-4 lg:grid-cols-[2fr_1fr]">
+                        <div class="glass-panel rounded-xl p-6">
+                            <h3 class="text-sm font-semibold text-white mb-4">Pulse Feed</h3>
+                            <div
+                                class="flex flex-col items-center justify-center h-32 text-slate-500 text-xs italic border border-dashed border-slate-700 rounded-lg">
+                                Waiting for business events...
+                            </div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-6">
+                            <h3 class="text-sm font-semibold text-white mb-2">Ask Jarvis</h3>
+                            <ul class="text-xs text-slate-400 space-y-2">
+                                <li class="p-2 rounded bg-white/5 hover:bg-white/10 cursor-pointer transition-colors">
+                                    “Summarise cash flow today”</li>
+                                <li class="p-2 rounded bg-white/5 hover:bg-white/10 cursor-pointer transition-colors">
+                                    “Identify risky deliveries”</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAGE: FINANCE -->
+                <section id="page-finance" class="space-y-4 hidden">
+                    <h2 class="text-lg font-semibold">Finance View (Coming Next)</h2>
+                    <p class="text-xs sm:text-sm text-slate-400">
+                        This tab will aggregate: revenue, expenses, profit, cash position and obligations
+                        across OKASINA, deliveries, workshops and any other entity you add.
+                    </p>
+                    <ul class="text-xs sm:text-sm text-slate-300 space-y-1.5">
+                        <li>• Per-business P&amp;L (OKASINA / Deliveries / EduConnect…)</li>
+                        <li>• Cash-flow timeline and upcoming payables/receivables</li>
+                        <li>• “Safe to spend” vs “do not touch” levels based on your rules</li>
+                        <li>• JARVIS comments: anomalies, risky trends, and suggestions</li>
+                    </ul>
+                </section>
+
+                <!-- PAGE: OPS -->
+                <section id="page-ops" class="space-y-4 hidden">
+                    <h2 class="text-lg font-semibold">Operations View (Coming Next)</h2>
+                    <p class="text-xs sm:text-sm text-slate-400">
+                        Designed for deliveries, fulfilment, staff workload and process monitoring.
+                    </p>
+                    <ul class="text-xs sm:text-sm text-slate-300 space-y-1.5">
+                        <li>• Jobs in progress / completed / delayed</li>
+                        <li>• Driver / staff utilisation, fuel and time costs</li>
+                        <li>• Bottlenecks (where work keeps getting stuck)</li>
+                        <li>• Autonomy slider impact – what’s still manual vs automated</li>
+                    </ul>
+                </section>
+
+                <!-- PAGE: CUSTOMERS -->
+                <section id="page-customers" class="space-y-4 hidden">
+                    <h2 class="text-lg font-semibold">Customers View (Coming Next)</h2>
+                    <p class="text-xs sm:text-sm text-slate-400">
+                        One place to understand who you serve, how happy they are, and where the money really comes
+                        from.
+                    </p>
+                    <ul class="text-xs sm:text-sm text-slate-300 space-y-1.5">
+                        <li>• Top customers by revenue and profit</li>
+                        <li>• Complaints, refunds and satisfaction patterns</li>
+                        <li>• Lead → customer → repeat buyer funnels</li>
+                        <li>• JARVIS: “Which segment should we focus on this month and why?”</li>
+                    </ul>
+                </section>
+
+                <!-- PAGE: SYSTEMS (THE BACKEND) -->
+                <section id="page-systems" class="space-y-6 hidden">
+
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-light tracking-wide text-white">TITAN GRID</h2>
+                        <div class="flex gap-2">
+                            <button aria-label="Purge System"
+                                class="text-xs font-mono px-3 py-1 rounded border border-rose-500/50 text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.3)] transition-all">
+                                PURGE_ALL
+                            </button>
+                            <span
+                                class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border border-emerald-500/20 flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                MESH_ONLINE
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- N8N STYLE VISUALIZER -->
+                    <div
+                        class="relative min-h-[500px] border border-slate-800 rounded-xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-[#020617] overflow-hidden p-8">
+
+                        <!-- Background Grid -->
+                        <!-- Background Grid -->
+                        <div
+                            class="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:20px_20px]">
+                        </div>
+
+                        <!-- Header -->
+                        <div class="relative z-10 flex justify-between items-start mb-12">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white tracking-tight">Infinity Modules</h3>
+                                <p class="text-slate-500 font-mono text-xs">Autonomous Execution Engines</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="fetchAgents()" aria-label="Refresh Agents"
+                                    class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AGENT NODES CONTAINER -->
+                        <div id="agent-grid"
+                            class="relative z-10 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr">
+                            <!-- Dynamic Nodes -->
+                            <div class="col-span-full text-center py-20 flex flex-col items-center gap-4">
+                                <div
+                                    class="w-12 h-12 border-4 border-sky-500/30 border-t-sky-500 rounded-full animate-spin">
+                                </div>
+                                <span class="font-mono text-sky-500 text-sm tracking-widest">INITIALIZING TITAN
+                                    GRID...</span>
+                            </div>
+                        </div>
+
+                        <!-- Decorative Lines (Simulated N8N Connections) -->
+                        <svg class="absolute inset-0 pointer-events-none z-0 opacity-30" width="100%" height="100%">
+                            <!-- Static example lines, real ones would be dynamic canvas -->
+                            <path d="M100 100 C 200 100, 200 300, 300 300" stroke="#0ea5e9" stroke-width="2" fill="none"
+                                stroke-dasharray="5,5" />
+                        </svg>
+
+                    </div>
+
+                    <!-- LIVE TERMINAL -->
+                    <div class="glass-panel rounded-xl overflow-hidden border border-slate-700/50 flex flex-col h-96">
+                        <div
+                            class="bg-slate-900/80 px-4 py-2 border-b border-slate-700/50 flex items-center justify-between">
+                            <span class="text-xs font-mono text-slate-400">root@aion-zero:~/logs/reflex# tail -f
+                                live.log</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-rose-500/20 border border-rose-500/50"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-amber-500/20 border border-amber-500/50"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/50">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="terminal-output"
+                            class="flex-1 p-4 font-mono text-xs overflow-y-auto space-y-1 bg-black/40 text-slate-300 shadow-inner">
+                            <div class="text-slate-500">Initializing connection to AION-ZERO Core...</div>
+                            <div class="text-emerald-400">Connected. Listening for events...</div>
+                            <!-- Logs will be injected here via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAGE: FORGE (IDE) -->
+                <section id="page-forge"
+                    class="hidden h-[calc(100vh-220px)] flex flex-col glass-panel rounded-xl overflow-hidden border border-slate-700">
+                    <!-- Toolbar -->
+                    <div
+                        class="h-12 border-b border-slate-700 bg-slate-900/80 flex items-center justify-between px-4 gap-4 backdrop-blur-md">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="flex items-center gap-1.5 text-amber-500">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
+                                </svg>
+                                <span class="text-xs font-bold tracking-widest uppercase">Forge v2</span>
+                            </div>
+                            <div class="h-4 w-px bg-slate-700"></div>
+                            <span id="forge-current-file" class="text-xs text-slate-400 font-mono truncate">No file
+                                selected</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <!-- Task Selector -->
+                            <select id="forge-task-select" aria-label="Forge Task Selector"
+                                class="bg-black/40 border border-slate-600 text-slate-300 text-xs rounded px-2 py-1 font-mono focus:border-amber-500 outline-none">
+                                <option value="run_script">▶ RUN SCRIPT</option>
+                                <option value="shell_cmd">⚡ SHELL CMD</option>
+                                <option value="git_status">GIT STATUS</option>
+                                <option value="git_add_commit">GIT COMMIT</option>
+                                <option value="pip_install">PIP INSTALL</option>
+                                <option value="npm_run">NPM RUN</option>
+                            </select>
+
+                            <!-- Task Args -->
+                            <input id="forge-task-arg" aria-label="Forge Task Arguments" type="text"
+                                placeholder="Args / Target / Message..."
+                                class="bg-black/40 border border-slate-600 text-slate-300 text-xs rounded px-2 py-1 font-mono w-48 focus:border-amber-500 outline-none placeholder:text-slate-600" />
+
+                            <button id="forge-btn-run" onclick="runForgeScript()"
+                                class="text-[0.65rem] bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded font-mono shadow-lg transition-all flex items-center gap-1.5 border border-emerald-500/50 hover:shadow-emerald-500/20">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                </svg>
+                                EXECUTE
+                            </button>
+                            <button id="forge-btn-save" onclick="saveForgeFile()"
+                                class="text-[0.65rem] bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded font-mono shadow-lg transition-all flex items-center gap-1.5 border border-sky-500/50 hover:shadow-sky-500/20">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+                                    </path>
+                                </svg>
+                                SAVE
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Main Area -->
+                    <div class="flex-1 flex overflow-hidden">
+                        <!-- Sidebar: File Tree -->
+                        <div class="w-64 border-r border-slate-700 bg-[#0d1117] flex flex-col">
+                            <div
+                                class="p-2 border-b border-slate-800 text-[0.65rem] font-bold text-slate-500 uppercase tracking-wider flex justify-between">
+                                <span>FILES</span>
+                                <button onclick="loadForgeTree()" title="Refresh" class="hover:text-white"><svg
+                                        class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg></button>
+                            </div>
+                            <div id="forge-tree"
+                                class="flex-1 overflow-y-auto p-2 font-mono text-xs text-slate-400 space-y-1">
+                                <!-- Tree Items -->
+                                <div class="text-center mt-10">Loading...</div>
+                            </div>
+                        </div>
+
+                        <!-- Editor & Terminal -->
+                        <div class="flex-1 flex flex-col min-w-0 bg-[#1e1e1e]">
+                            <!-- Monaco Container -->
+                            <div id="forge-monaco" class="flex-1"></div>
+
+                            <!-- Terminal Panel -->
+                            <div class="h-48 border-t border-slate-700 bg-black flex flex-col">
+                                <div class="h-6 bg-slate-800 px-3 flex items-center justify-between">
+                                    <span class="text-[0.6rem] text-slate-400 font-mono uppercase">TERMINAL
+                                        OUTPUT</span>
+                                    <button onclick="document.getElementById('forge-console').innerHTML=''"
+                                        class="text-[0.6rem] text-slate-500 hover:text-white">CLEAR</button>
+                                </div>
+                                <div id="forge-console"
+                                    class="flex-1 p-2 font-mono text-xs text-emerald-400 overflow-y-auto whitespace-pre-wrap">
+                                    <span class="text-slate-600">TITAN FORGE TERMINAL READY...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAGE: LEDGER (COCKPIT) -->
+                <section id="page-ledger" class="hidden h-[calc(100vh-220px)] flex flex-col">
+                    <iframe src="ledger.html" class="w-full h-full rounded-xl border border-slate-700 glass-panel"
+                        title="Titan Ledger"></iframe>
+                </section>
+
+                <!-- PAGE: SMS MARKETING -->
+                <section id="page-sms" class="hidden h-[calc(100vh-220px)] flex flex-col">
+                    <iframe src="sms_marketing.html"
+                        class="w-full h-full rounded-xl border border-slate-700 glass-panel"
+                        title="SMS Marketing"></iframe>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- GLOBAL COMMAND BAR -->
+        <div class="fixed bottom-0 left-0 right-0 z-50 p-4 pointer-events-none">
+            <div class="max-w-3xl mx-auto pointer-events-auto">
+                <!-- Toast Response -->
+                <div id="jarvis-response"
+                    class="hidden mb-4 glass-panel rounded-xl p-4 flex items-start gap-4 animate-fade-in-up">
+                    <div
+                        class="h-8 w-8 rounded-full bg-sky-500/20 flex items-center justify-center border border-sky-500/30">
+                        <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">TITAN OUTPUT</span>
+                        <p id="jarvis-text" class="text-sm text-slate-200 mt-1">Hello Omran. Ready for instructions.</p>
+                    </div>
+                </div>
+
+                <!-- Input Bar -->
+                <div
+                    class="glass-panel rounded-full p-2 flex items-center gap-2 shadow-2xl shadow-sky-900/20 ring-1 ring-white/10">
+                    <div class="pl-4 text-sky-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8H8c-4.418 0-8-3.582-8-8 8-8 8-3.582 8-8s3.582 8 8 8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <input id="cmd-input" type="text"
+                        class="flex-1 bg-transparent border-none text-[var(--text-primary)] placeholder-slate-500 focus:ring-0 text-sm"
+                        placeholder="Issue Command..." autocomplete="off">
+                    <button id="cmd-send" aria-label="Send Command"
+                        class="p-2 rounded-full bg-sky-600 hover:bg-sky-500 text-white transition shadow-lg shadow-sky-600/20">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPLOAD MODAL -->
+        <div id="upload-modal"
+            class="fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+            <div class="glass-panel rounded-2xl w-full max-w-lg p-6 space-y-6 relative animate-scale-in">
+                <button id="close-upload" class="absolute top-4 right-4 text-slate-400 hover:text-white"
+                    aria-label="Close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+
+                <div>
+                    <h3 class="text-xl font-light text-white">Data Ingestion Uplink</h3>
+                    <p class="text-sm text-slate-400 mt-1">Upload CSV dumps from OKASINA, Banks, or Delivery Logs.</p>
+                </div>
+
+                <div id="drop-zone"
+                    class="border-2 border-dashed border-slate-700 rounded-xl h-48 flex flex-col items-center justify-center text-slate-500 hover:border-sky-500/50 hover:bg-sky-500/5 transition cursor-pointer">
+                    <svg class="w-10 h-10 mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
+                    </svg>
+                    <span class="text-sm font-medium">Click or Drag files here</span>
+                    <span class="text-xs text-slate-600 mt-1">Supported: .csv, .json, .xlsx</span>
+                    <input type="file" id="file-input" class="hidden" accept=".csv,.json,.xlsx"
+                        aria-label="File Upload">
+                </div>
+
+                <div id="upload-status"
+                    class="hidden rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-3 flex items-center gap-3">
+                    <div class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span class="text-sm text-emerald-300">File uploaded successfully. Processing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Tab Switching Script -->
+    <script>
+            (function () {
+                // --- CONFIG & SECURITY ---
+                // In a real deployed environment, this key should be managed via secure cookies or session tokens.
+                // For this local-first architecture, we use the pre-shared key.
+                const API_KEY = "titan-protocol-secure-9988";
+
+                function authHeaders(extra = {}) {
+                    const h = { ...extra };
+                    if (API_KEY) h['X-API-KEY'] = API_KEY;
+                    return h;
+                }
+
+                // --- TAB SWITCHING ---
+                const navButtons = document.querySelectorAll('.tab-btn');
+                const sections = document.querySelectorAll('section');
+
+                navButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        navButtons.forEach(b => {
+                            b.classList.remove('bg-white/10', 'text-white', 'shadow-lg', 'border-white/20');
+                            b.classList.add('text-slate-400', 'hover:bg-white/5', 'hover:text-slate-200');
+                        });
+                        sections.forEach(s => s.classList.add('hidden'));
+
+                        btn.classList.remove('text-slate-400', 'hover:bg-white/5', 'hover:text-slate-200');
+                        btn.classList.add('bg-white/10', 'text-white', 'shadow-lg', 'border-white/20');
+
+                        const tabId = btn.getAttribute('data-tab');
+                        const target = document.getElementById(`page-${tabId}`);
+                        if (target) target.classList.remove('hidden');
+                    });
+                });
+
+                // --- SYSTEM STATUS (TOP BAR) ---
+                async function fetchSystemStatus() {
+                    try {
+                        const res = await fetch('/api/status');
+                        const data = await res.json();
+
+                        const statusDot = document.getElementById('system-status-dot');
+                        const statusText = document.getElementById('system-status-text');
+
+                        if (statusDot && statusText) {
+                            if (data.status === 'online') {
+                                statusDot.classList.remove('bg-rose-500');
+                                statusDot.classList.add('bg-emerald-500');
+                                statusText.innerText = 'ONLINE';
+                            } else {
+                                statusDot.classList.remove('bg-emerald-500');
+                                statusDot.classList.add('bg-rose-500');
+                                statusText.innerText = 'OFFLINE';
+                            }
+                        }
+                    } catch (e) {
+                        // Silent fail for UI polish
+                    }
+                }
+
+                // --- UPLOAD HANDLER ---
+                const dropZone = document.getElementById('drop-zone');
+                const fileInput = document.getElementById('file-input');
+                const uploadModal = document.getElementById('upload-modal');
+                const btnUpload = document.getElementById('btn-upload');
+                const closeUpload = document.getElementById('close-upload');
+
+                function toggleUpload(show) {
+                    if (uploadModal) {
+                        if (show) uploadModal.classList.remove('hidden');
+                        else uploadModal.classList.add('hidden');
+                    }
+                }
+
+                if (btnUpload) btnUpload.addEventListener('click', () => toggleUpload(true));
+                if (closeUpload) closeUpload.addEventListener('click', () => toggleUpload(false));
+
+                if (dropZone && fileInput) {
+                    dropZone.addEventListener('click', () => fileInput.click());
+                    fileInput.addEventListener('change', async (e) => {
+                        if (e.target.files.length > 0) handleUpload(e.target.files[0]);
+                    });
+                }
+
+                async function handleUpload(file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    dropZone.innerHTML = `<span class="animate-pulse text-amber-400">Uploading ${file.name}...</span>`;
+
+                    try {
+                        const res = await fetch('/api/upload', {
+                            method: 'POST',
+                            headers: authHeaders(),
+                            body: formData
+                        });
+                        const data = await res.json();
+
+                        if (data.status === 'success') {
+                            dropZone.innerHTML = `<span class="text-emerald-400">✔ ${data.message}</span>`;
+                            setTimeout(() => {
+                                toggleUpload(false);
+                                dropZone.innerHTML = `<span class="text-slate-400">Drag & Drop CSV or <span class="text-sky-400">Click to Browse</span></span>`;
+                            }, 2000);
+                        } else {
+                            dropZone.innerHTML = `<span class="text-rose-400">✘ Error: ${data.message}</span>`;
+                        }
+                    } catch (e) {
+                        dropZone.innerHTML = `<span class="text-rose-400">✘ Upload Failed</span>`;
+                    }
+                }
+
+                // --- CHART Mock ---
+                const ctx = document.getElementById('financeChart');
+                if (ctx) {
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                            datasets: [{
+                                label: 'Net Revenue (USD)',
+                                data: [1200, 1900, 3000, 5000, 2000, 3000, 4500],
+                                borderColor: '#8b5cf6',
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                y: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                                x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+                            }
+                        }
+                    });
+                }
+
+                // --- CHAT LOGIC ---
+                const chatInput = document.getElementById('cmd-input');
+                const chatSend = document.getElementById('cmd-send');
+                const jarvisResponse = document.getElementById('jarvis-response');
+                const jarvisText = document.getElementById('jarvis-text');
+
+                async function sendCommand() {
+                    const msg = chatInput.value.trim();
+                    if (!msg) return;
+
+                    // UI State
+                    chatInput.value = '';
+                    chatInput.placeholder = "Processing...";
+                    chatInput.disabled = true;
+
+                    try {
+                        const res = await fetch('/api/chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }, // Chat is public/open per spec
+                            body: JSON.stringify({ message: msg })
+                        });
+                        const data = await res.json();
+
+                        // Show Response
+                        if (jarvisText && jarvisResponse) {
+                            jarvisText.textContent = data.response;
+                            jarvisResponse.classList.remove('hidden');
+                        }
+
+                        // Action Handling
+                        if (data.action === 'open_upload') {
+                            toggleUpload(true);
+                        } else if (data.action === 'open_systems') {
+                            const systemsBtn = document.querySelector('button[data-tab="systems"]');
+                            if (systemsBtn) systemsBtn.click();
+                        }
+
+                        // Logs & Visual Feedback
+                        if (data.logs && data.logs.length > 0) {
+                            const term = document.getElementById('terminal-output');
+                            if (term) {
+                                data.logs.forEach((log, i) => {
+                                    setTimeout(() => {
+                                        const line = document.createElement('div');
+                                        let color = "text-slate-300";
+                                        if (log.includes("ERROR")) color = "text-rose-400";
+                                        else if (log.includes("SUCCESS") || log.includes("COMPLETE")) color = "text-emerald-400";
+                                        else if (log.includes("ENGAGING") || log.includes("ANALYZING")) color = "text-amber-400";
+
+                                        line.className = `${color} font-mono text-xs border-l-2 border-transparent px-2`;
+                                        line.textContent = `[${new Date().toLocaleTimeString()}] ${log}`;
+                                        term.appendChild(line);
+                                        term.scrollTop = term.scrollHeight;
+
+                                        if (log.includes("Neural Engine") || log.includes("Brain")) highlightNode("jarvis_brain_local.py");
+                                        if (log.includes("CONNECTING")) highlightNode("jarvis_chat.py");
+
+                                    }, i * 800);
+                                });
+                            }
+                        }
+
+                        setTimeout(() => {
+                            if (jarvisResponse) jarvisResponse.classList.add('hidden');
+                        }, 8000);
+
+                    } catch (e) {
+                        if (jarvisText) jarvisText.textContent = "Error communicating with Citadel Core.";
+                        if (jarvisResponse) jarvisResponse.classList.remove('hidden');
+                    } finally {
+                        if (chatInput) {
+                            chatInput.disabled = false;
+                            chatInput.placeholder = "Ask JARVIS...";
+                            chatInput.focus();
+                        }
+                    }
+                }
+
+                // --- HISTORY LOGIC ---
+                async function load_history() {
+                    const term = document.getElementById('terminal-output');
+                    if (!term) return;
+
+                    try {
+                        const res = await fetch('/api/chat/history', {
+                            headers: authHeaders() // Use the helper for API key
+                        });
+                        const data = await res.json();
+
+                        if (data.history && data.history.length > 0) {
+                            // Add a separator
+                            const sep = document.createElement('div');
+                            sep.className = "text-slate-600 font-mono text-xs border-b border-slate-700/50 my-2 pb-1";
+                            sep.textContent = "--- RESTORED SESSION HISTORY ---";
+                            term.appendChild(sep);
+
+                            data.history.forEach(msg => {
+                                const line = document.createElement('div');
+                                let color = "text-slate-400"; // Default
+                                let prefix = "INFO";
+
+                                if (msg.role === 'user') {
+                                    color = "text-slate-300";
+                                    prefix = "COMMAND";
+                                } else if (msg.role === 'model') { // 'model' is typical for Gemini/Vertex
+                                    color = "text-sky-300";
+                                    prefix = "RESPONSE";
+                                } else if (msg.role === 'assistant') { // OpenAI style
+                                    color = "text-sky-300";
+                                    prefix = "RESPONSE";
+                                }
+
+                                line.className = `${color} font-mono text-xs border-l-2 border-transparent px-2`;
+                                // Ensure msg.content is a string
+                                const content = typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content);
+
+                                // Limit length for terminal readability
+                                const displayContent = content.length > 300 ? content.substring(0, 300) + "..." : content;
+
+                                line.textContent = `[HISTORY] ${prefix}: ${displayContent}`;
+                                term.appendChild(line);
+                            });
+
+                            term.scrollTop = term.scrollHeight;
+                        }
+                    } catch (e) {
+                        console.error("History Fetch Error", e);
+                    }
+                }
+
+                if (chatSend) chatSend.addEventListener('click', sendCommand);
+
+                // Init
+                load_history();
+                if (chatInput) {
+                    chatInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') sendCommand();
+                    });
+                }
+
+                // --- VISUAL FEEDBACK HELPERS ---
+                window.highlightNode = (agentName) => {
+                    const simpleName = agentName.replace('.py', '').replace('jarvis_', '').toUpperCase();
+                    const nodes = document.querySelectorAll('#agent-grid .glass-panel');
+
+                    nodes.forEach(card => {
+                        if (card.dataset.agent === agentName) {
+                            pulseCard(card);
+                            return;
+                        }
+                        const h4 = card.querySelector('h4');
+                        if (h4 && h4.innerText.toUpperCase().includes(simpleName)) {
+                            pulseCard(card);
+                        }
+                    });
+                };
+
+                function pulseCard(card) {
+                    card.classList.add('ring-2', 'ring-amber-500', 'scale-105', 'z-20');
+                    setTimeout(() => card.classList.remove('ring-2', 'ring-amber-500', 'scale-105', 'z-20'), 1500);
+                }
+
+                // --- LIVE DATA FETCH ---
+                async function fetchLiveData() {
+                    try {
+                        const resLedger = await fetch('/api/ledger/daily');
+                        const ledger = await resLedger.json();
+
+                        const kpiRev = document.getElementById('kpi-okasina-revenue'); // Fixed ID
+                        const kpiNet = document.getElementById('kpi-finance-net');     // Fixed ID
+
+                        if (kpiRev && ledger.okasina)
+                            kpiRev.textContent = "MUR " + (ledger.okasina.revenue || 0).toLocaleString();
+
+                        if (kpiNet && ledger.finance)
+                            kpiNet.textContent = "MUR " + (ledger.finance.net || 0).toLocaleString();
+
+                        // Okasina Orders (Preserve Icon)
+                        const subTitle = document.getElementById('kpi-okasina-sub');
+                        if (subTitle && ledger.okasina) {
+                            subTitle.innerHTML = `
+                           <svg class="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                           <span class="text-emerald-400 font-bold">${ledger.okasina.count}</span> orders today
+                       `;
+                        }
+
+                        // Reflex Incidents
+                        const resReflex = await fetch('/api/reflex/incidents');
+                        const incidents = await resReflex.json();
+                        // ... incidents logic ...
+
+                    } catch (e) {
+                        // console.log(e); 
+                    }
+                }
+
+                // --- RESOURCE MANAGER ---
+                const addResourceBtn = document.getElementById('btn-add-resource'); // Fixed ID
+                const resourceModal = document.getElementById('resource-modal');
+                const closeResourceBtn = document.getElementById('close-resource');
+                const saveResourceBtn = document.getElementById('btn-save-resource'); // Fixed ID
+                const integrationsList = document.getElementById('integrations-list'); // Fixed ID? Wait, previous code used connections-list or integrations-list. Let's check HTML.
+                // HTML in step 319 uses 'integrations-list' at line ??? No, line 437 is systems sections. 
+                // Wait, previous replace used connections-list. The HTML in 319 uses 'integrations-list' at the end of resource section?
+                // Actually I don't see 'integrations-list' in 319 snippet. I see RESOURCE MODAL at 281. The list is likely in 'overview' page.
+                // I'll assume 'integrations-list' as per previous context or fallback to 'connections-list'.
+
+                function toggleResModal(show) {
+                    if (resourceModal) {
+                        if (show) resourceModal.classList.remove('hidden');
+                        else resourceModal.classList.add('hidden');
+                    }
+                }
+
+                if (addResourceBtn) addResourceBtn.addEventListener('click', () => toggleResModal(true));
+                if (closeResourceBtn) closeResourceBtn.addEventListener('click', () => toggleResModal(false));
+
+                async function fetchResources() {
+                    try {
+                        const res = await fetch('/api/resources');
+                        const data = await res.json();
+                        const list = document.getElementById('integrations-list') || document.getElementById('connections-list');
+
+                        if (!list) return;
+                        list.innerHTML = '';
+
+                        if (data.length === 0) {
+                            list.innerHTML = '<div class="text-slate-500 text-sm">No active connections.</div>';
+                            return;
+                        }
+
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = "glass-card rounded-lg p-3 border-l-2 border-slate-700 flex justify-between items-center mb-2";
+                            // Color coding
+                            if (item.type === 'api') div.classList.add('border-l-emerald-500');
+
+                            div.innerHTML = `
+                             <div>
+                                <div class="text-sm font-medium text-slate-200">${item.name}</div>
+                                <div class="text-xs text-slate-500 font-mono">${item.url}</div>
+                             </div>
+                             <span class="text-[0.6rem] uppercase px-2 py-1 rounded bg-slate-800 text-slate-400">${item.type}</span>
+                        `;
+                            list.appendChild(div);
+                        });
+                    } catch (e) { console.error("Resource error", e); }
+                }
+
+                if (saveResourceBtn) {
+                    saveResourceBtn.addEventListener('click', async () => {
+                        const name = document.getElementById('res-name').value;
+                        const type = document.getElementById('res-type').value;
+                        const url = document.getElementById('res-url').value;
+                        const desc = document.getElementById('res-desc') ? document.getElementById('res-desc').value : "";
+
+                        if (!name || !url) return alert("Name and URL required");
+
+                        try {
+                            await fetch('/api/resources', {
+                                method: 'POST',
+                                headers: authHeaders({ 'Content-Type': 'application/json' }),
+                                body: JSON.stringify({ name, type, url, description: desc })
+                            });
+
+                            toggleResModal(false);
+                            fetchResources();
+                            document.getElementById('res-name').value = '';
+                            document.getElementById('res-url').value = '';
+                        } catch (e) { alert("Error " + e); }
+                    });
+                }
+
+                // --- AGENT MESH CONTROL ---
+                const agentGrid = document.getElementById('agent-grid');
+
+                async function fetchAgents() {
+                    try {
+                        const res = await fetch('/api/agents');
+                        const data = await res.json();
+
+                        if (!agentGrid) return;
+                        agentGrid.innerHTML = '';
+
+                        if (data.length === 0) {
+                            agentGrid.innerHTML = '<div class="col-span-3 text-center text-slate-500">No agents detected in /py directory.</div>';
+                            return;
+                        }
+
+                        data.forEach(agent => {
+                            const isActive = agent.status === 'active';
+                            const isCore = agent.role !== "Autonomous Unit"; // Rename 'Board' to 'Core' internally if needed
+
+                            // Visual Logic
+                            const statusColor = isActive ? 'bg-sky-400 shadow-[0_0_12px_#38bdf8]' : 'bg-slate-700';
+                            const borderColor = isActive ? 'border-sky-500/50' : 'border-slate-800';
+                            const textParams = isActive ? 'text-sky-100' : 'text-slate-500';
+
+                            // Names
+                            const simplifiedName = agent.name.replace('.py', '').replace('jarvis_', '').toUpperCase();
+                            const operationName = "OP_" + simplifiedName;
+
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = `
+                             <div class="h-full glass-panel ${borderColor} border rounded-lg p-5 flex flex-col justify-between relative group hover:bg-white/5 transition-all">
+                                
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h4 class="${textParams} font-bold text-sm tracking-widest">${simplifiedName}</h4>
+                                        <p class="text-[0.65rem] text-slate-500 font-mono mt-0.5">${operationName}</p>
+                                    </div>
+                                    <div class="w-3 h-3 rounded-sm ${statusColor}"></div>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <p class="text-[0.65rem] text-slate-400 leading-snug h-8 overflow-hidden">${agent.description}</p>
+                                    
+                                    <div class="flex items-center justify-between border-t border-white/5 pt-3">
+                                        <span class="font-mono text-[0.6rem] text-slate-600">PID: ${agent.pid || 'N/A'}</span>
+                                        
+                                        <button onclick="window.toggleAgent('${agent.name}', '${isActive ? 'stop' : 'start'}')"
+                                            class="text-[0.6rem] font-bold px-3 py-1.5 rounded transition-all shadow-lg
+                                            ${isActive ?
+                                    'bg-rose-500/10 text-rose-400 border border-rose-500/30 hover:bg-rose-500/20' :
+                                    'bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20'}">
+                                            ${isActive ? 'TERMINATE' : 'DEPLOY'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                            agentGrid.appendChild(wrapper.firstElementChild);
+                        });
+
+                    } catch (e) { console.error("Agent Fetch Error", e); }
+                }
+
+                window.toggleAgent = async (name, action) => {
+                    try {
+                        const res = await fetch('/api/agents/control', {
+                            method: 'POST',
+                            headers: authHeaders({ 'Content-Type': 'application/json' }),
+                            body: JSON.stringify({ name, action })
+                        });
+                        const data = await res.json();
+
+                        const term = document.getElementById('terminal-output');
+                        if (term && data.message) {
+                            const line = document.createElement('div');
+                            line.className = "text-sky-400 font-mono text-xs";
+                            line.textContent = `[SYSTEM] ${data.message}`;
+                            term.appendChild(line);
+                            term.scrollTop = term.scrollHeight;
+                        }
+                        setTimeout(fetchAgents, 1500);
+                    } catch (e) { alert("Failed to control agent: " + e); }
+                };
+
+                // --- FORGE (IDE) LOGIC ---
+                let forgeEditor = null;
+                let currentFilePath = null;
+
+                window.initForge = function () {
+                    // Only init once
+                    if (forgeEditor) return;
+
+                    document.getElementById('forge-monaco').innerHTML = '<div class="text-slate-500 p-4">Loading Editor Engine...</div>';
+
+                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs' } });
+
+                    require(['vs/editor/editor.main'], function () {
+                        document.getElementById('forge-monaco').innerHTML = '';
+                        forgeEditor = monaco.editor.create(document.getElementById('forge-monaco'), {
+                            value: "# Select a file to edit\n",
+                            language: 'python',
+                            theme: 'vs-dark',
+                            automaticLayout: true,
+                            minimap: { enabled: false },
+                            fontSize: 12
+                        });
+                    });
+
+                    loadForgeTree();
+                };
+
+                window.loadForgeTree = async function () {
+                    const treeDiv = document.getElementById('forge-tree');
+                    treeDiv.innerHTML = '<div class="text-slate-600">Scanning...</div>';
+                    try {
+                        const res = await fetch('/api/forge/tree', { headers: authHeaders() });
+                        const files = await res.json();
+
+                        treeDiv.innerHTML = '';
+
+                        // Simple flat list for now, styled as tree
+                        files.sort().forEach(path => {
+                            const isPy = path.endsWith('.py');
+                            const div = document.createElement('div');
+                            div.className = "cursor-pointer hover:bg-slate-800 hover:text-white truncate px-1 py-0.5 rounded flex items-center gap-2";
+                            div.title = path;
+                            div.onclick = () => loadForgeFile(path);
+
+                            const icon = isPy ? '<span class="text-sky-500">PY</span>' : '<span class="text-slate-600">DOC</span>';
+
+                            div.innerHTML = `<span class="font-mono opacity-50 text-[0.6rem]">${icon}</span> ${path}`;
+                            treeDiv.appendChild(div);
+                        });
+                    } catch (e) {
+                        treeDiv.innerHTML = '<div class="text-rose-500">Error loading tree</div>';
+                    }
+                };
+
+                window.loadForgeFile = async function (path) {
+                    if (!forgeEditor) return;
+                    currentFilePath = path;
+                    document.getElementById('forge-current-file').textContent = path;
+
+                    const res = await fetch('/api/forge/read', {
+                        method: 'POST',
+                        headers: authHeaders({ 'Content-Type': 'application/json' }),
+                        body: JSON.stringify({ path })
+                    });
+                    const data = await res.json();
+
+                    const ext = path.split('.').pop();
+                    const langMap = { 'py': 'python', 'js': 'javascript', 'html': 'html', 'json': 'json', 'md': 'markdown' };
+
+                    monaco.editor.setModelLanguage(forgeEditor.getModel(), langMap[ext] || 'plaintext');
+                    forgeEditor.setValue(data.content || "");
+                };
+
+                window.saveForgeFile = async function () {
+                    if (!currentFilePath) return alert("No file selected");
+                    const content = forgeEditor.getValue();
+                    const btn = document.getElementById('forge-btn-save');
+
+                    const originalText = btn.innerHTML;
+                    btn.textContent = "SAVING...";
+
+                    try {
+                        await fetch('/api/forge/save', {
+                            method: 'POST',
+                            headers: authHeaders({ 'Content-Type': 'application/json' }),
+                            body: JSON.stringify({ path: currentFilePath, content })
+                        });
+                        btn.textContent = "SAVED";
+                        setTimeout(() => btn.innerHTML = originalText, 1500);
+                    } catch (e) { alert("Save failed: " + e); btn.innerHTML = originalText; }
+                };
+
+                window.runForgeScript = async function () {
+                    const taskId = document.getElementById('forge-task-select').value;
+                    let target = document.getElementById('forge-task-arg').value;
+
+                    // Auto-fill target if empty and running script
+                    if (!target && taskId === 'run_script') {
+                        if (!currentFilePath) return alert("Select a file or enter arguments.");
+                        target = currentFilePath;
+                    }
+
+                    const consoleDiv = document.getElementById('forge-console');
+                    consoleDiv.innerHTML += `\n> [${taskId.toUpperCase()}] ${target || ''} ...\n`;
+                    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+
+                    try {
+                        const res = await fetch('/api/forge/run', {
+                            method: 'POST',
+                            headers: authHeaders({ 'Content-Type': 'application/json' }),
+                            body: JSON.stringify({
+                                task_id: taskId,
+                                target: target || ""
+                            })
+                        });
+                        const data = await res.json();
+
+                        if (data.error) {
+                            consoleDiv.innerHTML += `<span class="text-rose-500">ERROR: ${data.error}</span>\n`;
+                        } else {
+                            if (data.stdout) consoleDiv.innerHTML += `<span class="text-slate-300">${data.stdout}</span>`;
+                            if (data.stderr) consoleDiv.innerHTML += `<span class="text-rose-400">${data.stderr}</span>`;
+                            consoleDiv.innerHTML += `\n[STATUS: ${data.returncode === 0 ? 'SUCCESS' : 'FAILED'}]\n`;
+                        }
+                        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+
+                    } catch (e) {
+                        consoleDiv.innerHTML += `<span class="text-rose-500">SYSTEM FAILURE: ${e}</span>\n`;
+                    }
+                };
+
+                // --- INIT ---
+                fetchResources();
+                fetchAgents();
+                fetchLiveData();
+                fetchSystemStatus();
+
+                setInterval(fetchLiveData, 15000);
+                setInterval(fetchSystemStatus, 15000);
+                setInterval(fetchAgents, 10000);
+
+            })();
+    </script>
+</body>
+
+</html>

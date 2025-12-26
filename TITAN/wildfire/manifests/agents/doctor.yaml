@@ -1,0 +1,52 @@
+version: 1
+agent_id: AGENT_DOCTOR
+name: Doctor
+runtime:
+  mode: sandbox
+  language: python
+  entrypoint: wildfire/modules/doctor/main.py
+  concurrency: 1
+  timeout_ms: 300000
+
+interfaces:
+  consumes:
+    - topic: az.fix_requests
+      schema: fix_request_v1
+    - topic: az.inspect_reports
+      schema: inspect_report_v1
+  produces:
+    - topic: az.fix_results
+      schema: fix_result_v1
+    - topic: az.rollback_events
+      schema: rollback_event_v1
+
+permissions:
+  read_scopes:
+    - fs:wildfire/**
+    - supabase:public.az_* # read
+  write_scopes:
+    - fs:wildfire/** # may write patches in sandbox
+    - supabase:public.az_fix_results
+  network:
+    outbound_allowlist:
+      - "localhost"
+      - "127.0.0.1"
+
+constraints:
+  requires_signed_report: true
+  allowed_actions:
+    - "config_patch_in_sandbox"
+    - "adapter_rollforward"
+    - "adapter_rollback"
+  forbidden_actions:
+    - "write_core"
+    - "write_prod_app_code"
+    - "drop_tables"
+    - "delete_data"
+
+observability:
+  heartbeat_sec: 20
+  metrics:
+    - fixes_applied
+    - rollbacks_applied
+    - mean_time_to_recover_ms

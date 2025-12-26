@@ -1,0 +1,368 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Tenant {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String   @unique
+  
+  // Default tenant settings
+  defaultCurrency String @default("USD")
+  defaultTimezone String @default("UTC")
+  defaultLanguage String @default("en")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  users       User[]
+  products    Product[]
+  campaigns   Campaign[]
+  clients     Client[]
+  apiKeys     ApiKey[]
+  auditLogs   AuditLog[]
+  scraperJobs ScraperJob[]
+  scraperData ScraperData[]
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(VIEWER)
+  tenantId      String
+  isActive      Boolean   @default(true)
+  
+  // Global preferences
+  preferredCurrency String @default("USD")
+  preferredTimezone String @default("UTC")
+  preferredLanguage String @default("en")
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  tenant        Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  accounts      Account[]
+  sessions      Session[]
+  campaigns     Campaign[]
+  auditLogs     AuditLog[]
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model ApiKey {
+  id          String   @id @default(cuid())
+  name        String
+  key         String   @unique
+  tenantId    String
+  isActive    Boolean  @default(true)
+  lastUsed    DateTime?
+  createdAt   DateTime @default(now())
+  
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  currency    String   @default("USD")
+  imageUrl    String?
+  category    String?
+  tenantId    String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  tenant          Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  campaignProducts CampaignProduct[]
+}
+
+model Client {
+  id            String      @id @default(cuid())
+  name          String
+  company       String
+  email         String
+  phone         String      @default("")
+  website       String      @default("")
+  industry      String      @default("")
+  contactPerson String      @default("")
+  location      String      @default("")
+  totalBudget   Float       @default(0)
+  currency      String      @default("USD")
+  priority      ClientPriority @default(MEDIUM)
+  status        ClientStatus @default(ACTIVE)
+  notes         String      @default("")
+  tenantId      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  tenant        Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  campaigns     Campaign[]  @relation("ClientCampaigns")
+  
+  @@unique([email, tenantId])
+}
+
+enum ClientPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  PAUSED
+}
+
+model Creative {
+  id          String      @id @default(cuid())
+  type        CreativeType
+  content     String      // JSON content for image/copy data
+  prompt      String?
+  status      CreativeStatus @default(PENDING)
+  tenantId    String
+  createdAt   DateTime    @default(now())
+  
+  campaigns   Campaign[]
+}
+
+enum CreativeType {
+  IMAGE
+  COPY
+  VIDEO
+}
+
+enum CreativeStatus {
+  PENDING
+  GENERATING
+  COMPLETED
+  FAILED
+}
+
+model Campaign {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  budget      Float
+  currency    String        @default("USD")
+  audience    String        // JSON audience targeting data
+  status      CampaignStatus @default(DRAFT)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdById String
+  tenantId    String
+  creativeId  String?
+  clientId    String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  tenant      Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdBy   User            @relation(fields: [createdById], references: [id])
+  creative    Creative?       @relation(fields: [creativeId], references: [id])
+  client      Client?         @relation("ClientCampaigns", fields: [clientId], references: [id])
+  products    CampaignProduct[]
+  jobs        ScheduledJob[]
+  analytics   Analytics[]
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  RUNNING
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+model CampaignProduct {
+  id         String  @id @default(cuid())
+  campaignId String
+  productId  String
+  
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  @@unique([campaignId, productId])
+}
+
+model ScheduledJob {
+  id          String    @id @default(cuid())
+  jobId       String    @unique // BullMQ job ID
+  type        JobType
+  payload     String    // JSON payload
+  status      JobStatus @default(PENDING)
+  scheduledAt DateTime
+  processedAt DateTime?
+  error       String?
+  campaignId  String?
+  createdAt   DateTime  @default(now())
+  
+  campaign    Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
+enum JobType {
+  CAMPAIGN_START
+  CAMPAIGN_STOP
+  CAMPAIGN_UPDATE
+  CREATIVE_GENERATION
+  ANALYTICS_SYNC
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+model Analytics {
+  id          String   @id @default(cuid())
+  campaignId  String
+  date        DateTime
+  impressions Int      @default(0)
+  clicks      Int      @default(0)
+  conversions Int      @default(0)
+  spend       Float    @default(0)
+  revenue     Float    @default(0)
+  createdAt   DateTime @default(now())
+  
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  @@unique([campaignId, date])
+}
+
+model AuditLog {
+  id        String     @id @default(cuid())
+  userId    String
+  tenantId  String
+  action    AuditAction
+  resource  String     // e.g., "product", "campaign", "user"
+  resourceId String?
+  details   String?    // JSON details
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime   @default(now())
+  
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant    Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  VIEW
+  LOGIN
+  LOGOUT
+}
+
+// Data Scraper Models
+model ScraperJob {
+  id          String      @id @default(cuid())
+  name        String
+  type        ScraperType
+  url         String
+  frequency   String      // cron expression
+  config      String      // JSON configuration
+  status      ScraperJobStatus @default(ACTIVE)
+  lastRun     DateTime?
+  nextRun     DateTime?
+  tenantId    String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  data        ScraperData[]
+}
+
+model ScraperData {
+  id          String      @id @default(cuid())
+  jobId       String
+  type        ScraperType
+  url         String
+  title       String?
+  content     String      // JSON scraped content
+  metadata    String?     // JSON metadata (prices, metrics, etc.)
+  hash        String      // Content hash for deduplication
+  scrapedAt   DateTime    @default(now())
+  tenantId    String
+  
+  job         ScraperJob  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  @@unique([hash, tenantId])
+  @@index([type, scrapedAt])
+}
+
+enum ScraperType {
+  COMPETITOR_PRICING
+  COMPETITOR_PRODUCTS
+  SOCIAL_MEDIA_METRICS
+  MARKET_TRENDS
+  AD_CREATIVE
+  SEO_KEYWORDS
+  NEWS_SENTIMENT
+  INDUSTRY_REPORTS
+}
+
+enum ScraperJobStatus {
+  ACTIVE
+  PAUSED
+  DISABLED
+  ERROR
+}

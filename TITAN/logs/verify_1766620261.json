@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "request_id": "verify-1766620261",
+  "ts": "2025-12-25T03:51:01.060550+04:00",
+  "agent": "VerificationHarness",
+  "severity": "info",
+  "human_summary": "All 5 core modules verified. Found 8 active projects.",
+  "findings": {
+    "modules": [
+      {
+        "module": "site_health",
+        "ok": true,
+        "checks": [
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\apps\\inspector\\inspector.py"
+          },
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\apps\\doctor\\doctor.py"
+          }
+        ]
+      },
+      {
+        "module": "grants_eligibility",
+        "ok": true,
+        "checks": [
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\apps\\grant_writer\\tinns_generator.py"
+          }
+        ]
+      },
+      {
+        "module": "voyager_engine",
+        "ok": true,
+        "checks": [
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\apps\\voyager\\voyager.py"
+          }
+        ]
+      },
+      {
+        "module": "utils",
+        "ok": true,
+        "checks": [
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\apps\\utils\\summarize_cli.py"
+          }
+        ]
+      },
+      {
+        "module": "policy_core",
+        "ok": true,
+        "checks": [
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\policy\\authority.toml"
+          },
+          {
+            "ok": true,
+            "path": "F:\\AION-ZERO\\TITAN\\policy\\decision_atoms.json"
+          }
+        ]
+      }
+    ],
+    "projects_scanned": [
+      "AOGRL-DS",
+      "autopilot",
+      "delivery_crm",
+      "EduConnect",
+      "Jules Trading Platform",
+      "ngo-automator",
+      "ReachX-AI",
+      "ReachX-Pilot-Project"
+    ]
+  },
+  "metrics": {}
+}

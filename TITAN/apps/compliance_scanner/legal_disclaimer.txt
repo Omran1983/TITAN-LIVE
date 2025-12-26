@@ -1,0 +1,9 @@
+DISCLAIMER: EDUCATIONAL & AUDIT SIMULATION ONLY
+
+This "Employment Risk Scanner" is an automated analysis tool designed to identify potential discrepancies in workforce data based on general principles of international labor standards (ILO) and common statutory requirements.
+
+1. NO ATTORNEY-CLIENT RELATIONSHIP: Use of this tool does not create an attorney-client relationship. The "Verdicts" and "Risk Scores" generated are algorithmic estimates, not legal opinions.
+2. NO LIABILITY: The developers assume no liability for actions taken based on this output. Users are strongly advised to verify all findings with qualified local legal counsel before making decisions regarding hiring, firing, or compensation changes.
+3. DATA PRIVACY: Users should strictly provide ANONYMIZED data (e.g., "Employee A", not "John Doe"). Do not upload sensitive personal data (PII).
+
+By using this tool, you acknowledge that you have read and understood these terms.

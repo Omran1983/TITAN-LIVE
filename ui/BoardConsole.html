@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AOGRL Board Console</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --bg-soft: #ffffff;
+            --border-soft: #dde3f0;
+            --text-main: #0f172a;
+            --text-soft: #64748b;
+            --accent: #4f46e5;
+            --accent-soft: #e0e7ff;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.08);
+
+            --atlas: #38bdf8;
+            --vega: #22c55e;
+            --orion: #818cf8;
+            --nova: #f97316;
+            --helios: #facc15;
+            --luna: #ec4899;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #e0f2fe, #f5f7fb 55%, #fdf2ff 100%);
+            color: var(--text-main);
+        }
+
+        .app {
+            max-width: 1200px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .app-header {
+            margin-bottom: 16px;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(248, 250, 252, 0.6);
+            color: var(--text-soft);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 0 0 4px;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-soft);
+        }
+
+        .layout {
+            margin-top: 18px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 22px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-soft);
+            display: grid;
+            grid-template-columns: 270px minmax(0, 1fr);
+            overflow: hidden;
+        }
+
+        @media (max-width: 880px) {
+            .layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .sidebar {
+            padding: 16px 14px 14px;
+            border-right: 1px solid var(--border-soft);
+            background: linear-gradient(160deg, #eff6ff, #fdf2ff);
+        }
+
+        @media (max-width: 880px) {
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-soft);
+            }
+        }
+
+        .sidebar-title {
+            font-size: 13px;
+           _color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+        }
+
+        .director-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .director-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+        }
+
+        .director-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+        }
+
+        .director-item.active {
+            background: #ffffff;
+            border-color: var(--accent-soft);
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .circle.atlas { background: rgba(56, 189, 248, 0.16); border: 1px solid rgba(56, 189, 248, 0.6); }
+        .circle.vega  { background: rgba(34, 197, 94, 0.16);  border: 1px solid rgba(34, 197, 94, 0.6); }
+        .circle.orion { background: rgba(129, 140, 248, 0.16);border: 1px solid rgba(129, 140, 248, 0.6); }
+        .circle.nova  { background: rgba(249, 115, 22, 0.16); border: 1px solid rgba(249, 115, 22, 0.6); }
+        .circle.helios{ background: rgba(250, 204, 21, 0.18); border: 1px solid rgba(250, 204, 21, 0.7); }
+        .circle.luna  { background: rgba(236, 72, 153, 0.16); border: 1px solid rgba(236, 72, 153, 0.7); }
+        .circle.board { background: rgba(79, 70, 229, 0.18); border: 1px solid rgba(79, 70, 229, 0.7); }
+
+        .dir-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .dir-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dir-role {
+            font-size: 11px;
+            color: var(--text-soft);
+        }
+
+        .dir-pill {
+            font-size: 11px;
+            color: var(--text-soft);
+            margin-top: 10px;
+        }
+
+        .dir-pill span {
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        .chat-pane {
+            display: flex;
+            flex-direction: column;
+            padding: 14px 14px 12px;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 6px 4px 8px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+        }
+
+        .chat-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .chat-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .chat-subtitle {
+            font-size: 12px;
+            color: var(--text-soft);
+        }
+
+        .chat-meta-chip {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            color: var(--text-soft);
+        }
+
+        .chat-log {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 4px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .msg-group {
+            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .msg-group.me {
+            margin-left: auto;
+            align-items: flex-end;
+        }
+
+        .msg-meta {
+            font-size: 11px;
+            color: var(--text-soft);
+        }
+
+        .msg-bubble {
+            border-radius: 14px;
+            padding: 8px 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .msg-group.me .msg-bubble {
+            background: var(--accent-soft);
+            color: var(--text-main);
+        }
+
+        .msg-group.board .msg-bubble {
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        .msg-group.director .msg-bubble {
+            background: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        .msg-bubble strong {
+            font-weight: 600;
+        }
+
+        .chat-input-area {
+            border-top: 1px solid rgba(226, 232, 240, 0.9);
+            padding: 8px 4px 2px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .chat-input-wrapper {
+            flex: 1;
+            background: #f8fafc;
+            border-radius: 999px;
+            padding: 5px 10px;
+            border: 1px solid rgba(203, 213, 225, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-input-wrapper textarea {
+            border: none;
+            outline: none;
+            resize: none;
+            background: transparent;
+            width: 100%;
+            font-family: inherit;
+            font-size: 13px;
+            max-height: 80px;
+        }
+
+        .chat-input-wrapper textarea::placeholder {
+            color: var(--text-soft);
+        }
+
+        .target-select {
+            font-size: 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            padding: 4px 8px;
+            background: #ffffff;
+            color: var(--text-main);
+        }
+
+        .send-btn {
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+            transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 32px rgba(79, 70, 229, 0.4);
+            background: #4338ca;
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 7px 18px rgba(79, 70, 229, 0.4);
+        }
+
+        .hint-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-soft);
+            padding: 0 2px 4px;
+        }
+
+        .hint-shortcuts {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .hint-tag {
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="badge-row">
+            <div class="badge">AOGRL · VIRTUAL BOARDROOM</div>
+            <div class="badge">Interactive Strategy Console</div>
+        </div>
+        <h1>Board Conversation Console</h1>
+        <p class="subtitle">
+            Talk to your virtual directors like a real C-suite: ask for strategy, trade-offs and requirements, then approve or adjust.
+        </p>
+    </header>
+
+    <section class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">Directors</div>
+            <div class="director-list">
+                <div class="director-item active" data-target="BOARD">
+                    <div class="circle board">B</div>
+                    <div class="dir-info">
+                        <div class="dir-name">Full Board</div>
+                        <div class="dir-role">All directors respond in turn</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="ATLAS">
+                    <div class="circle atlas">A</div>
+                    <div class="dir-info">
+                        <div class="dir-name">ATLAS</div>
+                        <div class="dir-role">Strategy & Systems</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="VEGA">
+                    <div class="circle vega">V</div>
+                    <div class="dir-info">
+                        <div class="dir-name">VEGA</div>
+                        <div class="dir-role">Technology & Automation</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="ORION">
+                    <div class="circle orion">O</div>
+                    <div class="dir-info">
+                        <div class="dir-name">ORION</div>
+                        <div class="dir-role">AI & Intelligence</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="NOVA">
+                    <div class="circle nova">N</div>
+                    <div class="dir-info">
+                        <div class="dir-name">NOVA</div>
+                        <div class="dir-role">EduConnect Product</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="HELIOS">
+                    <div class="circle helios">H</div>
+                    <div class="dir-info">
+                        <div class="dir-name">HELIOS</div>
+                        <div class="dir-role">Finance & Risk</div>
+                    </div>
+                </div>
+
+                <div class="director-item" data-target="LUNA">
+                    <div class="circle luna">L</div>
+                    <div class="dir-info">
+                        <div class="dir-name">LUNA</div>
+                        <div class="dir-role">Brand & Marketing</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dir-pill" style="margin-top:14px;">
+                <span>Tip</span>
+            </div>
+            <div style="margin-top:6px; font-size:11px; color:var(--text-soft);">
+                Example prompt:<br>
+                <strong>“In one line, what challenge is each of you facing right now?”</strong>
+            </div>
+        </aside>
+
+        <section class="chat-pane">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-title" id="chatTitle">Talking to: Full Board</div>
+                    <div class="chat-subtitle">
+                        Each director will tell you what they need and propose solutions. You approve or adjust.
+                    </div>
+                </div>
+                <div class="chat-meta-chip">
+                    Mode: CEO ↔ Directors · Approve / Adjust / Question
+                </div>
+            </div>
+
+            <div class="chat-log" id="chatLog"></div>
+
+            <div class="chat-input-area">
+                <div class="hint-row">
+                    <span>Enter to send · Shift+Enter for new line</span>
+                    <div class="hint-shortcuts">
+                        <span class="hint-tag">“what challenges…”</span>
+                        <span class="hint-tag">“your main objective”</span>
+                        <span class="hint-tag">“what do you need from me”</span>
+                    </div>
+                </div>
+
+                <div class="chat-input-row">
+                    <select id="targetSelect" class="target-select">
+                        <option value="BOARD">Full Board</option>
+                        <option value="ATLAS">ATLAS · Strategy & Systems</option>
+                        <option value="VEGA">VEGA · Tech & Automation</option>
+                        <option value="ORION">ORION · AI & Intelligence</option>
+                        <option value="NOVA">NOVA · EduConnect Product</option>
+                        <option value="HELIOS">HELIOS · Finance & Risk</option>
+                        <option value="LUNA">LUNA · Brand & Marketing</option>
+                    </select>
+
+                    <div class="chat-input-wrapper">
+                        <textarea id="inputBox" rows="1" placeholder="Type your directive or question to the board..."></textarea>
+                    </div>
+
+                    <button class="send-btn" id="sendBtn">
+                        Send
+                        <span>➤</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+
+<script>
+    const chatLog = document.getElementById('chatLog');
+    const inputBox = document.getElementById('inputBox');
+    const sendBtn = document.getElementById('sendBtn');
+    const targetSelect = document.getElementById('targetSelect');
+    const chatTitle = document.getElementById('chatTitle');
+    const sidebarItems = document.querySelectorAll('.director-item');
+
+    function scrollToBottom() {
+        chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function addMessage(role, sender, text) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('msg-group');
+        if (role === 'me') wrapper.classList.add('me');
+        if (role === 'board') wrapper.classList.add('board');
+        if (role === 'director') wrapper.classList.add('director');
+
+        const meta = document.createElement('div');
+        meta.classList.add('msg-meta');
+        meta.textContent = sender;
+
+        const bubble = document.createElement('div');
+        bubble.classList.add('msg-bubble');
+        bubble.innerText = text;
+
+        wrapper.appendChild(meta);
+        wrapper.appendChild(bubble);
+        chatLog.appendChild(wrapper);
+        scrollToBottom();
+    }
+
+    function localDirectorReply(target, content) {
+        const textLower = content.toLowerCase();
+        let replies = [];
+
+        const baseConsolidation =
+            textLower.includes('consolidate') ||
+            textLower.includes('consolidation') ||
+            textLower.includes('scatter') ||
+            textLower.includes('scattered') ||
+            textLower.includes('single pane of glass') ||
+            textLower.includes('bring the projects together');
+
+        const askChallenges =
+            textLower.includes('challenge') ||
+            textLower.includes('challenges') ||
+            textLower.includes('struggle') ||
+            textLower.includes('struggling') ||
+            textLower.includes('problem') ||
+            textLower.includes('problems');
+
+        const askObjectives =
+            textLower.includes('objective') ||
+            textLower.includes('objectives') ||
+            textLower.includes('goal') ||
+            textLower.includes('goals') ||
+            textLower.includes('focus') ||
+            textLower.includes('priority') ||
+            textLower.includes('priorities');
+
+        const askNeeds =
+            textLower.includes('what do you need from me') ||
+            textLower.includes('what you need from me') ||
+            textLower.includes('need from me') ||
+            textLower.includes('require from me') ||
+            textLower.includes('requirements from me') ||
+            textLower.includes('what do you need') ||
+            textLower.includes('what you need');
+
+        const shortApprovalAsk =
+            "\n\nWhat I need from you: confirm this direction, and optionally adjust priorities or timeframes.";
+
+        if (target === 'ATLAS') {
+            replies.push(
+                "ATLAS here.\n\n" +
+                "I understand this as a directive to reduce operational scatter and bring every project under one unified operating framework.\n\n" +
+                "Required from my side:\n" +
+                "1) Define a single AOGRL Operating Model: standard folders, env files, logging, health checks.\n" +
+                "2) Map all existing projects (EduConnect, OKASINA, ReachX, AION-ZERO) against that model.\n" +
+                "3) Flag conflicts or special cases that break the standard.\n\n" +
+                "Proposed solution:\n" +
+                "• Create a central 'Project Catalog' with metadata for each project.\n" +
+                "• Define one standard structure for scripts, env, and scheduled tasks.\n" +
+                "• Schedule a phased migration – one project at a time – into this unified structure.\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'VEGA') {
+            replies.push(
+                "VEGA here.\n\n" +
+                "From an infra and automation perspective, consolidation means one template that all live projects follow.\n\n" +
+                "Required from my side:\n" +
+                "1) Create a baseline project template (env layout, PS script layout, Supabase wiring, worker deployment pattern).\n" +
+                "2) Implement a 'Create-ProjectFromTemplate' script so new projects are consistent from day one.\n" +
+                "3) Slowly refactor existing projects to the template without breaking production.\n\n" +
+                "Proposed solution:\n" +
+                "• Design a single 'AOGRL-Project-Template' repo or folder.\n" +
+                "• Lock environment variable names, logging pattern, and error handling conventions.\n" +
+                "• Use your approval to prioritise which project gets migrated first (EduConnect vs OKASINA vs ReachX).\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'ORION') {
+            replies.push(
+                "ORION here.\n\n" +
+                "Consolidation from AI's perspective means one intelligence layer, not scattered bots.\n\n" +
+                "Required from my side:\n" +
+                "1) Define a shared schema for 'events' and 'metrics' across all projects.\n" +
+                "2) Build a single Daily CEO Brief that pulls from each engine (EduConnect, OKASINA, ReachX, AION-ZERO).\n" +
+                "3) Align agent prompts and decision rules so they support your unified strategy.\n\n" +
+                "Proposed solution:\n" +
+                "• Introduce an 'aion_events' or similar table as a central feed.\n" +
+                "• Standardise what each system logs (orders, leads, workers, tasks).\n" +
+                "• Train one Board Intelligence Agent that reads these and outputs actions, not just reports.\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'NOVA') {
+            replies.push(
+                "NOVA here.\n\n" +
+                "For EduConnect, consolidation means treating it as one of several productised engines under the same umbrella.\n\n" +
+                "Required from my side:\n" +
+                "1) Position EduConnect clearly in the portfolio so it doesn't fight with other products.\n" +
+                "2) Align its tiering, pricing, and onboarding with the same structural logic as other engines.\n" +
+                "3) Avoid building one-off flows that can't be reused for future products.\n\n" +
+                "Proposed solution:\n" +
+                "• Define a 'product blueprint' that all offerings share (tiers, onboarding, delivery, reporting).\n" +
+                "• Map EduConnect to that blueprint as the first fully formalised product.\n" +
+                "• Then re-use the pattern for other platforms you sell.\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'HELIOS') {
+            replies.push(
+                "HELIOS here.\n\n" +
+                "Consolidation from finance/risk view means one clear map of where time and money are going.\n\n" +
+                "Required from my side:\n" +
+                "1) Build a unified view of project costs and potential returns.\n" +
+                "2) Flag duplicated effort where consolidation will free time and reduce cost.\n" +
+                "3) Define a 'no new snowflakes' rule – new work must fit the shared structure.\n\n" +
+                "Proposed solution:\n" +
+                "• Create a simple table linking each project to monthly time/cost and target revenue.\n" +
+                "• Mark any custom setups that should be retired or merged.\n" +
+                "• Use this to prioritise where consolidation gives the fastest financial relief.\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'LUNA') {
+            replies.push(
+                "LUNA here.\n\n" +
+                "Consolidation on the brand side means one AOGRL story with multiple chapters, not unrelated islands.\n\n" +
+                "Required from my side:\n" +
+                "1) Create a shared brand system (colours, typography, voice) used across EduConnect, OKASINA, ReachX.\n" +
+                "2) Build a single asset library so visuals and copy are not duplicated or lost.\n" +
+                "3) Tie campaigns back to this structure so performance can be compared.\n\n" +
+                "Proposed solution:\n" +
+                "• Assemble a core AOGRL style guide and apply it to every current project.\n" +
+                "• Centralise logos, templates, hero images and key messages.\n" +
+                "• Move towards multi-project landing pages that show the ecosystem, not just one brand at a time.\n" +
+                shortApprovalAsk
+            );
+        } else if (target === 'BOARD') {
+            // Full board behaviour: depends on your intent
+            if (baseConsolidation) {
+                // Deep consolidation replies
+                replies.push(
+                    "ATLAS: I will define the unified operating model, map all projects to it, and stage a phased migration. " +
+                    "I need your sign-off on the standard structure and which project gets consolidated first."
+                );
+                replies.push(
+                    "VEGA: I will implement a shared project template and the scripts to spin up or refactor projects into it. " +
+                    "I need clarity on acceptable downtime and the exact priority order."
+                );
+                replies.push(
+                    "ORION: I will unify AI decision-making into one intelligence layer that reads from all engines. " +
+                    "I need decisions on which metrics are 'non-negotiable' in your daily brief."
+                );
+                replies.push(
+                    "NOVA: I will align EduConnect as a productised platform within this shared structure. " +
+                    "I need your input on target clients and pricing bands."
+                );
+                replies.push(
+                    "HELIOS: I will provide a consolidation ROI view – what you save in time and risk from each move. " +
+                    "I need your tolerance level for short-term disruption versus long-term clarity."
+                );
+                replies.push(
+                    "LUNA: I will unify the brands and assets so the ecosystem feels coherent. " +
+                    "I need your preference on how bold or conservative the shared AOGRL look should be."
+                );
+            } else if (askChallenges) {
+                // “What challenges are each of you facing?”
+                replies.push(
+                    "ATLAS: My main challenge is that your projects live in different structures, so it's hard to give you a single clear picture of the whole system."
+                );
+                replies.push(
+                    "VEGA: My main challenge is scattered scripts and env files, which makes automation fragile and harder to reuse."
+                );
+                replies.push(
+                    "ORION: My main challenge is that data and metrics are not standardised across projects, so intelligence is siloed."
+                );
+                replies.push(
+                    "NOVA: My main challenge is turning EduConnect into a clean, repeatable product instead of a one-off service."
+                );
+                replies.push(
+                    "HELIOS: My main challenge is visibility – it's not yet obvious which project is draining time or cash the most."
+                );
+                replies.push(
+                    "LUNA: My main challenge is brand fragmentation – AOGRL feels like multiple stories instead of one strong ecosystem."
+                );
+            } else if (askObjectives) {
+                // “What is your main objective / focus right now?”
+                replies.push(
+                    "ATLAS: My primary objective is to give you one unified operating model where every project fits cleanly."
+                );
+                replies.push(
+                    "VEGA: My primary objective is to standardise project templates so new and old projects can be wired and maintained quickly."
+                );
+                replies.push(
+                    "ORION: My primary objective is to provide a daily, actionable CEO brief that merges signals from all systems."
+                );
+                replies.push(
+                    "NOVA: My primary objective is to package EduConnect as a product you can sell repeatedly, not just customise each time."
+                );
+                replies.push(
+                    "HELIOS: My primary objective is to make it obvious which moves bring you closer to your 1M target and which should be paused."
+                );
+                replies.push(
+                    "LUNA: My primary objective is to make AOGRL look and feel like one confident, modern brand across all touchpoints."
+                );
+            } else if (askNeeds) {
+                // “What do you need from me?”
+                replies.push(
+                    "ATLAS: I need you to confirm that you want one standard structure and to choose which project we migrate first."
+                );
+                replies.push(
+                    "VEGA: I need your tolerance for short-term disruption so I know how aggressive we can be with refactors."
+                );
+                replies.push(
+                    "ORION: I need you to pick the top 3 metrics you never want to lose sight of in your daily brief."
+                );
+                replies.push(
+                    "NOVA: I need clarity on who EduConnect is for first – ideal customer, market, and the minimum viable promise."
+                );
+                replies.push(
+                    "HELIOS: I need you to state your minimum monthly cash comfort level so I can protect that as we experiment."
+                );
+                replies.push(
+                    "LUNA: I need your preference on tone – should AOGRL feel bold and disruptive, or calm and quietly premium."
+                );
+            } else {
+                // Default polite greeting / generic status
+                replies.push(
+                    "ATLAS: Good afternoon. From my side, I'm watching structure, projects and how scattered or aligned everything is. " +
+                    "Tell me what topic you want to prioritise and I'll frame the system view."
+                );
+                replies.push(
+                    "VEGA: Afternoon. I'm focused on automation, scripts and reliability. " +
+                    "If you tell us your main concern, I'll translate it into infra changes or new agents."
+                );
+                replies.push(
+                    "ORION: I'm tracking signals, metrics and AI opportunities. " +
+                    "Let me know whether you want insight, forecasting or decision support first."
+                );
+                replies.push(
+                    "NOVA: I'm looking at EduConnect and other products as engines we can sell repeatedly. " +
+                    "Tell me whether you want to push productisation, packaging or onboarding next."
+                );
+                replies.push(
+                    "HELIOS: I'm watching risk, cash and time drain. " +
+                    "If you share your current stress point, I'll map it to financial and risk changes."
+                );
+                replies.push(
+                    "LUNA: I'm monitoring how the outside world sees AOGRL. " +
+                    "Let me know if you want to focus next on brand clarity, campaigns or assets."
+                );
+            }
+        } else {
+            replies.push(
+                "Board: I received your message but I don't yet have a programmed response for this target."
+            );
+        }
+
+        return replies;
+    }
+
+    function handleSend() {
+        const text = inputBox.value.trim();
+        if (!text) return;
+
+        const target = targetSelect.value;
+        const label = target === 'BOARD' ? 'You → Board' : `You → ${target}`;
+
+        addMessage('me', label, text);
+        inputBox.value = '';
+
+        const replies = localDirectorReply(target, text);
+        let delay = 250;
+
+        replies.forEach(rep => {
+            setTimeout(() => {
+                if (target === 'BOARD') {
+                    addMessage('board', 'Board Reply', rep);
+                } else {
+                    addMessage('director', target, rep);
+                }
+            }, delay);
+            delay += 300;
+        });
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+
+    inputBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+
+    targetSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val === 'BOARD') {
+            chatTitle.textContent = 'Talking to: Full Board';
+        } else {
+            chatTitle.textContent = 'Talking to: ' + val;
+        }
+        sidebarItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('data-target') === val);
+        });
+    });
+
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const target = item.getAttribute('data-target');
+            targetSelect.value = target;
+            targetSelect.dispatchEvent(new Event('change'));
+        });
+    });
+
+    addMessage(
+        'board',
+        'Board System',
+        "Board Console ready.\n\nAsk things like:\n" +
+        "• “In one line, what challenges are each of you facing?”\n" +
+        "• “What is your main objective right now?”\n" +
+        "• “What do you need from me to move faster?”\n" +
+        "• “Let's consolidate all projects and reduce scatter – propose a plan.”"
+    );
+</script>
+</body>
+</html>

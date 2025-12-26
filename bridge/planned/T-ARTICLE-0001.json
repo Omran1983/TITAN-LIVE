@@ -1,0 +1,6 @@
+{
+  "task_id": "T-ARTICLE-0001",
+  "intent": "article_to_bullets",
+  "goal": "Open a public article and save 5 bullet insights to notes.",
+  "constraints": { "max_steps": 8, "timeout_s": 60 }
+}

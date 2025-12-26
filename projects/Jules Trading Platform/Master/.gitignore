@@ -1,0 +1,29 @@
+# Environments
+.env
+*.env
+.env.*
+env/
+venv/
+ENV/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+logs/
+*.log
+
+# IDE / Editor specific
+.idea/
+.vscode/
+*.swp
+
+# Dependencies
+node_modules/
+dist/
+build/
+*.db
+

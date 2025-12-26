@@ -1,0 +1,37 @@
+{
+    "version": "1.0",
+    "task_id": "task_001_healthcheck",
+    "created_at": "2025-12-22T06:57:00Z",
+    "tenant": {
+        "org": "AOGRL",
+        "project": "TITAN",
+        "env": "local"
+    },
+    "request": {
+        "goal": "Run a local TITAN runner self-check: validate allowlist, write an audit log entry, and produce a hello artifact.",
+        "inputs": [
+            {
+                "kind": "text",
+                "ref": "hello",
+                "label": "seed"
+            }
+        ],
+        "deliverables": [
+            "outbox/result.json",
+            "artifacts/hello.txt"
+        ]
+    },
+    "limits": {
+        "max_seconds": 120,
+        "max_tool_calls": 20,
+        "max_output_mb": 10
+    },
+    "policy": {
+        "allowlist_version": "1.0",
+        "approval_mode": "auto",
+        "data_handling": "local_only"
+    },
+    "callbacks": {
+        "mode": "file"
+    }
+}

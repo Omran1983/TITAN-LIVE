@@ -1,0 +1,6 @@
+employee_id,name,base_salary,performance_status,increment_proposed,training_count
+EMP001,John Doe,15000,satisfactory,true,2
+EMP002,Jane Smith,18000,pass,true,1
+EMP003,Bob Jones,30000,hold,true,0
+EMP004,Alice Wonder,16500,unsatisfactory,false,1
+EMP005,Charlie Brown,22000,pass,true,5

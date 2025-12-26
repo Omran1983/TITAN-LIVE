@@ -1,0 +1,33 @@
+JARVIS Execution Spec v1.0 (Document)
+
+1) Pre-Trade Checks (must pass before any order intent)
+   - Trading window allowed by policy.
+   - STOP.TRADING file not present.
+   - Daily loss not below limit.
+   - Max trades/day not exceeded.
+   - Streak < StreakBreaker; Cooldown satisfied.
+   - MaxConcurrentPositions respected.
+   - BNB fee buffer >= MinBNBBufferUSDT.
+
+2) Market Sanity
+   - Fetch bookTicker (bid/ask) and compute spread bps.
+   - Spread <= SpreadGuardBps.
+   - Depth >= DepthGuardMultiplier * intended order size (approx via depth endpoint).
+
+3) Order Construction (simulated in paper)
+   - Pull tickSize, stepSize, minNotional from /exchangeInfo.
+   - Round price to tickSize; qty to stepSize; ensure price*qty >= minNotional.
+   - Idempotency key: {symbol|side|minuteBucket} to prevent duplicates.
+
+4) Slippage Guard (paper)
+   - Simulate taker fill; if |fill - intended| in bps > SlippageCapBps => reject/cooldown.
+
+5) Logging & Attribution
+   - CSV per trade: ts, symbol, side, intended_price, filled_price, qty, notional, spread_bps, slippage_bps, fee_usdt, reason, breaker_flags.
+   - Daily summary: gross, fees, slippage cost, net.
+
+6) Error Handling (realtime endpoints)
+   - Retry/Backoff on transient HTTP/network.
+   - On exchange filter mismatches, block symbol for session.
+
+This document is the law your paper/live engines must adhere to.

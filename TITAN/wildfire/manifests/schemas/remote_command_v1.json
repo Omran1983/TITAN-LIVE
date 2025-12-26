@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "remote_command_v1",
+    "type": "object",
+    "required": [
+        "cmd_id",
+        "issued_at",
+        "actor",
+        "action",
+        "args",
+        "signature"
+    ],
+    "properties": {
+        "cmd_id": {
+            "type": "string"
+        },
+        "issued_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "actor": {
+            "type": "object"
+        },
+        "action": {
+            "type": "string",
+            "enum": [
+                "health_snapshot",
+                "run_inspector",
+                "run_pipeline",
+                "deploy_sandbox",
+                "tail_logs"
+            ]
+        },
+        "args": {
+            "type": "object"
+        },
+        "signature": {
+            "type": "object"
+        }
+    }
+}

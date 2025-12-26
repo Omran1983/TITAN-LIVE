@@ -1,0 +1,3 @@
+employee_name,salary,performance_status,increment_proposed,hire_date,job_grade,leave_taken_annual,leave_taken_sick,overtime_hours,last_increment_date
+John Doe,16000,Good,No,2021-03-15,G4,10,2,12,2023-01-01
+Jane Smith,18000,Excellent,Yes,2019-06-01,G5,21,1,5,2022-07-01

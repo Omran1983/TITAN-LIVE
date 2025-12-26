@@ -1,0 +1,57 @@
+{
+  "timestamp": "2025-12-20T16:57:41.661463",
+  "total_items": 4,
+  "failures": 2,
+  "details": [
+    {
+      "employee_id": "LOG-001",
+      "name": "Monthly Kitchen Supply",
+      "checks": [
+        {
+          "rule_id": "ENV26-PLASTICS-001",
+          "rule_name": "Single-Use Plastic Reduction",
+          "verdict": "PASS",
+          "evidence": {
+            "consumed": 45.0,
+            "limit": 50,
+            "unit": "kg",
+            "excess": 0
+          }
+        }
+      ]
+    },
+    {
+      "employee_id": "LOG-002",
+      "name": "Warehouse Wrapping (Excess)",
+      "checks": [
+        {
+          "rule_id": "ENV26-PLASTICS-001",
+          "rule_name": "Single-Use Plastic Reduction",
+          "verdict": "FAIL",
+          "evidence": {
+            "consumed": 55.0,
+            "limit": 50,
+            "unit": "kg",
+            "excess": 5.0
+          }
+        }
+      ]
+    },
+    {
+      "employee_id": "PERMIT-001",
+      "name": "EIA Certificate 2024",
+      "checks": [
+        {
+          "rule_id": "ENV26-PERMIT-001",
+          "rule_name": "Valid Environmental Impact License",
+          "verdict": "FAIL",
+          "evidence": {
+            "permit_type": "eia_license",
+            "status": "expired",
+            "required": "active"
+          }
+        }
+      ]
+    }
+  ]
+}

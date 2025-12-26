@@ -1,0 +1,9 @@
+python-binance
+websockets
+python-dotenv
+pandas
+numpy
+requests
+vaderSentiment
+pandas-ta
+Flask

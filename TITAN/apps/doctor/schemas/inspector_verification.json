@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "InspectorVerification",
+    "type": "object",
+    "required": [
+        "signal_id",
+        "verdict",
+        "checks_run",
+        "timestamp"
+    ],
+    "properties": {
+        "signal_id": {
+            "type": "string"
+        },
+        "verdict": {
+            "enum": [
+                "VERIFIED_OK",
+                "STILL_FAILING",
+                "INCONCLUSIVE"
+            ]
+        },
+        "checks_run": {
+            "type": "array",
+            "items": {
+                "enum": [
+                    "health",
+                    "journey",
+                    "api_probe",
+                    "log_scan"
+                ]
+            }
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        }
+    }
+}

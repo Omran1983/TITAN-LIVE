@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <title>ReachX · Smart Outreach Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="h-full bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex bg-slate-950">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex md:flex-col w-64 border-r border-slate-800 bg-slate-950/80">
+      <div class="px-6 py-5 border-b border-slate-800 flex items-center gap-3">
+        <div class="h-9 w-9 rounded-2xl bg-emerald-500/20 flex items-center justify-center">
+          <span class="text-emerald-400 text-xl font-bold">R</span>
+        </div>
+        <div>
+          <div class="font-semibold text-lg">ReachX</div>
+          <div class="text-xs text-slate-400">AI Outreach Console</div>
+        </div>
+      </div>
+      <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+        <div class="px-2 py-2 rounded-xl bg-slate-900/80 text-slate-100 flex items-center justify-between">
+          <span class="font-medium">Overview</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            live
+          </span>
+        </div>
+        <div class="px-2 py-2 rounded-xl text-slate-400 hover:bg-slate-900/40 cursor-default">
+          Pipelines
+        </div>
+        <div class="px-2 py-2 rounded-xl text-slate-400 hover:bg-slate-900/40 cursor-default">
+          Clients
+        </div>
+        <div class="px-2 py-2 rounded-xl text-slate-400 hover:bg-slate-900/40 cursor-default">
+          Settings
+        </div>
+      </nav>
+      <div class="px-4 py-4 border-t border-slate-800 text-[11px] text-slate-500">
+        Supabase: <span class="font-mono text-[10px]">abkprecmhitqmmlzxfad</span>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 flex flex-col">
+      <!-- Top bar / hero -->
+      <header class="border-b border-slate-800 bg-gradient-to-r from-slate-900 via-slate-900/80 to-emerald-900/30">
+        <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-1">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-300">
+                BETA
+              </span>
+              <span id="status-pill" class="text-[11px] px-2 py-0.5 rounded-full border border-slate-700 bg-slate-900 text-slate-300">
+                Connecting…
+              </span>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">
+              Hotel & Resort Outreach Snapshot
+            </h1>
+            <p id="status-text" class="mt-1 text-sm text-slate-300 max-w-xl">
+              Loading campaigns and leads from Supabase…
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="refreshBtn"
+                    class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 border border-slate-700 hover:border-emerald-400 hover:text-emerald-300">
+              Refresh data
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Body -->
+      <div class="flex-1">
+        <div class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+          <!-- Stats row -->
+          <div class="grid gap-4 md:grid-cols-4">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl px-4 py-3">
+              <div class="text-xs text-slate-400 mb-1">Clients</div>
+              <div id="statClients" class="text-2xl font-bold">–</div>
+              <div class="text-[11px] text-slate-500 mt-1">Accounts in this workspace</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl px-4 py-3">
+              <div class="text-xs text-slate-400 mb-1">Campaigns</div>
+              <div id="statCampaigns" class="text-2xl font-bold">–</div>
+              <div class="text-[11px] text-slate-500 mt-1">Live & historical runs</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl px-4 py-3">
+              <div class="text-xs text-slate-400 mb-1">Total Leads</div>
+              <div id="statLeads" class="text-2xl font-bold">–</div>
+              <div class="text-[11px] text-slate-500 mt-1">Companies in pipeline</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl px-4 py-3">
+              <div class="text-xs text-slate-400 mb-1">Lead Mix</div>
+              <div class="flex items-baseline gap-2">
+                <span id="statHot" class="text-sm font-semibold text-emerald-300">0 hot</span>
+                <span id="statWarm" class="text-[11px] text-amber-300/90">0 warm</span>
+                <span id="statCold" class="text-[11px] text-slate-400">0 cold</span>
+              </div>
+              <div class="text-[11px] text-slate-500 mt-1">By ReachX score</div>
+            </div>
+          </div>
+
+          <!-- Two column: list + pipeline -->
+          <div class="grid gap-6 lg:grid-cols-3">
+            <!-- Clients & campaigns -->
+            <div class="lg:col-span-1 space-y-4">
+              <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h2 class="text-sm font-semibold">Clients</h2>
+                </div>
+                <ul id="clientsList" class="space-y-2 text-sm max-h-64 overflow-y-auto pr-1"></ul>
+              </section>
+
+              <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h2 class="text-sm font-semibold">Campaigns</h2>
+                </div>
+                <ul id="campaignsList" class="space-y-2 text-sm max-h-64 overflow-y-auto pr-1"></ul>
+              </section>
+            </div>
+
+            <!-- Pipeline -->
+            <section class="lg:col-span-2 bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <h2 class="text-sm font-semibold">Lead Pipeline</h2>
+                  <p class="text-xs text-slate-400">Grouped by score: hot · warm · cold</p>
+                </div>
+              </div>
+              <div class="grid gap-4 md:grid-cols-3 text-xs">
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                    <span class="font-semibold text-emerald-300 uppercase tracking-wide text-[10px]">Hot</span>
+                  </div>
+                  <ul id="leadsHot" class="space-y-2 min-h-[40px]"></ul>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="h-2 w-2 rounded-full bg-amber-400"></span>
+                    <span class="font-semibold text-amber-300 uppercase tracking-wide text-[10px]">Warm</span>
+                  </div>
+                  <ul id="leadsWarm" class="space-y-2 min-h-[40px]"></ul>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="h-2 w-2 rounded-full bg-slate-400"></span>
+                    <span class="font-semibold text-slate-200 uppercase tracking-wide text-[10px]">Cold</span>
+                  </div>
+                  <ul id="leadsCold" class="space-y-2 min-h-[40px]"></ul>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <p class="text-[10px] text-slate-500 pt-2 border-t border-slate-900">
+            Data source: Supabase · Project <span class="font-mono">abkprecmhitqmmlzxfad</span> · Tables reachx_clients / reachx_campaigns / reachx_leads
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ==============================
+    // Supabase config
+    // ==============================
+    const SUPABASE_URL = 'https://abkprecmhitqmmlzxfad.supabase.co';
+    // IMPORTANT: use the anon key for abkprecmhitqmmlzxfad
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFia3ByZWNtaGl0cW1tbHp4ZmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDc2NTksImV4cCI6MjA3NTUyMzY1OX0.laMBfcRG_liLwsaslI0qZyGJwrpgiryUmzy8k-rls2o';
+
+    const supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ==============================
+    // DOM references
+    // ==============================
+    const statusPill = document.getElementById('status-pill');
+    const statusText = document.getElementById('status-text');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    const statClients = document.getElementById('statClients');
+    const statCampaigns = document.getElementById('statCampaigns');
+    const statLeads = document.getElementById('statLeads');
+    const statHot = document.getElementById('statHot');
+    const statWarm = document.getElementById('statWarm');
+    const statCold = document.getElementById('statCold');
+
+    const clientsList = document.getElementById('clientsList');
+    const campaignsList = document.getElementById('campaignsList');
+    const leadsHot = document.getElementById('leadsHot');
+    const leadsWarm = document.getElementById('leadsWarm');
+    const leadsCold = document.getElementById('leadsCold');
+
+    function setStatus(type, text) {
+      statusText.textContent = text;
+      if (type === 'ok') {
+        statusPill.textContent = 'Connected';
+        statusPill.className = 'text-[11px] px-2 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-300';
+      } else if (type === 'error') {
+        statusPill.textContent = 'Error';
+        statusPill.className = 'text-[11px] px-2 py-0.5 rounded-full border border-rose-500/40 bg-rose-500/10 text-rose-300';
+      } else {
+        statusPill.textContent = 'Connecting…';
+        statusPill.className = 'text-[11px] px-2 py-0.5 rounded-full border border-slate-700 bg-slate-900 text-slate-300';
+      }
+    }
+
+    function renderSimpleList(container, items, renderItem) {
+      container.innerHTML = '';
+      if (!items || items.length === 0) {
+        container.innerHTML = '<li class="text-slate-500 italic">No records</li>';
+        return;
+      }
+      for (const item of items) {
+        const li = document.createElement('li');
+        li.className = 'bg-slate-900 border border-slate-800 rounded-xl px-3 py-2';
+        li.innerHTML = renderItem(item);
+        container.appendChild(li);
+      }
+    }
+
+    function renderLeadList(container, items) {
+      container.innerHTML = '';
+      if (!items || items.length === 0) {
+        container.innerHTML = '<li class="text-slate-600 italic">No leads</li>';
+        return;
+      }
+      for (const l of items) {
+        const li = document.createElement('li');
+        li.className = 'bg-slate-900 border border-slate-800 rounded-xl px-3 py-2';
+        li.innerHTML = `
+          <div class="font-semibold text-slate-100 text-[13px]">${l.company_name}</div>
+          <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Status: <span class="font-mono">${l.status}</span></span>
+            <span class="font-mono text-slate-500">campaign: ${l.campaign_id}</span>
+          </div>
+        `;
+        container.appendChild(li);
+      }
+    }
+
+    async function loadData() {
+      setStatus('loading', 'Loading from Supabase…');
+
+      try {
+        const [
+          { data: clients, error: clientsError },
+          { data: campaigns, error: campaignsError },
+          { data: leads, error: leadsError }
+        ] = await Promise.all([
+          supa.from('reachx_clients').select('id,name').limit(50),
+          supa.from('reachx_campaigns').select('id,name,client_id').limit(50),
+          supa.from('reachx_leads').select('id,company_name,score,status,campaign_id').limit(200)
+        ]);
+
+        if (clientsError || campaignsError || leadsError) {
+          console.error('Supabase errors', { clientsError, campaignsError, leadsError });
+          setStatus('error', 'Error loading data. Check browser console for details.');
+          return;
+        }
+
+        // Stats
+        const clientCount = clients?.length || 0;
+        const campaignCount = campaigns?.length || 0;
+        const leadCount = leads?.length || 0;
+
+        statClients.textContent = clientCount;
+        statCampaigns.textContent = campaignCount;
+        statLeads.textContent = leadCount;
+
+        const hotLeads = (leads || []).filter(l => String(l.score).toLowerCase() === 'hot');
+        const warmLeads = (leads || []).filter(l => String(l.score).toLowerCase() === 'warm');
+        const coldLeads = (leads || []).filter(l => String(l.score).toLowerCase() === 'cold');
+
+        statHot.textContent = `${hotLeads.length} hot`;
+        statWarm.textContent = `${warmLeads.length} warm`;
+        statCold.textContent = `${coldLeads.length} cold`;
+
+        // Lists
+        renderSimpleList(clientsList, clients, c => `
+          <div class="font-semibold">${c.name || 'Unnamed client'}</div>
+          <div class="mt-1 text-[10px] text-slate-500 font-mono">id: ${c.id}</div>
+        `);
+
+        renderSimpleList(campaignsList, campaigns, c => `
+          <div class="font-semibold">${c.name || 'Unnamed campaign'}</div>
+          <div class="mt-1 text-[10px] text-slate-500 font-mono">client: ${c.client_id}</div>
+        `);
+
+        renderLeadList(leadsHot, hotLeads);
+        renderLeadList(leadsWarm, warmLeads);
+        renderLeadList(leadsCold, coldLeads);
+
+        setStatus('ok', 'Connected to Supabase · Snapshot updated');
+      } catch (err) {
+        console.error('Unexpected error', err);
+        setStatus('error', 'Unexpected error loading data.');
+      }
+    }
+
+    refreshBtn.addEventListener('click', loadData);
+    loadData();
+  </script>
+</body>
+</html>

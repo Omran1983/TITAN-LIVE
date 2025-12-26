@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SMS Marketing - TITAN OS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #020617;
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.1), transparent 40%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(30, 41, 59, 0.6);
+        }
+    </style>
+</head>
+
+<body class="h-full antialiased">
+    <div class="min-h-screen p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center gap-3 mb-2">
+                <div
+                    class="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">SMS Marketing</h1>
+                    <p class="text-sm text-slate-400">Bulk SMS campaigns via Android gateway</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-4 mb-6 border-b border-white/10">
+            <button onclick="switchTab('compose')" data-tab="compose"
+                class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-cyan-500 text-cyan-400">
+                Compose Campaign
+            </button>
+            <button onclick="switchTab('campaigns')" data-tab="campaigns"
+                class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white">
+                Campaign History
+            </button>
+            <button onclick="switchTab('contacts')" data-tab="contacts"
+                class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white">
+                Contacts
+            </button>
+            <button onclick="switchTab('settings')" data-tab="settings"
+                class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white">
+                Gateway Settings
+            </button>
+        </div>
+
+        <!-- Compose Tab -->
+        <div id="tab-compose" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Message Composer -->
+                <div class="glass-panel rounded-xl p-6">
+                    <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                        Compose Message
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Campaign Name</label>
+                            <input type="text" id="campaign-name"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-cyan-500 outline-none"
+                                placeholder="e.g., New Product Launch">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">
+                                Message (<span id="char-count">0</span>/160 characters)
+                            </label>
+                            <textarea id="sms-message" maxlength="160"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none h-32 resize-none"
+                                placeholder="Type your message here..."></textarea>
+                            <p class="text-xs text-slate-500 mt-1">SMS messages are limited to 160 characters</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">
+                                Recipients (<span id="selected-count">0</span> selected)
+                            </label>
+                            <div class="flex gap-2">
+                                <button onclick="selectAllContacts()"
+                                    class="px-3 py-1.5 text-sm border border-slate-600 rounded hover:bg-slate-800 transition">
+                                    Select All
+                                </button>
+                                <button onclick="clearSelection()"
+                                    class="px-3 py-1.5 text-sm border border-slate-600 rounded hover:bg-slate-800 transition">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <button onclick="sendCampaign()"
+                            class="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white py-3 rounded-lg font-semibold shadow-lg transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                            Send Campaign
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contact Selection -->
+                <div class="glass-panel rounded-xl p-6">
+                    <h2 class="text-lg font-semibold mb-4">Select Recipients</h2>
+                    <div id="contacts-list" class="space-y-2 max-h-96 overflow-y-auto">
+                        <div class="text-center text-slate-500 py-8">
+                            Loading contacts...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaigns Tab -->
+        <div id="tab-campaigns" class="tab-content hidden">
+            <div class="glass-panel rounded-xl overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-slate-900/50 border-b border-slate-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Campaign</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Recipients</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Delivered</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Failed</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Rate</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaigns-table" class="divide-y divide-slate-700">
+                        <tr>
+                            <td colspan="7" class="px-6 py-8 text-center text-slate-500">
+                                Loading campaigns...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Contacts Tab -->
+        <div id="tab-contacts" class="tab-content hidden">
+            <div class="mb-4 flex gap-4">
+                <label
+                    class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer transition-all flex items-center gap-2 shadow-lg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
+                    </svg>
+                    Import CSV
+                    <input type="file" accept=".csv" onchange="importCSV(event)" class="hidden">
+                </label>
+                <button onclick="loadContacts()"
+                    class="border border-slate-600 px-4 py-2 rounded-lg hover:bg-slate-800 transition">
+                    Refresh
+                </button>
+            </div>
+
+            <div class="glass-panel rounded-xl overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-slate-900/50 border-b border-slate-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Phone</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Email</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Tags</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                                Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts-table" class="divide-y divide-slate-700">
+                        <tr>
+                            <td colspan="5" class="px-6 py-8 text-center text-slate-500">
+                                Loading contacts...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="tab-settings" class="tab-content hidden">
+            <div class="max-w-2xl">
+                <div class="glass-panel rounded-xl p-6">
+                    <h2 class="text-lg font-semibold mb-4">SMS Gateway Configuration</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Gateway Type</label>
+                            <select aria-label="Gateway Type"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-cyan-500 outline-none">
+                                <option>SMS Gateway API (Android)</option>
+                                <option>Twilio</option>
+                                <option>Africa's Talking</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">API URL</label>
+                            <input type="text" id="gateway-url"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-cyan-500 outline-none"
+                                placeholder="https://smsgateway.me/api/v4">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">API Key</label>
+                            <input type="password" id="gateway-key"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-cyan-500 outline-none"
+                                placeholder="Your API key">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Device ID</label>
+                            <input type="text" id="gateway-device"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-cyan-500 outline-none"
+                                placeholder="Device ID from app">
+                        </div>
+                        <button onclick="saveGatewayConfig()"
+                            class="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white py-3 rounded-lg font-semibold shadow-lg transition-all">
+                            Save Configuration
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-6 mt-6">
+                    <h3 class="text-sm font-semibold mb-3">Setup Instructions</h3>
+                    <ol class="text-sm text-slate-400 space-y-2 list-decimal list-inside">
+                        <li>Download "SMS Gateway API" app from Google Play Store</li>
+                        <li>Grant SMS permissions and create account</li>
+                        <li>Copy API URL, API Key, and Device ID from app settings</li>
+                        <li>Paste credentials above and save</li>
+                        <li>Import contacts via CSV (format: phone,name,email,tags)</li>
+                        <li>Compose and send your first campaign!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-cyan-500', 'text-cyan-400');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.querySelector(`[data-tab="${tabName}"]`).classList.remove('border-transparent', 'text-slate-400');
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('border-cyan-500', 'text-cyan-400');
+        }
+
+        // Character counter
+        document.getElementById('sms-message')?.addEventListener('input', (e) => {
+            document.getElementById('char-count').textContent = e.target.value.length;
+        });
+
+        // Mock data and functions (replace with actual API calls)
+        let selectedContacts = [];
+        let contacts = [];
+
+        function loadContacts() {
+            // TODO: Fetch from Supabase
+            contacts = [
+                { id: 1, name: 'John Doe', phone: '+260971234567', email: 'john@example.com', tags: ['customer'], opted_in: true },
+                { id: 2, name: 'Jane Smith', phone: '+260977654321', email: 'jane@example.com', tags: ['vip'], opted_in: true }
+            ];
+            renderContacts();
+        }
+
+        function renderContacts() {
+            const list = document.getElementById('contacts-list');
+            list.innerHTML = contacts.map(c => `
+                <div class="glass-card rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700/30" onclick="toggleContact(${c.id})">
+                    <input type="checkbox" ${selectedContacts.includes(c.id) ? 'checked' : ''} class="w-4 h-4">
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">${c.name || 'No name'}</div>
+                        <div class="text-xs text-slate-400">${c.phone}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('selected-count').textContent = selectedContacts.length;
+        }
+
+        function toggleContact(id) {
+            if (selectedContacts.includes(id)) {
+                selectedContacts = selectedContacts.filter(cid => cid !== id);
+            } else {
+                selectedContacts.push(id);
+            }
+            renderContacts();
+        }
+
+        function selectAllContacts() {
+            selectedContacts = contacts.map(c => c.id);
+            renderContacts();
+        }
+
+        function clearSelection() {
+            selectedContacts = [];
+            renderContacts();
+        }
+
+        function sendCampaign() {
+            const name = document.getElementById('campaign-name').value;
+            const message = document.getElementById('sms-message').value;
+
+            if (!name || !message || selectedContacts.length === 0) {
+                alert('Please fill in campaign name, message, and select recipients');
+                return;
+            }
+
+            // TODO: Send to backend API
+            alert(`Campaign "${name}" would be sent to ${selectedContacts.length} recipients`);
+        }
+
+        function importCSV(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const csv = e.target.result;
+                // TODO: Parse CSV and upload to Supabase
+                alert('CSV import functionality - connect to backend');
+            };
+            reader.readAsText(file);
+        }
+
+        function saveGatewayConfig() {
+            // TODO: Save to Supabase sms_gateway_config table
+            alert('Gateway configuration saved!');
+        }
+
+        // Initialize
+        loadContacts();
+    </script>
+</body>
+
+</html>

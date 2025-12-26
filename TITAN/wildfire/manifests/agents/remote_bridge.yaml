@@ -1,0 +1,46 @@
+version: 1
+agent_id: AGENT_REMOTE_BRIDGE
+name: Remote Bridge
+runtime:
+  mode: sandbox
+  language: node
+  entrypoint: wildfire/modules/remote_bridge/index.js
+  concurrency: 2
+  timeout_ms: 60000
+
+interfaces:
+  consumes:
+    - topic: az.remote_commands
+      schema: remote_command_v1
+  produces:
+    - topic: az.remote_results
+      schema: remote_result_v1
+
+auth:
+  channel: telegram
+  require_2fa_phrase: true
+  signing:
+    algorithm: ed25519
+    required: true
+
+execution:
+  runner: "local_executor_adapter"
+  allowlist_commands:
+    - "health_snapshot"
+    - "deploy_sandbox"
+    - "run_inspector"
+    - "run_pipeline"
+    - "tail_logs"
+  denylist_patterns:
+    - "format"
+    - "del /s"
+    - "rm -rf"
+    - "reg delete"
+    - "diskpart"
+
+observability:
+  heartbeat_sec: 15
+  metrics:
+    - commands_received
+    - commands_executed
+    - auth_failures

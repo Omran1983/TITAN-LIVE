@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Left Column: Intelligence & Status (30%) -->
+<div class="flex-none w-1/4 flex flex-col gap-6">
+
+    <!-- The SENTINEL (Sentiment) -->
+    <div class="holo-panel p-1 flex-1 flex flex-col relative overflow-hidden group">
+        <div class="absolute top-0 right-0 p-2 text-neon-cyan/50 text-xs font-mono">MOD_SENTINEL</div>
+
+        <div class="p-4 flex-1 flex flex-col items-center justify-center relative z-10">
+            <!-- Animated Arc -->
+            <div
+                class="w-48 h-24 border-t-8 border-l-8 border-r-8 border-gray-800 rounded-t-full relative overflow-hidden">
+                <div id="sentiment-arc"
+                    class="absolute w-full h-full border-t-8 border-l-8 border-r-8 border-neon-cyan rounded-t-full origin-bottom transition-transform duration-1000"
+                    style="transform: rotate(-100deg);"></div>
+            </div>
+
+            <div class="text-center -mt-8">
+                <div id="sentiment-score" class="text-5xl font-bold text-white text-glow-cyan">0.00</div>
+                <div id="sentiment-label" class="text-neon-cyan font-mono tracking-widest text-sm mt-1">NEUTRAL</div>
+                <div class="text-xs text-gray-500 mt-4">GLOBAL MARKET MOOD</div>
+            </div>
+        </div>
+
+        <!-- News Feed Ticker -->
+        <div class="h-32 border-t border-white/10 bg-black/40 p-3 font-mono text-xs overflow-y-auto" id="news-ticker">
+            <div class="text-neon-gold mb-1">// LATEST INTEL</div>
+            <div class="space-y-1 text-gray-400">
+                <div class="flex gap-2"><span>></span> <span>Connecting to News Stream...</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The SHIELD (Risk) -->
+    <div class="holo-panel p-4 h-1/3 flex flex-col">
+        <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
+            <h3 class="text-neon-red font-bold tracking-widest"><i class="fas fa-shield-alt mr-2"></i>SHIELD</h3>
+            <span id="shield-status"
+                class="bg-neon-green/20 text-neon-green text-xs px-2 py-1 rounded border border-neon-green/50">ACTIVE</span>
+        </div>
+
+        <div class="flex-1 flex flex-col justify-center gap-4">
+            <!-- PnL Progress Bar -->
+            <div>
+                <div class="flex justify-between text-xs font-mono mb-1">
+                    <span class="text-gray-400">DAILY PNL</span>
+                    <span id="pnl-display" class="text-white">$0.00</span>
+                </div>
+                <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div id="pnl-bar" class="h-full bg-neon-green w-1/2 transition-all"></div>
+                </div>
+                <div class="flex justify-between text-xs font-mono mt-1 text-gray-600">
+                    <span>LIMIT: <span id="daily-limit" class="text-neon-red">-$10.00</span></span>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 gap-2 text-center">
+                <div class="bg-black/40 p-2 rounded border border-white/5">
+                    <div class="text-xs text-gray-500 font-mono">DRAWDOWN</div>
+                    <div class="text-neon-gold font-bold">0.00%</div>
+                </div>
+                <div class="bg-black/40 p-2 rounded border border-white/5">
+                    <div class="text-xs text-gray-500 font-mono">EXPOSURE</div>
+                    <div class="text-neon-cyan font-bold">0.00%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Center Column: Charts & Execution (50%) -->
+<div class="flex-1 flex flex-col gap-6">
+    <!-- Chart Container -->
+    <div class="holo-panel flex-1 relative p-1">
+        <div class="absolute top-0 left-0 bg-neon-cyan/20 px-2 py-0.5 text-[10px] font-mono text-neon-cyan">LIVE FEED //
+            BTCUSDT</div>
+        <div id="tv_chart_container" class="w-full h-full rounded bg-black/50"></div>
+    </div>
+
+    <!-- Active Positions Terminal -->
+    <div class="holo-panel h-1/3 p-4 flex flex-col">
+        <div class="flex justify-between items-center mb-2">
+            <h3 class="text-neon-gold font-bold tracking-widest text-sm"><i class="fas fa-crosshairs mr-2"></i>ACTIVE
+                DEPLOYMENTS</h3>
+        </div>
+        <div class="flex-1 overflow-auto bg-black/40 border border-white/5 rounded">
+            <table class="w-full text-left font-mono text-sm">
+                <thead class="bg-white/5 text-gray-400">
+                    <tr>
+                        <th class="p-2">ASSET</th>
+                        <th class="p-2">VECTOR</th>
+                        <th class="p-2">SIZE</th>
+                        <th class="p-2">ENTRY</th>
+                        <th class="p-2">ROI</th>
+                    </tr>
+                </thead>
+                <tbody id="positions-table-body" class="text-gray-300">
+                    <!-- JS Populated -->
+                </tbody>
+            </table>
+            <div id="no-positions-msg" class="text-center text-gray-600 p-8 italic">NO ACTIVE POSITIONS</div>
+        </div>
+    </div>
+</div>
+
+<!-- Right Column: Council Status & Logs (20%) -->
+<div class="flex-none w-1/5 flex flex-col gap-6">
+
+    <!-- MARKET INTELLIGENCE SCANNER -->
+    <div class="holo-panel flex-1 flex flex-col p-4">
+        <h3
+            class="text-neon-cyan font-bold tracking-widest mb-2 border-b border-white/10 pb-2 text-xs flex justify-between">
+            <span>MARKET INTEL</span>
+            <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+        </h3>
+        <div class="flex-1 overflow-y-auto pr-1">
+            <table class="w-full text-left font-mono text-xs">
+                <thead class="text-gray-500 border-b border-white/5">
+                    <tr>
+                        <th class="pb-2 pl-1">TICKER</th>
+                        <th class="pb-2 text-right">PRICE</th>
+                        <th class="pb-2 text-right pr-1">24H</th>
+                    </tr>
+                </thead>
+                <tbody id="scanner-body">
+                    <!-- Populated via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- The COUNCIL -->
+    <div class="holo-panel p-4">
+        <h3 class="text-neon-purple font-bold tracking-widest mb-4 border-b border-white/10 pb-2 text-xs"><i
+                class="fas fa-users mr-2"></i>THE COUNCIL</h3>
+
+        <div class="space-y-3 font-mono text-xs">
+            <div class="flex items-center justify-between p-2 bg-black/30 border-l-2 border-neon-red">
+                <div>
+                    <div class="text-gray-400">DOOM WATCHER</div>
+                </div>
+                <div class="text-neon-green animate-pulse">● ONLINE</div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-black/30 border-l-2 border-neon-cyan">
+                <div>
+                    <div class="text-gray-400">STRATEGIST</div>
+                </div>
+                <div class="text-neon-cyan">● THINKING</div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-black/30 border-l-2 border-neon-gold">
+                <div>
+                    <div class="text-gray-400">ORACLE</div>
+                </div>
+                <div class="text-neon-green">● SYNCED</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The BLACK BOX -->
+    <div class="holo-panel flex-1 flex flex-col p-4">
+        <h3 class="text-gray-400 font-bold tracking-widest mb-2 border-b border-white/10 pb-2 text-xs">DECISION STREAM
+        </h3>
+        <div id="decision-log" class="flex-1 overflow-y-auto font-mono text-[10px] space-y-2 pr-1">
+            <!-- JS populated -->
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // TradingView (Simplified for performance)
+    new TradingView.widget({
+        "autosize": true,
+        "symbol": "BINANCE:BTCUSDT",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": "tv_chart_container",
+        "hide_side_toolbar": true,
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "gridLineColor": "rgba(255, 255, 255, 0.05)"
+    });
+
+    // Update Logic
+    async function updateData() {
+        try {
+            const statusRes = await fetch('/api/status');
+            const data = await statusRes.json();
+
+            // PnL & Shield
+            const pnl = data.pnl || 0;
+            document.getElementById('pnl-display').innerText = `$${pnl.toFixed(2)}`;
+            document.getElementById('pnl-display').className = pnl >= 0 ? 'text-neon-green font-bold' : 'text-neon-red font-bold';
+            document.getElementById('header-capital').innerText = `$${(data.shield.current_capital || 100).toFixed(2)}`;
+            document.getElementById('daily-limit').innerText = `$${data.shield.daily_loss_limit}`;
+
+            // Sentinel Arc Animation
+            if (data.sentinel) {
+                const score = data.sentinel.score;
+                document.getElementById('sentiment-score').innerText = score.toFixed(2);
+                document.getElementById('sentiment-label').innerText = data.sentinel.label;
+                const degrees = -90 + (score * 90);
+                document.getElementById('sentiment-arc').style.transform = `rotate(${degrees}deg)`;
+
+                const scoreEl = document.getElementById('sentiment-score');
+                const arc = document.getElementById('sentiment-arc');
+
+                if (score < -0.3) {
+                    scoreEl.className = "text-5xl font-bold text-white text-glow-red";
+                    arc.className = "absolute w-full h-full border-t-8 border-l-8 border-r-8 border-neon-red rounded-t-full origin-bottom transition-transform duration-1000";
+                } else if (score > 0.3) {
+                    scoreEl.className = "text-5xl font-bold text-white text-glow-green";
+                    arc.className = "absolute w-full h-full border-t-8 border-l-8 border-r-8 border-neon-green rounded-t-full origin-bottom transition-transform duration-1000";
+                } else {
+                    scoreEl.className = "text-5xl font-bold text-white text-glow-cyan";
+                    arc.className = "absolute w-full h-full border-t-8 border-l-8 border-r-8 border-neon-cyan rounded-t-full origin-bottom transition-transform duration-1000";
+                }
+            }
+
+            // Market Scanner
+            const scannerBody = document.getElementById('scanner-body');
+            if (scannerBody && data.scanner) {
+                scannerBody.innerHTML = '';
+                data.scanner.forEach(asset => {
+                    const chgClass = asset.change_24h >= 0 ? 'text-neon-green' : 'text-neon-red';
+                    const wlIcon = asset.is_whitelisted ? '<i class="fas fa-check-circle text-neon-green text-[10px] ml-1"></i>' : '<i class="fas fa-ban text-neon-red text-[10px] ml-1"></i>';
+
+                    scannerBody.innerHTML += `
+                        <tr class="hover:bg-white/10 border-b border-white/5 transition-colors cursor-pointer">
+                            <td class="py-2 pl-1 font-bold text-gray-200">
+                                ${asset.symbol} ${wlIcon}
+                            </td>
+                            <td class="py-2 text-right text-gray-400 font-mono">$${asset.price.toFixed(4)}</td>
+                            <td class="py-2 pr-1 text-right ${chgClass} font-mono">${asset.change_24h.toFixed(2)}%</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Positions
+            const posBody = document.getElementById('positions-table-body');
+            posBody.innerHTML = '';
+            if (data.positions && data.positions.length > 0) {
+                document.getElementById('no-positions-msg').classList.add('hidden');
+                data.positions.forEach(pos => {
+                    // Calc PnL
+                    const currentPrice = data.market_data[pos.symbol] || pos.entry_price;
+                    let pnlVal = 0;
+                    if (pos.direction === 'LONG') pnlVal = (currentPrice - pos.entry_price) * pos.quantity;
+                    else pnlVal = (pos.entry_price - currentPrice) * pos.quantity;
+
+                    const pnlClass = pnlVal >= 0 ? 'text-neon-green' : 'text-neon-red';
+
+                    posBody.innerHTML += `
+                    <tr class="border-b border-white/5 hover:bg-white/5">
+                        <td class="p-2 font-bold text-white">${pos.symbol}</td>
+                        <td class="p-2"><span class="${pos.direction == 'LONG' ? 'text-neon-green' : 'text-neon-red'} bg-white/5 px-1 rounded">${pos.direction}</span></td>
+                        <td class="p-2">${pos.quantity.toFixed(3)}</td>
+                        <td class="p-2 text-gray-400">$${pos.entry_price.toFixed(4)}</td>
+                        <td class="p-2 ${pnlClass} font-bold">$${pnlVal.toFixed(2)}</td>
+                    </tr>`;
+                });
+            } else {
+                document.getElementById('no-positions-msg').classList.remove('hidden');
+            }
+
+            // Logs
+            const logRes = await fetch('/api/decision_log');
+            const logs = await logRes.json();
+            const logContainer = document.getElementById('decision-log');
+            logContainer.innerHTML = '';
+
+            logs.reverse().forEach(entry => {
+                const time = entry.timestamp.split('T')[1].split('.')[0];
+                const statusColor = entry.risk_check.approved ? 'text-neon-green' : 'text-neon-red';
+
+                logContainer.innerHTML += `
+                <div class="mb-2 font-mono hover:bg-white/5 p-1 rounded">
+                    <div class="flex justify-between text-gray-500">
+                        <span>[${time}]</span>
+                        <span class="text-white font-bold">${entry.symbol}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="${statusColor}">> ${entry.signal}</span>
+                        <span class="text-gray-400">SENT:${entry.context.sentiment_score.toFixed(2)}</span>
+                    </div>
+                </div>`;
+            });
+
+
+        } catch (e) { console.error(e); }
+    }
+
+    setInterval(updateData, 2000);
+    updateData();
+</script>
+{% endblock %}

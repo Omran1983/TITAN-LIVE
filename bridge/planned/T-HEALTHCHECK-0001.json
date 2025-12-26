@@ -1,0 +1,1 @@
+{"id":"T-HEALTHCHECK-0001","type":"HEALTHCHECK","payload":{"ts":"'"$(Get-Date -AsUTC -Format s)"'"}}

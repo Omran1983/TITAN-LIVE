@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "status": "queued",
+  "file": "infra\\ReachX-Workers-UI-v1\\index.html",
+  "goal": "Create or improve a workers list UI that fetches workers from Supabase and displays them in a responsive table with filters by primary_skill and origin_country.",
+  "notes": "You may rewrite the whole file. Do not touch other files or projects.",
+  "completed_at": null
+}

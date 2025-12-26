@@ -1,0 +1,9 @@
+[project]
+name = "Grant Refresh (NGO Automator)"
+description = "Runs NGO automator report generation."
+
+[[steps]]
+name = "Run NGO Automator report"
+kind = "powershell"
+cwd = "F:\\AION-ZERO"
+cmd = "python projects/ngo-automator/src/report.py"

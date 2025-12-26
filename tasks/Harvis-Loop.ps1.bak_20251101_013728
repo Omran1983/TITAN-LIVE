@@ -1,0 +1,134 @@
+<#
+Harvis-Loop.ps1 ? resilient build loop (git-optional, offline-safe, kill-switch)
+
+? Works from $ProjectPath (preferred) else nearest repo
+? Skips git if: not a repo OR no 'origin' OR offline OR -NoGit
+? Retries pull when online; npm ci + build; exit-code decides success
+? Kill-switch fixed: robust JSON load to real array
+#>
+
+param(
+  [string]$ProjectPath = "F:\AION-ZERO\a-one-marcom",
+  [string]$LogDir      = "F:\AION-ZERO\logs",
+  [string]$Branch      = "main",
+  [int]   $GitRetries  = 3,
+  [switch]$NoGit,
+  [switch]$Quiet
+)
+
+if ($PSVersionTable.PSVersion.Major -ge 7) { $global:PSNativeCommandUseErrorActionPreference = $false }
+
+if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Force -Path $LogDir | Out-Null }
+$Log = Join-Path $LogDir ("harvis_{0:yyyyMMdd_HHmmss}.log" -f (Get-Date))
+$StatusPath     = Join-Path $LogDir 'harvis_status.txt'
+$KillSwitchPath = Join-Path $LogDir 'harvis_killswitch.json'
+
+function ts { (Get-Date).ToString('o') }
+function Write-Log {
+  param([string]$Message, [switch]$Error)
+  $line = "$(ts) | $Message"
+  if ($Error) { $line | Tee-Object -FilePath $Log -Append | Write-Error }
+  else { $line | Tee-Object -FilePath $Log -Append | Out-Host }
+}
+
+function Register-FailureAndMaybeTripKillSwitch {
+  param([string]$Why = "unknown")
+  try { $epochNow = [int][DateTimeOffset]::Now.ToUnixTimeSeconds() } catch { $epochNow = [int][double]::Parse((Get-Date -UFormat %s)) }
+  $windowS = 600; $limit = 3
+  $arr = $null
+  if (Test-Path $KillSwitchPath) {
+    try { $arr = Get-Content $KillSwitchPath -Raw | ConvertFrom-Json } catch { $arr = $null }
+  }
+  if ($null -eq $arr) { $arr = @() }
+  elseif ($arr -isnot [System.Array]) { $arr = @($arr) }  # force array if single object
+  $arr += [pscustomobject]@{ t=$epochNow; why=$Why }
+  $cut = $epochNow - $windowS
+  $arr = $arr | Where-Object { $_ -ne $null -and $_.t -gt $cut }
+  ($arr | ConvertTo-Json -Depth 3) | Set-Content -Path $KillSwitchPath -Encoding ASCII
+  if ($arr.Count -ge $limit) {
+    Set-Content -Path $StatusPath -Value 'degraded-offline'
+    Write-Log "Kill-switch tripped (>= $limit failures in 10m). Exiting." -Error
+    exit 2
+  }
+}
+
+function Test-Online {
+  try { return (Test-NetConnection github.com -Port 443 -InformationLevel Quiet) } catch { return $false }
+}
+
+function Invoke-Step {
+  param([Parameter(Mandatory)][string]$Label,[Parameter(Mandatory)][string]$Exe,[string[]]$Args=@())
+  Write-Log "$Label"
+  & $Exe @Args 2>&1 | Tee-Object -FilePath $Log -Append
+  if ($LASTEXITCODE -ne 0) { throw "$Label failed (exit=$LASTEXITCODE)" }
+}
+
+# ---------- Working directory: prefer ProjectPath ----------
+$Pushed = $false
+try {
+  $work = $null
+  if ($ProjectPath -and (Test-Path $ProjectPath)) { $work = $ProjectPath }
+  else {
+    $root = $PSScriptRoot
+    while ($root -and -not (Test-Path (Join-Path $root '.git'))) { $root = Split-Path $root -Parent }
+    if ($root) { $work = $root }
+  }
+  if ($work) { Push-Location $work; $Pushed = $true; Write-Log "WorkingDir -> $work" } else { Write-Log "Staying in $(Get-Location) (no ProjectPath/repo found)" }
+
+  $projName = (Split-Path (Get-Location) -Leaf)
+  $Tag = "HARVIS | $($projName.ToUpper())"
+  Set-Content -Path $StatusPath -Value 'starting'
+
+  # ---------- GIT (optional; skip when unsafe) ----------
+  $insideRepo = $false
+  try { & git rev-parse --is-inside-work-tree 2>$null | Out-Null; $insideRepo = ($LASTEXITCODE -eq 0) } catch { $insideRepo = $false }
+
+  $hasOrigin = $false
+  if ($insideRepo) {
+    & git remote get-url origin 2>$null | Out-Null
+    $hasOrigin = ($LASTEXITCODE -eq 0)
+  }
+
+  if ($NoGit) {
+    Write-Log "$($Tag): -NoGit -> skipping git pull"
+  } elseif (-not $insideRepo) {
+    Write-Log "$($Tag): Not a git repo here -> skipping git pull"
+  } elseif (-not $hasOrigin) {
+    Write-Log "$($Tag): No 'origin' remote -> skipping git pull"
+  } elseif (-not (Test-Online)) {
+    Write-Log "$($Tag): Offline -> skipping git pull"
+  } else {
+    $attempt=0; $code=0
+    while ($attempt -lt [math]::Max(1,$GitRetries)) {
+      & git fetch origin $Branch 2>&1 | Tee-Object -FilePath $Log -Append
+      & git pull --rebase origin $Branch 2>&1 | Tee-Object -FilePath $Log -Append
+      $code = $LASTEXITCODE
+      if ($code -eq 0) { break }
+      $backoff = [int](5 * [math]::Pow(2, $attempt))
+      Write-Log "$($Tag): git pull failed (exit=$code). Retrying in ${backoff}s..."
+      Start-Sleep -Seconds $backoff
+      $attempt++
+    }
+    if ($code -ne 0) { throw "$($Tag): git pull failed after $attempt attempts (exit=$code)" }
+  }
+
+  # ---------- NPM ----------
+  Write-Log "$($Tag): npm ci"
+  Invoke-Step -Label "$($Tag): npm ci" -Exe 'npm' -Args @('ci')
+
+  Write-Log "$($Tag): npm run build"
+  Invoke-Step -Label "$($Tag): npm run build" -Exe 'npm' -Args @('run','build')
+
+  Set-Content -Path $StatusPath -Value 'ok'
+  if (-not $Quiet) { Write-Log "$($Tag): SUCCESS" }
+}
+catch {
+  $msg = $_.Exception.Message
+  Write-Log "ERROR | $msg" -Error
+  Register-FailureAndMaybeTripKillSwitch -Why $msg
+  Set-Content -Path $StatusPath -Value 'error'
+  exit 1
+}
+finally {
+  if ($Pushed) { Pop-Location }
+}

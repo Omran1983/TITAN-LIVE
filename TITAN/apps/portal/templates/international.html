@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white">
+    <!-- Hero -->
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 bg-indigo-900 mb-12">
+        <div class="text-center">
+            <h1 class="text-base font-semibold text-indigo-300 tracking-wide uppercase">TITAN International</h1>
+            <p class="mt-1 text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
+                International Structuring
+            </p>
+            <p class="max-w-xl mt-5 mx-auto text-xl text-indigo-200">
+                Launch your Global HQ in the "Singapore of Africa". Tax Efficient. Legally Robust.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    🌍 Tax Treaty Access
+                </span>
+                <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    🛡️ Asset Protection
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- LEFT COLUMN: The Friendly Form -->
+        <div class="lg:col-span-2 bg-white shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-slate-50 px-8 py-6 border-b border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-900">Jurisdiction Fit Assessment</h3>
+                <p class="text-sm text-gray-500 mt-1">
+                    Determine if a Global Business License (GBC) or Authorized Company (AC) is right for your
+                    Pan-African expansion.
+                </p>
+            </div>
+
+            <!-- Form -->
+            <div class="p-8 space-y-8">
+                <!-- 1. Origin & Visa -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-lg font-medium text-gray-900 mb-2">1. Origin Country</label>
+                        <select id="originCountry" title="Origin Country" onchange="checkVisa(this.value)"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg p-3 border">
+                            <option value="">Select Country...</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="India">India</option>
+                            <option value="France">France / EU</option>
+                            <option value="USA">United States</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-lg font-medium text-gray-900 mb-2" for="targetActivity">Target
+                            Activity</label>
+                        <select id="targetActivity" title="Target Activity" aria-label="Target Activity"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg p-3 border">
+                            <option value="Holding">Holding Company (IP/Equity)</option>
+                            <option value="Trading">Global Trading / Import-Export</option>
+                            <option value="Tech">SaaS / Technology</option>
+                            <option value="Fund">Investment Fund</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Visa Logic Display -->
+                <div id="visaInfo" class="hidden bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
+                    <span class="text-2xl mr-3">✈️</span>
+                    <div>
+                        <h4 class="font-bold text-blue-900 text-sm">Visa Requirement Check</h4>
+                        <p class="text-sm text-blue-700 mt-1" id="visaText">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- 2. Goal Selection (Visual Cards) -->
+                <div>
+                    <label class="block text-lg font-medium text-gray-900 mb-4">2. Primary Objective</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button type="button" onclick="selectGoal(this, 'tax')"
+                            class="goal-btn py-4 px-6 border-2 border-gray-200 rounded-xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition group">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-green-100 text-green-700 p-2 rounded-lg text-xl mr-3 group-hover:bg-indigo-100 group-hover:text-indigo-700 transition">💸</span>
+                                <span class="block font-bold text-gray-900">Tax Optimization</span>
+                            </div>
+                            <span class="block text-xs text-gray-500 leading-relaxed">Leverage Mauritius's 40+ DTAA
+                                treaties. 3% Effective Tax Rate (GBC).</span>
+                        </button>
+
+                        <button type="button" onclick="selectGoal(this, 'ip')"
+                            class="goal-btn py-4 px-6 border-2 border-gray-200 rounded-xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition group">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-purple-100 text-purple-700 p-2 rounded-lg text-xl mr-3 group-hover:bg-indigo-100 group-hover:text-indigo-700 transition">🔒</span>
+                                <span class="block font-bold text-gray-900">Asset Protection</span>
+                            </div>
+                            <span class="block text-xs text-gray-500 leading-relaxed">Ideal for IP, Real Estate, and
+                                centralized treasury management.</span>
+                        </button>
+
+                        <button type="button" onclick="selectGoal(this, 'trade')"
+                            class="goal-btn py-4 px-6 border-2 border-gray-200 rounded-xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition group">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-blue-100 text-blue-700 p-2 rounded-lg text-xl mr-3 group-hover:bg-indigo-100 group-hover:text-indigo-700 transition">🚢</span>
+                                <span class="block font-bold text-gray-900">Regional HQ</span>
+                            </div>
+                            <span class="block text-xs text-gray-500 leading-relaxed">Duty-free access to Africa
+                                (COMESA/SADC) and logistics hub.</span>
+                        </button>
+
+                        <button type="button" onclick="selectGoal(this, 'invest')"
+                            class="goal-btn py-4 px-6 border-2 border-gray-200 rounded-xl text-left hover:border-indigo-500 hover:bg-indigo-50 transition group">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-orange-100 text-orange-700 p-2 rounded-lg text-xl mr-3 group-hover:bg-indigo-100 group-hover:text-indigo-700 transition">📈</span>
+                                <span class="block font-bold text-gray-900">Venture Capital</span>
+                            </div>
+                            <span class="block text-xs text-gray-500 leading-relaxed">No Capital Gains Tax. Ideal for
+                                exiting African startups.</span>
+                        </button>
+                    </div>
+                    <input type="hidden" id="selectedGoal" value="">
+                </div>
+
+                <!-- 3. Turnover Slider -->
+                <div>
+                    <label class="block text-lg font-medium text-gray-900 mb-2" for="turnoverRange">3. Projected Year 1
+                        Turnover</label>
+                    <div class="relative pt-1">
+                        <input type="range" min="0" max="10000000" step="50000" value="100000"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" id="turnoverRange"
+                            title="Turnover Slider" aria-label="Projected Turnover Slider"
+                            oninput="updateTurnoverLabel(this.value)">
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>Seed ($0)</span>
+                            <span class="font-bold text-indigo-600 text-lg" id="turnoverLabel">$100,000</span>
+                            <span>Corporate ($10M+)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="pt-6 border-t border-gray-100">
+                    <button id="analyzeBtn" onclick="analyzeFit()" disabled
+                        class="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 text-lg flex justify-center items-center">
+                        <span class="mr-2">✨</span> Generate Structure Plan
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="resultArea" class="hidden bg-slate-50 rounded-xl p-6 border border-slate-200 animate-pulse">
+                    <p class="text-center text-gray-600">Analyzing DTAA Treaties & Substance Rules...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: The "Excitement" Sidebar -->
+        <div class="space-y-6">
+            <!-- 1. Why Mauritius -->
+            <div class="bg-indigo-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mr-8 -mt-8 opacity-20">
+                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-lg mb-4">Why Mauritius?</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-indigo-100 text-sm"><span class="mr-2">✅</span> <strong>No Capital
+                            Gains Tax</strong></li>
+                    <li class="flex items-center text-indigo-100 text-sm"><span class="mr-2">✅</span> <strong>No
+                            Withholding Tax</strong> on Dividends</li>
+                    <li class="flex items-center text-indigo-100 text-sm"><span class="mr-2">✅</span> <strong>No
+                            Exchange Control</strong> (Free flow of USD/EUR)</li>
+                </ul>
+            </div>
+
+            <!-- 2. Applicable Laws -->
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                <h3 class="font-bold text-gray-900 mb-4">Key Legislation</h3>
+                <div class="space-y-4">
+                    <div class="group cursor-pointer">
+                        <h4 class="text-sm font-bold text-blue-600 group-hover:underline">Finance Act 2018</h4>
+                        <p class="text-xs text-gray-500">Introduced the 80% Partial Exemption Regime (Effective tax rate
+                            ~3%).</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <h4 class="text-sm font-bold text-blue-600 group-hover:underline">Companies Act 2001</h4>
+                        <p class="text-xs text-gray-500">The flexible framework allowing GBC, AC, and PCC structures.
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <h4 class="text-sm font-bold text-blue-600 group-hover:underline">FSC Rules</h4>
+                        <p class="text-xs text-gray-500">Defines "Substance Requirements" (Local director, expenditure).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Regional Access -->
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                <h3 class="font-bold text-gray-900 mb-2">Market Access</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-bold text-gray-600">SADC</span>
+                    <span
+                        class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-bold text-gray-600">COMESA</span>
+                    <span
+                        class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-bold text-gray-600">AfCFTA</span>
+                    <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-bold text-gray-600">AGOA
+                        (USA)</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">Mauritius is a member of all major African trade blocs, offering
+                    duty-free exports to 600M+ consumers.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentGoal = '';
+    let turnoverValue = 100000;
+
+    function updateTurnoverLabel(val) {
+        turnoverValue = parseInt(val);
+        const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 }).format(turnoverValue);
+        document.getElementById('turnoverLabel').innerText = formatted;
+        checkForm();
+    }
+
+    const VISA_RULES = {
+        "South Africa": "Visa Free (90 Days)",
+        "Kenya": "Visa Free (90 Days)",
+        "Nigeria": "Visa Required (Apply Online - eVisa)",
+        "Zambia": "Visa Free (90 Days)",
+        "India": "Visa on Arrival (60 Days)",
+        "France": "Visa Free (90 Days - Schengen)",
+        "USA": "Visa Free (90 Days)"
+    };
+
+    function checkVisa(country) {
+        const info = document.getElementById('visaInfo');
+        const text = document.getElementById('visaText');
+
+        if (country && VISA_RULES[country]) {
+            info.classList.remove('hidden');
+            text.innerText = `${country} Citizens: ${VISA_RULES[country]}`;
+        } else if (country) {
+            info.classList.remove('hidden');
+            text.innerText = "Check EDB Mauritius for specific visa rules.";
+        } else {
+            info.classList.add('hidden');
+        }
+    }
+
+    function selectGoal(btn, value) {
+        document.querySelectorAll('.goal-btn').forEach(b => {
+            // Reset styling for unselected
+            b.classList.remove('border-indigo-500', 'bg-indigo-50', 'ring-2', 'ring-indigo-200');
+            b.classList.add('border-gray-200');
+        });
+        // Select logic
+        btn.classList.remove('border-gray-200');
+        btn.classList.add('border-indigo-500', 'bg-indigo-50', 'ring-2', 'ring-indigo-200');
+
+        currentGoal = value;
+        document.getElementById('selectedGoal').value = value;
+        checkForm();
+    }
+
+    function checkForm() {
+        const btn = document.getElementById('analyzeBtn');
+        if (currentGoal) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true;
+        }
+    }
+
+    function analyzeFit() {
+        const resultArea = document.getElementById('resultArea');
+        const origin = document.getElementById('originCountry').value;
+
+        resultArea.classList.remove('hidden');
+        resultArea.classList.remove('animate-pulse');
+
+        let recommendation = "";
+        let colorClass = "bg-green-50 border-green-200 text-green-900";
+
+        // Logic
+        if (turnoverValue < 50000) {
+            recommendation = "Recommendation: **Domestic Company**. Your turnover (<$50k) is likely too low to justify GBC substance costs ($5k-$10k annual). Start as a standard Domestic Company.";
+            colorClass = "bg-yellow-50 border-yellow-200 text-yellow-900";
+        } else if (origin === 'South Africa' || origin === 'India') {
+            recommendation = "Recommendation: **Global Business License (GBC)**. Strong DTAA treaties exist with your origin. You qualify for the 80% Partial Exemption (3% Tax) on foreign income.";
+        } else if (currentGoal === 'ip') {
+            recommendation = "Recommendation: **Authorized Company (AC)**. If management is outside Mauritius, an AC offers 0% tax (Place of Effective Management rules apply).";
+            colorClass = "bg-purple-50 border-purple-200 text-purple-900";
+        } else {
+            recommendation = "Recommendation: **Global Business License (GBC)**. The gold standard for Pan-African trade and investment aggregation.";
+        }
+
+        resultArea.className = `mt-6 p-6 rounded-xl border ${colorClass}`;
+        resultArea.innerHTML = `
+            <h4 class='text-lg font-bold mb-2'>Preliminary Verdict</h4>
+            <p>${recommendation}</p>
+            <div class='mt-4 pt-4 border-t border-black/10'>
+                <p class='text-sm opacity-75'>To proceed with incorporation, our Advisory Team needs to review your shareholder structure.</p>
+                <button class='mt-3 text-indigo-700 font-bold underline'>Schedule Strategy Call &rarr;</button>
+            </div>
+        `;
+    }
+</script>
+
+<style>
+    .fade-in-up {
+        animation: fadeInUp 0.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}

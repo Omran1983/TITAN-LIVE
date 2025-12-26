@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white">
+    <!-- Hero Section: The Problem & Solution -->
+    <div class="bg-slate-900 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-3xl font-extrabold text-white sm:text-4xl md:text-5xl">
+                Most people miss out on <span class="text-blue-500">funding</span>.
+            </h1>
+            <h2 class="mt-4 text-xl text-slate-300">
+                Not because they're ineligible—but because the paperwork is a nightmare.
+            </h2>
+            <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-400">
+                We exist to fix that. We help individuals and businesses understand what’s available, decide what fits,
+                and prepare complete, submission-ready documents—so nothing breaks at the final stage.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="/portal/intake"
+                    class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-white hover:bg-slate-50">
+                    Get Started (Free)
+                </a>
+                <a href="#how-it-works"
+                    class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-slate-800 hover:bg-slate-700">
+                    How We Work
+                </a>
+            </div>
+            <p class="mt-4 text-sm text-slate-500 italic">
+                *We do not submit applications on behalf of applicants. We ensure your submission is compliant and
+                credible.
+            </p>
+        </div>
+    </div>
+
+    <!-- How We Work (The Trinity) -->
+    <div id="how-it-works" class="py-16 bg-white overflow-hidden lg:py-24">
+        <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
+            <div class="relative">
+                <h2 class="text-center text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    How We Work (Quietly, Reliably)
+                </h2>
+                <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-slate-500">
+                    Behind the scenes, our work is supported by an internal decision and document-preparation system
+                    made up of three core engines.
+                </p>
+            </div>
+
+            <div class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-3 lg:gap-8 border-t border-slate-100 pt-12">
+                <!-- TITAN -->
+                <div class="mt-10 lg:mt-0">
+                    <div
+                        class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto mb-4">
+                        <!-- Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg leading-6 font-medium text-slate-900">TITAN</h3>
+                        <p class="mt-2 text-base text-slate-500">
+                            Our <strong>coordination and validation engine</strong>. It checks eligibility logic,
+                            timelines, constraints, and internal consistency across documents.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- JARVIS -->
+                <div class="mt-10 lg:mt-0">
+                    <div
+                        class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-700 text-white mx-auto mb-4">
+                        <!-- Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg leading-6 font-medium text-slate-900">JARVIS</h3>
+                        <p class="mt-2 text-base text-slate-500">
+                            Our <strong>research and structuring engine</strong>. It scans available schemes, extracts
+                            requirements, and converts raw ideas into structured inputs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AZ (Automation Zone) -->
+                <div class="mt-10 lg:mt-0">
+                    <div
+                        class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-600 text-white mx-auto mb-4">
+                        <!-- Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg leading-6 font-medium text-slate-900">AZ (Automation Zone)</h3>
+                        <p class="mt-2 text-base text-slate-500">
+                            Our <strong>execution layer</strong>. It assembles drafts, validates completeness, flags
+                            gaps, and prepares final documents for human review.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-8 text-center text-sm text-slate-400 max-w-2xl mx-auto">
+                These systems do not replace people — they support accuracy, speed, and consistency.
+            </p>
+        </div>
+    </div>
+
+    <!-- The 6 Ws (Blueprint) -->
+    <div class="bg-slate-50 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">The Blueprint</h2>
+                <p class="mt-4 text-lg text-slate-500">Everything you need to know about the mission.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- WHO -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">WHO is this for?
+                    </h3>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li>• Individuals exploring funding or support schemes</li>
+                        <li>• SMEs and startups with limited internal capacity</li>
+                        <li>• Founders without formal project documentation experience</li>
+                        <li>• Teams that don’t have time to interpret complex guidelines</li>
+                    </ul>
+                </div>
+
+                <!-- WHAT -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">WHAT do we do?
+                    </h3>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li>• Identifying relevant schemes and grants</li>
+                        <li>• Translating vague ideas into structured project concepts</li>
+                        <li>• Preparing project plans, summaries, and supporting documents</li>
+                        <li>• Validating eligibility criteria and compliance requirements</li>
+                        <li>• Producing submission-ready documents</li>
+                    </ul>
+                </div>
+
+                <!-- WHEN -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">WHEN do we step
+                        in?</h3>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li>• An application deadline is close</li>
+                        <li>• A project plan is requested</li>
+                        <li>• A scheme requires structured justification</li>
+                        <li>• An applicant feels unsure or overwhelmed</li>
+                    </ul>
+                    <p class="mt-2 text-xs font-bold text-blue-600">Early engagement = stronger outcomes.</p>
+                </div>
+
+                <!-- WHERE -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">WHERE do we
+                        operate?</h3>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li>• <strong>Scheme-agnostic:</strong> Local or International</li>
+                        <li>• <strong>Sector-agnostic:</strong> Business, Innovation, Training, Sustainability</li>
+                        <li>• <strong>Document-focused:</strong> We adapt to official requirements</li>
+                    </ul>
+                </div>
+
+                <!-- WHY -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">WHY does this
+                        exist?</h3>
+                    <p class="text-slate-600 text-sm mb-4">
+                        Most people fail not at eligibility, but at documentation quality.
+                    </p>
+                    <p class="text-slate-600 text-sm font-semibold">We exist to ensure:</p>
+                    <ul class="mt-2 space-y-1 text-slate-600 text-sm">
+                        <li>• Ideas are clearly expressed</li>
+                        <li>• Requirements are fully addressed</li>
+                        <li>• Time and effort are not wasted</li>
+                    </ul>
+                </div>
+
+                <!-- HOW -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 border-l-4 border-blue-500 pl-3 mb-4">HOW does it work?
+                    </h3>
+                    <ol class="list-decimal pl-4 space-y-2 text-slate-600 text-sm">
+                        <li><strong>Intake:</strong> You provide basic details and your idea</li>
+                        <li><strong>Screening:</strong> We assess eligibility and feasibility</li>
+                        <li><strong>Structuring:</strong> We convert inputs into formal project logic</li>
+                        <li><strong>Drafting:</strong> We prepare structured documents</li>
+                        <li><strong>Validation:</strong> We check for completeness</li>
+                        <li><strong>Delivery:</strong> You receive submission-ready files</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing (How Much) -->
+    <div class="py-16 bg-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-slate-900">How Much It Costs</h2>
+                <p class="mt-4 text-lg text-slate-500 max-w-3xl mx-auto">
+                    Not all work can be priced upfront. That’s why every service has a free entry tier.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Free Tier -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        ALWAYS FREE</div>
+                    <h3 class="text-xl font-bold text-slate-900">Tier 0: The Explorer</h3>
+                    <p class="mt-2 text-slate-500 text-sm h-10">Get clarity before you commit time or money.</p>
+                    <hr class="my-6 border-slate-200">
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> Initial eligibility
+                            screening</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> Scheme fit assessment
+                        </li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> Gap and readiness
+                            checklist</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> High-level project
+                            outline</li>
+                    </ul>
+                    <div class="mt-8">
+                        <a href="/portal/intake"
+                            class="block w-full text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">Check
+                            My Eligibility</a>
+                    </div>
+                </div>
+
+                <!-- Paid Tiers -->
+                <div class="bg-white rounded-2xl p-8 border-2 border-slate-900 relative overflow-hidden shadow-lg">
+                    <div
+                        class="absolute top-0 right-0 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        PAID</div>
+                    <h3 class="text-xl font-bold text-slate-900">Tier 1 & 2: Project Architect</h3>
+                    <p class="mt-2 text-slate-500 text-sm h-10">From assisted structuring to full document packs.</p>
+                    <hr class="my-6 border-slate-200">
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> <strong>Full
+                                Structuring:</strong> Detailed project plans</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>
+                            <strong>Drafting:</strong> Executive narratives & summaries</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>
+                            <strong>Validation:</strong> Compliance sanity pass</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> <strong>Pricing:</strong>
+                            Custom quote based on complexity (No surprises)</li>
+                    </ul>
+                    <div class="mt-8">
+                        <a href="/portal/intake"
+                            class="block w-full text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800">Start
+                            Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What We Don't Do -->
+    <div class="bg-red-50 py-12 px-4 sm:px-6 lg:px-8 border-t border-red-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-lg font-bold text-red-800 uppercase tracking-wide">Important Disclaimer</h2>
+            <p class="mt-2 text-red-700 max-w-2xl mx-auto">
+                We assist with preparation and documentation only. Final submission, communication with funding bodies,
+                and outcomes remain the responsibility of the applicant. We do not guarantee approvals.
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

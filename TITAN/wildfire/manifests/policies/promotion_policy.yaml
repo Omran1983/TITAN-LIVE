@@ -1,0 +1,40 @@
+version: 1
+policy_id: PROMOTION_POLICY_V1
+description: >
+  Controls module/agent promotion from sandbox to production. Enforces no-core-break rule.
+
+gates:
+  - gate_id: GATE_SANDBOX_ONLY
+    rule: "agent.runtime.mode == 'sandbox' OR agent.promotion.status == 'promoted'"
+  - gate_id: GATE_NO_CORE_MUTATION
+    rule: "agent.permissions.write_scopes EXCLUDES ['core/*', 'apps/*/prod/*']"
+  - gate_id: GATE_SIGNED_INPUTS
+    rule: "inputs.signature.required == true"
+
+promotion_criteria:
+  - metric: "error_rate_24h"
+    op: "<="
+    value: 0.5
+    unit: "percent"
+  - metric: "latency_p95"
+    op: "<="
+    value: 1500
+    unit: "ms"
+  - metric: "rollback_count_7d"
+    op: "<="
+    value: 1
+    unit: "count"
+  - metric: "token_cost_reduction"
+    op: ">="
+    value: 0.30
+    unit: "ratio"
+
+kill_switch:
+  enabled: true
+  triggers:
+    - name: "hard_5xx_spike"
+      condition: "http_5xx_rate_10m >= 2.0"
+      action: "disable_agent"
+    - name: "data_integrity_alert"
+      condition: "integrity_alert == true"
+      action: "disable_agent_and_revert_adapters"

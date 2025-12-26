@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReachX Operations Cockpit – 14-Day Pilot</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1220;
+      color: #e5e7eb;
+    }
+    .page {
+      background: radial-gradient(circle at top left, #22c55e22, transparent 60%),
+                  radial-gradient(circle at bottom right, #0ea5e922, transparent 60%),
+                  #020617;
+      border-radius: 16px;
+      padding: 28px 32px 32px;
+      min-height: calc(297mm - 24mm);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #22c55e, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: 0 0 0 2px #020617, 0 0 0 4px rgba(34, 197, 94, 0.4);
+    }
+    .brand-text-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+    .brand-text-sub {
+      font-size: 11px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .tag-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      background: linear-gradient(90deg, #020617aa, #02061755);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 2.2fr 1.6fr;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+    .hero-main-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a5b4fc;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      margin-bottom: 8px;
+    }
+    .hero-main-label span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+    }
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: #f9fafb;
+      margin: 0 0 8px 0;
+    }
+    .hero-highlight {
+      color: #22c55e;
+    }
+    .hero-subtitle {
+      font-size: 13px;
+      color: #cbd5f5;
+      max-width: 420px;
+      margin-bottom: 14px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      background: radial-gradient(circle at top, #020617, #020617ee);
+    }
+    .primary-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .btn-primary {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #020617;
+      cursor: default;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.45);
+    }
+    .btn-ghost {
+      font-size: 11px;
+      color: #a5b4fc;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px dashed rgba(129, 140, 248, 0.6);
+    }
+
+    .hero-aside {
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: radial-gradient(circle at top left, #1d283a, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-aside h3 {
+      font-size: 13px;
+      margin: 0 0 6px;
+      color: #e5e7eb;
+    }
+    .hero-aside p {
+      font-size: 11px;
+      margin: 0 0 4px;
+      color: #cbd5f5;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .metric-card {
+      padding: 8px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(51, 65, 85, 0.8);
+    }
+    .metric-label {
+      font-size: 9px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 2px;
+    }
+    .metric-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #e5e7eb;
+    }
+    .metric-footnote {
+      font-size: 9px;
+      color: #6b7280;
+    }
+
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.6fr;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .card {
+      border-radius: 14px;
+      padding: 12px 14px 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .card-tag {
+      font-size: 9px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+    .card ul {
+      margin: 0;
+      padding-left: 15px;
+    }
+    .card li {
+      font-size: 11px;
+      color: #cbd5f5;
+      margin-bottom: 4px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .step-card {
+      border-radius: 12px;
+      padding: 10px 10px 9px;
+      background: radial-gradient(circle at top, #020617, #020617ee);
+      border: 1px solid rgba(75, 85, 99, 0.8);
+    }
+    .step-number {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+    .step-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 3px;
+    }
+    .step-text {
+      font-size: 10px;
+      color: #cbd5f5;
+    }
+
+    .who-bar {
+      border-radius: 12px;
+      padding: 9px 12px;
+      background: linear-gradient(90deg, rgba(34, 197, 94, 0.16), rgba(56, 189, 248, 0.08));
+      border: 1px solid rgba(52, 211, 153, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .who-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ecfdf5;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+    .who-items {
+      font-size: 10px;
+      color: #dcfce7;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .mini-heading {
+      font-size: 11px;
+      font-weight: 600;
+      color: #e5e7eb;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 4px;
+    }
+    .mini-text {
+      font-size: 10px;
+      color: #cbd5f5;
+      margin-bottom: 4px;
+    }
+    .list-compact {
+      margin: 0;
+      padding-left: 15px;
+    }
+    .list-compact li {
+      font-size: 10px;
+      color: #cbd5f5;
+      margin-bottom: 2px;
+    }
+
+    .cta-panel {
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: radial-gradient(circle at top left, #22c55e33, #020617);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cta-main {
+      font-size: 11px;
+      font-weight: 600;
+      color: #bbf7d0;
+    }
+    .cta-contact {
+      font-size: 10px;
+      color: #e5e7eb;
+    }
+    .cta-contact span.label {
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 9px;
+    }
+    .qr-box {
+      margin-top: 4px;
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      font-size: 9px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .footer-line {
+      margin-top: 14px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: #6b7280;
+    }
+    .footer-line span strong {
+      color: #e5e7eb;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .page {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="brand-block">
+        <div class="logo-circle">RX</div>
+        <div>
+          <div class="brand-text-title">ReachX Operations Cockpit</div>
+          <div class="brand-text-sub">Workers · Employers · Dormitories</div>
+        </div>
+      </div>
+      <div class="tag-pill">
+        14-DAY MONITORED PILOT
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <div class="hero-main-label">
+          <span class="dot"></span>
+          LIVE OPS VIEW IN 14 DAYS
+        </div>
+        <h1 class="hero-title">
+          From spreadsheet chaos<br />
+          to a <span class="hero-highlight">live operations cockpit</span>.
+        </h1>
+        <p class="hero-subtitle">
+          ReachX gives recruitment and manpower agencies a monitored online dashboard of workers, employers and dormitories – built on top of the Excel files you already use.
+        </p>
+        <div class="hero-badges">
+          <div class="badge">✅ Keep your existing Excel/CSV</div>
+          <div class="badge">✅ Monitored database & sync jobs</div>
+          <div class="badge">✅ Cloud dashboard – browser only</div>
+        </div>
+        <div class="primary-cta">
+          <button class="btn-primary">Apply for 14-Day Pilot</button>
+          <div class="btn-ghost">Limited slots · Remote setup</div>
+        </div>
+      </div>
+
+      <aside class="hero-aside">
+        <h3>What your team actually sees</h3>
+        <p>A clean browser-based view of:</p>
+        <ul style="padding-left:16px; margin:4px 0 6px;">
+          <li>Employers by country, city and sector</li>
+          <li>Workers linked to their employer & dormitory</li>
+          <li>Basic capacity / occupancy indicators</li>
+        </ul>
+        <p style="font-size:10px; color:#9ca3af;">
+          Under the hood, ReachX monitors the database, sync jobs and dashboard so nothing fails silently.
+        </p>
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <div class="metric-label">Source of truth</div>
+            <div class="metric-value">Your Excel</div>
+            <div class="metric-footnote">We sync to a live view.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Pilot length</div>
+            <div class="metric-value">14 days</div>
+            <div class="metric-footnote">Real data, real usage.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Access</div>
+            <div class="metric-value">Browser</div>
+            <div class="metric-footnote">No hardware to install.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- BODY: PROBLEM / SOLUTION -->
+    <div class="body-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">The problem most agencies face</div>
+          <div class="card-tag">Before ReachX</div>
+        </div>
+        <ul>
+          <li>Multiple Excel files and WhatsApp chats for each employer.</li>
+          <li>No single view of who is where, and for which client.</li>
+          <li>Reports built manually, often already outdated.</li>
+          <li>Systems that fail quietly – nobody notices for days.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">What the ReachX pilot gives you</div>
+          <div class="card-tag">In 14 days</div>
+        </div>
+        <ul>
+          <li>One online dashboard of workers, employers and dormitories.</li>
+          <li>Automatic sync from your existing Excel/CSV templates.</li>
+          <li>Continuous health checks on database, sync jobs and UI.</li>
+          <li>A monitored cockpit you can access from any modern browser.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Share your data</div>
+        <div class="step-text">
+          You fill simple templates for workers, employers and dormitories – or we map your existing sheets once.
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">We set up your cockpit</div>
+        <div class="step-text">
+          We load your data into ReachX, deploy your dashboard to the cloud and enable heartbeats and autopilot.
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">You run it for 14 days</div>
+        <div class="step-text">
+          Your team uses ReachX with real operations. We monitor logs and summarise results with clear next steps.
+        </div>
+      </div>
+    </div>
+
+    <!-- WHO IT'S FOR -->
+    <div class="who-bar">
+      <div class="who-title">Who this pilot is for</div>
+      <div class="who-items">
+        Recruitment & manpower agencies · Overseas placement companies · Staffing providers in hospitality, construction, security and cleaning.
+      </div>
+    </div>
+
+    <!-- BOTTOM GRID -->
+    <div class="bottom-grid">
+      <div>
+        <div class="mini-heading">What we monitor for you</div>
+        <p class="mini-text">
+          We don’t just “launch an app” and disappear. During the pilot we actively monitor:
+        </p>
+        <ul class="list-compact">
+          <li>Database heartbeats and table row counts.</li>
+          <li>Autopilot job output when syncing your data.</li>
+          <li>Dashboard availability from the public URL.</li>
+          <li>Any errors in the logs that need attention.</li>
+        </ul>
+        <p class="mini-text">
+          If something goes wrong, we see it in our logs and work with you to fix it – instead of waiting for complaints.
+        </p>
+      </div>
+
+      <div>
+        <div class="mini-heading">What you keep after the pilot</div>
+        <p class="mini-text">
+          At the end of 14 days, you decide:
+        </p>
+        <ul class="list-compact">
+          <li><strong>Continue:</strong> Move to a simple monthly plan with hosting and monitoring included.</li>
+          <li><strong>Pause:</strong> Keep using your Excel/CSV as before, with the option to return later.</li>
+          <li><strong>Export:</strong> We can export the data stored in ReachX on request.</li>
+        </ul>
+        <p class="mini-text">
+          There is no lock-in during the pilot. The goal is to prove value quickly with your real data.
+        </p>
+      </div>
+
+      <div class="cta-panel">
+        <div class="mini-heading">Ready for a 14-day pilot?</div>
+        <div class="cta-main">
+          30-minute discovery call · Remote setup · Limited pilot slots.
+        </div>
+        <div class="cta-contact">
+          <div><span class="label">Contact</span><br />[Your Name] – ReachX Ops</div>
+          <div style="margin-top:4px;">WhatsApp: [+230 XXX XXX XX]</div>
+          <div>Email: [youremail@example.com]</div>
+        </div>
+        <div class="qr-box">
+          Place QR code here linking to your booking page or WhatsApp chat.
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-line">
+      <span><strong>ReachX</strong> · Live operations cockpit for workers, employers & dormitories.</span>
+      <span>14-Day Monitored Pilot · No hardware · Built on your existing spreadsheets.</span>
+    </div>
+  </div>
+</body>
+</html>

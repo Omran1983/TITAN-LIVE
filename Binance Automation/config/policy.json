@@ -1,0 +1,49 @@
+﻿{
+    "ops":  {
+                "reselect_minutes":  2,
+                "clock_skew_alert_ms":  300,
+                "maker_target_ratio":  0.6,
+                "recv_window_ms":  2000,
+                "cooldown_sec":  600
+            },
+    "risk":  {
+                 "per_trade_loss_cap_pct":  0.6,
+                 "portfolio_heat_max":  4.5,
+                 "max_concurrent_positions":  8,
+                 "daily_loss_halt_pct":  3
+             },
+    "invest_sleeve":  {
+                          "frequency":  "WEEKLY@Mon-10:00",
+                          "per_cycle_usdt":  200,
+                          "never_sell":  true,
+                          "targets":  {
+                                          "BTCUSDT":  0.3,
+                                          "XRPUSDT":  0.1,
+                                          "SOLUSDT":  0.1
+                                      },
+                          "enabled":  true
+                      },
+    "universe":  {
+                     "explorer_budget_pct":  20,
+                     "core_symbols":  [
+                                          "DOGEUSDT",
+                                          "SHIBUSDT",
+                                          "PEPEUSDT",
+                                          "WIFUSDT",
+                                          "FLOKIUSDT",
+                                          "BONKUSDT",
+                                          "BRETTUSDT",
+                                          "POPCATUSDT",
+                                          "MEWUSDT",
+                                          "PONKEUSDT",
+                                          "SATSUSDT",
+                                          "PEOPLEUSDT"
+                                      ],
+                     "do_not_trade":  [
+                                          "BTCUSDT",
+                                          "SOLUSDT",
+                                          "XRPUSDT",
+                                          "ETHUSDT"
+                                      ]
+                 }
+}

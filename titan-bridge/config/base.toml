@@ -1,0 +1,30 @@
+[app]
+name = "titan-bridge"
+environment = "local"
+
+[security]
+# Use a strong random token in env: CONTROL_PLANE_TOKEN
+require_bearer_token = true
+max_body_bytes = 250000  # 250 KB
+
+[supabase]
+url_env = "SUPABASE_URL"
+service_key_env = "SUPABASE_SERVICE_ROLE_KEY"
+schema = "public"
+
+[control_plane]
+host = "0.0.0.0"
+port = 8010
+cors_allow_origins = ["http://localhost:3000", "http://localhost:8001"]
+
+[worker]
+poll_interval_seconds = 2
+stale_command_seconds = 600
+
+[authority]
+default_level = "L1"
+autopilot_enabled = false
+
+[limits]
+max_patch_files = 8
+max_runtime_seconds = 1800

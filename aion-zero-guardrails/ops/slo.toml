@@ -1,0 +1,5 @@
+[http]
+p95_ms = 1200
+error_rate_pct = 1.0
+canary_minutes = 10
+canary_traffic_pct = 10

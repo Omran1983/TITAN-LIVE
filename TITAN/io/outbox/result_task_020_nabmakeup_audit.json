@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "task_id": "task_020_nabmakeup_audit",
+  "status": "success",
+  "started_at": "2025-12-22T21:13:57.596354",
+  "finished_at": "2025-12-22T21:14:02.578297",
+  "summary": {
+    "what_happened": "Successfully crawled https://nabmakeup.com/. Size: 360911 bytes.",
+    "key_outputs": [
+      "F:\\AION-ZERO\\TITAN\\io\\artifacts\\audit_task_020_nabmakeup_audit.html"
+    ],
+    "next_actions": []
+  },
+  "artifacts": [
+    {
+      "path": "F:\\AION-ZERO\\TITAN\\io\\artifacts\\audit_task_020_nabmakeup_audit.html",
+      "label": "Raw HTML Source",
+      "mime": "text/html",
+      "bytes": 360911
+    }
+  ],
+  "audit": {
+    "tool_calls": [
+      {
+        "tool": "http.get",
+        "ok": true,
+        "started_at": "2025-12-22T21:13:58.546621",
+        "finished_at": "2025-12-22T21:14:02.575824",
+        "error": null,
+        "details": "Status: 200"
+      }
+    ],
+    "warnings": [],
+    "policy_violations": []
+  }
+}

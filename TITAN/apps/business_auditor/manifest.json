@@ -1,0 +1,17 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Agreement Risk Verdict",
+    "name_for_model": "agreement_risk_verdict",
+    "description_for_human": "Know if it's safe to sign. Instant 'Traffic Light' risk score, audit flags, and PDF report for Contracts & Contractor Agreements.",
+    "description_for_model": "Auditor tool for business agreements. Use 'scan_agreement' to get a deterministic 'Risk Verdict' (RED/AMBER/GREEN). Always show the 'verdict_title' and 'risk_score' prominently. If 'pdf_download_url' is present, offer it to the user. Explain critical flags clearly. Ask user for doc_type if unclear.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://your-server-url.com/openapi.yaml"
+    },
+    "logo_url": "https://cdn-icons-png.flaticon.com/512/9322/9322127.png",
+    "contact_email": "support@titan-os.com",
+    "legal_info_url": "https://your-server-url.com/legal/terms"
+}

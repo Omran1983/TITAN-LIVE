@@ -1,0 +1,6 @@
+{
+  "task_id": "T-LEADFIND-0001",
+  "intent": "lead_find",
+  "goal": "Search for Wear2Go Souillac and extract top 3 contacts (name/phone/address) from public pages.",
+  "constraints": { "max_steps": 8, "timeout_s": 60, "submit_forms": false }
+}

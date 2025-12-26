@@ -1,0 +1,130 @@
+# === Pairs sanitize ===
+$pairList = ($Pairs -split '[,\s]+' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | ForEach-Object { $_.ToUpperInvariant() })
+if (-not $pairList -or $pairList.Count -eq 0) { throw "No valid symbols parsed from `$Pairs." }
+param(
+  [string]$PairsInput = 'BTCUSDT,ETHUSDT',
+  [double]$NotionalUSDT = 12,
+  [string]$Base = $Env:BINANCE_BASE_URL
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+if (-not $Base) { $Base = 'https://api.binance.com' }
+
+# prepare log
+$root = Split-Path -Parent $MyInvocation.MyCommand.Path
+$log = Join-Path $root 'journal\sniper.log'
+if (-not (Test-Path (Split-Path $log))) { New-Item -ItemType Directory -Path (Split-Path $log) -Force | Out-Null }
+"`n=== SNIPER RUN $(Get-Date -Format s) ===" | Add-Content -LiteralPath $log
+
+# load env helper if available
+if (Get-Command Load-DotEnv -ErrorAction SilentlyContinue) { Load-DotEnv '.env' }
+
+if ([string]::IsNullOrWhiteSpace($Env:BINANCE_API_KEY) -or [string]::IsNullOrWhiteSpace($Env:BINANCE_API_SECRET)) {
+  "❌ Missing API key/secret" | Add-Content -LiteralPath $log
+  throw "Missing API credentials"
+}
+
+function New-BinanceSignature([string]$secret,[string]$query){
+  $h = New-Object System.Security.Cryptography.HMACSHA256
+  $h.Key = [Text.Encoding]::UTF8.GetBytes($secret)
+  ($h.ComputeHash([Text.Encoding]::UTF8.GetBytes($query)) | ForEach-Object { $_.ToString('x2') }) -join ''
+}
+function Invoke-Binance([string]$method,[string]$path,[hashtable]$qs,$signed=$false){
+  $ts = [int64]([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
+  if (-not $qs) { $qs = @{} }
+  $qs.timestamp = $ts
+  $qs.recvWindow = 5000
+  $query = ($qs.GetEnumerator() | Sort-Object Name | ForEach-Object { "$($_.Name)=$($_.Value)" }) -join '&'
+  if ($signed) {
+    $sig = New-BinanceSignature -secret $Env:BINANCE_API_SECRET -query $query
+    $query = "$query&signature=$sig"
+  }
+  $uri = $Base.TrimEnd('/') + $path + '?' + $query
+  $hdr = @{ 'X-MBX-APIKEY' = $Env:BINANCE_API_KEY }
+  Invoke-RestMethod -Method $method -Uri $uri -Headers $hdr
+}
+
+function Round-ToStep([decimal]$value,[decimal]$step){
+  if ($step -eq 0) { return $value }
+  [decimal]::Floor($value / $step) * $step
+}
+
+# parse pairs
+$Pairs = ($PairsInput -split '[,;\s]+' | Where-Object { $_ -and $_.Trim() -ne '' } | ForEach-Object { $_.Trim().ToUpperInvariant() })
+if (-not $Pairs) { "No pairs specified" | Add-Content -LiteralPath $log; exit 1 }
+
+"$($Pairs -join ' ' ) | Notional: $NotionalUSDT USDT | Base: $Base" | Add-Content -LiteralPath $log
+
+foreach ($symbol in $pairList) {
+  try {
+    # safe: request exchangeInfo for one symbol
+    $infoRaw = Invoke-RestMethod -Uri (Build-BinanceUri -Base $Base -Path "/api/v3/exchangeInfo" -Query "symbol=$symbol")
+    if (-not $infoRaw -or -not $infoRaw.symbols -or $infoRaw.symbols.Count -eq 0) { throw "Symbol not found or invalid response: $symbol" }
+    $info = $infoRaw.symbols[0]
+
+    $filters = @{}
+    foreach ($f in $info.filters) { $filters[$f.filterType] = $f }
+
+    $book = Invoke-RestMethod -Uri (Build-BinanceUri -Base $Base -Path "/api/v3/ticker/bookTicker" -Query "symbol=$symbol")
+    [decimal]$ask = [decimal]$book.askPrice
+
+    [decimal]$stepSize = [decimal]($filters['LOT_SIZE'].stepSize)
+    [decimal]$minQty   = [decimal]($filters['LOT_SIZE'].minQty)
+    $notionalFilter = $filters['NOTIONAL']; if (-not $notionalFilter) { $notionalFilter = $filters['MIN_NOTIONAL'] }
+    [decimal]$minNotional = if ($notionalFilter) {[decimal]$notionalFilter.minNotional} else { 5 }
+
+    [decimal]$rawQty = [decimal]$NotionalUSDT / $ask
+    [decimal]$qty = Round-ToStep $rawQty $stepSize
+    if ($qty -lt $minQty) { $qty = $minQty }
+
+    if ($qty * $ask -lt $minNotional) {
+      $qty = Round-ToStep ([decimal]$minNotional / $ask) $stepSize
+      if ($qty -lt $minQty) { $qty = $minQty }
+    }
+
+    "[$symbol] ask=$ask step=$stepSize minQty=$minQty minNotional=$minNotional -> qty=$qty" | Add-Content -LiteralPath $log
+
+    # MARKET BUY
+    $buyReq = @{ symbol=$symbol; side='BUY'; type='MARKET'; quantity = $qty.ToString("0.################") }
+    $buy = Invoke-Binance -method 'POST' -path '/api/v3/order' -qs $buyReq -signed:$true
+    "[$symbol][BUY] orderId=$($buy.orderId) status=$($buy.status) executedQty=$($buy.executedQty)" | Add-Content -LiteralPath $log
+
+    # MARKET SELL
+    [decimal]$execQty = [decimal]$buy.executedQty
+    if ($execQty -le 0) { $execQty = $qty }
+    $execQty = Round-ToStep $execQty $stepSize
+    $sellReq = @{ symbol=$symbol; side='SELL'; type='MARKET'; quantity = $execQty.ToString("0.################") }
+    $sell = Invoke-Binance -method 'POST' -path '/api/v3/order' -qs $sellReq -signed:$true
+    "[$symbol][SELL] orderId=$($sell.orderId) status=$($sell.status) executedQty=$($sell.executedQty)" | Add-Content -LiteralPath $log
+  } catch {
+    # safe error logging: never assume properties on the exception
+    $err = $_ | Out-String
+    "[$symbol] ERROR: $err" | Add-Content -LiteralPath $log
+  }
+}
+
+"Done." | Add-Content -LiteralPath $log
+Get-Content -LiteralPath $log -Tail 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

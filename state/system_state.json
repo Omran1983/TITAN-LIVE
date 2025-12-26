@@ -1,0 +1,307 @@
+{
+  "status": "ONLINE",
+  "last_updated": "2025-12-22 23:16:14.470718",
+  "directors": [
+    {
+      "id": "bod_str",
+      "name": "Chief of Staff / Strategy",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_cos"
+    },
+    {
+      "id": "bod_fin",
+      "name": "Finance & Risk Director",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_fin"
+    },
+    {
+      "id": "bod_gro",
+      "name": "Growth & Sales Director",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_gro"
+    },
+    {
+      "id": "bod_prod",
+      "name": "Product & Delivery Director",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_ops"
+    },
+    {
+      "id": "bod_leg",
+      "name": "Legal & Compliance Director",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_comp"
+    },
+    {
+      "id": "bod_sec",
+      "name": "Security & Infra Director",
+      "role": "Director",
+      "level": "L1_STRATEGIC",
+      "manager_id": "mgr_sec"
+    }
+  ],
+  "managers": [
+    {
+      "id": "mgr_cos",
+      "name": "CoS_Manager",
+      "domain": "Strategy",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_meet",
+        "bot_brief",
+        "bot_kpi"
+      ]
+    },
+    {
+      "id": "mgr_fin",
+      "name": "Finance_Manager",
+      "domain": "Finance",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_ledger",
+        "bot_recon",
+        "bot_price",
+        "bot_coll"
+      ]
+    },
+    {
+      "id": "mgr_gro",
+      "name": "Growth_Manager",
+      "domain": "Growth",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_lead",
+        "bot_reach",
+        "bot_ads",
+        "bot_seo"
+      ]
+    },
+    {
+      "id": "mgr_ops",
+      "name": "OpsDelivery_Manager",
+      "domain": "Product",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_route",
+        "bot_disp",
+        "bot_pod",
+        "bot_inv",
+        "bot_supp"
+      ]
+    },
+    {
+      "id": "mgr_comp",
+      "name": "Compliance_Manager",
+      "domain": "Legal",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_stat",
+        "bot_audit",
+        "bot_pol"
+      ]
+    },
+    {
+      "id": "mgr_sec",
+      "name": "InfraSec_Manager",
+      "domain": "Security",
+      "level": "L2_MANAGERIAL",
+      "bots": [
+        "bot_up",
+        "bot_patch",
+        "bot_back",
+        "bot_acc"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "name": "MeetingBot",
+      "role": "Scheduler",
+      "level": "L4_TASK",
+      "id": "bot_meet",
+      "status": "ONLINE"
+    },
+    {
+      "name": "BriefingBot",
+      "role": "Reporter",
+      "level": "L4_TASK",
+      "id": "bot_brief",
+      "status": "ONLINE"
+    },
+    {
+      "name": "KPIBot",
+      "role": "Analyst",
+      "level": "L4_TASK",
+      "id": "bot_kpi",
+      "status": "ONLINE"
+    },
+    {
+      "name": "LedgerBot",
+      "role": "Bookkeeper",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_ledger",
+      "status": "ONLINE"
+    },
+    {
+      "name": "ReconciliationBot",
+      "role": "Analyst",
+      "level": "L4_TASK",
+      "id": "bot_recon",
+      "status": "ONLINE"
+    },
+    {
+      "name": "PricingBot",
+      "role": "Analyst",
+      "level": "L4_TASK",
+      "id": "bot_price",
+      "status": "ONLINE"
+    },
+    {
+      "name": "CollectionsBot",
+      "role": "Agent",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_coll",
+      "status": "ONLINE"
+    },
+    {
+      "name": "LeadBot",
+      "role": "Scraper",
+      "level": "L4_TASK",
+      "id": "bot_lead",
+      "status": "ONLINE"
+    },
+    {
+      "name": "OutreachBot",
+      "role": "Sender",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_reach",
+      "status": "ONLINE"
+    },
+    {
+      "name": "AdsBot",
+      "role": "Marketer",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_ads",
+      "status": "ONLINE"
+    },
+    {
+      "name": "SEOContentBot",
+      "role": "Writer",
+      "level": "L4_TASK",
+      "id": "bot_seo",
+      "status": "ONLINE"
+    },
+    {
+      "name": "RoutingBot",
+      "role": "Logistics",
+      "level": "L4_TASK",
+      "id": "bot_route",
+      "status": "ONLINE"
+    },
+    {
+      "name": "DispatchBot",
+      "role": "Logistics",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_disp",
+      "status": "ONLINE"
+    },
+    {
+      "name": "ProofOfDeliveryBot",
+      "role": "Logistics",
+      "level": "L4_TASK",
+      "id": "bot_pod",
+      "status": "ONLINE"
+    },
+    {
+      "name": "InvoiceBot",
+      "role": "Finance",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_inv",
+      "status": "ONLINE"
+    },
+    {
+      "name": "SupportBot",
+      "role": "Service",
+      "level": "L4_TASK",
+      "id": "bot_supp",
+      "status": "ONLINE"
+    },
+    {
+      "name": "StatutoryBot",
+      "role": "Compliance",
+      "level": "L4_TASK",
+      "id": "bot_stat",
+      "status": "ONLINE"
+    },
+    {
+      "name": "AuditTrailBot",
+      "role": "Compliance",
+      "level": "L4_TASK",
+      "id": "bot_audit",
+      "status": "ONLINE"
+    },
+    {
+      "name": "PolicyCheckBot",
+      "role": "Compliance",
+      "level": "L4_TASK",
+      "id": "bot_pol",
+      "status": "ONLINE"
+    },
+    {
+      "name": "UptimeBot",
+      "role": "Monitor",
+      "level": "L4_TASK",
+      "id": "bot_up",
+      "status": "ONLINE"
+    },
+    {
+      "name": "PatchBot",
+      "role": "DevOps",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_patch",
+      "status": "ONLINE"
+    },
+    {
+      "name": "BackupBot",
+      "role": "DevOps",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_back",
+      "status": "ONLINE"
+    },
+    {
+      "name": "AccessBot",
+      "role": "Security",
+      "level": "L3_OPERATIONAL",
+      "id": "bot_acc",
+      "status": "ONLINE"
+    }
+  ],
+  "autonomy_loop": [
+    {
+      "name": "LearnBot",
+      "status": "ONLINE"
+    },
+    {
+      "name": "EvalBot",
+      "status": "ONLINE"
+    },
+    {
+      "name": "HealBot",
+      "status": "ONLINE"
+    },
+    {
+      "name": "ImproveBot",
+      "status": "ONLINE"
+    },
+    {
+      "name": "PatchBot",
+      "status": "ONLINE"
+    }
+  ],
+  "active_bots": 23
+}

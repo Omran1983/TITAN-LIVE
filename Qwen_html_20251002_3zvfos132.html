@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice Generator - A-One Global</title>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 30px; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    h1 { color: #1e40af; font-size: 1.8rem; margin-bottom: 10px; }
+    .upload-section, .invoice-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px; }
+    .controls { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+    select, button { padding: 10px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
+    button { background: #3b82f6; color: white; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #2563eb; }
+    button:disabled { background: #94a3b8; cursor: not-allowed; }
+    .invoice-container { border: 1px solid #e2e8f0; padding: 30px; background: white; }
+    .invoice-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+    .company-info h2 { color: #1e40af; }
+    .invoice-meta { text-align: right; }
+    .invoice-meta div { margin: 4px 0; }
+    .client-info { display: flex; justify-content: space-between; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f1f5f9; font-weight: 600; }
+    .totals { margin-left: auto; width: 300px; }
+    .totals div { display: flex; justify-content: space-between; padding: 8px 0; }
+    .totals .total { font-weight: bold; font-size: 1.1rem; margin-top: 10px; border-top: 2px solid #3b82f6; padding-top: 10px; }
+    .bank-info { margin-top: 30px; display: flex; justify-content: space-between; color: #475569; font-size: 0.9rem; }
+    .hidden { display: none; }
+    .status { padding: 8px; background: #dcfce7; color: #166534; border-radius: 6px; text-align: center; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ A-One Global Invoice Generator</h1>
+      <p>Upload your Master Sheet, select month & client, and generate invoices instantly.</p>
+    </header>
+
+    <section class="upload-section">
+      <h2>Step 1: Upload Your Master Sheet</h2>
+      <input type="file" id="fileInput" accept=".xlsx, .xls" />
+      <p id="fileStatus">No file uploaded</p>
+    </section>
+
+    <section class="upload-section">
+      <h2>Step 2: Select Collection Month & Client</h2>
+      <div class="controls">
+        <select id="monthSelect" disabled>
+          <option value="">-- Select Collection Month --</option>
+          <option value="2025-08">August 2025</option>
+          <option value="2025-07">July 2025</option>
+          <option value="2025-06">June 2025</option>
+          <option value="2025-09">September 2025</option>
+        </select>
+        <select id="clientSelect" disabled>
+          <option value="">-- Select Client --</option>
+        </select>
+        <button id="generateBtn" disabled>Generate Invoice</button>
+      </div>
+    </section>
+
+    <section class="invoice-section hidden" id="invoiceSection">
+      <div class="invoice-container" id="invoiceContent">
+        <!-- Invoice will be rendered here -->
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let masterData = [];
+    const CLIENTS = [
+      "Azzah Boutique", "Glow And Aura", "OKASINA", "Nab-Makeup", 
+      "Timeless Trends", "Little Star Boutique", "Luxe Miniatures", 
+      "Vibezone Boutik", "May's Shop", "Spicy Bites"
+    ];
+    const CLIENT_DETAILS = {
+      "Azzah Boutique": { owner: "Zahrah Sundhoo", address: "Tirvengadum Lane, Rose Hill", phone: "57663628", juice: "57663628" },
+      "Glow And Aura": { owner: "Saniyya Mandarun", address: "Dr. Bour Street, Rose Hill", phone: "57585364", juice: "57585364" },
+      "OKASINA": { owner: "Shahenaz Ahmad", address: "Souillac", phone: "57944614", juice: "" },
+      "Nab-Makeup": { owner: "Nabila", address: "Chemin Grenier", phone: "58332007", juice: "" },
+      "Timeless Trends": { owner: "Naafeera Abdel Hassan", address: "Beau Bassin", phone: "55055617", juice: "58061835" },
+      "Little Star Boutique": { owner: "Nausheen", address: "Camp Diable", phone: "57693168", juice: "57693168" },
+      "Luxe Miniatures": { owner: "Rawda", address: "La Marie, Vacoas", phone: "57831919", juice: "57831919" },
+      "Vibezone Boutik": { owner: "Domah Taazleelah", address: "Winner, St Paul", phone: "55110344", juice: "59383600" },
+      "May's Shop": { owner: "Amna Mohobuth Aldin", address: "Port Louis", phone: "57245551", juice: "57245551" },
+      "Spicy Bites": { owner: "Nussaibah Seethamah", address: "Vingta Lane No.1, Vacoas", phone: "58186909", juice: "58186909" }
+    };
+
+    document.getElementById('fileInput').addEventListener('change', handleFile);
+    document.getElementById('monthSelect').addEventListener('change', updateClients);
+    document.getElementById('generateBtn').addEventListener('click', generateInvoice);
+
+    function handleFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+        
+        // Parse headers
+        const headers = jsonData[0].map(h => h.trim());
+        masterData = jsonData.slice(1).map(row => {
+          const obj = {};
+          headers.forEach((header, i) => {
+            obj[header] = row[i] || '';
+          });
+          return obj;
+        }).filter(row => row['#'] && !isNaN(row['#']));
+        
+        document.getElementById('fileStatus').textContent = `✅ Loaded ${masterData.length} records`;
+        document.getElementById('monthSelect').disabled = false;
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function parseDate(dateValue) {
+      if (!dateValue) return null;
+      
+      // Handle Excel serial date numbers
+      if (typeof dateValue === 'number') {
+        const date = new Date((dateValue - 25569) * 86400 * 1000);
+        return date.toISOString().split('T')[0];
+      }
+      
+      // Handle text dates like "8/22/25"
+      if (typeof dateValue === 'string') {
+        if (dateValue.includes('/')) {
+          const [m, d, y] = dateValue.split('/');
+          const year = y.length === 2 ? '20' + y : y;
+          return `${year}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+        }
+      }
+      
+      return null;
+    }
+
+    function updateClients() {
+      const month = document.getElementById('monthSelect').value;
+      if (!month) return;
+      
+      const clients = new Set();
+      masterData.forEach(row => {
+        const collected = parseDate(row['Collected on']);
+        if (collected && collected.startsWith(month)) {
+          clients.add(row['Client']);
+        }
+      });
+      
+      const clientSelect = document.getElementById('clientSelect');
+      clientSelect.innerHTML = '<option value="">-- Select Client --</option>';
+      Array.from(clients).sort().forEach(client => {
+        if (CLIENTS.includes(client)) {
+          const opt = document.createElement('option');
+          opt.value = client;
+          opt.textContent = client;
+          clientSelect.appendChild(opt);
+        }
+      });
+      
+      clientSelect.disabled = false;
+      document.getElementById('generateBtn').disabled = !(month && clientSelect.value);
+    }
+
+    function generateInvoice() {
+      const month = document.getElementById('monthSelect').value;
+      const client = document.getElementById('clientSelect').value;
+      if (!month || !client) return;
+      
+      const monthName = new Date(month + '-01').toLocaleString('default', { month: 'long', year: 'numeric' });
+      const invoiceNumber = generateInvoiceNumber(client, month);
+      
+      // Filter data by COLLECTION month (not delivery)
+      const filtered = masterData.filter(row => {
+        if (row['Client'] !== client) return false;
+        const collected = parseDate(row['Collected on']);
+        return collected && collected.startsWith(month);
+      });
+      
+      const totalAmount = filtered.reduce((sum, row) => sum + (parseFloat(row['Invoicing']) || 0), 0);
+      const qty = filtered.length;
+      
+      const details = CLIENT_DETAILS[client] || { owner: '', address: '', phone: '', juice: '' };
+      
+      const invoiceHTML = `
+        <div class="invoice-header">
+          <div class="company-info">
+            <h2>A-ONE GLOBAL RESOURCING LTD</h2>
+            <p>WELLNESS ESSENCE<br>BRN: C22185206</p>
+          </div>
+          <div class="invoice-meta">
+            <div><strong>Invoice#</strong> ${invoiceNumber}</div>
+            <div><strong>Date:</strong> ${new Date(month + '-01').toLocaleDateString()}</div>
+          </div>
+        </div>
+        
+        <div class="client-info">
+          <div>
+            <strong>Bill To</strong><br>
+            ${details.owner}<br>
+            ${details.address}<br>
+            ${details.phone}
+          </div>
+          <div>
+            <strong>For</strong><br>
+            ${client}<br>
+            Freelance<br>
+            Delivery Service
+          </div>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Qty</th>
+              <th>Amount (MUR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>${new Date(month + '-01').toLocaleDateString()}</td>
+              <td>${qty}</td>
+              <td>Rs.${totalAmount.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div style="margin: 15px 0;">
+          <div>Total Collected - ${qty}</div>
+          <div>Total Delivered - ${qty}</div>
+          <div>Pending - 0</div>
+          <div>Returned - 0</div>
+          <div>Cancelled - 0</div>
+        </div>
+        
+        <div class="totals">
+          <div><strong>Subtotal</strong> <span>Rs.${totalAmount.toFixed(2)}</span></div>
+          <div>Tax Rate <span>0.00%</span></div>
+          <div>Other Costs <span>Rs.0.00</span></div>
+          <div class="total">Total Cost <span>Rs.${totalAmount.toFixed(2)}</span></div>
+        </div>
+        
+        <div class="bank-info">
+          <div>
+            A-One Global Resourcing Ltd<br>
+            Bank: MCB<br>
+            Account number: 000449347214<br>
+            Juice: ${details.juice || '57887132'}<br>
+            WL Phone: ${details.juice || '57887132'}
+          </div>
+          <div>Email: deals@aogrl.com</div>
+        </div>
+        
+        <div class="status">✅ Invoice generated for ${client} - ${monthName} (based on COLLECTION date)</div>
+      `;
+      
+      document.getElementById('invoiceContent').innerHTML = invoiceHTML;
+      document.getElementById('invoiceSection').classList.remove('hidden');
+    }
+    
+    function generateInvoiceNumber(client, month) {
+      const prefixMap = {
+        "Azzah Boutique": "AU",
+        "Glow And Aura": "GA",
+        "OKASINA": "OK",
+        "Nab-Makeup": "NM",
+        "Timeless Trends": "TT",
+        "Little Star Boutique": "LS",
+        "Luxe Miniatures": "LM",
+        "Vibezone Boutik": "VB",
+        "May's Shop": "MS",
+        "Spicy Bites": "SB"
+      };
+      const prefix = prefixMap[client] || "XX";
+      const yearSuffix = month.split('-')[0].slice(-2);
+      const baseNumber = {
+        "Azzah Boutique": 124,
+        "Glow And Aura": 125,
+        "OKASINA": 126,
+        "Nab-Makeup": 127,
+        "Timeless Trends": 128,
+        "Little Star Boutique": 129,
+        "Luxe Miniatures": 130,
+        "Vibezone Boutik": 131,
+        "May's Shop": 132,
+        "Spicy Bites": 133
+      }[client] || 100;
+      return `${prefix}${yearSuffix}-${baseNumber}`;
+    }
+  </script>
+</body>
+</html>

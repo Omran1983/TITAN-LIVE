@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "az_command_v1",
+    "type": "object",
+    "required": [
+        "command_id",
+        "created_at",
+        "actor",
+        "intent",
+        "payload",
+        "signature"
+    ],
+    "properties": {
+        "command_id": {
+            "type": "string",
+            "minLength": 8
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "actor": {
+            "type": "object",
+            "required": [
+                "user_id",
+                "channel"
+            ],
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                },
+                "channel": {
+                    "type": "string",
+                    "enum": [
+                        "web",
+                        "telegram",
+                        "api"
+                    ]
+                }
+            }
+        },
+        "intent": {
+            "type": "string",
+            "enum": [
+                "inspect",
+                "fix",
+                "ingest",
+                "run_workflow",
+                "route",
+                "deploy_sandbox"
+            ]
+        },
+        "payload": {
+            "type": "object"
+        },
+        "signature": {
+            "type": "object",
+            "required": [
+                "alg",
+                "sig",
+                "kid"
+            ],
+            "properties": {
+                "alg": {
+                    "type": "string",
+                    "enum": [
+                        "ed25519"
+                    ]
+                },
+                "sig": {
+                    "type": "string"
+                },
+                "kid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

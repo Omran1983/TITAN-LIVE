@@ -1,0 +1,15 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+.env*
+!*.example
+# Logs & data
+*.log
+*.csv
+trades_export.csv
+klines_*.csv
+live_trade_log.csv
+# OS
+.DS_Store
+Thumbs.db

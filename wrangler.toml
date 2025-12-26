@@ -1,0 +1,11 @@
+name = "educonnect-api"
+main = "src/index.ts"
+compatibility_date = "2025-10-01"
+account_id = "51eb164d0cf82ef62825aacbb5e1150a"
+
+crons = ["*/5 * * * *"]
+
+
+[triggers]
+crons = ["*/5 * * * *"]
+

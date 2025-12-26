@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All‑In‑One Employee & Payroll Manager</title>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f8fa;
+        }
+        h1, h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 20px;
+            color: #2a9d8f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4a261;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .actions {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        button:hover {
+            background-color: #21867a;
+        }
+        .note {
+            font-size: 0.85em;
+            color: #555;
+        }
+        .formula-table th {
+            background-color: #264653;
+        }
+        .formula-table td, .formula-table th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>All‑In‑One Employee & Payroll Manager</h1>
+<nav>
+    <a href="#employee-section">Employee Data</a>
+    <a href="#payroll-section">Payroll</a>
+    <a href="#formula-section">Formula Reference</a>
+</nav>
+
+<!-- Employee Data Section -->
+<section id="employee-section">
+    <h2>Employee Data</h2>
+    <p>Manage your employees here. Add new staff, import them in bulk, and save to your browser so payroll calculations can access them later. Data is stored locally (no server required).</p>
+    <div class="actions">
+        <button onclick="addEmployeeRow()">Add Employee</button>
+        <input type="file" id="empFileInput" accept=".csv" onchange="importEmployees(event)">
+        <button onclick="saveEmployees()">Save Employees</button>
+    </div>
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>National ID</th>
+                <th>Department</th>
+                <th>Job Title</th>
+                <th>Start Date</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Employee rows will be injected here -->
+        </tbody>
+    </table>
+</section>
+
+<!-- Payroll Section -->
+<section id="payroll-section">
+    <h2>Payroll</h2>
+    <p>Calculate salaries, overtime, contributions and taxes for your employees. Load employees from the Employee Data section or add rows manually.</p>
+    <div class="actions">
+        <button onclick="addPayrollRow()">Add Row</button>
+        <button onclick="computeAll()">Recalculate All</button>
+        <button onclick="loadFromEmployees()">Load Employees</button>
+    </div>
+    <table id="payrollTable">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Job Title</th>
+                <th>Basic Salary (MUR)</th>
+                <th>OT Hours (1.5×)</th>
+                <th>OT Hours (2×)</th>
+                <th>OT Rate</th>
+                <th>Allowances</th>
+                <th>Other Deduct</th>
+                <th>OT Pay</th>
+                <th>Gross Pay</th>
+                <th>CSG Emp</th>
+                <th>NSF Emp</th>
+                <th>PAYE Tax</th>
+                <th>Total Deduct</th>
+                <th>Net Pay</th>
+                <th>CSG Emplr</th>
+                <th>NSF Emplr</th>
+                <th>Employer Cost</th>
+                <th>Payslip</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Payroll rows will be injected here -->
+        </tbody>
+    </table>
+    <p class="note"><strong>Totals:</strong> Net Pay Sum = <span id="sum-net-pay">0.00</span> | Employer Cost Sum = <span id="sum-employer-cost">0.00</span></p>
+    <p class="note">Note: OT hours beyond 40–45 hours per week and work on Sundays/public holidays are compensated at 1.5× and 2× rates respectively according to Mauritian labour law【710328168227177†L375-L383】.</p>
+</section>
+
+<!-- Formula Reference Section -->
+<section id="formula-section">
+    <h2>Formula Reference</h2>
+    <table class="formula-table">
+        <thead>
+            <tr><th>Component</th><th>Formula (plain language)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Overtime Pay</td><td>(OT Hours (1.5×) × OT Rate × 1.5) + (OT Hours (2×) × OT Rate × 2)</td></tr>
+            <tr><td>Gross Pay</td><td>Basic Salary + OT Pay + Allowances</td></tr>
+            <tr><td>CSG Employee</td><td>1.5 % of basic salary if ≤ MUR 50 000; otherwise 3 %</td></tr>
+            <tr><td>NSF Employee</td><td>1 % of basic salary (max MUR 187)</td></tr>
+            <tr><td>PAYE Tax</td><td>10 % of gross pay if ≤ MUR 54 166.67; otherwise 15 %</td></tr>
+            <tr><td>Total Deductions</td><td>CSG Emp + NSF Emp + PAYE + Other Deduct</td></tr>
+            <tr><td>Net Pay</td><td>Gross Pay – Total Deductions</td></tr>
+            <tr><td>CSG Employer</td><td>3 % of basic salary if ≤ MUR 50 000; otherwise 6 %</td></tr>
+            <tr><td>NSF Employer</td><td>1.5 % of basic salary + 2.5 % of (OT Pay + Allowances)</td></tr>
+            <tr><td>Employer Cost</td><td>Gross Pay + CSG Employer + NSF Employer</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<script>
+// === Employee Management Functions ===
+
+// Add a blank employee row with input fields
+function addEmployeeRow() {
+    const tbody = document.querySelector('#employeeTable tbody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><input type="text" class="emp-id-field"></td>
+        <td><input type="text" class="first-name-field"></td>
+        <td><input type="text" class="last-name-field"></td>
+        <td><input type="text" class="gender-field"></td>
+        <td><input type="date" class="dob-field"></td>
+        <td><input type="text" class="national-id-field"></td>
+        <td><input type="text" class="department-field"></td>
+        <td><input type="text" class="job-title-field"></td>
+        <td><input type="date" class="start-date-field"></td>
+        <td><input type="text" class="contact-field"></td>
+        <td><input type="email" class="email-field"></td>
+        <td><input type="text" class="address-field"></td>
+    `;
+    tbody.appendChild(row);
+}
+
+// Add an employee row with predefined data (for import/sample)
+function addEmployeeRowWithData(emp) {
+    const tbody = document.querySelector('#employeeTable tbody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${emp.id || ''}</td>
+        <td>${emp.firstName || ''}</td>
+        <td>${emp.lastName || ''}</td>
+        <td>${emp.gender || ''}</td>
+        <td>${emp.dob || ''}</td>
+        <td>${emp.nationalId || ''}</td>
+        <td>${emp.department || ''}</td>
+        <td>${emp.jobTitle || ''}</td>
+        <td>${emp.startDate || ''}</td>
+        <td>${emp.contact || ''}</td>
+        <td>${emp.email || ''}</td>
+        <td>${emp.address || ''}</td>
+    `;
+    tbody.appendChild(row);
+}
+
+// Import employees from CSV file
+function importEmployees(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.trim().split(/\r?\n/);
+        if (lines.length === 0) return;
+        // Map header names to indices
+        const header = lines[0].split(',');
+        const map = {};
+        header.forEach((h, i) => {
+            map[h.trim().toLowerCase()] = i;
+        });
+        for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].split(',');
+            if (!cols || cols.length < 2) continue;
+            const emp = {};
+            emp.id = cols[map['employee id']] || cols[map['emp id']] || cols[map['id']] || cols[0] || '';
+            emp.firstName = cols[map['first name']] || cols[map['firstname']] || '';
+            emp.lastName = cols[map['last name']] || cols[map['lastname']] || '';
+            emp.gender = cols[map['gender']] || '';
+            emp.dob = cols[map['date of birth']] || cols[map['dob']] || '';
+            emp.nationalId = cols[map['national id']] || cols[map['nic']] || '';
+            emp.department = cols[map['department']] || '';
+            emp.jobTitle = cols[map['job title']] || cols[map['title']] || '';
+            emp.startDate = cols[map['start date']] || '';
+            emp.contact = cols[map['contact number']] || cols[map['contact']] || '';
+            emp.email = cols[map['email']] || '';
+            emp.address = cols[map['address']] || '';
+            // Additional payroll fields (optional, for loading to payroll later)
+            emp.basicSalary = cols[map['basic salary']] || '';
+            emp.otHours15 = cols[map['ot hours 1.5']] || '';
+            emp.otHours2 = cols[map['ot hours 2']] || '';
+            emp.otRate = cols[map['ot rate']] || '';
+            emp.allowances = cols[map['allowances']] || '';
+            emp.otherDeduct = cols[map['other deduct']] || '';
+            addEmployeeRowWithData(emp);
+        }
+        event.target.value = '';
+    };
+    reader.readAsText(file);
+}
+
+// Save employees to localStorage (so payroll can load them)
+function saveEmployees() {
+    const rows = document.querySelectorAll('#employeeTable tbody tr');
+    const employees = [];
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const emp = {};
+        // Determine if cell contains input or static text
+        function getVal(cell, selector) {
+            const input = cell.querySelector(selector);
+            return input ? input.value.trim() : cell.textContent.trim();
+        }
+        emp.id = getVal(cells[0], 'input');
+        emp.firstName = getVal(cells[1], 'input');
+        emp.lastName = getVal(cells[2], 'input');
+        emp.gender = getVal(cells[3], 'input');
+        emp.dob = getVal(cells[4], 'input');
+        emp.nationalId = getVal(cells[5], 'input');
+        emp.department = getVal(cells[6], 'input');
+        emp.jobTitle = getVal(cells[7], 'input');
+        emp.startDate = getVal(cells[8], 'input');
+        emp.contact = getVal(cells[9], 'input');
+        emp.email = getVal(cells[10], 'input');
+        emp.address = getVal(cells[11], 'input');
+        // Additional payroll fields (initialize blank)
+        emp.basicSalary = '';
+        emp.otHours15 = '';
+        emp.otHours2 = '';
+        emp.otRate = '';
+        emp.allowances = '';
+        emp.otherDeduct = '';
+        employees.push(emp);
+    });
+    localStorage.setItem('employees', JSON.stringify(employees));
+    alert('Employees saved. Now go to the Payroll section to process salaries.');
+}
+
+// === Payroll Functions ===
+
+// Compute payroll for a single payroll row
+function computePayrollRow(row) {
+    const basic = parseFloat(row.querySelector('.basic')?.value) || 0;
+    const otHours1 = parseFloat(row.querySelector('.ot-hours1')?.value) || 0;
+    const otHours2 = parseFloat(row.querySelector('.ot-hours2')?.value) || 0;
+    const otRate = parseFloat(row.querySelector('.ot-rate')?.value) || 0;
+    const allowances = parseFloat(row.querySelector('.allowances')?.value) || 0;
+    const otherDeduct = parseFloat(row.querySelector('.other-deduct')?.value) || 0;
+    const otPay = (otHours1 * otRate * 1.5) + (otHours2 * otRate * 2);
+    const grossPay = basic + otPay + allowances;
+    const csgEmp = basic <= 50000 ? basic * 0.015 : basic * 0.03;
+    const nsfEmp = Math.min(basic * 0.01, 187);
+    const paye = grossPay <= 54166.67 ? grossPay * 0.10 : grossPay * 0.15;
+    const totalDeduct = csgEmp + nsfEmp + paye + otherDeduct;
+    const netPay = grossPay - totalDeduct;
+    const csgEmpr = basic <= 50000 ? basic * 0.03 : basic * 0.06;
+    const nsfEmpr = basic * 0.015 + (otPay + allowances) * 0.025;
+    const employerCost = grossPay + csgEmpr + nsfEmpr;
+    row.querySelector('.ot-pay').textContent = otPay.toFixed(2);
+    row.querySelector('.gross-pay').textContent = grossPay.toFixed(2);
+    row.querySelector('.csg-emp').textContent = csgEmp.toFixed(2);
+    row.querySelector('.nsf-emp').textContent = nsfEmp.toFixed(2);
+    row.querySelector('.paye').textContent = paye.toFixed(2);
+    row.querySelector('.total-deduct').textContent = totalDeduct.toFixed(2);
+    row.querySelector('.net-pay').textContent = netPay.toFixed(2);
+    row.querySelector('.csg-empr').textContent = csgEmpr.toFixed(2);
+    row.querySelector('.nsf-empr').textContent = nsfEmpr.toFixed(2);
+    row.querySelector('.employer-cost').textContent = employerCost.toFixed(2);
+}
+
+// Compute totals across all payroll rows
+function computeTotals() {
+    let sumNet = 0;
+    let sumEmployer = 0;
+    const rows = document.querySelectorAll('#payrollTable tbody tr');
+    rows.forEach(r => {
+        const netVal = parseFloat(r.querySelector('.net-pay')?.textContent) || 0;
+        const empCostVal = parseFloat(r.querySelector('.employer-cost')?.textContent) || 0;
+        sumNet += netVal;
+        sumEmployer += empCostVal;
+    });
+    document.getElementById('sum-net-pay').textContent = sumNet.toFixed(2);
+    document.getElementById('sum-employer-cost').textContent = sumEmployer.toFixed(2);
+}
+
+// Compute all payroll rows and totals
+function computeAll() {
+    const rows = document.querySelectorAll('#payrollTable tbody tr');
+    rows.forEach(row => computePayrollRow(row));
+    computeTotals();
+}
+
+// Add a blank payroll row with input fields and output columns
+function addPayrollRow() {
+    const tbody = document.querySelector('#payrollTable tbody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><input type="text" class="emp-id"></td>
+        <td><input type="text" class="name"></td>
+        <td><input type="text" class="job-title"></td>
+        <td><input type="number" class="basic"></td>
+        <td><input type="number" class="ot-hours1"></td>
+        <td><input type="number" class="ot-hours2"></td>
+        <td><input type="number" class="ot-rate"></td>
+        <td><input type="number" class="allowances"></td>
+        <td><input type="number" class="other-deduct"></td>
+        <td class="ot-pay">0.00</td>
+        <td class="gross-pay">0.00</td>
+        <td class="csg-emp">0.00</td>
+        <td class="nsf-emp">0.00</td>
+        <td class="paye">0.00</td>
+        <td class="total-deduct">0.00</td>
+        <td class="net-pay">0.00</td>
+        <td class="csg-empr">0.00</td>
+        <td class="nsf-empr">0.00</td>
+        <td class="employer-cost">0.00</td>
+        <td><button onclick="generatePayslip(this)">Payslip</button></td>
+    `;
+    tbody.appendChild(row);
+    attachPayrollInputListeners(row);
+    computeTotals();
+}
+
+// Attach listeners to numeric inputs to recalc on change
+function attachPayrollInputListeners(row) {
+    const inputs = row.querySelectorAll('input[type=number]');
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            computePayrollRow(row);
+            computeTotals();
+        });
+    });
+}
+
+// Generate a payslip for a payroll row
+function generatePayslip(button) {
+    const row = button.closest('tr');
+    if (!row) return;
+    computePayrollRow(row);
+    const empId = row.querySelector('.emp-id')?.value || '';
+    const name = row.querySelector('.name')?.value || '';
+    const jobTitle = row.querySelector('.job-title')?.value || '';
+    const basic = parseFloat(row.querySelector('.basic')?.value) || 0;
+    const otHours1 = parseFloat(row.querySelector('.ot-hours1')?.value) || 0;
+    const otHours2 = parseFloat(row.querySelector('.ot-hours2')?.value) || 0;
+    const otRate = parseFloat(row.querySelector('.ot-rate')?.value) || 0;
+    const allowances = parseFloat(row.querySelector('.allowances')?.value) || 0;
+    const otherDed = parseFloat(row.querySelector('.other-deduct')?.value) || 0;
+    const otPay = parseFloat(row.querySelector('.ot-pay')?.textContent) || 0;
+    const grossPay = parseFloat(row.querySelector('.gross-pay')?.textContent) || 0;
+    const csgEmp = parseFloat(row.querySelector('.csg-emp')?.textContent) || 0;
+    const nsfEmp = parseFloat(row.querySelector('.nsf-emp')?.textContent) || 0;
+    const paye = parseFloat(row.querySelector('.paye')?.textContent) || 0;
+    const totalDed = parseFloat(row.querySelector('.total-deduct')?.textContent) || 0;
+    const netPay = parseFloat(row.querySelector('.net-pay')?.textContent) || 0;
+    const csgEmpr = parseFloat(row.querySelector('.csg-empr')?.textContent) || 0;
+    const nsfEmpr = parseFloat(row.querySelector('.nsf-empr')?.textContent) || 0;
+    const employerCost = parseFloat(row.querySelector('.employer-cost')?.textContent) || 0;
+    const otPay15 = (otHours1 * otRate * 1.5).toFixed(2);
+    const otPay2 = (otHours2 * otRate * 2).toFixed(2);
+    let slipHtml = '<html><head><title>Payslip - ' + empId + '</title><style>';
+    slipHtml += 'body{font-family:Arial,sans-serif;padding:20px;}';
+    slipHtml += 'h2{margin-top:0;}';
+    slipHtml += 'table{width:100%;border-collapse:collapse;margin-top:10px;}';
+    slipHtml += 'th,td{border:1px solid #ddd;padding:8px;text-align:left;}';
+    slipHtml += 'th{background-color:#f4a261;color:#fff;}';
+    slipHtml += '</style></head><body>';
+    slipHtml += '<h2>Payslip</h2>';
+    slipHtml += '<p><strong>Employee ID:</strong> ' + empId + '<br>';
+    slipHtml += '<strong>Name:</strong> ' + name + '<br>';
+    slipHtml += '<strong>Job Title:</strong> ' + jobTitle + '</p>';
+    slipHtml += '<table><thead><tr><th>Component</th><th>Amount (MUR)</th></tr></thead><tbody>';
+    slipHtml += '<tr><td>Basic Salary</td><td>' + basic.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>Overtime (1.5×)</td><td>' + otPay15 + '</td></tr>';
+    slipHtml += '<tr><td>Overtime (2×)</td><td>' + otPay2 + '</td></tr>';
+    slipHtml += '<tr><td>Total Overtime Pay</td><td>' + otPay.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>Allowances</td><td>' + allowances.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>Gross Pay</td><td>' + grossPay.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>CSG (Employee)</td><td>' + csgEmp.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>NSF (Employee)</td><td>' + nsfEmp.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>PAYE Tax</td><td>' + paye.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>Other Deductions</td><td>' + otherDed.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>Total Deductions</td><td>' + totalDed.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td><strong>Net Pay</strong></td><td><strong>' + netPay.toFixed(2) + '</strong></td></tr>';
+    slipHtml += '<tr><td>CSG (Employer)</td><td>' + csgEmpr.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td>NSF (Employer)</td><td>' + nsfEmpr.toFixed(2) + '</td></tr>';
+    slipHtml += '<tr><td><strong>Employer Cost</strong></td><td><strong>' + employerCost.toFixed(2) + '</strong></td></tr>';
+    slipHtml += '</tbody></table>';
+    slipHtml += '<p><button onclick="window.print();">Print</button></p>';
+    slipHtml += '</body></html>';
+    const slipWin = window.open('', '', 'width=700,height=700');
+    slipWin.document.write(slipHtml);
+    slipWin.document.close();
+}
+
+// Load employees from localStorage (or fallback to sample) and populate payroll rows
+function loadFromEmployees() {
+    const stored = localStorage.getItem('employees');
+    let employees = [];
+    if (stored) {
+        employees = JSON.parse(stored);
+    } else {
+        employees = [
+            { id: 'E001', firstName: 'John', lastName: 'Doe', jobTitle: 'Manager', basicSalary: '50000', otHours15: '8', otHours2: '2', otRate: '200', allowances: '5000', otherDeduct: '8000' },
+            { id: 'E002', firstName: 'Jane', lastName: 'Smith', jobTitle: 'Sales Exec', basicSalary: '30000', otHours15: '4', otHours2: '1', otRate: '150', allowances: '3000', otherDeduct: '4000' },
+            { id: 'E003', firstName: 'David', lastName: 'Lee', jobTitle: 'Accountant', basicSalary: '40000', otHours15: '6', otHours2: '2', otRate: '180', allowances: '4500', otherDeduct: '6000' }
+        ];
+    }
+    // Clear current payroll rows
+    const tbody = document.querySelector('#payrollTable tbody');
+    tbody.innerHTML = '';
+    employees.forEach(emp => {
+        addPayrollRow();
+        const row = tbody.lastElementChild;
+        row.querySelector('.emp-id').value = emp.id || '';
+        row.querySelector('.name').value = `${emp.firstName || ''} ${emp.lastName || ''}`.trim();
+        row.querySelector('.job-title').value = emp.jobTitle || '';
+        row.querySelector('.basic').value = emp.basicSalary || '';
+        row.querySelector('.ot-hours1').value = emp.otHours15 || '';
+        row.querySelector('.ot-hours2').value = emp.otHours2 || '';
+        row.querySelector('.ot-rate').value = emp.otRate || '';
+        row.querySelector('.allowances').value = emp.allowances || '';
+        row.querySelector('.other-deduct').value = emp.otherDeduct || '';
+        computePayrollRow(row);
+    });
+    computeTotals();
+}
+
+// On DOMContentLoaded, initialize sample data and an empty payroll row
+document.addEventListener('DOMContentLoaded', () => {
+    // Populate employee table from storage or with sample data
+    const stored = localStorage.getItem('employees');
+    if (stored) {
+        const emps = JSON.parse(stored);
+        emps.forEach(emp => addEmployeeRowWithData(emp));
+    } else {
+        // Provide some example employees if none saved
+        const samples = [
+            { id: 'E001', firstName: 'John', lastName: 'Doe', gender: 'M', dob: '1987-05-10', nationalId: 'A123456789', department: 'Management', jobTitle: 'Manager', startDate: '2015-01-15', contact: '58580000', email: 'john.doe@example.com', address: '14 Example Street, Curepipe', basicSalary: '50000', otHours15: '8', otHours2: '2', otRate: '200', allowances: '5000', otherDeduct: '8000' },
+            { id: 'E002', firstName: 'Jane', lastName: 'Smith', gender: 'F', dob: '1990-07-22', nationalId: 'B987654321', department: 'Sales', jobTitle: 'Sales Exec', startDate: '2018-03-20', contact: '58990000', email: 'jane.smith@example.com', address: '8 Market Road, Port Louis', basicSalary: '30000', otHours15: '4', otHours2: '1', otRate: '150', allowances: '3000', otherDeduct: '4000' },
+            { id: 'E003', firstName: 'David', lastName: 'Lee', gender: 'M', dob: '1985-02-17', nationalId: 'C112233445', department: 'Accounting', jobTitle: 'Accountant', startDate: '2010-09-01', contact: '59010000', email: 'david.lee@example.com', address: '23 Finance Lane, Rose Hill', basicSalary: '40000', otHours15: '6', otHours2: '2', otRate: '180', allowances: '4500', otherDeduct: '6000' }
+        ];
+        samples.forEach(emp => addEmployeeRowWithData(emp));
+    }
+    // Initialize an empty payroll row for user convenience
+    addPayrollRow();
+    computePayrollRow(document.querySelector('#payrollTable tbody tr'));
+    computeTotals();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TrendBot Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{--bg:#0b1020;--card:#121a2f;--muted:#94a3b8;--text:#e2e8f0;--green:#16a34a;--red:#dc2626;--chip:#1f2a44}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .wrap{max-width:1100px;margin:0 auto;padding:16px}
+  .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .title{font-size:20px;font-weight:700}
+  .meta{font-size:12px;color:var(--muted)}
+  .card{background:var(--card);border-radius:16px;box-shadow:0 10px 20px rgba(0,0,0,.25);overflow:auto}
+  table{width:100%;border-collapse:separate;border-spacing:0}
+  thead{background:#18213d;color:#cbd5e1;font-size:12px}
+  th,td{padding:10px 12px;border-bottom:1px solid #1e2a4a}
+  tbody tr:hover{background:#151f39}
+  tfoot{background:#0f1730;font-weight:600}
+  .right{text-align:right}
+  .center{text-align:center}
+  .green{color:var(--green)} .red{color:var(--red)}
+  .chip{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--chip);font-size:11px}
+  button{background:#334155;color:#e2e8f0;border:0;border-radius:10px;padding:6px 10px;font-size:12px;cursor:pointer}
+  button:hover{filter:brightness(1.1)}
+  select{background:#0f172a;color:#e2e8f0;border:1px solid #1f2a44;border-radius:8px;padding:6px 8px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <div class="title">TrendBot — Live P&amp;L</div>
+      <div class="row" style="gap:8px">
+        <select id="net">
+          <option value="testnet">Testnet</option>
+          <option value="mainnet">Mainnet</option>
+        </select>
+        <button id="refresh">Refresh</button>
+      </div>
+    </div>
+    <div id="meta" class="meta">Loading…</div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th class="right">Price</th>
+            <th class="right">Qty</th>
+            <th class="right">Avg Entry</th>
+            <th class="right">Last Buy</th>
+            <th class="right">Last Sell</th>
+            <th class="right">Unrealized P/L</th>
+            <th class="right">Realized P/L</th>
+            <th class="center">Signal</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">Totals</td>
+            <td id="uTotal" class="right">–</td>
+            <td id="rTotal" class="right">–</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+<script>
+const $ = (id)=>document.getElementById(id);
+const rowsEl = $('rows'), metaEl = $('meta'), uTotalEl = $('uTotal'), rTotalEl = $('rTotal'), netSel = $('net');
+
+async function load(){
+  try{
+    const res = await fetch('./runtime/state.json?ts=' + Date.now(), {cache:'no-store'});
+    const state = await res.json();
+
+    // reflect env
+    if (state.env) netSel.value = state.env;
+
+    const pos = state.positions || {};
+    const syms = Object.keys(pos);
+
+    let uSum=0, rSum=0;
+    rowsEl.innerHTML = syms.map(sym=>{
+      const p = pos[sym] || {};
+      const price = Number(p.price ?? NaN);
+      const qty   = Number(p.qty ?? 0);
+      const avg   = (p.avg_entry==null ? NaN : Number(p.avg_entry));
+      const lbuy  = (p.last_buy==null ? NaN : Number(p.last_buy));
+      const lsell = (p.last_sell==null ? NaN : Number(p.last_sell));
+      const rpl   = Number(p.realized_pnl ?? 0);
+      const upl   = Number(p.unrealized_pl ?? ((qty && !isNaN(avg) && !isNaN(price)) ? (price-avg)*qty : 0));
+      uSum += upl; rSum += rpl;
+      const fmt = n => (n==null || isNaN(n)) ? '–' : Number(n).toFixed(4);
+      const sig = (p.action||'HOLD').toString().toUpperCase();
+      const sigClass = sig==='BUY'?'green':(sig==='SELL'?'red':'');
+
+      return `<tr>
+        <td>${sym}</td>
+        <td class="right">${fmt(price)}</td>
+        <td class="right">${fmt(qty)}</td>
+        <td class="right">${fmt(avg)}</td>
+        <td class="right">${fmt(lbuy)}</td>
+        <td class="right">${fmt(lsell)}</td>
+        <td class="right ${upl>=0?'green':'red'}">${fmt(upl)}</td>
+        <td class="right ${rpl>=0?'green':'red'}">${fmt(rpl)}</td>
+        <td class="center"><span class="chip ${sigClass}">${sig}</span></td>
+      </tr>`;
+    }).join('');
+
+    uTotalEl.textContent = uSum.toFixed(4);
+    rTotalEl.textContent = rSum.toFixed(4);
+    metaEl.textContent = `Env: ${netSel.value.toUpperCase()} • Updated: ${state.updated_at||'—'} • Auto-refreshing…`;
+  }catch(e){
+    metaEl.textContent = 'Waiting for state.json…';
+  }
+}
+
+$('refresh').addEventListener('click', load);
+setInterval(load, 2000);
+load();
+</script>
+</body>
+</html>

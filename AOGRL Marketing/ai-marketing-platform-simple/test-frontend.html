@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Image Generation</title>
+</head>
+<body>
+    <h1>Test Image Generation</h1>
+    <button onclick="generateImage()">Generate Image</button>
+    <div id="result"></div>
+
+    <script>
+        async function generateImage() {
+            try {
+                const response = await fetch('/api/generate-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        prompt: 'A beautiful sunset over the ocean'
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('Response:', data);
+                
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <h2>Generated Image</h2>
+                    <img src="${data.imageUrl}" alt="Generated" style="max-width: 600px;" />
+                    <p>Prompt: ${data.prompt}</p>
+                    <p>Message: ${data.message}</p>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

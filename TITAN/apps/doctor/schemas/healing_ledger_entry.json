@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "HealingLedgerEntry",
+    "type": "object",
+    "required": [
+        "entry_id",
+        "signal_id",
+        "action",
+        "actor",
+        "result",
+        "timestamp"
+    ],
+    "properties": {
+        "entry_id": {
+            "type": "string"
+        },
+        "signal_id": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string"
+        },
+        "actor": {
+            "enum": [
+                "INSPECTOR",
+                "DOCTOR",
+                "HUMAN"
+            ]
+        },
+        "result": {
+            "type": "string"
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        }
+    }
+}

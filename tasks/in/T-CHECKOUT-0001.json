@@ -1,0 +1,6 @@
+{
+  "task_id": "T-CHECKOUT-0001",
+  "intent": "checkout_staging_dryrun",
+  "goal": "Open staging checkout, fill all fields with dummy data, stop before payment.",
+  "constraints": { "max_steps": 8, "timeout_s": 60, "submit_forms": false }
+}

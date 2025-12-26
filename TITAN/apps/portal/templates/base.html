@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITAN OS | Business Acceleration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold tracking-tighter">TITAN<span
+                                class="text-blue-600">OS</span></span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="/portal"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="/portal/departments"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Departments</a>
+                        <a href="/portal/grants"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Grants</a>
+                        <a href="/portal/audit"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Compliance</a>
+                        <a href="/portal/international"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium text-purple-600">HQ
+                            Setup</a>
+                        <a href="/portal/resources"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
+                        <a href="/portal/about"
+                            class="border-transparent text-slate-500 hover:border-blue-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="/portal/intake"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                        Help Me Choose
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer with MANDATORY TRUST & LEGAL -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <span class="text-xl font-bold text-white tracking-tighter">TITAN<span
+                        class="text-blue-500">OS</span></span>
+                <p class="mt-4 text-sm leading-relaxed">
+                    The Operating System for Autonomous Business.<br>
+                    We turn bureaucracy into outcomes.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Departments</h3>
+                <ul class="mt-4 space-y-2 text-sm">
+                    <li><a href="/portal/grants" class="hover:text-white">Grants & Funding</a></li>
+                    <li><a href="/portal/audit" class="hover:text-white">Compliance Audit</a></li>
+                    <li><a href="/portal/international" class="hover:text-white">International Setup</a></li>
+                    <li><a href="/portal/resources" class="hover:text-white">Resources & Laws</a></li>
+                    <li><a href="#" class="text-slate-600 cursor-not-allowed">HR (Coming Soon)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Legal</h3>
+                <ul class="mt-4 space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MANDATORY DISCLAIMER BLOCK -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800">
+            <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400 text-center leading-relaxed">
+                    <strong>DISCLAIMER: NOT LEGAL ADVICE.</strong><br>
+                    TITAN OS uses artificial intelligence to generate documents, proposals, and audits. While we strive
+                    for accuracy, these outputs are for informational purposes only and do not constitute professional
+                    legal, financial, or tax advice. You should review all outputs with a qualified professional before
+                    submission or signature. TITAN OS and AION-ZERO are not liable for any rejected grants, legal
+                    penalties, or financial losses.
+                </p>
+            </div>
+            <p class="text-center text-xs mt-4">&copy; 2025 AION-ZERO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Intake Modal (Placeholder) -->
+    <script>
+        function openIntake() {
+            // Priority 2: This will be connected to the Rules-Based Router
+            alert("Intake System Loading... (Initializing Fast Path)");
+        }
+    </script>
+</body>
+
+</html>

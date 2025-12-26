@@ -1,0 +1,53 @@
+﻿{
+    "ts":  "2025-09-23T22:01:05",
+    "base_url":  "https://api.binance.com",
+    "recv_window_ms":  2000,
+    "min_depth_usd":  10000,
+    "max_spread_bps":  12,
+    "errors":  [
+
+               ],
+    "probes":  [
+                   {
+                       "symbol":  "DOGEUSDT",
+                       "ok":  true,
+                       "bid":  0.23838,
+                       "ask":  0.23839,
+                       "spread_bps":  0.42,
+                       "depth_usd":  93827.78,
+                       "pass_spread":  true,
+                       "pass_depth":  true
+                   },
+                   {
+                       "symbol":  "SHIBUSDT",
+                       "ok":  true,
+                       "bid":  1.21E-05,
+                       "ask":  1.211E-05,
+                       "spread_bps":  8.26,
+                       "depth_usd":  253493.72,
+                       "pass_spread":  true,
+                       "pass_depth":  true
+                   },
+                   {
+                       "symbol":  "PEPEUSDT",
+                       "ok":  true,
+                       "bid":  9.61E-06,
+                       "ask":  9.62E-06,
+                       "spread_bps":  10.4,
+                       "depth_usd":  1139712.79,
+                       "pass_spread":  true,
+                       "pass_depth":  true
+                   }
+               ],
+    "env":  {
+                "BINANCE_API_KEY":  "***5MYd",
+                "BINANCE_API_SECRET":  "present"
+            },
+    "server_time":  1758650466082,
+    "clock_skew_ms":  -173,
+    "account_status":  {
+                           "data":  "Normal"
+                       },
+    "exchange_info":  "ok",
+    "verdict":  "READY"
+}

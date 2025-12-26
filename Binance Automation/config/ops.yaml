@@ -1,0 +1,31 @@
+﻿risk:
+  risk_per_trade_pct: 0.0075       # 0.75% per trade
+  max_trades_per_day: 3
+  max_daily_loss_pct: 0.02
+  max_weekly_drawdown_pct: 0.06
+  slip_pips_worst_case: 0.5
+  include_fees_in_r: true
+
+sessions:
+  enable_session_filter: true
+  allowed_sessions_utc:
+    - {start: "07:00", end: "16:00"}  # London->NY overlap
+
+setup:
+  trend_emafast: 20
+  trend_emaslow: 50
+  atr_period: 14
+  atr_stop_mult: 1.1
+  rr_primary: 2.0
+  partial_tp_r: 1.0
+  use_vwap: true
+  pullback_fib_min: 0.38
+  pullback_fib_max: 0.62
+  min_range_break_pips: 8
+
+instruments:
+  whitelist: ["BTCUSDT","ETHUSDT","XAUUSD"]  # tailor to your venue
+
+journal:
+  path_csv: "./live_trade_log.csv"
+  screenshot_dir: "./logs/screens"

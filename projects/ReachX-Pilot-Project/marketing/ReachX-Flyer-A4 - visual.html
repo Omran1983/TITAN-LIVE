@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReachX Ops Cockpit – Visual Flyer</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    .page {
+      min-height: calc(297mm - 20mm);
+      background:
+        radial-gradient(circle at top left, #22c55e33, transparent 60%),
+        radial-gradient(circle at bottom right, #0ea5e933, transparent 60%),
+        #020617;
+      border-radius: 18px;
+      padding: 22px 26px 24px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #22c55e, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: #020617;
+      box-shadow: 0 0 0 2px #020617, 0 0 0 5px rgba(34, 197, 94, 0.45);
+    }
+    .brand-text-main {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .brand-text-sub {
+      font-size: 10px;
+      color: #9ca3af;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .tag {
+      font-size: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: linear-gradient(90deg, #020617dd, #02061788);
+    }
+
+    /* HERO AREA */
+    .hero {
+      display: grid;
+      grid-template-columns: 2.1fr 1.5fr;
+      gap: 18px;
+      margin-bottom: 14px;
+      margin-top: 6px;
+    }
+    .hero-left-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a5b4fc;
+      margin-bottom: 6px;
+    }
+    .hero-title {
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: #f9fafb;
+    }
+    .hero-title span {
+      color: #22c55e;
+    }
+    .hero-sub {
+      font-size: 12px;
+      color: #cbd5f5;
+      max-width: 420px;
+      margin-bottom: 10px;
+    }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .pill {
+      font-size: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #e5e7eb;
+    }
+
+    .hero-right-card {
+      border-radius: 16px;
+      padding: 10px 12px 12px;
+      background: radial-gradient(circle at top left, #1e293b, #020617);
+      border: 1px solid rgba(51, 65, 85, 0.95);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
+    }
+    .hero-right-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .fake-dashboard {
+      margin-top: 6px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(71, 85, 105, 0.9);
+      padding: 8px 10px 10px;
+    }
+    .fake-dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .fake-badge {
+      font-size: 9px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+    .fake-dots {
+      display: flex;
+      gap: 4px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #334155;
+    }
+    .dot.green { background: #22c55e; }
+    .dot.amber { background: #facc15; }
+
+    .fake-dash-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 6px;
+      align-items: center;
+    }
+    .mini-metrics {
+      display: grid;
+      gap: 4px;
+    }
+    .mini-metric {
+      border-radius: 8px;
+      padding: 5px 6px;
+      background: #020617;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 9px;
+    }
+    .mini-metric-label {
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .mini-metric-value {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .bars {
+      border-radius: 8px;
+      padding: 5px 6px;
+      background: #020617;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+    .bar-label {
+      width: 60px;
+      font-size: 9px;
+      color: #9ca3af;
+    }
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #0ea5e9);
+    }
+
+    /* FLOW DIAGRAM */
+    .flow-section {
+      margin-bottom: 14px;
+    }
+    .flow-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    .flow-row {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr 1.3fr;
+      align-items: center;
+      gap: 10px;
+    }
+    .flow-node {
+      border-radius: 16px;
+      padding: 10px 10px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      text-align: center;
+      font-size: 11px;
+    }
+    .flow-node strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+    .flow-node span {
+      font-size: 10px;
+      color: #9ca3af;
+    }
+    .flow-node.highlight {
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5);
+    }
+    .flow-center {
+      text-align: center;
+      font-size: 11px;
+      color: #cbd5f5;
+    }
+    .flow-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      margin: 0 auto 4px;
+      background: radial-gradient(circle at 20% 20%, #22c55e, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #020617;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.85);
+    }
+    .flow-arrow {
+      font-size: 16px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    /* STEPS TIMELINE */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .step {
+      border-radius: 14px;
+      padding: 8px 9px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.98);
+      font-size: 10px;
+      position: relative;
+    }
+    .step-num {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 3px;
+    }
+    .step-title {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 2px;
+    }
+    .step::after {
+      content: "→";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .step:last-child::after {
+      content: "";
+    }
+
+    /* BOTTOM CTA */
+    .bottom {
+      display: grid;
+      grid-template-columns: 1.7fr 1.3fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .bottom-left {
+      font-size: 10px;
+      color: #9ca3af;
+    }
+    .bottom-left strong {
+      color: #e5e7eb;
+    }
+    .cta-box {
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, #22c55e33, #020617);
+      border: 1px solid rgba(34, 197, 94, 0.85);
+      font-size: 10px;
+    }
+    .cta-main {
+      font-size: 12px;
+      font-weight: 600;
+      color: #bbf7d0;
+      margin-bottom: 4px;
+    }
+    .cta-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+    .cta-line {
+      margin-top: 2px;
+    }
+    .qr-placeholder {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      padding: 6px;
+      text-align: center;
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .page { border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- TOP HALF -->
+    <div>
+      <!-- HEADER -->
+      <div class="header">
+        <div class="brand">
+          <div class="logo">RX</div>
+          <div>
+            <div class="brand-text-main">ReachX Ops Cockpit</div>
+            <div class="brand-text-sub">Workers • Employers • Dormitories</div>
+          </div>
+        </div>
+        <div class="tag">14-DAY PILOT • REMOTE SETUP</div>
+      </div>
+
+      <!-- HERO -->
+      <div class="hero">
+        <div>
+          <div class="hero-left-label">For recruitment & manpower agencies</div>
+          <h1 class="hero-title">
+            From spreadsheet chaos<br />
+            to a <span>live cockpit</span>.
+          </h1>
+          <p class="hero-sub">
+            One visual dashboard for workers, employers and dormitories – built on the Excel files you already use.
+          </p>
+          <div class="hero-pills">
+            <div class="pill">No new system to learn</div>
+            <div class="pill">Cloud dashboard only</div>
+            <div class="pill">Monitored, not blind</div>
+          </div>
+        </div>
+
+        <!-- Fake dashboard "image" -->
+        <div class="hero-right-card">
+          <div class="hero-right-title">Example cockpit snapshot</div>
+          <div class="fake-dashboard">
+            <div class="fake-dash-header">
+              <div class="fake-badge">Live employers view</div>
+              <div class="fake-dots">
+                <div class="dot"></div>
+                <div class="dot amber"></div>
+                <div class="dot green"></div>
+              </div>
+            </div>
+            <div class="fake-dash-grid">
+              <div class="mini-metrics">
+                <div class="mini-metric">
+                  <div class="mini-metric-label">Employers</div>
+                  <div class="mini-metric-value">24 live</div>
+                </div>
+                <div class="mini-metric">
+                  <div class="mini-metric-label">Workers</div>
+                  <div class="mini-metric-value">412 active</div>
+                </div>
+                <div class="mini-metric">
+                  <div class="mini-metric-label">Dorms</div>
+                  <div class="mini-metric-value">19 sites</div>
+                </div>
+              </div>
+              <div class="bars">
+                <div class="bar-row">
+                  <div class="bar-label">Hospitality</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:78%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-label">Construction</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:60%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-label">Security</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:45%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-label">Cleaning</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:35%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW DIAGRAM -->
+      <div class="flow-section">
+        <div class="flow-title">How it flows (at a glance)</div>
+        <div class="flow-row">
+          <div class="flow-node">
+            <strong>🧾 Your Sheets</strong>
+            <span>Excel / CSV with workers, employers, dormitories.</span>
+          </div>
+          <div class="flow-center">
+            <div class="flow-circle">RX</div>
+            <div class="flow-arrow">data sync + monitoring</div>
+          </div>
+          <div class="flow-node highlight">
+            <strong>📊 ReachX Cockpit</strong>
+            <span>One live, monitored view in the browser.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEPS -->
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">Step 1</div>
+          <div class="step-title">Send us your data</div>
+          <div>We give you simple templates or map what you already use.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 2</div>
+          <div class="step-title">We wire ReachX</div>
+          <div>We set up cockpit + sync + health checks in the cloud.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 3</div>
+          <div class="step-title">You run 14 days live</div>
+          <div>Your team uses it in real ops; we monitor & review together.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM CTA -->
+    <div class="bottom">
+      <div class="bottom-left">
+        <strong>Who this is for:</strong> agencies placing workers across multiple employers, cities or dormitories who want a clear, visual, monitored cockpit without forcing a big system change on their team.
+      </div>
+      <div class="cta-box">
+        <div class="cta-main">ReachX 14-Day Pilot – limited slots</div>
+        <div class="cta-label">Next step</div>
+        <div class="cta-line">Book a 30-minute call to see your process and confirm if ReachX is a fit.</div>
+        <div class="cta-label" style="margin-top:6px;">Contact</div>
+        <div class="cta-line">Name: [Your Name]</div>
+        <div class="cta-line">WhatsApp: [+230 XXX XXX XX]</div>
+        <div class="cta-line">Email: [youremail@example.com]</div>
+        <div class="qr-placeholder">
+          QR code goes here – link to your booking page, WhatsApp, or demo video.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

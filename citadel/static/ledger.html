@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>TITAN OS – Ledger Cockpit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* The Glass Citadel Theme (Shared) */
+        :root {
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-highlight: rgba(56, 189, 248, 0.1);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            background-color: transparent;
+            /* Allows embed transparency */
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .status-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        /* JSON Tree styling */
+        .json-key {
+            color: #94a3b8;
+        }
+
+        .json-string {
+            color: #a5f3fc;
+        }
+
+        .json-number {
+            color: #fca5a5;
+        }
+
+        .json-boolean {
+            color: #fcd34d;
+        }
+
+        /* Drawer animation */
+        .drawer-enter {
+            transform: translateX(100%);
+        }
+
+        .drawer-enter-active {
+            transform: translateX(0);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .drawer-exit {
+            transform: translateX(0);
+        }
+
+        .drawer-exit-active {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(71, 85, 105, 0.5);
+            border-radius: 99px;
+        }
+    </style>
+</head>
+
+<body class="h-full overflow-hidden flex flex-col p-4">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-4 shrink-0">
+        <div class="flex items-center gap-3">
+            <div
+                class="h-8 w-8 rounded bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-white tracking-tight">LOOP-5 LEDGER</h1>
+                <p class="text-[0.65rem] text-slate-400 font-mono uppercase tracking-wider">Evolution Stream • Live</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="loadEvents()"
+                class="p-2 rounded hover:bg-white/5 text-slate-400 hover:text-white transition" title="Refresh">
+                <i class="fa-solid fa-sync"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Filters & Stats -->
+    <div class="grid grid-cols-4 gap-4 mb-4 shrink-0">
+        <div class="glass-card rounded-lg p-3">
+            <p class="text-[0.6rem] text-slate-400 uppercase tracking-widest">Events (50)</p>
+            <p id="stat-total" class="text-xl font-bold text-white font-mono">0</p>
+        </div>
+        <div class="glass-card rounded-lg p-3">
+            <p class="text-[0.6rem] text-emerald-400 uppercase tracking-widest">Win Rate</p>
+            <p id="stat-win" class="text-xl font-bold text-emerald-300 font-mono">--%</p>
+        </div>
+        <div class="glass-card rounded-lg p-3 border-rose-500/20 bg-rose-500/5">
+            <p class="text-[0.6rem] text-rose-400 uppercase tracking-widest">Fails/Blocks</p>
+            <p id="stat-fail" class="text-xl font-bold text-rose-300 font-mono">0</p>
+        </div>
+        <div class="glass-card rounded-lg p-3 flex items-center justify-center cursor-pointer hover:bg-white/5"
+            onclick="toggleAutoRefresh()">
+            <div class="flex flex-col items-center">
+                <div id="refresh-dot" class="w-2 h-2 rounded-full bg-slate-500 mb-2"></div>
+                <span class="text-[0.6rem] text-slate-400 uppercase tracking-widest">Auto-Poll</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Table Area -->
+    <div class="flex-1 glass-panel rounded-xl overflow-hidden flex flex-col relative">
+        <!-- Table Header -->
+        <div
+            class="grid grid-cols-[80px_100px_1fr_80px_100px_60px_60px] gap-2 p-3 bg-slate-900/50 border-b border-white/5 text-[0.65rem] font-bold text-slate-500 uppercase tracking-wider items-center">
+            <div>Time</div>
+            <div>Type</div>
+            <div>Intent / Action</div>
+            <div>Status</div>
+            <div>Verdict</div>
+            <div>Risk</div>
+            <div>Score</div>
+        </div>
+
+        <!-- Table Body -->
+        <div id="event-list" class="flex-1 overflow-y-auto p-1 space-y-1">
+            <div class="text-center p-10 text-slate-500 text-xs italic">Loading Ledger...</div>
+        </div>
+
+        <!-- Detail Drawer -->
+        <div id="drawer"
+            class="absolute inset-y-0 right-0 w-1/2 glass-panel border-l border-slate-700 bg-slate-900/95 transform translate-x-full transition-transform duration-300 flex flex-col z-20 shadow-2xl">
+            <div class="h-12 border-b border-slate-700 flex items-center justify-between px-4 bg-black/20">
+                <span class="text-xs font-bold text-white uppercase tracking-wider">Event Details</span>
+                <button onclick="closeDrawer()" aria-label="Close" title="Close"
+                    class="text-slate-400 hover:text-white"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div id="drawer-content"
+                class="flex-1 overflow-y-auto p-4 font-mono text-xs text-slate-300 whitespace-pre-wrap"></div>
+        </div>
+    </div>
+
+    <script>
+        let autoRefresh = false;
+        let pollInterval;
+
+        function formatTime(iso) {
+            if (!iso) return "--:--:--";
+            return new Date(iso).toLocaleTimeString([], { hour12: false });
+        }
+
+        function getStatusColor(status) {
+            if (status === 'success') return 'text-emerald-400';
+            if (status === 'error' || status === 'failed') return 'text-rose-400';
+            return 'text-amber-400';
+        }
+
+        function getVerdictBadge(verdict) {
+            if (!verdict) return '<span class="text-slate-600">-</span>';
+            const cls = verdict === 'win' ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' :
+                verdict === 'loss' ? 'text-rose-400 border-rose-500/30 bg-rose-500/10' :
+                    'text-slate-400 border-slate-500/30 bg-slate-500/10';
+            return `<span class="status-badge border ${cls}">${verdict}</span>`;
+        }
+
+        function getRiskBadge(level) {
+            const l = (level || 'low').toLowerCase();
+            const cls = l === 'high' ? 'bg-rose-500 text-white' :
+                l === 'medium' ? 'bg-amber-500 text-black' : 'bg-emerald-500/20 text-emerald-400';
+            return `<span class="px-1.5 py-0.5 rounded text-[0.6rem] font-bold uppercase ${cls}">${l}</span>`;
+        }
+
+        function renderEvents(data) {
+            const list = document.getElementById('event-list');
+            const totalEl = document.getElementById('stat-total');
+            const winEl = document.getElementById('stat-win');
+            const failEl = document.getElementById('stat-fail');
+
+            if (!data.events) return;
+
+            let wins = 0;
+            let losses = 0;
+
+            list.innerHTML = data.events.map(ev => {
+                if (ev.verdict === 'win') wins++;
+                if (ev.verdict === 'loss' || ev.error) losses++;
+
+                // Truncate intent
+                const intent = ev.intent || ev.type || "unknown";
+                const rowClass = "grid grid-cols-[80px_100px_1fr_80px_100px_60px_60px] gap-2 p-2 rounded hover:bg-white/5 cursor-pointer border-b border-white/5 items-center text-xs transition-colors group";
+
+                return `
+                <div class="${rowClass}" onclick='openDrawer(${JSON.stringify(ev).replace(/'/g, "&#39;")})'>
+                    <div class="font-mono text-slate-500 group-hover:text-slate-300">${formatTime(ev.ts)}</div>
+                    <div class="font-semibold text-sky-400 truncate">${ev.type}</div>
+                    <div class="text-white truncate" title="${intent}">${intent}</div>
+                    <div class="${getStatusColor(ev.status)}">${ev.status || 'pending'}</div>
+                    <div class="flex items-center">${getVerdictBadge(ev.verdict)}</div>
+                    <div>${getRiskBadge(ev.risk)}</div>
+                    <div class="font-mono ${ev.score > 0 ? 'text-amber-400' : 'text-slate-600'}">${ev.score || '-'}</div>
+                </div>
+                `;
+            }).join('');
+
+            totalEl.innerText = data.events.length;
+            failEl.innerText = losses;
+
+            const totalVerdicts = wins + losses;
+            winEl.innerText = totalVerdicts > 0 ? Math.round((wins / totalVerdicts) * 100) + '%' : '--%';
+        }
+
+        function syntaxHighlight(json) {
+            if (typeof json !== 'string') json = JSON.stringify(json, undefined, 2);
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function openDrawer(ev) {
+            const drawer = document.getElementById('drawer');
+            const content = document.getElementById('drawer-content');
+
+            let html = `<div class="space-y-4">`;
+
+            // Error Block
+            if (ev.error) {
+                html += `
+                <div class="p-3 bg-rose-500/10 border border-rose-500/30 rounded text-rose-300">
+                    <strong class="block text-xs uppercase mb-1">Error</strong>
+                    ${ev.error}
+                </div>`;
+            }
+
+            // Input
+            if (ev.input) {
+                try {
+                    let j = JSON.parse(ev.input);
+                    html += `<div><strong class="text-slate-500 block mb-1">INPUT</strong><pre class="bg-black/30 p-2 rounded overflow-x-auto">${syntaxHighlight(j)}</pre></div>`;
+                } catch (e) {
+                    html += `<div><strong class="text-slate-500 block mb-1">INPUT (Raw)</strong><pre class="bg-black/30 p-2 rounded">${ev.input}</pre></div>`;
+                }
+            }
+
+            // Output
+            if (ev.output) {
+                try {
+                    let j = JSON.parse(ev.output);
+                    html += `<div><strong class="text-slate-500 block mb-1">OUTPUT</strong><pre class="bg-black/30 p-2 rounded overflow-x-auto">${syntaxHighlight(j)}</pre></div>`;
+                } catch (e) {
+                    html += `<div><strong class="text-slate-500 block mb-1">OUTPUT (Raw)</strong><pre class="bg-black/30 p-2 rounded">${ev.output}</pre></div>`;
+                }
+            }
+
+            // Evidence
+            if (ev.evidence) {
+                try {
+                    let j = JSON.parse(ev.evidence);
+                    html += `<div><strong class="text-emerald-500/70 block mb-1">EVIDENCE / OUTCOME</strong><pre class="bg-emerald-500/5 border border-emerald-500/10 p-2 rounded overflow-x-auto">${syntaxHighlight(j)}</pre></div>`;
+                } catch (e) { }
+            }
+
+            html += `</div>`;
+            content.innerHTML = html;
+            drawer.classList.remove('translate-x-full');
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer').classList.add('translate-x-full');
+        }
+
+        async function loadEvents() {
+            try {
+                const res = await fetch('/api/ledger/recent');
+                const data = await res.json();
+                renderEvents(data);
+            } catch (e) {
+                console.error("Ledger offline", e);
+            }
+        }
+
+        function toggleAutoRefresh() {
+            autoRefresh = !autoRefresh;
+            const dot = document.getElementById('refresh-dot');
+            if (autoRefresh) {
+                dot.classList.remove('bg-slate-500');
+                dot.classList.add('bg-emerald-400', 'animate-pulse');
+                pollInterval = setInterval(loadEvents, 3000);
+            } else {
+                dot.classList.add('bg-slate-500');
+                dot.classList.remove('bg-emerald-400', 'animate-pulse');
+                clearInterval(pollInterval);
+            }
+        }
+
+        // Init
+        loadEvents();
+    </script>
+</body>
+
+</html>

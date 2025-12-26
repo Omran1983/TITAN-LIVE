@@ -1,0 +1,10 @@
+{
+    "clients": [],
+    "proposals": [],
+    "waitlist": [],
+    "system_stats": {
+        "total_generated": 0,
+        "total_audits": 0,
+        "last_active": null
+    }
+}

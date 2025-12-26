@@ -1,0 +1,36 @@
+<html><body>
+<h2>Tweak Report: 20251031_003420</h2>
+<p>Status: <b>APPLIED</b></p>
+<p>Notes: APPLIED</p>
+</body></html>
+
+<pre>
+--- F:\AION-ZERO\src\components\Hero.jsx
+
++++ F:\AION-ZERO\src\components\Hero.jsx
+
+@@ -1,3 +1,3 @@
+
+ export default function Hero(){
+
+-  return (<button className="btn-primary">Shop Now</button>);
+
++  return (<button className="btn-primary">Shop Now – 15% OFF</button>);
+
+ }
+
+
+--- F:\AION-ZERO\src\styles\buttons.css
+
++++ F:\AION-ZERO\src\styles\buttons.css
+
+@@ -1 +1,3 @@
+
+ .btn-primary{padding:12px 20px;background:#222;color:#fff;}
+
++
+
++.btn-primary:hover { filter: brightness(0.9); }
+
+</pre>
+

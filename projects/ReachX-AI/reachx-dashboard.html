@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ReachX Demo Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tailwind for quick styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <header class="mb-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold">ReachX Demo Dashboard</h1>
+        <p class="text-slate-400 text-sm mt-1">
+          Clients · Campaigns · Leads — Supabase (abkprecmhitqmmlzxfad)
+        </p>
+      </div>
+      <button id="refreshBtn"
+              class="px-4 py-2 rounded-lg bg-emerald-500/90 hover:bg-emerald-400 text-sm font-semibold">
+        Refresh
+      </button>
+    </header>
+
+    <div id="status" class="mb-4 text-sm text-slate-300">Loading...</div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      <section class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+        <h2 class="text-lg font-semibold mb-2">Clients</h2>
+        <ul id="clientsList" class="space-y-2 text-sm"></ul>
+      </section>
+
+      <section class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+        <h2 class="text-lg font-semibold mb-2">Campaigns</h2>
+        <ul id="campaignsList" class="space-y-2 text-sm"></ul>
+      </section>
+
+      <section class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+        <h2 class="text-lg font-semibold mb-2">Leads</h2>
+        <ul id="leadsList" class="space-y-2 text-sm"></ul>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // IMPORTANT: Use anon key for abkprecmhitqmmlzxfad (NOT OKASINA).
+    const SUPABASE_URL = 'https://abkprecmhitqmmlzxfad.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFia3ByZWNtaGl0cW1tbHp4ZmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDc2NTksImV4cCI6MjA3NTUyMzY1OX0.laMBfcRG_liLwsaslI0qZyGJwrpgiryUmzy8k-rls2o';
+
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const statusEl = document.getElementById('status');
+    const clientsEl = document.getElementById('clientsList');
+    const campaignsEl = document.getElementById('campaignsList');
+    const leadsEl = document.getElementById('leadsList');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    function setStatus(text, type = 'info') {
+      const colors = {
+        info: 'text-slate-300',
+        ok: 'text-emerald-400',
+        error: 'text-rose-400'
+      };
+      statusEl.className = 'mb-4 text-sm ' + (colors[type] || colors.info);
+      statusEl.textContent = text;
+    }
+
+    function renderList(el, items, renderItem) {
+      el.innerHTML = '';
+      if (!items || items.length === 0) {
+        el.innerHTML = '<li class="text-slate-500 italic">No records</li>';
+        return;
+      }
+      for (const item of items) {
+        const li = document.createElement('li');
+        li.className = 'bg-slate-800/60 rounded-xl px-3 py-2 border border-slate-700/60';
+        li.innerHTML = renderItem(item);
+        el.appendChild(li);
+      }
+    }
+
+    async function loadData() {
+      setStatus('Loading from Supabase...');
+
+      try {
+        const [
+          { data: clients, error: clientsError },
+          { data: campaigns, error: campaignsError },
+          { data: leads, error: leadsError }
+        ] = await Promise.all([
+          client.from('reachx_clients').select('id,name').limit(20),
+          client.from('reachx_campaigns').select('id,name,client_id').limit(20),
+          client.from('reachx_leads').select('id,company_name,score,status,campaign_id').limit(50)
+        ]);
+
+        if (clientsError || campaignsError || leadsError) {
+          console.error({ clientsError, campaignsError, leadsError });
+          setStatus('Error loading data. Check console for details.', 'error');
+          return;
+        }
+
+        renderList(clientsEl, clients, c =>
+          `<div class="font-semibold">${c.name || 'Unnamed client'}</div>
+           <div class="text-[10px] text-slate-500 mt-1">id: ${c.id}</div>`
+        );
+
+        renderList(campaignsEl, campaigns, c =>
+          `<div class="font-semibold">${c.name || 'Unnamed campaign'}</div>
+           <div class="text-xs text-slate-400">Client ID: ${c.client_id}</div>
+           <div class="text-[10px] text-slate-500 mt-1">id: ${c.id}</div>`
+        );
+
+        renderList(leadsEl, leads, l =>
+          `<div class="font-semibold">${l.company_name}</div>
+           <div class="text-xs text-slate-400 flex gap-2">
+             <span>Score: <span class="font-mono">${l.score}</span></span>
+             <span>Status: <span class="font-mono">${l.status}</span></span>
+           </div>
+           <div class="text-[10px] text-slate-500 mt-1">Campaign ID: ${l.campaign_id}</div>`
+        );
+
+        setStatus('ReachX UI connected · Data loaded OK', 'ok');
+      } catch (err) {
+        console.error(err);
+        setStatus('Unexpected error loading data.', 'error');
+      }
+    }
+
+    refreshBtn.addEventListener('click', loadData);
+    loadData();
+  </script>
+</body>
+</html>

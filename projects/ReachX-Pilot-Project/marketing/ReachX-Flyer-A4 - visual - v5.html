@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReachX Ops Cockpit – Visual Flyer V5</title>
+  <style>
+    @page { size: A4; margin: 6mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    .page {
+      min-height: calc(297mm - 12mm);
+      padding: 18px 22px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 5% 0%, #22c55e40, transparent 60%),
+        radial-gradient(circle at 95% 5%, #f9731640, transparent 60%),
+        radial-gradient(circle at 50% 100%, #0ea5e940, transparent 55%),
+        #020617;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 20%, #22c55e, #0ea5e9 45%, #38bdf8 80%);
+      color: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 24px;
+      box-shadow:
+        0 0 0 2px #020617,
+        0 0 0 5px rgba(34,197,94,0.7),
+        0 18px 45px rgba(0,0,0,0.9);
+    }
+    .brand-main {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      font-size: 10px;
+      color: #9ca3af;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .badge {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 10px;
+      background: linear-gradient(135deg, #020617f2, #02061799);
+      box-shadow: 0 12px 32px rgba(15,23,42,0.9);
+    }
+
+    /* HERO */
+    .hero-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 20px;
+      align-items: center;
+    }
+    .hero-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.08;
+      font-weight: 900;
+      margin: 0 0 6px;
+    }
+    .hero-title span {
+      color: #22c55e;
+      text-shadow: 0 0 18px rgba(34,197,94,0.9);
+    }
+    .hero-sub {
+      font-size: 12px;
+      color: #d1d5db;
+      max-width: 440px;
+      margin: 0;
+    }
+    .hero-chips {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 9px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.92);
+    }
+
+    /* Snapshot card */
+    .snapshot {
+      justify-self: end;
+      width: 260px;
+      border-radius: 20px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at 0% 0%, #22c55e33, transparent 70%), #020617;
+      border: 1px solid rgba(55,65,81,0.95);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.9);
+      font-size: 10px;
+    }
+    .snapshot-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    .snapshot-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.9);
+      margin-bottom: 6px;
+    }
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .snap-card {
+      border-radius: 12px;
+      padding: 6px 7px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.95);
+      text-align: left;
+    }
+    .snap-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #9ca3af;
+      margin-bottom: 1px;
+    }
+    .snap-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e5e7eb;
+    }
+
+    /* MAIN FLOW */
+    .main {
+      margin-top: 14px;
+      flex: 1;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      row-gap: 12px;
+    }
+    .flow-title {
+      font-size: 11px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .big-flow {
+      position: relative;
+      padding: 12px 16px 16px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.97), rgba(15,23,42,0.9));
+      border: 1px solid rgba(51,65,85,0.95);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.95);
+      overflow: hidden;
+    }
+
+    .flow-line {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 54%;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #0ea5e9, #f97316);
+      opacity: 0.7;
+      filter: blur(0.5px);
+    }
+
+    .flow-circles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+    }
+    .node {
+      text-align: center;
+    }
+    .node-circle {
+      width: 92px;
+      height: 92px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #020617;
+      box-shadow:
+        0 0 0 3px #020617,
+        0 0 0 7px rgba(15,23,42,0.95),
+        0 16px 40px rgba(0,0,0,0.9);
+    }
+    .node-circle.left {
+      background: radial-gradient(circle at 20% 20%, #e5e7eb, #22c55e);
+    }
+    .node-circle.center {
+      background: conic-gradient(from 220deg, #22c55e, #0ea5e9, #22c55e);
+    }
+    .node-circle.right {
+      background: radial-gradient(circle at 20% 20%, #f97316, #22c55e);
+    }
+    .node-label {
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .node-sub {
+      font-size: 9px;
+      color: #9ca3af;
+    }
+    .flow-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      font-size: 18px;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 96px;
+    }
+
+    /* MINI CARDS */
+    .mini-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mini-card {
+      border-radius: 16px;
+      padding: 9px 10px;
+      background: rgba(15,23,42,0.95);
+      border: 1px dashed rgba(75,85,99,0.98);
+      font-size: 9px;
+    }
+    .mini-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #cbd5f5;
+      margin-bottom: 5px;
+    }
+    .mini-step {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+    .mini-step span {
+      width: 14px; height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+    .mini-text { color: #9ca3af; }
+
+    /* METRICS STRIP */
+    .metrics {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .metric-card {
+      border-radius: 18px;
+      padding: 8px 9px;
+      background:
+        linear-gradient(135deg, rgba(15,23,42,0.97), rgba(15,23,42,0.9));
+      border: 1px solid rgba(55,65,81,0.95);
+      text-align: center;
+    }
+    .metric-main {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: #22c55e;
+      text-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+    .metric-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
+    }
+    .metric-sub {
+      font-size: 9px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    /* BOTTOM */
+    .bottom {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1.7fr 1.3fr;
+      gap: 18px;
+      align-items: flex-end;
+    }
+    .who {
+      font-size: 9px;
+      color: #9ca3af;
+      max-width: 420px;
+    }
+    .who strong { color: #e5e7eb; }
+
+    .cta {
+      border-radius: 20px;
+      padding: 11px 12px;
+      background:
+        radial-gradient(circle at 0% 0%, #22c55e33, transparent 60%),
+        radial-gradient(circle at 100% 0%, #f9731633, transparent 60%),
+        #020617;
+      border: 1px solid rgba(34,197,94,0.9);
+      font-size: 10px;
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.9),
+        0 18px 48px rgba(0,0,0,0.9);
+    }
+    .cta-tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+    .cta-main {
+      font-size: 14px;
+      font-weight: 700;
+      color: #bbf7d0;
+      margin-bottom: 4px;
+    }
+    .cta-line { margin-top: 1px; }
+    .cta-contact {
+      margin-top: 4px;
+      font-size: 9px;
+      color: #e5e7eb;
+    }
+    .qr {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px dashed rgba(148,163,184,0.95);
+      padding: 5px;
+      text-align: center;
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .page { border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- TOP -->
+    <div>
+      <div class="header">
+        <div class="brand">
+          <div class="logo">RX</div>
+          <div>
+            <div class="brand-main">REACHX OPS COCKPIT</div>
+            <div class="brand-sub">WORKERS • EMPLOYERS • DORMITORIES</div>
+          </div>
+        </div>
+        <div class="badge">14-DAY PILOT • REMOTE SETUP</div>
+      </div>
+
+      <div class="hero-top">
+        <div>
+          <div class="hero-tag">For recruitment & manpower agencies</div>
+          <h1 class="hero-title">
+            From spreadsheet chaos<br />
+            to a <span>live cockpit</span> in 14 days.
+          </h1>
+          <p class="hero-sub">
+            One visual dashboard for workers, employers & dormitories – driven by the Excel sheets you already use.
+          </p>
+          <div class="hero-chips">
+            <div class="chip">No new system to learn</div>
+            <div class="chip">Cloud cockpit only</div>
+            <div class="chip">Monitored, not blind</div>
+          </div>
+        </div>
+
+        <div class="snapshot">
+          <div class="snapshot-title">Example cockpit snapshot</div>
+          <div class="snapshot-pill">
+            <span style="width:10px;height:10px;border-radius:999px;background:#22c55e;"></span>
+            Live employers view
+          </div>
+          <div class="snapshot-grid">
+            <div class="snap-card">
+              <div class="snap-label">Employers</div>
+              <div class="snap-num">24</div>
+            </div>
+            <div class="snap-card">
+              <div class="snap-label">Workers</div>
+              <div class="snap-num">412</div>
+            </div>
+            <div class="snap-card">
+              <div class="snap-label">Dorms</div>
+              <div class="snap-num">19</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN VISUAL -->
+    <div class="main">
+      <div>
+        <div class="flow-title">The whole thing in one picture</div>
+        <div class="big-flow">
+          <div class="flow-line"></div>
+
+          <div class="flow-circles">
+            <div class="node">
+              <div class="node-circle left">📊</div>
+              <div class="node-label">Your Sheets</div>
+              <div class="node-sub">Excel / CSV with workers, employers, dorms.</div>
+            </div>
+
+            <div class="node">
+              <div class="node-circle center">RX</div>
+              <div class="node-label">Data Sync + Monitoring</div>
+              <div class="node-sub">Autopilot jobs, heartbeats & logs – watched for you.</div>
+            </div>
+
+            <div class="node">
+              <div class="node-circle right">📈</div>
+              <div class="node-label">ReachX Cockpit</div>
+              <div class="node-sub">One live, browser-based view for your team.</div>
+            </div>
+          </div>
+
+          <div class="flow-arrows">
+            <div>▶</div>
+            <div>▶</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini ops cards -->
+      <div class="mini-row">
+        <div class="mini-card">
+          <div class="mini-title">Onboarding flow</div>
+          <div class="mini-step">
+            <span>1</span><div class="mini-text">Client copies data into our templates.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span><div class="mini-text">We load into ReachX (Supabase) & wire cockpit.</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span><div class="mini-text">We publish their cockpit URL.</div>
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-title">Daily ops loop</div>
+          <div class="mini-step">
+            <span>1</span><div class="mini-text">Team updates the master Excel.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span><div class="mini-text">Autopilot sync runs & logs status.</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span><div class="mini-text">Cockpit shows fresh counts & filters.</div>
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-title">Safety layer</div>
+          <div class="mini-step">
+            <span>1</span><div class="mini-text">DB heartbeat checks key tables.</div>
+          </div>
+          <div class="mini-step">
+            <span>2</span><div class="mini-text">UI ping confirms cockpit is online.</div>
+          </div>
+          <div class="mini-step">
+            <span>3</span><div class="mini-text">Status script shows last signals.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-main">1</div>
+          <div class="metric-label">Ops cockpit</div>
+          <div class="metric-sub">Workers • employers • dorms, one screen.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-main">14</div>
+          <div class="metric-label">Days to pilot</div>
+          <div class="metric-sub">Fast setup using sheets you already have.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-main">0</div>
+          <div class="metric-label">New systems</div>
+          <div class="metric-sub">We plug into Excel, not replace it.</div>
+        </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="bottom">
+        <div class="who">
+          <strong>Who this is for:</strong><br />
+          Agencies placing workers across multiple employers, cities or dormitories who want a clear, monitored cockpit
+          without forcing a big software change on their team.
+        </div>
+        <div class="cta">
+          <div class="cta-tag">Next step</div>
+          <div class="cta-main">ReachX 14-Day Pilot – limited slots.</div>
+          <div class="cta-line">Book a 30-minute call to see your process and confirm if ReachX is a fit.</div>
+          <div class="cta-contact">
+            <strong>Contact:</strong> Omran Ahmad<br />
+            WhatsApp: +230 5788 7132<br />
+            Email: deals@aogrl.com
+          </div>
+          <div class="qr">
+            QR / short link goes here → your booking page, WhatsApp, or demo video.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

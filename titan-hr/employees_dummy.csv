@@ -1,0 +1,5 @@
+id,name,role,salary,last_increment,training_hours,wellbeing_check
+1,John Doe,General Worker,15000,2024-01-01,0,false
+2,Jane Smith,Clerk,17000,2025-01-01,10,true
+3,Manager Mike,Manager,80000,2025-01-01,5,true
+4,New Guy,Intern,16500,2025-12-01,2,false

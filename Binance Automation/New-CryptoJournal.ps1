@@ -1,0 +1,133 @@
+param(
+  [Parameter(Mandatory=$true)][string]$Csv,
+  [Parameter(Mandatory=$true)][string]$OutPath,
+  [string]$Title = "AOGRL â€“ Mainnet Journal"
+)
+$ErrorActionPreference = "Stop"
+if (!(Test-Path $Csv)) { throw "CSV not found: $Csv" }
+
+# Load CSV (no server calcs; everything computed in-browser JS)
+$rows = Import-Csv $Csv
+if (!$rows -or $rows.Count -eq 0) { throw "CSV has no rows." }
+
+$json = $rows | ConvertTo-Json -Depth 4
+$dir = Split-Path -Parent $OutPath
+if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Force -Path $dir | Out-Null }
+
+$css = ':root{--ok:#10b981;--bad:#ef4444;--muted:#64748b}
+*{box-sizing:border-box}body{font-family:Segoe UI,Roboto,system-ui;margin:0;background:#fff}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+.header{position:sticky;top:0;background:#fff8;border-bottom:1px solid #e5e7eb;backdrop-filter:blur(6px)}
+.h1{font-weight:800}.pill{font-size:12px;border:1px solid #86efac;background:#dcfce7;color:#166534;border-radius:999px;padding:2px 8px;font-weight:700;margin-left:8px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px}
+.card .b{padding:10px}.small{font-size:12px;color:var(--muted)}
+.tbl{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid #e5e7eb;white-space:nowrap}th{background:#f8fafc;text-align:left}
+.pos{color:var(--ok);font-weight:700}.neg{color:var(--bad);font-weight:700}
+.err{background:#fff0f0;border:1px solid #fecaca;color:#991b1b;border-radius:10px;padding:8px;margin:10px 0;display:none}'
+
+$html = @"
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>$Title</title>
+<style>$css</style>
+<body>
+<div class="header"><div class="wrap"><span class="h1">$Title</span><span class="pill">MAINNET ONLY</span></div></div>
+<div class="wrap">
+  <div id="err" class="err"></div>
+
+  <div class="grid4">
+    <div class="card"><div class="b"><div class="small">Total P&L (USDT)</div><div id="kPnL" style="font-weight:800"></div></div></div>
+    <div class="card"><div class="b"><div class="small">ROI %</div><div id="kROI" style="font-weight:800"></div></div></div>
+    <div class="card"><div class="b"><div class="small">Win Rate</div><div id="kWR" style="font-weight:800"></div></div></div>
+    <div class="card"><div class="b"><div class="small">Profit Factor</div><div id="kPF" style="font-weight:800"></div></div></div>
+  </div>
+
+  <div class="card"><div class="b">
+    <div class="small">Equity Curve</div>
+    <canvas id="eq" height="160"></canvas>
+  </div></div>
+
+  <div class="card" style="margin-top:10px"><div class="b">
+    <div class="small" id="rcount"></div>
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr><th>Date/Time</th><th>Exchange</th><th>Account</th><th>Pair</th><th>Side</th><th>Entry</th><th>Exit</th><th>Qty</th><th>Fees</th><th>Strategy</th><th>P&L</th><th>ROI %</th></tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+
+<script>
+const R = $json;   // raw CSV rows as objects
+
+(function main(){
+  try {
+    const rows = R.map(r=>{
+      const e=Number(r.entry_price||r.entry||0), x=Number(r.exit_price||r.exit||r.close||0),
+            q=Number(r.qty||r.quantity||0), f=Number(r.fees||0),
+            side=String(r.side||"LONG").toUpperCase();
+      const pnl = (side==="SHORT" ? (e-x)*q : (x-e)*q) - f;
+      const cost= e*q, roi = cost? pnl/cost : 0;
+      return {...r, entry_price:e, exit_price:x, qty:q, fees:f, side, pnl, roi};
+    }).sort((a,b)=> new Date(a.datetime) - new Date(b.datetime));
+
+    // Table
+    const tb=document.getElementById("tb"); tb.innerHTML="";
+    for (const r of rows){
+      const roiPct=r.roi*100, cls=(r.pnl>=0)?"pos":"neg";
+      const tr=document.createElement("tr");
+      [new Date(r.datetime).toLocaleString(), r.exchange, r.account, r.pair, r.side,
+       n(r.entry_price), n(r.exit_price), r.qty, n(r.fees), r.strategy,
+       {v:n(r.pnl), cls}, {v:n(roiPct,2), cls}
+      ].forEach(c=>{ const td=document.createElement("td"); if(typeof c==='object'){td.textContent=c.v; td.className=c.cls} else {td.textContent=c} ; tr.appendChild(td) });
+      tb.appendChild(tr);
+    }
+    document.getElementById("rcount").textContent = rows.length + " rows";
+
+    // KPIs
+    const sum = (a)=>a.reduce((x,y)=>x+y,0);
+    const tPnL = sum(rows.map(r=>r.pnl));
+    const tCost= sum(rows.map(r=>r.entry_price*r.qty));
+    const roiPct = tCost? (tPnL/tCost*100) : 0;
+    const wins = rows.filter(r=>r.pnl>0).length;
+    const pf = (()=>{
+      const gp=sum(rows.filter(r=>r.pnl>0).map(r=>r.pnl));
+      const gl=Math.abs(sum(rows.filter(r=>r.pnl<0).map(r=>r.pnl)));
+      if (gl>0) return gp/gl; if (gp>0) return Infinity; return 0;
+    })();
+    set("kPnL", n(tPnL));
+    set("kROI", n(roiPct,2)+"%");
+    set("kWR", n(rows.length? (wins/rows.length*100) : 0,1)+"%");
+    set("kPF", pf===Infinity ? "âˆž" : n(pf,2));
+
+    // Equity
+    let run=0; const eq=rows.map(r=> (run+=r.pnl));
+    window.renderEq = ()=> new Chart(document.getElementById("eq"), {
+      type:"line",
+      data:{ labels:eq.map((_,i)=>i+1), datasets:[{label:"Equity", data:eq, borderWidth:2, fill:true}] },
+      options:{plugins:{legend:{display:false}}, scales:{x:{display:true}, y:{display:true}}}
+    });
+    // If Chart.js fails to load, page still shows table & KPIs.
+  } catch (err) {
+    const el=document.getElementById("err");
+    el.style.display="block";
+    el.textContent = "Render error: " + (err && err.message ? err.message : err);
+  }
+
+  function n(v,d=2){ return Number(v||0).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d}); }
+  function set(id,txt){ document.getElementById(id).textContent = txt; }
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        onload="window.renderEq && window.renderEq()"
+        onerror="console.warn('Chart.js failed; showing KPIs + table only')"></script>
+</body></html>
+"@
+
+$html | Set-Content -Path $OutPath -Encoding UTF8
+Write-Host "âœ... Dashboard generated: $OutPath"

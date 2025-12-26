@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Trade Log{% endblock %}
+{% block page_title %}Trade History{% endblock %}
+
+{% block content %}
+<div class="holo-panel overflow-hidden flex flex-col h-full">
+    <div class="p-4 border-b border-neon-cyan/30 flex justify-between items-center bg-black/40">
+        <h2 class="text-neon-cyan font-bold tracking-widest text-sm flex items-center space-x-2">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>EXECUTION LOGS // AUDIT TRAIL</span>
+        </h2>
+        <div class="text-[10px] text-neon-gold font-mono">ENCRYPTED // ARCHIVED</div>
+    </div>
+
+    <div class="flex-1 overflow-auto p-4">
+        <table id="trade-log-table" class="w-full text-left font-mono text-xs text-gray-400">
+            <thead class="text-neon-cyan border-b border-white/10 uppercase tracking-wider">
+                <tr>
+                    <th class="px-4 py-2">TIME (UTC)</th>
+                    <th class="px-4 py-2">SYMBOL</th>
+                    <th class="px-4 py-2">SIDE</th>
+                    <th class="px-4 py-2">ENTRY</th>
+                    <th class="px-4 py-2">EXIT</th>
+                    <th class="px-4 py-2">SIZE</th>
+                    <th class="px-4 py-2 text-right">PNL</th>
+                </tr>
+            </thead>
+            <tbody id="trade-log-body" class="divide-y divide-white/5">
+                <!-- Data will be populated by JavaScript -->
+                <tr>
+                    <td colspan="7" class="px-4 py-8 text-center text-gray-500 italic">> ACCESSING DATABASE...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function loadTradeHistory() {
+        fetch('/api/trade_history')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('trade-log-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="8" class="px-6 py-8 text-center text-gray-600">No completed trades found in the database.</td></tr>';
+                    return;
+                }
+
+                data.forEach(trade => {
+                    // Determine PnL Styles
+                    const isWin = trade.pnl >= 0;
+                    const pnlClass = isWin ? 'text-green-400 font-bold' : 'text-red-400 font-bold';
+                    const pnlPrefix = isWin ? '+' : '';
+
+                    // Badge for direction
+                    const directionClass = (trade.direction === 'LONG' || trade.direction === 'BUY')
+                        ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                        : 'bg-purple-500/20 text-purple-400 border border-purple-500/30';
+
+                    const row = `
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-6 py-4 text-gray-300 font-mono text-xs">${new Date(trade.entry_time).toLocaleString()}</td>
+                                <td class="px-6 py-4 text-gray-500 group-hover:text-gray-300 font-mono text-xs">${new Date(trade.exit_time).toLocaleString()}</td>
+                                <td class="px-6 py-4 font-bold text-white">${trade.symbol}</td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${directionClass}">
+                                        ${trade.direction}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 font-mono">$${trade.entry_price.toFixed(4)}</td>
+                                <td class="px-6 py-4 font-mono text-gray-400">$${trade.exit_price.toFixed(4)}</td>
+                                <td class="px-6 py-4 font-mono">${trade.quantity}</td>
+                                <td class="px-6 py-4 text-right font-mono ${pnlClass}">
+                                    ${pnlPrefix}$${trade.pnl.toFixed(2)}
+                                </td>
+                            </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching trade history:', error);
+                const tableBody = document.getElementById('trade-log-body');
+                tableBody.innerHTML = '<tr><td colspan="8" class="px-6 py-8 text-center text-red-400 bg-red-500/10 rounded">Error loading trade history.</td></tr>';
+            });
+    }
+
+    // Load the history when the page is opened
+    loadTradeHistory();
+</script>
+{% endblock %}

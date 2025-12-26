@@ -1,0 +1,58 @@
+from __future__ import annotations
+
+import httpx
+from types import SimpleNamespace
+from tenacity import Retrying, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+# Settings fallback (so this module never crashes if settings is missing)
+try:
+    from .settings import get_settings  # expected to provide .http config
+except Exception:
+    def get_settings():
+        return SimpleNamespace(http=SimpleNamespace(
+            timeout_sec=15,
+            max_connections=20,
+            retries=5,
+            backoff_min=0.5,
+            backoff_max=8,
+        ))
+
+def _build_client() -> httpx.Client:
+    cfg = get_settings().http
+    return httpx.Client(
+        timeout=cfg.timeout_sec,
+        limits=httpx.Limits(
+            max_keepalive_connections=cfg.max_connections,
+            max_connections=cfg.max_connections,
+        ),
+        http2=True,
+    )
+
+class HttpClient:
+    def __init__(self) -> None:
+        self.client = _build_client()
+        cfg = get_settings().http
+        self._retry = Retrying(
+            stop=stop_after_attempt(getattr(cfg, "retries", 3)),
+            wait=wait_exponential(
+                min=getattr(cfg, "backoff_min", 0.5),
+                max=getattr(cfg, "backoff_max", 8),
+            ),
+            retry=retry_if_exception_type(
+                (httpx.ReadTimeout, httpx.ConnectError, httpx.RemoteProtocolError)
+            ),
+            reraise=True,
+        )
+
+    def get(self, url: str, **kwargs) -> httpx.Response:
+        for attempt in self._retry:
+            with attempt:
+                return self.client.get(url, **kwargs)
+
+    def post(self, url: str, **kwargs) -> httpx.Response:
+        for attempt in self._retry:
+            with attempt:
+                return self.client.post(url, **kwargs)
+
+    def close(self) -> None:
+        self.client.close()

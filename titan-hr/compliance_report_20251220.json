@@ -1,0 +1,15 @@
+{
+    "compliance_score":  75,
+    "timestamp":  "2025-12-20T14:42:08.8514619+04:00",
+    "rules_version":  "2026.1",
+    "compliant_employees":  3,
+    "total_employees":  4,
+    "violations":  [
+                       {
+                           "issue":  "BELOW_MIN_WAGE",
+                           "name":  "John Doe",
+                           "id":  "1",
+                           "details":  "Salary 15000 \u003c 16500"
+                       }
+                   ]
+}

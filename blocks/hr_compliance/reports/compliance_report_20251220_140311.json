@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "block": "TITAN-HR",
+  "block_version": "1.0.0",
+  "timestamp": "2025-12-20T14:03:11.761540+00:00",
+  "total_employees": 5,
+  "failures": 2,
+  "details": [
+    {
+      "employee_id": "EMP001",
+      "name": "John Doe",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "FAIL",
+          "evidence": {
+            "employee_salary": "15000",
+            "floor_required": "16500",
+            "gap": "1500"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "satisfactory",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP002",
+      "name": "Jane Smith",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "PASS",
+          "evidence": {
+            "employee_salary": "18000",
+            "floor_required": "16500",
+            "gap": "0"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "pass",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP003",
+      "name": "Bob Jones",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "PASS",
+          "evidence": {
+            "employee_salary": "30000",
+            "floor_required": "16500",
+            "gap": "0"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "FAIL",
+          "evidence": {
+            "performance_status": "hold",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP004",
+      "name": "Alice Wonder",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "PASS",
+          "evidence": {
+            "employee_salary": "16500",
+            "floor_required": "16500",
+            "gap": "0"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": "No increment proposed, policy constraint not triggered."
+        }
+      ]
+    },
+    {
+      "employee_id": "EMP005",
+      "name": "Charlie Brown",
+      "checks": [
+        {
+          "rule_id": "PRB26-SAL-001",
+          "rule_name": "Minimum wage baseline floor",
+          "verdict": "PASS",
+          "evidence": {
+            "employee_salary": "22000",
+            "floor_required": "16500",
+            "gap": "0"
+          }
+        },
+        {
+          "rule_id": "PRB26-PMS-001",
+          "rule_name": "Performance-linked increment gate",
+          "verdict": "PASS",
+          "evidence": {
+            "performance_status": "pass",
+            "increment_proposed": true,
+            "allowed_statuses": [
+              "pass",
+              "satisfactory"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "owner": {
+    "name": "Omran",
+    "headline": "Operator. Builder. Trader.",
+    "tagline": "Short loops. Asymmetric upside. Numbers decide.",
+    "email": "founder@aogrl.com",
+    "whatsapp": "https://wa.me/23058000000"
+  },
+  "achievements": [
+    {
+      "year": "2025",
+      "title": "EduConnect v2",
+      "desc": "Interactive demo shipped."
+    }
+  ],
+  "projects": [
+    {
+      "name": "EduConnect",
+      "emoji": "\ud83d\udcda",
+      "desc": "WhatsApp-first school ops.",
+      "tags": [
+        "WA",
+        "K-12"
+      ],
+      "link": "#"
+    }
+  ],
+  "trading": {
+    "disclaimer": "Educational content, not financial advice.",
+    "scoreboard": {
+      "winRate": "58%",
+      "avgRMultiple": "+0.42R",
+      "maxDD": "-7.9%",
+      "last30Trades": "+12R"
+    },
+    "strategies": [
+      {
+        "name": "Momentum/Breakout",
+        "desc": "Trade strength after consolidation."
+      }
+    ],
+    "affiliates": [
+      {
+        "name": "KuCoin",
+        "cta": "Trade on KuCoin",
+        "url": "https://www.kucoin.com/r/af/r82Y3XZ",
+        "perk": "Referral code: r82Y3XZ (fee perks)"
+      },
+      {
+        "name": "Binance",
+        "cta": "Join via Binance CPA",
+        "url": "https://www.binance.com/activity/referral-entry/CPA?ref=CPA_00G3ONT9KP",
+        "perk": "Referral code: CPA_00G3ONT9KP"
+      },
+      {
+        "name": "Goli Nutrition",
+        "cta": "Shop Goli (Use Code)",
+        "url": "https://go.goli.com/affili8583",
+        "perk": "Use code: affili8583 for discount"
+      }
+    ]
+  }
+}

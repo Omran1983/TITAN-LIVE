@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AION-ZERO | Investor Briefing</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617;
+            --text: #f8fafc;
+            --accent: #0ea5e9;
+            /* Sky Blue */
+            --accent-2: #10b981;
+            /* Emerald */
+            --glass: rgba(15, 23, 42, 0.85);
+            --glass-light: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 4rem 2rem;
+            box-sizing: border-box;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            filter: blur(2px) saturate(0.8);
+            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            transition: transform 5s ease;
+        }
+
+        .slide:hover .bg-img {
+            transform: scale(1.02);
+        }
+
+        .container {
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin: 0 0 1.5rem 0;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin: 0 0 1rem 0;
+        }
+
+        h3 {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li::before {
+            content: "▹";
+            color: var(--accent);
+            font-family: monospace;
+            margin-top: 0.2rem;
+        }
+
+        .highlight {
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(14, 165, 233, 0.2);
+            color: var(--accent);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        /* Slide Specifics */
+        .title-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .big-number {
+            font-size: 5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            right: 2rem;
+            top: 1rem;
+
+            line-height: 1;
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-italic {
+            font-style: italic;
+        }
+
+        .p-large {
+            padding: 5rem 3rem;
+        }
+
+        .p-medium {
+            padding: 2rem 4rem;
+        }
+
+        .p-small-wide {
+            padding: 1rem 3rem;
+        }
+
+        .m-0 {
+            margin: 0;
+        }
+
+        .mb-3 {
+            margin-bottom: 3rem;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mt-3 {
+            margin-top: 3rem;
+        }
+
+        .flex-col-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .border-left {
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 2rem;
+        }
+
+        .border-left-dashed {
+            height: 40px;
+            border-left: 2px dashed var(--accent);
+        }
+
+        .border-left-accent {
+            border-left: 4px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        .no-border {
+            border: none;
+        }
+
+        .w-60 {
+            width: 60%;
+        }
+
+        .w-70 {
+            width: 70%;
+        }
+
+        .bg-accent-faint {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .bg-glass-light {
+            background: var(--glass-light);
+            border: 1px solid #334155;
+            border-radius: 1rem;
+        }
+
+        .bg-gradient-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: 1rem;
+        }
+
+        .bg-dark {
+            background: rgba(2, 6, 23, 0.9);
+        }
+
+        .bg-faint-box {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1rem;
+        }
+
+        .opacity-30 {
+            opacity: 0.3;
+        }
+
+        .opacity-40 {
+            opacity: 0.4;
+        }
+
+        .opacity-50 {
+            opacity: 0.5;
+        }
+
+        .text-accent-2 {
+            color: var(--accent-2);
+        }
+
+        /* Specific Overrides */
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #e2e8f0;
+        }
+
+        .small-text {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .tiny-text {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .sub-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .badge-bottom {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            padding: 0.5rem;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .analogy-box {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .loop-quote {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .btn-restart {
+            padding: 1rem 3rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SLIDE 1: TITLE -->
+    <div class="slide">
+        <img src="img/slide3_tower.png" class="bg-img opacity-40" alt="Futuristic Tower">
+        <div class="container text-center">
+            <div class="card p-large">
+                <h3>The Autonomous Operations Layer</h3>
+                <h1>JARVIS & AION-ZERO</h1>
+                <p class="subtitle">Hybrid AI Control Plane & Agent Ecosystem<br>for Real-World Businesses</p>
+                <div class="title-footer">
+                    <div><strong>A-One Global Resourcing Ltd (AOGRL)</strong><br>Mauritius</div>
+                    <div><strong>Omran Ahmad</strong><br>Founder (MBA, MCIM)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: FOUNDER -->
+    <div class="slide">
+        <div class="container grid-2">
+            <div class="card">
+                <h3>The Founder</h3>
+                <h2>Omran Ahmad</h2>
+                <div class="big-number">01</div>
+                <ul>
+                    <li><strong>42-year-old Entrepreneur</strong> based in Mauritius.</li>
+                    <li><strong>MBA</strong> (University of Gloucestershire, UK).</li>
+                    <li><strong>Chartered Marketer (CIM)</strong> - Strategic business operator.</li>
+                    <li><strong>Experience:</strong> Logistics, Retail/Fashion, FMCG Trading.</li>
+                    <li><strong>Focus:</strong> AI-powered automation & "Auto-Dev" systems.</li>
+                </ul>
+            </div>
+            <div class="card flex-center bg-accent-faint">
+                <p class="quote-text">
+                    "I’m not from a pure coding background. I’m a business operator who got tired of manually
+                    firefighting. JARVIS & AION-ZERO started as my way of turning a chaotic multi-business life into a
+                    governed, automated system that can run at scale — and one day, without me."
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: AOGRL -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">02</div>
+                <h3>The Operating Entity</h3>
+                <h2>A-One Global Resourcing Ltd (AOGRL)</h2>
+                <div class="grid-2">
+                    <div>
+                        <p>A multi-venture holding & execution company registered in Mauritius.</p>
+                        <ul>
+                            <li><strong>AOGRL Deliveries:</strong> Last-mile logistics & fleet management.</li>
+                            <li><strong>OKASINA Trading:</strong> Fashion retail & E-commerce engine.</li>
+                            <li><strong>ReachX-AI (Next):</strong> Recruitment automation pipeline.</li>
+                            <li><strong>EduConnect (Next):</strong> Education & training automation.</li>
+                        </ul>
+                    </div>
+                    <div class="border-left">
+                        <h3>Strategic Shift</h3>
+                        <p>Moving from manual, owner-dependent operations to <span class="highlight">System-Driven,
+                                AI-Augmented Operations.</span></p>
+                        <p class="small-text mt-2">
+                            <em>"AOGRL is both the laboratory and the first client of JARVIS & AZ."</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: THE PROBLEM -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">03</div>
+                <h3>The Reality</h3>
+                <h2>Why We Built This</h2>
+                <div class="grid-3">
+                    <div>
+                        <div class="tag">Fragmented Tools</div>
+                        <p>Excel, WhatsApp, Email, Ad-hoc scripting. No single "Brain" to connect delivery sheets to
+                            profitability.</p>
+                    </div>
+                    <div>
+                        <div class="tag">Founder Bottleneck</div>
+                        <p>Every decision, exception, and fire escalates to the owner. Complexity grows faster than
+                            bandwidth.</p>
+                    </div>
+                    <div>
+                        <div class="tag">Blind Spots</div>
+                        <p>No real-time view of Cash, Risk, or Operational Health. High dependence on manual follow-up.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: THE VISION -->
+    <div class="slide">
+        <img src="img/slide3_tower.png" class="bg-img" alt="Futuristic Tower">
+        <div class="container text-center">
+            <div class="card">
+                <div class="big-number">04</div>
+                <h2>Vision: A Governed Autonomous Layer</h2>
+                <p class="subtitle mb-3">Turning "One-Man-Show" operations into structured,
+                    self-correcting workflows.</p>
+
+                <div class="flex-col-center">
+                    <div class="p-large bg-glass-light w-60">
+                        <strong>AOGRL Businesses</strong><br><span class="sub-label">Deliveries •
+                            OKASINA • ReachX</span>
+                    </div>
+                    <div class="border-left-dashed"></div>
+                    <div class="p-medium bg-gradient-box w-70 relative">
+                        <h3 class="m-0">AION-ZERO (Control Plane)</h3>
+                        <p class="tiny-text">Missions • Governance • Telemetry</p>
+                        <div class="badge-bottom">
+                            JARVIS Agents (Execution)</div>
+                    </div>
+                    <div class="border-left-dashed"></div>
+                    <div class="p-small-wide bg-glass-light w-60">
+                        <strong>Infrastructure</strong><br><span class="sub-label">Databases •
+                            APIs • Spreadsheets • The Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: CORE CONCEPT AZ -->
+    <div class="slide">
+        <div class="container grid-2">
+            <div class="card">
+                <div class="big-number">05</div>
+                <h3>The Control Plane</h3>
+                <h2>AION-ZERO (AZ)</h2>
+                <p>The central brain and governance layer. It doesn't "do" the work; it <strong>directs</strong> it.</p>
+                <ul>
+                    <li><strong>Missions:</strong> What we want to achieve.</li>
+                    <li><strong>Policies:</strong> What is allowed (and forbidden).</li>
+                    <li><strong>Telemetry:</strong> Complete logs and health snapshots.</li>
+                </ul>
+            </div>
+            <div class="card bg-dark">
+                <h3>Core Capabilities</h3>
+                <ul>
+                    <li><strong class="highlight">Ever-Growing:</strong> Registry for new missions and businesses.</li>
+                    <li><strong class="highlight">Ever-Learning:</strong> Uses historical outcomes to refine rules.</li>
+                    <li><strong class="highlight">Self-Correcting:</strong> Reflex rules (If X fails, do Y).</li>
+                </ul>
+                <div class="analogy-box">
+                    <strong>Analogy</strong><br>
+                    AZ is the "Board of Directors" + "Air Traffic Control".
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: CORE CONCEPT JARVIS -->
+    <div class="slide">
+        <img src="img/slide2_mesh.png" class="bg-img opacity-30" alt="Digital Mesh Network">
+        <div class="container grid-2">
+            <div class="card">
+                <div class="big-number">06</div>
+                <h3>The Execution Engine</h3>
+                <h2>JARVIS Agent Mesh</h2>
+                <p>A family of specialized agents that perform the actual work: calling APIs, writing code, sending
+                    alerts.</p>
+                <ul>
+                    <li><strong>Specialized:</strong> Finance, Ops, IT, Knowledge domains.</li>
+                    <li><strong>Governed:</strong> Operating strictly under AZ policies.</li>
+                    <li><strong>Verifiable:</strong> Logs every action back to HQ.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>The Agent Loop</h3>
+                <ul>
+                    <li><strong class="highlight">Self-Improving:</strong> Metrics (success rate, speed) drive tuning.
+                    </li>
+                    <li><strong class="highlight">Reusable:</strong> Agents share templates and solutions.</li>
+                    <li><strong class="highlight">Validation:</strong> Cross-checks outputs before committing.</li>
+                </ul>
+                <p class="loop-quote">
+                    "AZ decides WHAT.<br>JARVIS decides HOW."
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: PORTFOLIO -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">07</div>
+                <h2>JARVIS Agent Portfolio</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>Live / Deploying</h3>
+                        <ul>
+                            <li><strong>Jarvis-CodeAgent:</strong> Generates, refactors, and patches code. (Powered by
+                                GPT-4o/5 reasoning).</li>
+                            <li><strong>Jarvis-Watchdog:</strong> The "Immunne System". Checks health, scripts, and
+                                tasks. Restarts failures.</li>
+                            <li><strong>Jarvis-RunProjectLoop:</strong> Persistent mission runner for long-term goals.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Roadmap / Conceptual</h3>
+                        <ul>
+                            <li><strong>Finance Agent:</strong> Daily liquidity snapshots, P&L analysis, anomaly
+                                detection.</li>
+                            <li><strong>Ops Agent:</strong> Route optimization for Deliveries, driver performance
+                                tracking.</li>
+                            <li><strong>Trading Agent:</strong> Bulk deal evaluation (margin usage, expiry risk).</li>
+                            <li><strong>Knowledge Agent:</strong> Q&A over internal SOPs and contracts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: CONTINUOUS IMPROVEMENT -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">08</div>
+                <h2>Ever-Growing, Ever-Learning</h2>
+                <p>Not magic. Engineered continuous improvement through data.</p>
+                <div class="grid-3">
+                    <div class="bg-faint-box">
+                        <h3>1. Telemetry</h3>
+                        <p class="small-text">Every exception and success is logged. We build a history of "what
+                            breaks" and "what scales".</p>
+                    </div>
+                    <div class="bg-faint-box">
+                        <h3>2. Reflex Rules</h3>
+                        <p class="small-text">"If error rate > 5%, pause agent." Automated governance prevents
+                            runaway failures.</p>
+                    </div>
+                    <div class="bg-faint-box">
+                        <h3>3. Human Feedback</h3>
+                        <p class="small-text">You confirm high-quality outputs. The system prioritizes those
+                            patterns next time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: ARCHITECTURE -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">09</div>
+                <h2>Architecture Overview</h2>
+                <ul class="border-left-accent">
+                    <li class="no-border">
+                        <strong>User Layer:</strong> Dashboards (Citadel Web), Command Consoles. The interfaces for
+                        approval.
+                    </li>
+                    <li class="no-border">
+                        <strong>Control Plane (AZ):</strong> The Brain. Missions, Policies, Telemetry Store.
+                    </li>
+                    <li class="no-border">
+                        <strong>Execution Layer (JARVIS):</strong> Python/PowerShell Workers. Local or Server-side.
+                    </li>
+                    <li class="no-border">
+                        <strong>Data Layer:</strong> Supabase (PostgreSQL) + Local Files (Excel Masters).
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: KNOWLEDGE -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">10</div>
+                <h2>Knowledge & External Data</h2>
+                <p>Giving agents the equivalent of a "Research Assistant".</p>
+                <div class="grid-2">
+                    <div>
+                        <h3>Capabilities</h3>
+                        <ul>
+                            <li>Integration with trusted web sources (Wikipedia, Economic Data).</li>
+                            <li>Summarization and citation of findings.</li>
+                            <li>Feeding market shifts into deal evaluation missions.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Governance</h3>
+                        <ul>
+                            <li>AZ controls <em>which</em> agents can access the web.</li>
+                            <li>Domain allow-listing prevents hallucinations or security risks.</li>
+                            <li>Full trace logging of external calls.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: USE CASES (NOW) -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">11</div>
+                <h2>AOGRL Use Cases: Phase 1</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>🚚 AOGRL Deliveries</h3>
+                        <ul>
+                            <li>Automating reports from master sheets.</li>
+                            <li>Monitoring revenue per route/driver.</li>
+                            <li>Highlighting loss-making patterns.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>💰 Finance</h3>
+                        <ul>
+                            <li>Merged Personal + Business cashflow tracking.</li>
+                            <li>Daily snapshots of liquidity.</li>
+                            <li>Early warnings on negative trends.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>🛍️ OKASINA</h3>
+                        <ul>
+                            <li>"Auto-Dev" for website features using CodeAgent.</li>
+                            <li>Data cleaning for product inventory.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>🎓 AI Education</h3>
+                        <ul>
+                            <li>Drafting workshop material.</li>
+                            <li>Automated email marketing flows.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 13: USE CASES (FUTURE) -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">12</div>
+                <h2>Future Use Cases: Phase 2+</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>🌐 ReachX-AI (Recruitment)</h3>
+                        <p>Automating candidate screening, shortlists, and employer pipeline dashboards.</p>
+                    </div>
+                    <div>
+                        <h3>🎓 EduConnect</h3>
+                        <p>Student onboarding automation, course summaries, and performance snapshots.</p>
+                    </div>
+                    <div>
+                        <h3>📦 Dropshipping (AOGRL-DS)</h3>
+                        <p>Deal evaluation agents (Margin vs Expiry), logistics planning.</p>
+                    </div>
+                    <div>
+                        <h3>🚀 SME Platform</h3>
+                        <p>Packaging JARVIS & AZ as "Automation-as-a-Service" for external clients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: SAFETY -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">13</div>
+                <h2 class="text-accent-2">Safety & Governance</h2>
+                <p>We do not build "Black Boxes". We build Governed Systems.</p>
+                <ul>
+                    <li><strong>Human-in-Command:</strong> You retain the Kill Switch.</li>
+                    <li><strong>Separation of Powers:</strong> <em>Analysis Agents</em> cannot write code. <em>Execution
+                            Agents</em> cannot approve budgets.</li>
+                    <li><strong>Audit Trails:</strong> Every significant action is logged and versioned.</li>
+                    <li><strong>Safe Learning:</strong> No uncontrolled self-modification. Changes go through review.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 15: STATUS -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">14</div>
+                <h2>Current Status: Honest View</h2>
+                <p>Not a slide deck startup. A real-world proving ground.</p>
+                <div class="grid-2">
+                    <div>
+                        <h3>Real Assets</h3>
+                        <ul>
+                            <li>Scripts, Tasks, and Supabase Schema are <strong>Live</strong>.</li>
+                            <li>Internal Alpha running on AOGRL production data.</li>
+                            <li>Telemetry streams are active.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Next Steps</h3>
+                        <ul>
+                            <li>Wiring the "Cockpit" UI to live data.</li>
+                            <li>Stabilizing long-running loops.</li>
+                            <li><strong>Selling Point:</strong> We are proving this on our own money, in our own
+                                businesses, first.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 16: ROADMAP -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">15</div>
+                <h2>Roadmap</h2>
+                <ul>
+                    <li>
+                        <strong class="highlight">Near-Term (0-6 mo):</strong> Stabilize Telemetry. Solidify Heartbeat
+                        (Watchdog). Build out the Cockpit UI.
+                    </li>
+                    <li>
+                        <strong class="highlight">Mid-Term (6-18 mo):</strong> Deploy specialized agents (Finance, Ops)
+                        into production. Sophisticated Reflex Rules.
+                    </li>
+                    <li>
+                        <strong class="highlight">Long-Term (18+ mo):</strong> Productization. Offer "AION-ZERO" as a
+                        platform to select external SMEs.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 17: WHY IT MATTERS -->
+    <div class="slide">
+        <div class="container">
+            <div class="card">
+                <div class="big-number">16</div>
+                <h2>Why This Matters</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>For The Founder</h3>
+                        <p>Frees you from micro-firefighting. Turns businesses into data-visible, scalable systems.
+                            Reduces burnout risk.</p>
+                    </div>
+                    <div>
+                        <h3>For Investors</h3>
+                        <p>Shows a founder building a <strong>Platform</strong>, not just an app. High-margin potential
+                            via "Operations-as-a-Service".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18: CLOSING -->
+    <div class="slide">
+        <img src="img/slide1_ui.png" class="bg-img opacity-50" alt="Interface Dashboard">
+        <div class="container text-center">
+            <div class="card">
+                <h2>The Future of Operations</h2>
+                <p><strong>Omran Ahmad</strong><br>Founder, AOGRL</p>
+                <p class="quote-text mt-2">
+                    "I’m not trying to be everywhere at once.<br>
+                    I’m building a system that can be."
+                </p>
+                <div class="mt-3">
+                    <button onclick="window.scrollTo(0, 0)" class="btn-restart">
+                        Back to Start
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

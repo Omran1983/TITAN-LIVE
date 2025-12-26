@@ -1,0 +1,11 @@
+[name] 
+value = "binance"
+[limits]
+rest_rps = 10
+websocket = true
+max_leverage = 5
+[allowed]
+create_order = true
+cancel_order = true
+fetch_ohlcv = true
+margin = false

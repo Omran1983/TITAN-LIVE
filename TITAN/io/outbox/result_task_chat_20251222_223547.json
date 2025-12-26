@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "task_id": "task_chat_20251222_223547",
+  "status": "success",
+  "started_at": "2025-12-22T22:36:32.459873",
+  "finished_at": "2025-12-22T22:36:33.054128",
+  "summary": {
+    "what_happened": "Executed 1 steps.",
+    "key_outputs": [
+      "F:\\AION-ZERO\\TITAN\\io\\artifacts\\step_step_1_artifact.html"
+    ],
+    "next_actions": []
+  },
+  "artifacts": [
+    {
+      "path": "F:\\AION-ZERO\\TITAN\\io\\artifacts\\step_step_1_artifact.html",
+      "label": "Step step_1 Output",
+      "mime": "text/html",
+      "bytes": 513
+    }
+  ],
+  "audit": {
+    "tool_calls": [
+      {
+        "tool": "http.get",
+        "ok": true,
+        "started_at": "2025-12-22T22:36:32.487143",
+        "finished_at": "2025-12-22T22:36:33.053304",
+        "error": null,
+        "details": "Status: 200"
+      }
+    ],
+    "warnings": [],
+    "policy_violations": []
+  }
+}

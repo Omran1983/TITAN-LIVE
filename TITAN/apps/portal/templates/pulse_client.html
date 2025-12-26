@@ -1,0 +1,123 @@
+<script>
+    // TITAN Pulse WebSocket Client
+    // Connects to the local nervous system to display real-time thoughts.
+
+    const PULSE_URL = "ws://127.0.0.1:8000/ws";
+    let socket;
+
+    function connectPulse() {
+        console.log("TITAN Pulse: Connecting...");
+        socket = new WebSocket(PULSE_URL);
+
+        socket.onopen = function (e) {
+            console.log("TITAN Pulse: CONNECTED");
+            addLog("SYSTEM", "Pulse Connected. Listening for nervous system events...", "success");
+        };
+
+        socket.onmessage = function (event) {
+            try {
+                const data = JSON.parse(event.data);
+                // Expected format: {source, type, message, severity, timestamp}
+                addLog(data.source, `[${data.type}] ${data.message}`, data.severity || 'info');
+            } catch (e) {
+                console.error("Pulse Parse Error:", e);
+            }
+        };
+
+        socket.onclose = function (event) {
+            if (event.wasClean) {
+                addLog("SYSTEM", "Pulse Closed Cleanly", "warn");
+            } else {
+                addLog("SYSTEM", "Pulse Disconnected (Died). Retrying in 5s...", "error");
+                setTimeout(connectPulse, 5000);
+            }
+        };
+
+        socket.onerror = function (error) {
+            console.error(`Pulse Error:`, error);
+        };
+    }
+
+    function addLog(source, message, type) {
+        const terminal = document.getElementById('titan-terminal-output');
+        if (!terminal) return;
+
+        const line = document.createElement('div');
+        line.className = `log-line log-${type}`;
+
+        const timestamp = new Date().toLocaleTimeString();
+        line.innerHTML = `<span class="timestamp">[${timestamp}]</span> <span class="source">${source}:</span> <span class="msg">${message}</span>`;
+
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+
+        // Keep limit to 100 lines
+        if (terminal.childElementCount > 100) {
+            terminal.removeChild(terminal.firstChild);
+        }
+    }
+
+    // Auto-connect on load
+    document.addEventListener("DOMContentLoaded", connectPulse);
+</script>
+
+<style>
+    #titan-terminal-output {
+        background-color: #0d1117;
+        color: #c9d1d9;
+        font-family: 'Courier New', Courier, monospace;
+        height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+
+    .log-line {
+        margin-bottom: 4px;
+        border-bottom: 1px solid #161b22;
+        padding-bottom: 2px;
+    }
+
+    .timestamp {
+        color: #8b949e;
+    }
+
+    .source {
+        color: #79c0ff;
+        font-weight: bold;
+    }
+
+    .msg {
+        color: #c9d1d9;
+    }
+
+    .log-info .msg {
+        color: #c9d1d9;
+    }
+
+    .log-warn .msg {
+        color: #d29922;
+    }
+
+    .log-error .msg {
+        color: #ff7b72;
+    }
+
+    .log-success .msg {
+        color: #3fb950;
+    }
+</style>
+
+<div class="card mb-4" id="pulse-panel">
+    <div class="card-header bg-dark text-white">
+        <i class="fas fa-heartbeat text-danger me-2"></i> TITAN Nervous System (Live)
+    </div>
+    <div class="card-body bg-black p-0">
+        <div id="titan-terminal-output">
+            <!-- WebSocket logs stream here -->
+            <div class="log-line"><span class="timestamp">[SYSTEM]</span> Initializing Pulse Link...</div>
+        </div>
+    </div>
+</div>

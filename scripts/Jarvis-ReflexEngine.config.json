@@ -1,0 +1,30 @@
+﻿{
+    "telemetry":  {
+                      "error_rate":  0.08,
+                      "cpu":  12,
+                      "queue_depth":  12
+                  },
+    "rules":  [
+                  {
+                      "enabled":  true,
+                      "name":  "High queue depth",
+                      "id":  1,
+                      "threshold":  10,
+                      "trigger":  "queue_depth_high"
+                  },
+                  {
+                      "enabled":  true,
+                      "name":  "High error rate",
+                      "id":  2,
+                      "threshold":  0.05,
+                      "trigger":  "error_rate_high"
+                  },
+                  {
+                      "enabled":  true,
+                      "name":  "High CPU",
+                      "id":  3,
+                      "threshold":  70,
+                      "trigger":  "cpu_high"
+                  }
+              ]
+}

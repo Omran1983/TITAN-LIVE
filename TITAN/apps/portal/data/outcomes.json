@@ -1,0 +1,59 @@
+[
+    {
+        "id": "outcome_a_system_health",
+        "title": "System Health & Risk Audit",
+        "outcome": "Identify operational, security, and compliance risks",
+        "target_customer": "SMEs / Founders",
+        "price": 49,
+        "currency": "USD",
+        "delivery_agents": [
+            "AGENT_INSPECTOR",
+            "AGENT_DOCTOR"
+        ],
+        "success_metric": "risks_identified_count",
+        "status": "INTERNAL_TESTING",
+        "readiness": {
+            "runs_required": 5,
+            "runs_completed": 0,
+            "clean_runs": 0
+        }
+    },
+    {
+        "id": "outcome_b_grant_readiness",
+        "title": "Grant Readiness Snapshot",
+        "outcome": "Clear checklist gaps for grant eligibility",
+        "target_customer": "SMEs / NGOs",
+        "price": 79,
+        "currency": "USD",
+        "delivery_agents": [
+            "AGENT_INGESTION_HYDRA",
+            "AGENT_WORKFLOW_CONDUCTOR"
+        ],
+        "success_metric": "gaps_identified_count",
+        "status": "INTERNAL_TESTING",
+        "readiness": {
+            "runs_required": 5,
+            "runs_completed": 0,
+            "clean_runs": 0
+        }
+    },
+    {
+        "id": "outcome_c_automation_map",
+        "title": "Automation Opportunity Map",
+        "outcome": "List of manual processes that can be automated",
+        "target_customer": "Ops-heavy SMEs",
+        "price": 99,
+        "currency": "USD",
+        "delivery_agents": [
+            "AGENT_CONTEXT_ASSEMBLER",
+            "AGENT_INSPECTOR"
+        ],
+        "success_metric": "opportunities_mapped_count",
+        "status": "INTERNAL_TESTING",
+        "readiness": {
+            "runs_required": 5,
+            "runs_completed": 0,
+            "clean_runs": 0
+        }
+    }
+]

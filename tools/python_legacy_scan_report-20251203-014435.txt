@@ -1,0 +1,38 @@
+Python Legacy Bootstrap / Supply-Chain Risk Scan
+Scan root: F:\
+Timestamp: 2025-12-03T01:44:35.322782
+
+Legend / Reason codes:
+  BOOTSTRAP_FILE_NAME      = File named bootstrap.py (legacy buildout)
+  PYTHON_DISTRIBUTE_DOMAIN = References python-distribute.org
+  EXEC_ON_URL_CONTENT      = exec() + urlopen() in same file
+  ZC_BUILDOUT_REFERENCE    = References zc.buildout
+
+Findings:
+---------
+- F:\StabilityMatrix-win-x64\StabilityMatrix-win-x64\Data\Packages\Stable Diffusion WebUI Forge\venv\Lib\site-packages\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\StabilityMatrix-win-x64\StabilityMatrix-win-x64\Data\Assets\uv\cache\archive-v0\Bf02ycj1sNNThq_SmCsx7\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\StabilityMatrix-win-x64\StabilityMatrix-win-x64\Data\Assets\Python310\Lib\site-packages\pip\_vendor\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\StabilityMatrix-win-x64\StabilityMatrix-win-x64\Data\Assets\Python\cpython-3.10.18-windows-x86_64-none\Lib\configparser.py
+    Reasons: ZC_BUILDOUT_REFERENCE
+- F:\Jules Trading Platfrom\jules_session_2946937525076603383_backtester-regression\.venv\Lib\site-packages\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\Jarvis\Backups-Offsite\mirror\Jarvis\aion\.venv\Lib\site-packages\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\Jarvis\Backups\mirror\Jarvis\aion\.venv\Lib\site-packages\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\Jarvis\aion\.venv\Lib\site-packages\six.py
+    Reasons: EXEC_ON_URL_CONTENT
+- F:\ComfyUI\venv310\Lib\site-packages\sqlalchemy\testing\plugin\bootstrap.py
+    Reasons: BOOTSTRAP_FILE_NAME
+- F:\ComfyUI\venv310\Lib\site-packages\alembic\testing\plugin\bootstrap.py
+    Reasons: BOOTSTRAP_FILE_NAME
+- F:\ComfyUI\venv\Lib\site-packages\sqlalchemy\testing\plugin\bootstrap.py
+    Reasons: BOOTSTRAP_FILE_NAME
+- F:\ComfyUI\venv\Lib\site-packages\alembic\testing\plugin\bootstrap.py
+    Reasons: BOOTSTRAP_FILE_NAME
+- F:\AION-ZERO\tools\python_legacy_scanner.py
+    Reasons: PYTHON_DISTRIBUTE_DOMAIN, EXEC_ON_URL_CONTENT, ZC_BUILDOUT_REFERENCE

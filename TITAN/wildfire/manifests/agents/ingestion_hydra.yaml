@@ -1,0 +1,45 @@
+version: 1
+agent_id: AGENT_INGESTION_HYDRA
+name: Ingestion Hydra
+runtime:
+  mode: sandbox
+  language: python
+  entrypoint: wildfire/modules/ingestion_hydra/main.py
+  concurrency: 2
+  timeout_ms: 600000
+
+interfaces:
+  consumes:
+    - topic: az.ingest_jobs
+      schema: ingest_job_v1
+  produces:
+    - topic: az.ingest_results
+      schema: ingest_result_v1
+    - topic: az.artifacts
+      schema: artifact_v1
+
+permissions:
+  read_scopes:
+    - fs:wildfire/inbox/**
+  write_scopes:
+    - fs:wildfire/outbox/**
+    - supabase:public.az_artifacts
+  network:
+    outbound_allowlist:
+      - "localhost"
+      - "127.0.0.1"
+
+ocr_stack:
+  primary: "doc_ocr_local"
+  fallback: "vlm_local"
+  outputs:
+    - markdown
+    - json_tables
+    - image_snippets
+
+observability:
+  heartbeat_sec: 30
+  metrics:
+    - pages_processed
+    - ocr_accuracy_proxy
+    - pipeline_latency_ms
