@@ -1,7 +1,0 @@
-TASK T-CSV-0001 | GOAL: Download a public CSV and report row count to log.
-MODEL: qwen2.5:7b | STEPS<= 8
----
-ACTION BROWSER.GOTO | ARG https://example.com/public-csv | THEN verify page loads
-ACTION BROWSER.READ | ARG inspect CSV link | THEN identify download link
-ACTION BROWSER.CLICK | ARG download link | THEN file starts downloading
-ACTION FILE.WRITE | ARG row count of downloaded CSV | THEN log row count

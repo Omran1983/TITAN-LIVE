@@ -1,8 +1,0 @@
-{
-  "id": "T-CHECKOUT-AZ-INIT-20251027-104540",
-  "type": "CHECKOUT",
-  "payload": {
-    "note": "kickoff",
-    "project": "AZ"
-  }
-}

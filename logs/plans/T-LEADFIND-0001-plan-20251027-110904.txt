@@ -1,8 +1,0 @@
-TASK T-LEADFIND-0001 | GOAL: Search for Wear2Go Souillac and extract top 3 contacts (name/phone/address) from public pages.
-MODEL: qwen2.5:7b | STEPS<= 8
----
-ACTION BROWSER.GOTO | ARG "Wear2Go Souillac" | THEN Verify page load
-ACTION BROWSER.READ | ARG "Wear2Go Souillac" | THEN Identify contact section
-ACTION BROWSER.SCREENSHOT | ARG "Contact Section" | THEN Save screenshot for reference
-ACTION BROWSER.READ | ARG "Contact Section" | THEN Extract top 3 contacts
-ACTION FILE.WRITE | ARG "Top 3 Contacts: Name, Phone, Address" | THEN Save extracted contacts

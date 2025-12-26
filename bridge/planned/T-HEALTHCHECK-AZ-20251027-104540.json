@@ -1,8 +1,0 @@
-{
-  "id": "T-HEALTHCHECK-AZ-20251027-104540",
-  "type": "HEALTHCHECK",
-  "payload": {
-    "project": "AZ",
-    "ts": "2025-10-27T10:45:40"
-  }
-}
