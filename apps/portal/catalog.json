@@ -64,6 +64,30 @@
                 "currency": "Rs",
                 "category": "Agriculture",
                 "disclaimer": "50% grant for greenhouse structures."
+            },
+            "dbm_women": {
+                "name": "Women Entrepreneur Loan (DBM)",
+                "refund_rate": 0.00,
+                "refund_cap": 1200000,
+                "currency": "Rs",
+                "category": "Loan (0.5%)",
+                "disclaimer": "Loan up to Rs 1.2M at 0.5% p.a. Moratorium 18 months."
+            },
+            "elleboost": {
+                "name": "ElleBoost (MauBank)",
+                "refund_rate": 0.00,
+                "refund_cap": 0,
+                "currency": "Rs",
+                "category": "Loan",
+                "disclaimer": "100% financing for equipment. Zero processing fees."
+            },
+            "sbm_bright": {
+                "name": "Bright-HER Future (SBM)",
+                "refund_rate": 0.00,
+                "refund_cap": 0,
+                "currency": "Rs",
+                "category": "Loan",
+                "disclaimer": "Preferential rates and leasing for women-led businesses."
             }
         }
     },
@@ -116,6 +140,27 @@
             "status": "INFO_ONLY",
             "path": "/portal/resources",
             "icon": "🚀"
+        },
+        {
+            "id": "dbm_women",
+            "name": "Women Loan Scheme (DBM)",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "👩‍💼"
+        },
+        {
+            "id": "elleboost",
+            "name": "ElleBoost (MauBank)",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🏦"
+        },
+        {
+            "id": "sbm_bright",
+            "name": "Bright-HER Future (SBM)",
+            "status": "INFO_ONLY",
+            "path": "/portal/resources",
+            "icon": "🌟"
         }
     ]
 }
