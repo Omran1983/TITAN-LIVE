@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "TITAN/bridge/bridge_api.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "TITAN/bridge/bridge_api.py"
+        }
+    ]
+}
