@@ -1,14 +1,8 @@
 {
-    "builds": [
+    "rewrites": [
         {
-            "src": "bridge/bridge_api.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "bridge/bridge_api.py"
+            "source": "/(.*)",
+            "destination": "/api/index.py"
         }
     ]
 }
