@@ -1,9 +1,0 @@
-# Pin Node 20.19.0 for this process tree
-$verHome = Join-Path $env:APPDATA 'nvm\v20.19.0'
-if (Test-Path (Join-Path $verHome 'node.exe')) {
-  $env:Path = "$verHome;$env:Path"
-}
-$env:NPM_CONFIG_ENGINE_STRICT = 'false'
-
-# Run the loop
-powershell -NoProfile -ExecutionPolicy Bypass -File 'F:\AION-ZERO\tasks\Harvis-Loop.ps1'

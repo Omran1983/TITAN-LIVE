@@ -1,9 +1,0 @@
-{
-  "id": "20251202_220007",
-  "client": "okasina",
-  "intent": "Change CTA text to 'Shop Now – 23% OFF' and darken hover",
-  "target_files": [
-    "src\\components\\Hero.jsx",
-    "src\\styles\\buttons.css"
-  ]
-}

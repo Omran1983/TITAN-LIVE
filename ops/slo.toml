@@ -1,7 +1,0 @@
-[latency]
-p95_ms_canary = 1200
-[errors]
-error_rate_pct_canary = 1.0
-[canary]
-traffic_pct = 10
-observe_seconds = 600

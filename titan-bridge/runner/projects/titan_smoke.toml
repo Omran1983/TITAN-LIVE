@@ -1,7 +1,0 @@
-[project]
-name = "TITAN Smoke Check"
-
-[[steps]]
-name = "Environment quick check"
-kind = "powershell"
-cmd = "pwd; python --version; node -v; git --version"

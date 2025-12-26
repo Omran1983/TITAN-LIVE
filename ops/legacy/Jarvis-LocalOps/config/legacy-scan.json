@@ -1,9 +1,0 @@
-{
-  "scan_root": "F:\\\\",
-  "include_extensions": [".ps1", ".py", ".js", ".sql", ".yml", ".yaml", ".json"],
-  "exclude_paths": [
-    "F:\\\\Windows",
-    "F:\\\\Program Files",
-    "F:\\\\Program Files (x86)"
-  ]
-}

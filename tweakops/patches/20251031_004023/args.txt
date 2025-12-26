@@ -1,4 +1,0 @@
-intent=Change CTA text to 'Shop Now – 20% OFF' and darken hover
-raw_targets=["src\\components\\Hero.jsx","src\\styles\\buttons.css"]
-parsed_targets=['src\\components\\Hero.jsx', 'src\\styles\\buttons.css']
-engine=jsx-aware-1

@@ -1,5 +1,0 @@
-{
-    "global_level": "L2_HUMAN_CONFIRM",
-    "comment": "L2 allows agents to execute actions if initiated/confirmed by human runner.",
-    "overrides": {}
-}

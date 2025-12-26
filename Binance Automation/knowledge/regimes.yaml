@@ -1,3 +1,0 @@
-﻿regimes:
-  chop:  { adx_min: 0,  adx_max: 20, risk_scale: 0.5 }
-  trend: { adx_min: 20, adx_max: 99, risk_scale: 1.0 }

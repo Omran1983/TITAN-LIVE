@@ -1,9 +1,0 @@
-Deadline_ID,Description,Due_Date,Frequency,Agency,Late_Penalty
-TAX-001,"PAYE / TDS Return",2026-01-20,"Monthly","MRA","5% per month"
-TAX-002,"VAT Return",2026-01-20,"Monthly","MRA","Rs 2000 per day"
-LAB-001,"NPS / NPF Contribution",2026-01-20,"Monthly","MRA/Social Security","5% Surcharge"
-LAB-002,"NSF Contribution",2026-01-20,"Monthly","MRA/Social Security","5% Surcharge"
-LAB-003,"PRGF Contribution",2026-01-20,"Monthly","MRA","Interest applied"
-TAX-003,"Corporate Tax (APS)",2026-03-31,"Quarterly","MRA","5% per month"
-CORP-001,"Annual Return (ROC)",2026-06-30,"Annual","Registrar of Companies","Rs 300 per day"
-CORP-002,"Trade Fees",2026-01-31,"Annual","Local Council","50% Surcharge"

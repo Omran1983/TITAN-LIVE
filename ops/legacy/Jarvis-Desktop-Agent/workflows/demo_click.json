@@ -1,6 +1,0 @@
-{
-  "name": "demo_click",
-  "steps": [
-    { "action": "type", "text": "Hello from Jarvis-Desktop-Agent v0.1" }
-  ]
-}

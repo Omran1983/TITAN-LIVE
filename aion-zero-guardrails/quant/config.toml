@@ -1,9 +1,0 @@
-[symbols]
-universe = ["GLD","UPRO"]
-
-[eval]
-start = "2015-01-01"
-end   = "2025-10-01"
-slippage_bps = 5
-fee_bps = 2
-walk_forward_windows = 6

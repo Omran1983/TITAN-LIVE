@@ -1,9 +1,0 @@
-{
-    "name": "agreement-risk",
-    "version": "1.0.0",
-    "description": "Contract Analysis and Risk Scoring Engine (Compliance Block)",
-    "modules": {
-        "analyze": "src/risk_analyzer.py",
-        "report": "src/report_renderer.py"
-    }
-}

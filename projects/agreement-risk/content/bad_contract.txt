@@ -1,7 +1,0 @@
-AGREEMENT
-
-1. INDEMNITY. The Client agrees to indemnify the Provider against all claims, losses, and damages, regardless of cause. The Provider shall indemnify NOTHING.
-2. LIABILITY. The Provider's liability shall be UNLIMITED for all claims arising out of this agreement.
-3. TERMINATION. The Provider may terminate this agreement for convenience at any time with immediate effect.
-4. NON-COMPETE. The Client shall not compete with Provider for 100 years.
-5. JURISDICTION. This agreement shall be governed by the laws of Mars.

@@ -1,9 +1,0 @@
-[app]
-name = "jarvis-hq"
-environment = "base"
-
-[logging]
-level = "INFO"
-
-[queue]
-default_priority = 10

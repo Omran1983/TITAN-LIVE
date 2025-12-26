@@ -1,9 +1,0 @@
-name = "educonnect-api"
-main = "src/index.ts"
-compatibility_date = "2025-10-01"
-account_id = ""
-
-
-[triggers]
-crons = ["*/5 * * * *"]
-

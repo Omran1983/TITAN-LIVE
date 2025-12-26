@@ -1,6 +1,0 @@
-{
-  "task_id": "T-FORM-0001",
-  "intent": "form_fill_dryrun",
-  "goal": "Fill a generic contact form with dummy data and stop before submit.",
-  "constraints": { "max_steps": 8, "timeout_s": 60, "submit_forms": false }
-}

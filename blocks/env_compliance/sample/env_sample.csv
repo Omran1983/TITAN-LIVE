@@ -1,4 +1,0 @@
-id,category,amount,unit,date,description,type,status
-1,plastic,12,kg,2025-12-01,Plastic consumption,,
-2,plastic,25,kg,2025-12-02,Plastic consumption,,
-3,license,0,na,2025-12-03,EIA License,eia_license,active

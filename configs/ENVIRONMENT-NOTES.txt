@@ -1,4 +1,0 @@
-# Optional environment hints (manual steps later; no installs performed here)
-# - Install Ollama locally and pull 'qwen2:7b-instruct' or 'llama3.1:8b-instruct' (4-bit)
-# - Install Playwright runtime (Chromium)
-# - Install Tesseract OCR (optional)

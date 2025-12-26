@@ -1,9 +1,0 @@
-{
-  "rules": [
-    {
-      "name": "Supabase Invalid URI",
-      "match": "Invalid URI: The hostname could not be parsed",
-      "action": "flag_only"
-    }
-  ]
-}

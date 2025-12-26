@@ -1,9 +1,0 @@
-{
-    "name": "statutory-sentinel",
-    "version": "1.0.0",
-    "description": "Recurring Compliance & Deadline Tracker (MRA/ROC/CSG)",
-    "modules": {
-        "checker": "src/sentinel.py",
-        "rules": "data/obligations.json"
-    }
-}
