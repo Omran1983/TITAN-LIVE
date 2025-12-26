@@ -22,12 +22,24 @@ TEMPLATES_DIR = PORTAL_DIR / "templates"
 CATALOG_PATH = PORTAL_DIR / "catalog.json"
 
 # IO: prefer env override for portability (Laptop2, server, etc.)
-IO_ROOT = Path(os.environ.get("TITAN_IO_ROOT", r"F:\AION-ZERO\TITAN\io"))
+# VERCEL FIX: Detect if we are in a read-only environment (Lambda)
+if os.environ.get("VERCEL") or os.name != "nt":
+     # Linux/Vercel (Writeable only in /tmp)
+    IO_ROOT = Path("/tmp/titan_io")
+else:
+    # Windows Dev
+    IO_ROOT = Path(os.environ.get("TITAN_IO_ROOT", r"F:\AION-ZERO\TITAN\io"))
+
 INBOX = IO_ROOT / "inbox"
 OUTBOX = IO_ROOT / "outbox"
-INBOX.mkdir(parents=True, exist_ok=True)
-OUTBOX.mkdir(parents=True, exist_ok=True)
-TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+
+# Don't crash if mkdir fails (e.g. unexpected perms), but try.
+try:
+    INBOX.mkdir(parents=True, exist_ok=True)
+    OUTBOX.mkdir(parents=True, exist_ok=True)
+    TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+except Exception as e:
+    print(f"[WARN] IO Dir creation failed: {e}")
 
 # --- TITAN MODULE IMPORTS ---
 sys.path.append(str(APPS_DIR / "grant_writer"))
