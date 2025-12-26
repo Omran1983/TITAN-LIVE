@@ -1,0 +1,41 @@
+# --- VERCEL IGNORE ---
+# Block everything by default logic (keep only what we need)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.pdf
+*.exe
+*.dll
+*.iso
+*.bin
+*.log
+
+# Heavy Folders (Do not upload to Lambda)
+antigravity_package.zip
+n8n-workflows-main.zip
+Jarvis/
+universe/
+backups/
+archive/
+output/
+tmp/
+temp/
+_hidden/
+node_modules/
+venv/
+.venv/
+.git/
+
+# Projects (We only want TITAN core)
+projects/
+sales/
+ops/
+quant/
+design-output/
+services/
+
+# Keep TITAN
+!TITAN/
+!requirements.txt
+!vercel.json
