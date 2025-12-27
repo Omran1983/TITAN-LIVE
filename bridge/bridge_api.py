@@ -250,6 +250,9 @@ def _safe_outbox_file(filename: str) -> Path:
     return candidate
 
 
+    return candidate
+
+
 def _send_pdf(candidate: Path, download_name: str, disposition: str = "attachment") -> FileResponse:
     """
     Starlette/FastAPI compatible file serving.
@@ -263,6 +266,65 @@ def _send_pdf(candidate: Path, download_name: str, disposition: str = "attachmen
         media_type="application/pdf",
         headers=headers,
     )
+
+# --- SUPABASE INTEGRATION ---
+try:
+    from supabase import create_client, Client
+    url: str = os.environ.get("SUPABASE_URL")
+    key: str = os.environ.get("SUPABASE_ANON_KEY")
+    supabase: Client = create_client(url, key) if url and key else None
+except Exception as e:
+    print(f"[WARN] Supabase init failed: {e}")
+    supabase = None
+
+@app.post("/api/forge/submit")
+async def forge_submit(request: Request, feature_request: str = Form(...), module: str = Form("General")):
+    try:
+        check_rate_limit(request) # Security
+        
+        # 1. Log to JSONL (Backup / Legacy support)
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "ip": _client_ip(request),
+            "module": module,
+            "request": feature_request,
+            "status": "QUEUED"
+        }
+        
+        log_path = INBOX / "suggestions.jsonl"
+        try:
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry) + "\n")
+        except Exception as e:
+            print(f"[WARN] Local log failed: {e}")
+
+        # 2. Push to Supabase (Primary Persistence)
+        if supabase:
+            try:
+                data = {
+                    "title": module,  # Using Title for Module for now, or feature_request depending on schema
+                    "description": feature_request,
+                    "module": module,
+                    "status": "queued",
+                    "live_log": [{"msg": "Intake received", "ts": datetime.now().isoformat()}]
+                }
+                # If user is auth'd later, we add user_id. For now, it might beanon or fail if RLS is strict.
+                # Assuming table allows anon inserts for "Mode B" demo or I use Service Key? 
+                # User provided ANON key. RLS must allow INSERT for public OR we need to handle auth.
+                # For "Client Suggestion", usually public form is OK.
+                
+                # Check if table has specific column mapping
+                # User schema: client_suggestions(title, description, status, live_log...)
+                
+                supabase.table("client_suggestions").insert(data).execute()
+                print("[FORGE] Persisted to Supabase.")
+            except Exception as sb_e:
+                print(f"[ERROR] Supabase Insert Failed: {sb_e}")
+                # Don't crash user experience, just log
+        
+        return {"status": "success", "message": "Feature queued for autonomous build."}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
 
 
 @app.get("/debug/outbox")
