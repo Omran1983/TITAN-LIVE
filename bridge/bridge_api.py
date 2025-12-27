@@ -748,7 +748,11 @@ async def get_health_dashboard(request: Request):
 @app.get("/portal/vault", response_class=HTMLResponse)
 async def get_vault_ui(request: Request):
     check_rate_limit(request) # Security
-    return templates.TemplateResponse("vault.html", {"request": request})
+    return templates.TemplateResponse("vault.html", {
+        "request": request,
+        "supabase_url": os.environ.get("SUPABASE_URL", ""),
+        "supabase_key": os.environ.get("SUPABASE_ANON_KEY", "")
+    })
 
 
 # -----------------------
