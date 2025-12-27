@@ -123,8 +123,8 @@
         {
             "id": "startup",
             "name": "Start-Up Grant (Youth/Women)",
-            "status": "INFO_ONLY",
-            "path": "/portal/resources",
+            "status": "LIVE",
+            "path": "/portal/grants",
             "icon": "🚀"
         },
         {
@@ -140,6 +140,13 @@
             "status": "INFO_ONLY",
             "path": "/portal/resources",
             "icon": "🏦"
+        },
+        {
+            "id": "sme_marketing",
+            "name": "SME Marketing Support",
+            "status": "LIVE",
+            "path": "/portal/grants",
+            "icon": "📢"
         },
         {
             "id": "sbm_bright",
