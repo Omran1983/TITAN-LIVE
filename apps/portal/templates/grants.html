@@ -24,38 +24,50 @@
             </div>
 
             <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Scheme 1: TINNS -->
-                <div
-                    class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all cursor-pointer ring-2 ring-blue-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-blue-400 font-bold">Innovation</span>
-                        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">80% Refund</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white text-left">TINNS Scheme</h3>
-                    <p class="text-xs text-slate-300 text-left mt-1">For Software, Hardware, and Cloud projects.</p>
-                </div>
+                {% for product in catalog.products %}
+                {% if product.status == 'LIVE' and product.id not in ['audit', 'forge', 'resources'] %}
+                {% set scheme = catalog.config.schemes[product.id] %}
+                <div onclick="window.location='{{ product.path }}'"
+                    class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all cursor-pointer ring-1 ring-white/10 hover:ring-blue-500 relative group">
 
-                <!-- Scheme 2: Green -->
-                <div
-                    class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/20 transition-all cursor-pointer opacity-70 hover:opacity-100">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-green-400 font-bold">Green Impact</span>
-                        <span class="bg-green-600 text-white text-xs px-2 py-1 rounded">100% Grant</span>
+                    <!-- Icon Header -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">{{ product.icon }}</span>
+                        {% if scheme %}
+                        <span
+                            class="bg-blue-600 text-white text-[10px] px-2 py-1 rounded-full uppercase tracking-wider">
+                            {{ (scheme.refund_rate * 100)|int }}% Refund
+                        </span>
+                        {% else %}
+                        <span
+                            class="bg-slate-700 text-slate-300 text-[10px] px-2 py-1 rounded-full uppercase tracking-wider">
+                            Info
+                        </span>
+                        {% endif %}
                     </div>
-                    <h3 class="text-lg font-bold text-white text-left">GSS / Solar</h3>
-                    <p class="text-xs text-slate-300 text-left mt-1">For Renewable Energy and Efficiency.</p>
-                </div>
 
-                <!-- Scheme 3: Export -->
-                <div
-                    class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/20 transition-all cursor-pointer opacity-70 hover:opacity-100">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-orange-400 font-bold">Global Growth</span>
-                        <span class="bg-orange-600 text-white text-xs px-2 py-1 rounded">50% Refund</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white text-left">Export (MAP)</h3>
-                    <p class="text-xs text-slate-300 text-left mt-1">For Marketing and Fairs abroad.</p>
+                    <!-- Title -->
+                    <h3
+                        class="text-lg font-bold text-white leading-tight mb-2 group-hover:text-blue-300 transition-colors">
+                        {{ product.name }}
+                    </h3>
+
+                    <!-- Description -->
+                    {% if scheme %}
+                    <p class="text-xs text-slate-400">
+                        {{ scheme.category or "Government Scheme" }}
+                    </p>
+                    <p class="text-xs text-slate-500 mt-2 italic">
+                        {{ scheme.disclaimer or "Check eligibility." }}
+                    </p>
+                    {% else %}
+                    <p class="text-xs text-slate-400">
+                        Mauritius National Scheme
+                    </p>
+                    {% endif %}
                 </div>
+                {% endif %}
+                {% endfor %}
             </div>
 
             <p class="text-xs text-slate-500 mt-6 italic">Currently active: TINNS (Technology & Innovation)</p>

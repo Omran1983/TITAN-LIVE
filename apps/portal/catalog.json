@@ -100,7 +100,7 @@
             "icon": "⚖️"
         },
         {
-            "id": "export",
+            "id": "export_fair",
             "name": "Export Fairs & Freight Rebate",
             "status": "LIVE",
             "path": "/portal/resources",
