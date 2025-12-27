@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-slate-900 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+            Access Your Vault
+        </h2>
+        <p class="mt-2 text-center text-sm text-slate-400">
+            Secure login for TITAN Clients
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-slate-800 py-8 px-4 shadow shadow-blue-900/20 sm:rounded-lg sm:px-10 border border-slate-700">
+            <!-- Login Form -->
+            <form class="space-y-6" id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300">Email address</label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="appearance-none block w-full px-3 py-2 border border-slate-600 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-300">Password</label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            class="appearance-none block w-full px-3 py-2 border border-slate-600 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-900 text-white">
+                    </div>
+                </div>
+
+                <div id="errorMsg" class="text-red-400 text-xs hidden"></div>
+                <div id="successMsg" class="text-green-400 text-xs hidden">Magic Link Sent! Check your email.</div>
+
+                <div>
+                    <button type="submit" id="submitBtn"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Sign In / Sign Up
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-slate-600"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-slate-800 text-slate-400">Secure Protocol</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SUPABASE JS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    // Initialize Supabase
+    // We need the keys passed from backend or hardcoded if PUBLIC. 
+    // Since this is client-side, we normally use the PUBLIC ANON KEY.
+    // For this MVP, we will inject them via Jinja context if available, or fetch from an endpoint?
+    // BETTER: Use a lightweight proxy endpoint to get config, OR just render them if safe.
+    // Given the constraints, I'll render them into a hidden div (standard pattern for single-page apps).
+
+    const SUPA_URL = "{{ supabase_url }}";
+    const SUPA_KEY = "{{ supabase_key }}";
+
+    let supabase;
+
+    if (SUPA_URL && SUPA_KEY) {
+        supabase = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    } else {
+        document.getElementById('errorMsg').innerText = "System Error: Missing Config";
+        document.getElementById('errorMsg').classList.remove('hidden');
+    }
+
+    async function handleLogin() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const btn = document.getElementById('submitBtn');
+        const err = document.getElementById('errorMsg');
+
+        btn.disabled = true;
+        btn.innerHTML = "Authenticating...";
+        err.classList.add('hidden');
+
+        try {
+            // Try Login First
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                // If login fails, try SignUp (Auto-provisioning for MVP)
+                console.log("Login failed, attempting signup...", error);
+
+                const { data: upData, error: upError } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                });
+
+                if (upError) throw upError;
+
+                alert("Account Created! Please check your email to verify.");
+                window.location.href = "/portal"; // Redirect to dashboard
+                return;
+            }
+
+            // Success
+            console.log("Login Success", data);
+            // Save session to localStorage specifically for our app logic
+            localStorage.setItem('titan_session', JSON.stringify(data.session));
+            window.location.href = "/portal";
+
+        } catch (e) {
+            console.error(e);
+            err.innerText = e.message || "Authentication Failed";
+            err.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerHTML = "Sign In / Sign Up";
+        }
+    }
+</script>
+{% endblock %}

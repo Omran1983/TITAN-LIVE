@@ -158,6 +158,16 @@ async def portal_home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "catalog": CATALOG})
 
 
+@app.get("/portal/login", response_class=HTMLResponse)
+async def portal_login(request: Request):
+    return templates.TemplateResponse("login.html", {
+        "request": request, 
+        "catalog": CATALOG,
+        "supabase_url": os.environ.get("SUPABASE_URL", ""),
+        "supabase_key": os.environ.get("SUPABASE_ANON_KEY", "")
+    })
+
+
 @app.get("/portal/departments", response_class=HTMLResponse)
 async def portal_departments(request: Request):
     return templates.TemplateResponse("departments.html", {"request": request, "catalog": CATALOG})
