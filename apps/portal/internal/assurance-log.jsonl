@@ -1,0 +1,5 @@
+{"timestamp": "2025-12-27T00:01:00Z", "event_id": "TITAN-INIT-001", "jurisdiction": "MU", "action": "SYSTEM_BOOT", "status": "ONLINE"}
+{"timestamp": "2025-12-27T00:05:22Z", "event_id": "TITAN-LOG-002", "jurisdiction": "UK", "action": "CONTEXT_SWITCH", "user_agent": "Mozilla/5.0...", "badge_displayed": "ISO_27001_READINESS"}
+{"timestamp": "2025-12-27T00:05:45Z", "event_id": "TITAN-INTAKE-003", "jurisdiction": "UK", "action": "MATCH_FOUND", "protocol": "INNOVATE_UK_SMART", "risk_level": "LOW", "output_class": "READINESS_REPORT"}
+{"timestamp": "2025-12-27T00:10:11Z", "event_id": "TITAN-LOG-004", "jurisdiction": "MU", "action": "CONTEXT_SWITCH", "user_agent": "Mozilla/5.0...", "badge_displayed": "NONE"}
+{"timestamp": "2025-12-27T00:10:30Z", "event_id": "TITAN-INTAKE-005", "jurisdiction": "MU", "action": "MATCH_FOUND", "protocol": "TINNS_SME_GRANT", "risk_level": "N/A", "output_class": "OPPORTUNITY_MATCH"}
