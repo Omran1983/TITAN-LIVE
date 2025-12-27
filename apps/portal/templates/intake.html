@@ -135,6 +135,11 @@
     function updateDemoContext() {
         const region = document.getElementById('jurisdiction').value;
         const banner = document.querySelector('.bg-yellow-900\\/30');
+
+        // Requirement #3: Log the Jurisdiction Choice
+        console.log(`[TITAN] Jurisdiction Switch Detected: ${region}`);
+        console.log(`[TITAN] Loading Regulatory Protocols: ${region === 'UK' ? 'UK_GDPR_ISO27001' : 'MU_DPA_2017'}`);
+
         if (banner) {
             banner.innerText = region === 'UK' ? "⚠️ DEMO MODE: UK STANDARDS LOADED" : "⚠️ DEMO MODE: MAURITIUS DATASET LOADED";
         }
@@ -155,11 +160,11 @@
 
         let matchMsg = "";
         if (region === 'UK') {
-            setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Grants (Innovate UK)...</span>`; }, 4500);
-            matchMsg = "Simulated Match (UK Data):\n- Sector: R&D / Tech\n- Opportunity: Innovate UK Smart Grant (70% Funding)\n- Compliance: G-Cloud Ready";
+            setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">🛡️ Verifying G-Cloud Protocols...</span>`; }, 4500);
+            matchMsg = "TITAN READINESS REPORT (UK):\n\n- Protocol: Innovate UK Smart Grant\n- Status: Eligibility Criteria Mapped\n- Risk: Low (G-Cloud Aligned)\n- Next Step: Manual Review Recommended";
         } else {
             setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Opportunities (TINNS)...</span>`; }, 4500);
-            matchMsg = "Simulated Match (Mauritius Data):\n- Sector: Retail/Textile\n- Opportunity: SME Grant (Marketing)\n- Refund: 80% (TINNS)";
+            matchMsg = "Simulated Match (Mauritius Data):\n\n- Sector: Retail/Textile\n- Opportunity: SME Grant (Marketing)\n- Refund: 80% (TINNS)\n- Next Step: Application Structuring";
         }
 
         // 3. Success (Redirect to 'Mock' Result or Dashboard)

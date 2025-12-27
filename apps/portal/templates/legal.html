@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-slate-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8 text-slate-300">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-extrabold text-white mb-8">TITAN Legal Protocols</h1>
+
+        <!-- Navigation Tabs (Mock) -->
+        <div class="border-b border-slate-700 mb-8">
+            <nav class="-mb-px flex space-x-8">
+                <a href="#"
+                    class="border-blue-500 text-blue-500 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Privacy
+                    & GDPR</a>
+                <a href="#"
+                    class="border-transparent text-slate-500 hover:text-slate-300 hover:border-slate-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Terms
+                    of Service</a>
+            </nav>
+        </div>
+
+        <!-- 1. GDPR & Privacy -->
+        <div class="prose prose-invert max-w-none">
+            <h3>1. Data Processing Status</h3>
+            <p>
+                TITAN ("The System") operates as a <strong>Data Processor</strong> under UK GDPR and the Mauritius Data
+                Protection Act 2017.
+                Users retained full ownership of all inputs. TITAN does not sell, trade, or externalize user data to
+                third parties.
+            </p>
+
+            <h3>2. UK Specific Protocols</h3>
+            <p>
+                For users selecting the <strong>United Kingdom</strong> jurisdiction:
+            <ul class="list-disc pl-5">
+                <li>Data handling aligns with the <strong>UK GDPR</strong> framework.</li>
+                <li>Processing is limited to <strong>Readiness Assessment</strong> and <strong>Scenario
+                        Mapping</strong>.</li>
+                <li>No automated decision-making regarding legal eligibility or funding approval is performed.</li>
+            </ul>
+            </p>
+
+            <h3>3. Mauritius Specific Protocols</h3>
+            <p>
+                For users selecting the <strong>Mauritius</strong> jurisdiction:
+            <ul class="list-disc pl-5">
+                <li>Data handling aligns with the <strong>Companies Act 2001</strong> and <strong>DPA 2017</strong>.
+                </li>
+            </ul>
+            </p>
+
+            <hr class="border-slate-700 my-8">
+
+            <h3>4. Terms of Reference (Risk Disclaimer)</h3>
+            <div class="bg-red-900/20 border border-red-900/50 p-4 rounded-lg">
+                <p class="font-bold text-red-400 mb-2">CRITICAL ACKNOWLEDGEMENT</p>
+                <p>
+                    By using TITAN, you acknowledge that the System acts as a <strong>Preparation Tool</strong>, not a
+                    Professional Adviser.
+                    <br><br>
+                    <strong>TITAN DOES NOT:</strong>
+                <ul class="list-disc pl-5">
+                    <li>Guarantee funding, grants, or audit outcomes.</li>
+                    <li>Provide legal advice or binding determinations.</li>
+                    <li>Replace the need for independent professional review.</li>
+                </ul>
+                <br>
+                <strong>MANUAL REVIEW:</strong> It is expressly recommended that all TITAN outputs be subject to a
+                manual review by a qualified professional before submission to any governing body.
+                </p>
+            </div>
+
+            <h3 class="mt-8">5. Governing Law</h3>
+            <p>
+                <strong>UK Jurisdiction:</strong> Governed by the laws of England & Wales.<br>
+                <strong>Mauritius Jurisdiction:</strong> Governed by the laws of the Republic of Mauritius.<br>
+                Disputes shall be resolved via arbitration in the respective jurisdiction.
+            </p>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="/portal/intake" class="text-blue-500 hover:text-blue-400 font-medium">← Return to System Intake</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
