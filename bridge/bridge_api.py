@@ -41,22 +41,27 @@ try:
 except Exception as e:
     print(f"[WARN] IO Dir creation failed: {e}")
 
-# --- TITAN MODULE IMPORTS ---
-sys.path.append(str(APPS_DIR / "grant_writer"))
-from tinns_generator import TinnsGenerator  # noqa: E402
+# --- TITAN MODULE IMPORTS (Safe Loading) ---
+try:
+    sys.path.append(str(APPS_DIR / "grant_writer"))
+    from tinns_generator import TinnsGenerator
+except Exception as e:
+    print(f"[WARN] Failed to load TinnsGenerator: {e}")
+    TinnsGenerator = None
 
-sys.path.append(str(APPS_DIR / "audit"))
-sys.path.append(str(APPS_DIR / "audit"))
-from audit_engine import ContractAuditor  # noqa: E402
+try:
+    sys.path.append(str(APPS_DIR / "audit"))
+    from audit_engine import ContractAuditor
+except Exception as e:
+    print(f"[WARN] Failed to load ContractAuditor: {e}")
+    ContractAuditor = None
 
-sys.path.append(str(APPS_DIR / "inspector"))
-from readiness_generator import ReadinessGenerator  # noqa: E402
-
-sys.path.append(str(APPS_DIR / "inspector"))
-from readiness_generator import ReadinessGenerator  # noqa: E402
-
-sys.path.append(str(APPS_DIR / "inspector"))
-from readiness_generator import ReadinessGenerator  # noqa: E402
+try:
+    sys.path.append(str(APPS_DIR / "inspector"))
+    from readiness_generator import ReadinessGenerator
+except Exception as e:
+    print(f"[WARN] Failed to load ReadinessGenerator: {e}")
+    ReadinessGenerator = None
 
 # --- RATE LIMITER (MVP) ---
 RATE_LIMIT_STORE: Dict[str, List[float]] = {}
