@@ -200,6 +200,34 @@ async def portal_about(request: Request):
     return templates.TemplateResponse("about.html", {"request": request, "catalog": CATALOG})
 
 
+@app.get("/portal/forge", response_class=HTMLResponse)
+async def portal_forge(request: Request):
+    return templates.TemplateResponse("forge.html", {"request": request, "catalog": CATALOG})
+
+
+@app.post("/api/forge/submit")
+async def forge_submit(request: Request, feature_request: str = Form(...), module: str = Form("General")):
+    try:
+        check_rate_limit(request) # Security
+        
+        # Log to INBOX for AI review
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "ip": _client_ip(request),
+            "module": module,
+            "request": feature_request,
+            "status": "QUEUED"
+        }
+        
+        log_path = INBOX / "suggestions.jsonl"
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry) + "\n")
+            
+        return {"status": "success", "message": "Feature queued for autonomous build."}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
 # -----------------------
 # DOWNLOAD HELPERS
 # -----------------------

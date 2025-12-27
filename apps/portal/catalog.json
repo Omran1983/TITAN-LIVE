@@ -149,6 +149,13 @@
             "icon": "📢"
         },
         {
+            "id": "forge",
+            "name": "Feature Forge (Client Request)",
+            "status": "LIVE",
+            "path": "/portal/forge",
+            "icon": "⚡"
+        },
+        {
             "id": "sbm_bright",
             "name": "Bright-HER Future (SBM)",
             "status": "LIVE",
