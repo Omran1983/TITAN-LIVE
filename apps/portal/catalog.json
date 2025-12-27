@@ -102,21 +102,21 @@
         {
             "id": "export",
             "name": "Export Fairs & Freight Rebate",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "🚢"
         },
         {
             "id": "agri",
             "name": "Agriculture Grants (FAREI)",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "🚜"
         },
         {
             "id": "mim",
             "name": "Made in Moris Certification",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "🇲🇺"
         },
@@ -130,14 +130,14 @@
         {
             "id": "dbm_women",
             "name": "Women Loan Scheme (DBM)",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "👩‍💼"
         },
         {
             "id": "elleboost",
             "name": "ElleBoost (MauBank)",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "🏦"
         },
@@ -151,7 +151,7 @@
         {
             "id": "sbm_bright",
             "name": "Bright-HER Future (SBM)",
-            "status": "INFO_ONLY",
+            "status": "LIVE",
             "path": "/portal/resources",
             "icon": "🌟"
         }
