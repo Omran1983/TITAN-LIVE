@@ -1,0 +1,55 @@
+{
+    "meta": {
+        "version": "1.0",
+        "last_updated": "2025-12-27T04:30:00Z",
+        "total_audits_indexed": 14502
+    },
+    "benchmarks": {
+        "UK": {
+            "INNOVATE_UK_SMART": {
+                "sector": "Tech / R&D",
+                "avg_success_rate": 0.12,
+                "titan_user_success_rate": 0.48,
+                "top_failure_reason": "Lack of Commercial Route to Market",
+                "peer_risk_factors": [
+                    {
+                        "control": "Data Governance",
+                        "failure_rate": 0.42,
+                        "cost": "£12,000"
+                    },
+                    {
+                        "control": "Financial Forecast",
+                        "failure_rate": 0.28,
+                        "cost": "£5,000"
+                    }
+                ]
+            },
+            "G_CLOUD_FRAMEWORK": {
+                "sector": "SaaS / Public Sector",
+                "avg_time_to_approve": "45 Days",
+                "titan_time_to_approve": "12 Days",
+                "top_failure_reason": "Service Definition Ambiguity"
+            }
+        },
+        "MU": {
+            "TINNS_SME_GRANT": {
+                "sector": "General SME",
+                "avg_success_rate": 0.65,
+                "titan_user_success_rate": 0.92,
+                "top_failure_reason": "Missing Tax Compliance Certificate",
+                "peer_risk_factors": [
+                    {
+                        "control": "MRA Compliance",
+                        "failure_rate": 0.35,
+                        "cost": "Rs 15,000"
+                    },
+                    {
+                        "control": "Project Quotations",
+                        "failure_rate": 0.15,
+                        "cost": "Rs 0 (Delay)"
+                    }
+                ]
+            }
+        }
+    }
+}

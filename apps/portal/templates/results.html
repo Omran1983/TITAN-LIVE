@@ -54,8 +54,50 @@
                 </div>
 
                 <!-- Section 2: Technical Breakdown -->
-                <div class="bg-slate-900/50 rounded-lg p-6 border border-slate-700">
-                    <h4 class="text-sm font-bold text-white mb-4">Readiness Analysis</h4>
+                <!-- Section 2: Regulatory Intelligence (The Moat) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Widget A: Defensibility Score -->
+                    <div class="bg-slate-900/50 rounded-lg p-6 border border-slate-700 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-2 opacity-10">
+                            <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Defensibility Score
+                        </h4>
+                        <div class="flex items-end">
+                            <span id="score-value" class="text-5xl font-extrabold text-blue-500">...</span>
+                            <span class="text-sm text-slate-500 mb-2 ml-1">/ 100</span>
+                        </div>
+                        <div id="score-trend" class="mt-2 text-xs font-medium">...</div>
+                    </div>
+
+                    <!-- Widget B: Peer Failure Prediction (Fear) -->
+                    <div class="bg-slate-900/50 rounded-lg p-6 border border-slate-700 relative">
+                        <div class="absolute top-0 right-0 p-2 opacity-10">
+                            <svg class="w-24 h-24 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Peer Failure Risk
+                        </h4>
+                        <div class="flex items-end">
+                            <span id="fail-rate" class="text-5xl font-extrabold text-red-500">...</span>
+                            <span class="text-sm text-slate-500 mb-2 ml-1">Fail Here</span>
+                        </div>
+                        <p id="fail-reason" class="mt-2 text-xs text-red-300">...</p>
+                    </div>
+                </div>
+
+                <!-- Section 3: The Intelligence Feed -->
+                <div class="bg-slate-900/30 rounded-lg border border-slate-800 p-4 mt-4">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">TITAN Intelligence™
+                        Insights</h4>
                     <ul id="analysis-list" class="space-y-3 text-sm text-slate-300">
                         <!-- Populated by JS -->
                     </ul>
@@ -91,8 +133,49 @@
 </div>
 
 <script>
+    // THE BRAIN (Mock Intelligence Engine)
+    const INTELLIGENCE_DATA = {
+        "UK": {
+            badge: "🇬🇧 UK JURISDICTION (GBP)",
+            title: "G-Cloud Readiness Assessment",
+            pName: "Innovate UK Smart Grant",
+            pDesc: "R&D Funding for Disruptive Innovation",
+            valAmt: "£25,000 - £500,000",
+            price: "£500",
+            score: 72,
+            trend: "+14 pts vs Sector Avg",
+            failRate: "42%",
+            failReason: "Top Pitfall: 'Commercial Route' Definition",
+            baseProb: "12%",
+            titanProb: "48%",
+            insights: [
+                { icon: "⚠️", text: "Data Governance: <strong>CRITICAL GAP</strong> (GDPR UK)", color: "text-yellow-400" },
+                { icon: "✓", text: "Innovation Scope: <strong>High Alignment</strong> (Top 10%)", color: "text-green-400" },
+                { icon: "ℹ", text: "Projected Rectification Cost: <strong>£12,000</strong> (if ignored)", color: "text-blue-400" }
+            ]
+        },
+        "MU": {
+            badge: "🇲🇺 MAURITIUS JURISDICTION (MUR)",
+            title: "SME Opportunity Match",
+            pName: "SME Marketing Support",
+            pDesc: "SME Mauritius / TINNS Refund Scheme",
+            valAmt: "Rs 200,000 (Refund)",
+            price: "Rs 25,000",
+            score: 88,
+            trend: "Top 5% of Applicants",
+            failRate: "35%",
+            failReason: "Top Pitfall: Tax Compliance Certificate",
+            baseProb: "65%",
+            titanProb: "92%",
+            insights: [
+                { icon: "✓", text: "Scheme Match: <strong>TINNS Marketing</strong>", color: "text-green-400" },
+                { icon: "⚠️", text: "MRA Status: <strong>Verify Clearance</strong> (High Fail Rate)", color: "text-yellow-400" },
+                { icon: "ℹ", text: "Estimated Refund Time: <strong>45 Days</strong>", color: "text-blue-400" }
+            ]
+        }
+    };
+
     document.addEventListener("DOMContentLoaded", () => {
-        // Get Region from URL or Session
         const urlParams = new URLSearchParams(window.location.search);
         let region = urlParams.get('region');
 
@@ -104,51 +187,31 @@
     });
 
     function renderResult(region) {
-        const badge = document.getElementById('region-badge');
-        const title = document.getElementById('result-title');
-        const pName = document.getElementById('protocol-name');
-        const pDesc = document.getElementById('protocol-desc');
-        const valAmt = document.getElementById('value-amount');
+        const data = INTELLIGENCE_DATA[region] || INTELLIGENCE_DATA["MU"];
+
+        document.getElementById('region-badge').innerText = data.badge;
+        document.getElementById('result-title').innerText = data.title;
+        document.getElementById('protocol-name').innerText = data.pName;
+        document.getElementById('protocol-desc').innerText = data.pDesc;
+        document.getElementById('value-amount').innerText = data.valAmt;
+        document.getElementById('price-tag').innerText = data.price;
+
+        document.getElementById('score-value').innerText = data.score;
+        document.getElementById('score-trend').innerText = data.trend;
+        document.getElementById('score-trend').className = region === 'UK' ? "mt-2 text-xs font-medium text-green-400" : "mt-2 text-xs font-medium text-blue-400";
+
+        document.getElementById('fail-rate').innerText = data.failRate;
+        document.getElementById('fail-reason').innerText = data.failReason;
+
         const list = document.getElementById('analysis-list');
-        const btn = document.getElementById('btn-unlock');
-        const price = document.getElementById('price-tag');
+        list.innerHTML = data.insights.map(item => `
+            <li class="flex items-start">
+                <span class="${item.color} mr-2 font-bold">${item.icon}</span> 
+                <span class="text-slate-300">${item.text}</span>
+            </li>
+        `).join('');
 
-        // Log the Assurance Event (Simulated)
-        console.log(`[TITAN-LEDGER] Result Rendered. Region: ${region}. Event ID: ${Date.now()}`);
-
-        if (region === 'UK') {
-            // UK CONTEXT (Compliant / Readiness)
-            badge.innerText = "🇬🇧 UK JURISDICTION (GBP)";
-            title.innerText = "G-Cloud Readiness Assessment";
-            pName.innerText = "Innovate UK Smart Grant";
-            pDesc.innerText = "R&D Funding for Disruptive Innovation";
-            valAmt.innerText = "£25,000 - £500,000";
-
-            list.innerHTML = `
-                <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Protocol Match: High (Technological Innovation detected)</li>
-                <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> G-Cloud Alignment: Eligible for Digital Marketplace</li>
-                <li class="flex items-start"><span class="text-yellow-400 mr-2">!</span> Data Governance: Manual Review Required (GDPR UK)</li>
-                <li class="flex items-start"><span class="text-blue-400 mr-2">ℹ</span> Defense Strategy: "Productivity Tool" Categorization</li>
-            `;
-
-            price.innerText = "£500";
-        } else {
-            // MAURITIUS CONTEXT (Grants / Opportunity)
-            badge.innerText = "🇲🇺 MAURITIUS JURISDICTION (MUR)";
-            title.innerText = "SME Opportunity Match";
-            pName.innerText = "SME Marketing Support";
-            pDesc.innerText = "SME Mauritius / TINNS Refund Scheme";
-            valAmt.innerText = "Rs 200,000 (Refund)";
-
-            list.innerHTML = `
-                <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Scheme Match: Technology & Innovation Scheme (TINNS)</li>
-                <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Refund Rate: 80% of Project Cost</li>
-                <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Compliance: Valid BRN Structure Inferred</li>
-                <li class="flex items-start"><span class="text-blue-400 mr-2">ℹ</span> Next Step: Generate Supplier Quotations</li>
-            `;
-
-            price.innerText = "Rs 25,000";
-        }
+        console.log(`[TITAN-LEDGER] Intelligence Rendered. Region: ${region}. FailurePrediction: ${data.failRate}`);
     }
 </script>
 {% endblock %}
