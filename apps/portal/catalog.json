@@ -89,7 +89,7 @@
             "id": "tinns",
             "name": "Tech & Innovation Grant (TINNS)",
             "status": "LIVE",
-            "path": "/portal/grants",
+            "path": "/portal/grants?scheme=tinns",
             "icon": "💻"
         },
         {
@@ -103,49 +103,49 @@
             "id": "export_fair",
             "name": "Export Fairs & Freight Rebate",
             "status": "LIVE",
-            "path": "/portal/resources",
+            "path": "/portal/grants?scheme=export_fair",
             "icon": "🚢"
         },
         {
             "id": "agri",
             "name": "Agriculture Grants (FAREI)",
             "status": "LIVE",
-            "path": "/portal/resources",
+            "path": "/portal/grants?scheme=agri",
             "icon": "🚜"
         },
         {
             "id": "mim",
             "name": "Made in Moris Certification",
             "status": "LIVE",
-            "path": "/portal/resources",
+            "path": "/portal/grants?scheme=mim",
             "icon": "🇲🇺"
         },
         {
             "id": "startup",
             "name": "Start-Up Grant (Youth/Women)",
             "status": "LIVE",
-            "path": "/portal/grants",
+            "path": "/portal/grants?scheme=startup",
             "icon": "🚀"
         },
         {
             "id": "dbm_women",
             "name": "Women Loan Scheme (DBM)",
             "status": "LIVE",
-            "path": "/portal/resources",
+            "path": "/portal/grants?scheme=dbm_women",
             "icon": "👩‍💼"
         },
         {
             "id": "elleboost",
             "name": "ElleBoost (MauBank)",
             "status": "LIVE",
-            "path": "/portal/resources",
+            "path": "/portal/grants?scheme=elleboost",
             "icon": "🏦"
         },
         {
             "id": "sme_marketing",
             "name": "SME Marketing Support",
             "status": "LIVE",
-            "path": "/portal/grants",
+            "path": "/portal/grants?scheme=sme_marketing",
             "icon": "📢"
         },
         {

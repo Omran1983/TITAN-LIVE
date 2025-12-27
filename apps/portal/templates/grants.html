@@ -281,9 +281,14 @@
 
 <script>
     // Configuration from Server (Data Attributes)
+    // We parse the entire schemes dict to support dynamic switching
+    const ALL_SCHEMES = {{ catalog.config.schemes | tojson }}; // Jinja2 dump
     const configEl = document.getElementById('grantConfig');
-    const REFUND_RATE = parseFloat(configEl.dataset.refundRate);
-    const REFUND_CAP = parseFloat(configEl.dataset.refundCap);
+
+    // Default (TINNS)
+    let CURRENT_SCHEME_ID = 'tinns';
+    let REFUND_RATE = 0.8;
+    let REFUND_CAP = 150000;
 
     const costInput = document.getElementById('costInput');
     const refundDisplay = document.getElementById('refundAmount');
@@ -295,6 +300,28 @@
     const companyInput = document.getElementById('companyName');
     const summaryInput = document.getElementById('projectSummary');
     const emailInput = document.getElementById('contactEmail');
+
+    // --- DYNAMIC SCHEME LOADER ---
+    function loadSchemeFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const schemeId = params.get('scheme');
+
+        if (schemeId && ALL_SCHEMES[schemeId]) {
+            CURRENT_SCHEME_ID = schemeId;
+            const data = ALL_SCHEMES[schemeId];
+
+            // Update UI
+            document.querySelector('h1').innerHTML = `TITAN <span class="text-blue-500">${data.name}</span>`;
+            document.querySelector('.text-blue-200').innerText = data.disclaimer || data.category;
+
+            // Update Constants
+            REFUND_RATE = data.refund_rate;
+            REFUND_CAP = data.refund_cap;
+
+            // Update Refund Display Logic
+            document.getElementById('refundAmount').innerText = "Calculate below";
+        }
+    }
 
     // Validation & Calculation Logic
     function updateState() {
@@ -326,11 +353,16 @@
             const formData = new FormData();
             formData.append('project_cost', cost);
             formData.append('company_name', companyInput.value);
+            formData.append('project_name', ALL_SCHEMES[CURRENT_SCHEME_ID].name); // Pass Scheme Name
 
-            // V2 Eligibility Data
-            formData.append('inc_year', document.getElementById('incYear').value);
+            // V2 Eligibility Data (Handle Empty Ints)
+            const incYear = document.getElementById('incYear').value;
+            if (incYear) formData.append('inc_year', incYear);
+
+            const staff = document.getElementById('staffCount').value;
+            if (staff) formData.append('staff_count', staff);
+
             formData.append('turnover_range', document.getElementById('turnoverRange').value);
-            formData.append('staff_count', document.getElementById('staffCount').value);
             formData.append('sector', document.getElementById('sector').value);
 
             // Extra fields
@@ -351,7 +383,13 @@
                 downloadLink.href = result.download_url;
                 generateBtn.innerHTML = '✨ Proposal Generated';
             } else {
-                alert('Error: ' + result.message);
+                // FIXED: Handle 422 and other errors
+                let msg = result.message;
+                if (!msg && result.detail) {
+                    // API Validation Error
+                    msg = "Validation Error: " + JSON.stringify(result.detail);
+                }
+                alert('Error: ' + (msg || "Unknown Server Error"));
                 generateBtn.innerHTML = originalText;
                 generateBtn.disabled = false;
             }
@@ -362,5 +400,8 @@
             generateBtn.disabled = false;
         }
     }
+
+    // Init
+    loadSchemeFromURL(); // Run on load
 </script>
 {% endblock %}
