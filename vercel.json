@@ -1,13 +1,20 @@
 {
+    "builds": [
+        {
+            "src": "api/index.py",
+            "use": "@vercel/python",
+            "config": {
+                "includeFiles": [
+                    "apps/**",
+                    "bridge/**"
+                ]
+            }
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
             "destination": "/api/index.py"
         }
-    ],
-    "functions": {
-        "api/*.py": {
-            "includeFiles": "apps/**,bridge/**"
-        }
-    }
+    ]
 }
