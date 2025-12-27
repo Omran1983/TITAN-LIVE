@@ -25,6 +25,17 @@
             class="bg-slate-800 py-8 px-4 shadow-xl shadow-blue-900/20 sm:rounded-2xl sm:px-10 border border-slate-700">
             <form class="space-y-6" action="#" method="POST" onsubmit="event.preventDefault(); submitIntake();">
 
+                <!-- 0. Jurisdiction (NEW) -->
+                <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                    <label for="jurisdiction" class="block text-sm font-medium text-blue-400 mb-2">Select
+                        Jurisdiction</label>
+                    <select id="jurisdiction" name="jurisdiction" onchange="updateDemoContext()"
+                        class="block w-full pl-3 pr-10 py-3 text-base border-slate-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md bg-slate-800 text-white">
+                        <option value="MU">Mauritius (MUR) - SME & Grants</option>
+                        <option value="UK">United Kingdom (GBP) - Innovate UK / G-Cloud</option>
+                    </select>
+                </div>
+
                 <!-- 1. Identity -->
                 <div>
                     <label for="fullname" class="block text-sm font-medium text-slate-300">Full Name</label>
@@ -121,22 +132,39 @@
 </div>
 
 <script>
+    function updateDemoContext() {
+        const region = document.getElementById('jurisdiction').value;
+        const banner = document.querySelector('.bg-yellow-900\\/30');
+        if (banner) {
+            banner.innerText = region === 'UK' ? "⚠️ DEMO MODE: UK STANDARDS LOADED" : "⚠️ DEMO MODE: MAURITIUS DATASET LOADED";
+        }
+    }
+
     function submitIntake() {
         const btn = document.querySelector('button[type="submit"]');
+        const region = document.getElementById('jurisdiction').value;
         const originalText = btn.innerText;
 
         // 1. Loading State
         btn.disabled = true;
-        btn.innerHTML = `<span class="animate-pulse">🔄 Initializing Project Engine...</span>`;
+        btn.innerHTML = `<span class="animate-pulse">🔄 Initializing ${region} Engine...</span>`;
 
         // 2. Mock Process (The Experience)
-        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">📂 Structuring Evidence...</span>`; }, 1500);
+        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">📂 Structuring Evidence (${region})...</span>`; }, 1500);
         setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">🧠 Inferring Market Code...</span>`; }, 3000);
-        setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Opportunities (Demo: TINNS)...</span>`; }, 4500);
+
+        let matchMsg = "";
+        if (region === 'UK') {
+            setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Grants (Innovate UK)...</span>`; }, 4500);
+            matchMsg = "Simulated Match (UK Data):\n- Sector: R&D / Tech\n- Opportunity: Innovate UK Smart Grant (70% Funding)\n- Compliance: G-Cloud Ready";
+        } else {
+            setTimeout(() => { btn.innerHTML = `<span class="animate-pulse">💰 Matching Opportunities (TINNS)...</span>`; }, 4500);
+            matchMsg = "Simulated Match (Mauritius Data):\n- Sector: Retail/Textile\n- Opportunity: SME Grant (Marketing)\n- Refund: 80% (TINNS)";
+        }
 
         // 3. Success (Redirect to 'Mock' Result or Dashboard)
         setTimeout(() => {
-            alert("✅ DEMO COMPLETE: TITAN has inferred your profile.\n\nSimulated Match (Mauritius Data):\n- Sector: Retail/Textile\n- Opportunity: SME Grant (Marketing)\n\n(In the UK Version, this would match Innovate UK or Digital Outcomes.)");
+            alert(`✅ DEMO COMPLETE: TITAN has inferred your profile.\n\n${matchMsg}`);
             btn.disabled = false;
             btn.innerText = originalText;
         }, 6000);

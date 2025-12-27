@@ -7,7 +7,17 @@
                 "refund_cap": 150000,
                 "currency": "Rs",
                 "category": "SME / Tech",
-                "disclaimer": "80% refund up to Rs 150k. Subject to SME Mauritius approval."
+                "disclaimer": "80% refund up to Rs 150k. Subject to SME Mauritius approval.",
+                "region": "MU"
+            },
+            "innovate_uk": {
+                "name": "Innovate UK Smart Grant",
+                "refund_rate": 0.70,
+                "refund_cap": 500000,
+                "currency": "GBP",
+                "category": "R&D / Tech",
+                "disclaimer": "Up to 70% funding for R&D projects.",
+                "region": "UK"
             },
             "startup": {
                 "name": "Start-Up Support (Women/Young)",
