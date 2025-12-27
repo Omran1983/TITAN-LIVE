@@ -649,3 +649,17 @@ async def get_health_dashboard(request: Request):
 async def get_vault_ui(request: Request):
     check_rate_limit(request) # Security
     return templates.TemplateResponse("vault.html", {"request": request})
+
+
+# -----------------------
+# CATCH-ALL (Fixes 404s)
+# -----------------------
+@app.exception_handler(404)
+async def custom_404_handler(request: Request, exc: HTTPException):
+    # Redirect 404s to Home
+    return templates.TemplateResponse("index.html", {"request": request, "catalog": CATALOG})
+
+@app.get("/{catchall:path}", include_in_schema=False)
+async def catch_all_route(request: Request, catchall: str):
+    # Catch any leftover paths
+    return templates.TemplateResponse("index.html", {"request": request, "catalog": CATALOG})
