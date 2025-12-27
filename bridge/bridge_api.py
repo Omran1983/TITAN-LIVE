@@ -46,7 +46,17 @@ sys.path.append(str(APPS_DIR / "grant_writer"))
 from tinns_generator import TinnsGenerator  # noqa: E402
 
 sys.path.append(str(APPS_DIR / "audit"))
+sys.path.append(str(APPS_DIR / "audit"))
 from audit_engine import ContractAuditor  # noqa: E402
+
+sys.path.append(str(APPS_DIR / "inspector"))
+from readiness_generator import ReadinessGenerator  # noqa: E402
+
+sys.path.append(str(APPS_DIR / "inspector"))
+from readiness_generator import ReadinessGenerator  # noqa: E402
+
+sys.path.append(str(APPS_DIR / "inspector"))
+from readiness_generator import ReadinessGenerator  # noqa: E402
 
 # --- RATE LIMITER (MVP) ---
 RATE_LIMIT_STORE: Dict[str, List[float]] = {}
@@ -456,6 +466,102 @@ async def audit_upload(request: Request, email: str = Form(...), file: UploadFil
         return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
 
 
+@app.post("/api/oracle/generate-report")
+async def generate_readiness_report(
+    request: Request,
+    company_name: str = Form("Client"),
+    jurisdiction: str = Form("Mauritius"),
+    score: int = Form(...),
+    band: str = Form(...),
+    percentile: str = Form(...),
+    fail_rate: str = Form(...),
+    cost_total: str = Form(...),
+    insights: str = Form(...) # JSON String
+):
+    try:
+        check_rate_limit(request)
+        
+        # Parse insights JSON
+        try:
+            insights_list = json.loads(insights)
+        except:
+            insights_list = []
+
+        generator = ReadinessGenerator()
+        path = Path(generator.generate_report(
+            company_name=company_name,
+            jurisdiction=jurisdiction,
+            score=score,
+            band=band,
+            percentile=percentile,
+            fail_rate=fail_rate,
+            cost_total=cost_total,
+            insights=insights_list
+        ))
+        
+        print(f"[ORACLE] Report generated -> {path}")
+        
+        if not path.exists():
+             raise HTTPException(status_code=500, detail="Report generation failed")
+             
+        return {
+            "status": "success",
+            "download_url": f"/download/audit/{path.name}",
+            "filename": path.name
+        }
+    except Exception as e:
+        print(f"[ERROR] Oracle Gen Failed: {e}")
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
+@app.post("/api/oracle/generate-report")
+async def generate_readiness_report(
+    request: Request,
+    company_name: str = Form("Client"),
+    jurisdiction: str = Form("Mauritius"),
+    score: int = Form(...),
+    band: str = Form(...),
+    percentile: str = Form(...),
+    fail_rate: str = Form(...),
+    cost_total: str = Form(...),
+    insights: str = Form(...) # JSON String
+):
+    try:
+        check_rate_limit(request)
+        
+        # Parse insights JSON
+        try:
+            insights_list = json.loads(insights)
+        except:
+            insights_list = []
+
+        generator = ReadinessGenerator()
+        path = Path(generator.generate_report(
+            company_name=company_name,
+            jurisdiction=jurisdiction,
+            score=score,
+            band=band,
+            percentile=percentile,
+            fail_rate=fail_rate,
+            cost_total=cost_total,
+            insights=insights_list
+        ))
+        
+        print(f"[ORACLE] Report generated -> {path}")
+        
+        if not path.exists():
+             raise HTTPException(status_code=500, detail="Report generation failed")
+             
+        return {
+            "status": "success",
+            "download_url": f"/download/audit/{path.name}",
+            "filename": path.name
+        }
+    except Exception as e:
+        print(f"[ERROR] Oracle Gen Failed: {e}")
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
 # --- INSPECTOR ENDPOINTS (Priority 6) ---
 
 # --- SECURITY CONSTITUTION ---
@@ -533,3 +639,8 @@ async def get_latest_audit_json():
 @app.get("/portal/health", response_class=HTMLResponse)
 async def get_health_dashboard(request: Request):
     return templates.TemplateResponse("health.html", {"request": request})
+
+@app.get("/portal/vault", response_class=HTMLResponse)
+async def get_vault_ui(request: Request):
+    check_rate_limit(request) # Security
+    return templates.TemplateResponse("vault.html", {"request": request})

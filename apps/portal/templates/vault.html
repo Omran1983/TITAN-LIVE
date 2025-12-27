@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-slate-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="md:flex md:items-center md:justify-between mb-8">
+            <div class="flex-1 min-w-0">
+                <h2 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+                    TITAN Evidence Locker™
+                </h2>
+                <p class="mt-1 text-sm text-slate-400">
+                    Secure System of Record for Case #TITAN-25-X99
+                </p>
+            </div>
+            <div class="mt-4 flex md:mt-0 md:ml-4">
+                <button type="button"
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none ring-offset-slate-900">
+                    Upload Evidence
+                </button>
+            </div>
+        </div>
+
+        <!-- The Vault Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Column 1: Readiness History (The Trend) -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Trend Card -->
+                <div class="bg-slate-800 rounded-lg border border-slate-700 p-6">
+                    <h3 class="text-lg font-medium text-white mb-4">Defensibility Trajectory</h3>
+                    <div
+                        class="h-64 bg-slate-900/50 rounded flex items-center justify-center border border-slate-800 border-dashed">
+                        <!-- Mock Chart Placeholder -->
+                        <div class="text-center">
+                            <span class="text-4xl font-bold text-green-500">↗ +14 pts</span>
+                            <p class="text-slate-500 text-sm mt-2">Since Last Assessment (Nov 2025)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Historical Feed -->
+                <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-700">
+                        <h3 class="text-lg font-medium text-white">Assessment History</h3>
+                    </div>
+                    <ul role="list" class="divide-y divide-slate-700">
+                        <!-- Item 1 -->
+                        <li class="px-6 py-4 hover:bg-slate-750 transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-blue-400">Readiness Assessment (v2.1)</p>
+                                    <p class="text-xs text-slate-500">Generated: Dec 27, 2025 • Score: 72/100</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold rounded-full bg-green-900/30 text-green-400">Confidential</span>
+                                    <svg class="h-5 w-5 text-slate-400 ml-4" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Item 2 -->
+                        <li class="px-6 py-4 hover:bg-slate-750 transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-300">Initial Scan (Legacy)</p>
+                                    <p class="text-xs text-slate-500">Generated: Nov 14, 2025 • Score: 58/100</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold rounded-full bg-slate-700 text-slate-400">Archived</span>
+                                    <svg class="h-5 w-5 text-slate-400 ml-4" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Column 2: Evidence Library (The Records) -->
+            <div class="space-y-6">
+                <div class="bg-slate-800 rounded-lg border border-slate-700 p-6">
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-4">Evidence Library</h3>
+
+                    <div class="space-y-4">
+                        <!-- Evidence Item 1 -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <span
+                                    class="h-8 w-8 rounded bg-blue-900/50 flex items-center justify-center text-blue-400">
+                                    📄
+                                </span>
+                            </div>
+                            <div class="ml-3 w-0 flex-1">
+                                <p class="text-sm font-medium text-white">Certificate of Incorporation</p>
+                                <p class="text-xs text-green-400">Verified (MRA Registry)</p>
+                            </div>
+                        </div>
+
+                        <!-- Evidence Item 2 -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <span
+                                    class="h-8 w-8 rounded bg-yellow-900/20 flex items-center justify-center text-yellow-500">
+                                    ⚠️
+                                </span>
+                            </div>
+                            <div class="ml-3 w-0 flex-1">
+                                <p class="text-sm font-medium text-white">GDPR Policy (Draft)</p>
+                                <p class="text-xs text-yellow-500">Missing Sign-off</p>
+                            </div>
+                            <div class="ml-2">
+                                <button class="text-xs text-blue-400 hover:text-blue-300">Fix</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-slate-700">
+                        <button
+                            class="w-full flex justify-center py-2 px-4 border border-slate-600 rounded-md shadow-sm text-sm font-medium text-slate-300 hover:bg-slate-700">
+                            View All Examples
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Up-sell Block -->
+                <div
+                    class="bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-900 rounded-lg border border-indigo-500/30 p-6">
+                    <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-2">Enterprise Vault</h3>
+                    <p class="text-sm text-slate-300 mb-4">
+                        Unlock unlimited retention and "Board-View" access modes.
+                    </p>
+                    <button
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 rounded transition-colors">
+                        Upgrade Organization
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const listContainer = document.querySelector('ul[role="list"]');
+        const storage = sessionStorage.getItem('TITAN_VAULT_ITEMS');
+
+        if (storage) {
+            const items = JSON.parse(storage);
+            // Prepend new items to the static list (or replace clear/static)
+            // For demo, let's inject them at the top
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "px-6 py-4 hover:bg-slate-750 transition cursor-pointer border-l-4 border-green-500 bg-slate-800/50";
+                li.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-white">${item.title}</p>
+                            <p class="text-xs text-slate-400">Generated: ${item.date} • Score: ${item.score}/100</p>
+                        </div>
+                        <div class="flex items-center">
+                            <a href="${item.url}" class="text-xs text-blue-400 hover:text-blue-300 mr-4">Download</a>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-900/30 text-green-400">Locked</span>
+                        </div>
+                    </div>
+                `;
+                listContainer.prepend(li);
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+[
+  {
+    "case": "CASE-UK-001",
+    "company": "Hydra CyberSec Ltd",
+    "status": "SUCCESS",
+    "path": "F:\\AION-ZERO\\TITAN\\io\\outbox\\TITAN_READINESS_Hydra_CyberSec_Ltd_20251227_052816.pdf",
+    "value": "Medium"
+  },
+  {
+    "case": "CASE-UK-002",
+    "company": "BioGen Labs",
+    "status": "SUCCESS",
+    "path": "F:\\AION-ZERO\\TITAN\\io\\outbox\\TITAN_READINESS_BioGen_Labs_20251227_052816.pdf",
+    "value": "High"
+  },
+  {
+    "case": "CASE-MU-003",
+    "company": "Phoenix Textiles Ltd",
+    "status": "SUCCESS",
+    "path": "F:\\AION-ZERO\\TITAN\\io\\outbox\\TITAN_READINESS_Phoenix_Textiles_Ltd_20251227_052816.pdf",
+    "value": "Medium"
+  },
+  {
+    "case": "CASE-MU-004",
+    "company": "Azure FinTech",
+    "status": "SUCCESS",
+    "path": "F:\\AION-ZERO\\TITAN\\io\\outbox\\TITAN_READINESS_Azure_FinTech_20251227_052816.pdf",
+    "value": "Medium"
+  },
+  {
+    "case": "CASE-UK-005",
+    "company": "GovCorp Logistics",
+    "status": "SUCCESS",
+    "path": "F:\\AION-ZERO\\TITAN\\io\\outbox\\TITAN_READINESS_GovCorp_Logistics_20251227_052816.pdf",
+    "value": "Medium"
+  }
+]
