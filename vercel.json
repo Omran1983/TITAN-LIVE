@@ -16,5 +16,11 @@
             "src": "/(.*)",
             "dest": "/api/index.py"
         }
+    ],
+    "crons": [
+        {
+            "path": "/api/jarvis/patrol",
+            "schedule": "0 */2 * * *"
+        }
     ]
 }

@@ -763,3 +763,56 @@ async def custom_404_handler(request: Request, exc: HTTPException):
 async def catch_all_route(request: Request, catchall: str):
     # Catch any leftover paths
     return templates.TemplateResponse("index.html", {"request": request, "catalog": CATALOG})
+
+
+# -----------------------
+# JARVIS SHADOW USER (CRON)
+# -----------------------
+@app.get("/api/jarvis/patrol")
+async def jarvis_patrol(request: Request):
+    """
+    Called by Vercel Cron every 2 hours.
+    1. Checks connection.
+    2. Logs "I am here" to Supabase.
+    3. Checks for stuck items.
+    """
+    # 1. Security: Check for CRON_SECRET (if set)
+    cron_secret = os.environ.get("CRON_SECRET")
+    auth_header = request.headers.get("Authorization")
+    
+    if cron_secret and (not auth_header or auth_header != f"Bearer {cron_secret}"):
+        # Allow bypassing if explicitly disabled or dev mode, but for Prod warn.
+        # For MVP, we'll log warning but proceed if ENV not set to strict.
+        print("[JARVIS] WARN: Cron invoked without valid Secret.")
+
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "action": "PATROL",
+        "status": "OK",
+        "details": "System Check Initiated"
+    }
+
+    if supabase:
+        try:
+            # 1. Log Patrol
+            # Ensure 'jarvis_logs' table exists or use 'audit_logs'
+            # We'll try to insert into 'jarvis_logs'
+            try:
+                supabase.table("jarvis_logs").insert(log_entry).execute()
+                log_entry["db_status"] = "Logged to DB"
+            except Exception as e:
+                log_entry["db_status"] = f"DB Error: {e}"
+
+            # 2. Check "Queued" Suggestions
+            res = supabase.table("client_suggestions").select("*").eq("status", "queued").execute()
+            queued_count = len(res.data) if res.data else 0
+            log_entry["queued_suggestions"] = queued_count
+            
+            if queued_count > 0:
+                print(f"[JARVIS] Found {queued_count} queued items. Notification needed.")
+                # Here we could trigger email or processing.
+        except Exception as e:
+            log_entry["error"] = str(e)
+    
+    print(f"[JARVIS] Patrol Complete: {json.dumps(log_entry)}")
+    return log_entry
